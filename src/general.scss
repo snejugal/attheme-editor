@@ -1,0 +1,33 @@
+@import "./variables";
+@import "./typography";
+
+* {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+body {
+  @extend %body-1;
+
+  background-color: $theme_backgroundColor;
+  color: $theme_textColor;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+}
+
+noscript {
+  @extend %heading-6;
+
+  margin: auto;
+  text-align: center;
+  max-width: $container_maxWidth;
+  padding: $container_padding;
+}

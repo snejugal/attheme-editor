@@ -1,0 +1,299 @@
+parser: babel-eslint
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
+env:
+  es6: true
+rules:
+  eqeqeq: warn
+  for-direction: error
+  getter-return: error
+  no-compare-neg-zero: warn
+  no-cond-assign: error
+  no-console: warn
+  no-constant-condition: error
+  no-debugger: warn
+  no-dupe-args: error
+  no-dupe-keys: warn
+  no-duplicate-case: error
+  no-empty: warn
+  no-empty-character-class: warn
+  no-ex-assign: warn
+  no-extra-boolean-cast: warn
+  no-extra-parens: warn
+  no-extra-semi: warn
+  no-func-assign: error
+  no-inner-declarations: warn
+  no-invalid-regexp: error
+  no-irregular-whitespace: error
+  no-obj-calls: error
+  no-regex-spaces: warn
+  no-sparse-arrays: error
+  no-template-curly-in-string: warn
+  no-unexpected-multiline: error
+  no-unreachable: error
+  no-unsafe-finally: error
+  no-unsafe-negation: error
+  use-isnan: warn
+  valid-jsdoc: warn
+  valid-typeof: error
+  arrow-parens: warn
+  arrow-spacing: warn
+  constructor-super: error
+  generator-star-spacing:
+    - warn
+    - after
+  no-class-assign: error
+  no-const-assign: error
+  no-dupe-class-members: error
+  no-duplicate-imports: warn
+  no-new-symbol: error
+  no-this-before-super: error
+  no-useless-computed-key: warn
+  no-useless-constructor: warn
+  no-useless-rename: warn
+  no-var: warn
+  object-shorthand: warn
+  prefer-arrow-callback: warn
+  prefer-const: warn
+  prefer-destructuring: warn
+  prefer-numeric-literals: warn
+  prefer-rest-params: warn
+  prefer-spread: warn
+  prefer-template: warn
+  require-yield: error
+  rest-spread-spacing: error
+  sort-imports: warn
+  symbol-description: warn
+  template-curly-spacing: warn
+  yield-star-spacing: warn
+  array-bracket-newline: warn
+  array-bracket-spacing: warn
+  block-spacing: warn
+  brace-style: warn
+  camelcase: warn
+  comma-dangle:
+    - warn
+    - always-multiline
+  comma-spacing: warn
+  comma-style: warn
+  computed-property-spacing: warn
+  consistent-this: warn
+  eol-last:
+    - warn
+    - never
+  func-call-spacing: warn
+  func-names:
+    - warn
+    - as-needed
+  func-style:
+    - warn
+    - expression
+    - allowArrowFunctions: true
+  implicit-arrow-linebreak: warn
+  indent:
+    - warn
+    - 2
+    - SwitchCase: 1
+  key-spacing: warn
+  keyword-spacing: warn
+  linebreak-style:
+    - warn
+    - windows
+  lines-around-comment:
+    - warn
+    - beforeBlockComment: true
+      beforeLineComment: true
+      allowBlockStart: true
+      allowObjectStart: true
+      allowArrayStart: true
+      allowClassStart: true
+  lines-between-class-members: warn
+  max-len:
+    - warn
+    - 80
+  max-statements-per-line:
+    - warn
+    - max: 1
+  multiline-comment-style:
+    - warn
+    - separate-lines
+  new-cap: warn
+  new-parens: warn
+  newline-per-chained-call: warn
+  no-lonely-if: warn
+  no-mixed-spaces-and-tabs: warn
+  no-multi-assign: warn
+  no-multiple-empty-lines: warn
+  no-negated-condition: warn
+  no-nested-ternary: warn
+  no-tabs: warn
+  no-trailing-spaces: warn
+  no-underscore-dangle: warn
+  no-unneeded-ternary: warn
+  object-curly-spacing:
+    - warn
+    - always
+  object-property-newline: warn
+  one-var:
+    - warn
+    - never
+  one-var-declaration-per-line: warn
+  operator-assignment: warn
+  padded-blocks:
+    - warn
+    - never
+  padding-line-between-statements:
+    - warn
+
+    - prev: let
+      blankLine: always
+      next: "*"
+    - prev: let
+      blankLine: any
+      next: let
+    - prev: const
+      blankLine: always
+      next: "*"
+    - prev: const
+      blankLine: any
+      next: const
+
+    - prev: "*"
+      blankLine: always
+      next: break
+    - prev: "*"
+      blankLine: always
+      next: continue
+    - prev: "*"
+      blankLine: always
+      next: return
+    - prev: "*"
+      blankLine: always
+      next: throw
+
+    - prev: "*"
+      blankLine: always
+      next: export
+    - prev: import
+      blankLine: always
+      next: "*"
+    - prev: import
+      blankLine: any
+      next: import
+
+    - prev: "*"
+      blankLine: always
+      next: case
+    - prev: switch
+      blankLine: never
+      next: case
+    - prev: case
+      blankLine: never
+      next: case
+
+    - prev: "*"
+      blankLine: always
+      next: class
+    - prev: "*"
+      blankLine: always
+      next: if
+    - prev: "*"
+      blankLine: always
+      next: for
+    - prev: "*"
+      blankLine: always
+      next: try
+    - prev: "*"
+      blankLine: always
+      next: while
+  quote-props:
+    - warn
+    - as-needed
+  quotes:
+    - warn
+    - backtick
+  semi: warn
+  semi-spacing: warn
+  semi-style: warn
+  space-before-blocks: warn
+  space-before-function-paren: warn
+  space-in-parens: warn
+  space-infix-ops: warn
+  space-unary-ops: warn
+  spaced-comment: warn
+  switch-colon-spacing: warn
+  template-tag-spacing: warn
+  no-buffer-constructor: warn
+  no-mixed-requires: warn
+  no-new-require: warn
+  no-path-concat: warn
+  no-process-exit: warn
+  no-delete-var: error
+  no-label-var: error
+  no-shadow: error
+  no-shadow-restricted-names: error
+  no-undef: error
+  no-undef-init: warn
+  no-unused-vars: warn
+  no-use-before-define: error
+  strict: warn
+  accessor-pairs: warn
+  array-callback-return: error
+  block-scoped-var: error
+  class-methods-use-this: error
+  curly: warn
+  dot-location:
+    - warn
+    - property
+  dot-notation: warn
+  no-alert: warn
+  no-caller: error
+  no-case-declarations: error
+  no-div-regex: error
+  no-else-return: warn
+  no-empty-function: warn
+  no-empty-pattern: error
+  no-eq-null: warn
+  no-eval: error
+  no-extra-bind: warn
+  no-extra-label: warn
+  no-fallthrough: warn
+  no-floating-decimal: warn
+  no-global-assign: warn
+  no-implicit-coercion: warn
+  no-implied-eval: warn
+  no-iterator: warn
+  no-lone-blocks: warn
+  no-magic-numbers:
+    - warn
+    - ignoreArrayIndexes: true
+      enforceConst: true
+      ignore:
+        - -1
+        - 0
+        - 1
+        - 2
+        - 10
+  no-multi-spaces: warn
+  no-new-func: error
+  no-new-wrappers: warn
+  no-octal: warn
+  no-octal-escape: warn
+  no-return-assign: warn
+  no-script-url: error
+  no-self-assign: warn
+  no-self-compare: warn
+  no-throw-literal: warn
+  no-unmodified-loop-condition: warn
+  no-unused-expressions: warn
+  no-unused-labels: warn
+  no-useless-concat: warn
+  no-useless-return: warn
+  no-void: warn
+  no-with: error
+  require-await: warn
+  vars-on-top: warn
+  yoda: warn

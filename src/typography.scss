@@ -1,0 +1,58 @@
+@mixin fontType($weight, $size, $transform, $spacing) {
+  font-weight: $weight;
+  font-size: $size * 1px;
+  font-transform: $transform;
+  letter-spacing: $spacing / $size * 1rem;
+}
+
+%heading-1 {
+  @include fontType(300, 96, none, -1.5);
+}
+
+%heading-2 {
+  @include fontType(300, 60, none, -0.5);
+}
+
+%heading-3 {
+  @include fontType(400, 48, none, 0);
+}
+
+%heading-4 {
+  @include fontType(400, 34, none, 0.25);
+}
+
+%heading-5 {
+  @include fontType(400, 24, none, 0);
+}
+
+%heading-6 {
+  @include fontType(500, 20, none, 0.15);
+}
+
+%subtitle-1 {
+  @include fontType(400, 16, none, 0.15);
+}
+
+%subtitle-2 {
+  @include fontType(400, 14, none, 0.1);
+}
+
+%body-1 {
+  @include fontType(400, 16, none, 0.5);
+}
+
+%body-2 {
+  @include fontType(400, 14, none, 0.25);
+}
+
+%button {
+  @include fontType(500, 14, uppercase, 0.75);
+}
+
+%caption {
+  @include fontType(400, 12, none, 0.4);
+}
+
+%caption {
+  @include fontType(400, 10, none, 1.5);
+}
