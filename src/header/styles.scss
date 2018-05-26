@@ -1,0 +1,26 @@
+@import "../mixins/box-shadow";
+
+$header_height: 64px;
+
+$header_verticalGap: 12px;
+$header_horizontalGap: 16px;
+
+$header_background: #424242;
+
+.header {
+  @include box-shadow(4);
+
+  height: $header_height;
+  width: 100vw;
+  background-color: $header_background;
+  display: flex;
+  align-items: center;
+
+  :not(:last-child) {
+    margin-right: $header_horizontalGap;
+  }
+
+  :first-child {
+    margin-left: $header_horizontalGap;
+  }
+}

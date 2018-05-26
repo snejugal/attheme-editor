@@ -1,0 +1,13 @@
+@import "../variables";
+@import "../header/styles";
+
+$logoSize: $header_height / 2;
+$logoColor: $theme_textColor;
+
+.logo {
+  width: $logoSize;
+  height: $logoSize;
+  fill: $logoColor;
+  margin-right: $header_horizontalGap;
+  flex-shrink: 0;
+}
