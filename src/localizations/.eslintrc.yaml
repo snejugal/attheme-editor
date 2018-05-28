@@ -1,0 +1,5 @@
+extends: ../../.eslintrc.yaml
+rules:
+  camelcase: off
+  max-len: off
+  react/display-name: off
