@@ -27,10 +27,6 @@ class ErrorHandler extends React.Component {
       return true;
     };
 
-    setTimeout(() => {
-      throw new Error(`hi there`);
-    }, 1500);
-
     window.onerror = null;
     window.addEventListener(`error`, this.handler);
   }
