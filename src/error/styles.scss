@@ -5,7 +5,7 @@
 .error {
   @include shadow(24);
   padding: $container_padding;
-  background: $errorColor;
+  background: $theme_errorColor;
   border-radius: $container_borderRadius;
   margin-bottom: $container_verticalMargin;
 
