@@ -1,0 +1,22 @@
+@import "../variables";
+
+.errors {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: $container_padding;
+  max-width: 512px;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column-reverse;
+  z-index: 3;
+  overflow: auto;
+
+  &:empty {
+    display: none;
+  }
+
+  > :first-child {
+    margin-bottom: 0;
+  }
+}

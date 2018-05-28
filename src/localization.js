@@ -9,7 +9,7 @@ const localization = {
 let language = `en`;
 
 if (`languages` in navigator) {
-  for (const fullLanguage of navigator.languages)  {
+  for (const fullLanguage of navigator.languages) {
     const shortLanguage = fullLanguage.slice(0, 2);
 
     if (languages.includes(shortLanguage)) {

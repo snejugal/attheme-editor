@@ -1,5 +1,7 @@
 import "./general.scss";
 
+import "./handle-errors";
+
 import * as serviceWorker from './service-worker';
 import App from "./app";
 import React from "react";

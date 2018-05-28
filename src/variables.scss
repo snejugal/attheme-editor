@@ -1,8 +1,16 @@
 $theme_backgroundColor: #212121;
 $theme_textColor: rgba(#ffffff, .87);
 
+$accentColor: #607d8b;
+$errorColor: #f44336;
+
 $container_maxWidth: 512px;
 $container_padding: 24px 16px;
+$container_padding-negated: -24px -16px;
+$container_borderRadius: 5px;
+$container_verticalMargin: 24px;
+
+$transitionDuration: 300ms;
 
 $fontFamily:
   Fira Code,

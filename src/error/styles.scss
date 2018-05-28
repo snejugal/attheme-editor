@@ -1,0 +1,26 @@
+@import "../variables";
+@import "../typography";
+@import "../mixins/shadow";
+
+.error {
+  @include shadow(24);
+  padding: $container_padding;
+  background: $errorColor;
+  border-radius: $container_borderRadius;
+  margin-bottom: $container_verticalMargin;
+
+  &_title {
+    @extend %heading-5;
+  }
+
+  &_stack {
+    overflow: auto;
+    margin: $container_padding-negated;
+    margin-bottom: 0;
+    padding: $container_padding;
+  }
+
+  &_dismiss {
+    margin-bottom: 0;
+  }
+}

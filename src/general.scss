@@ -14,6 +14,16 @@ body {
   color: $theme_textColor;
   font-family: $fontFamily;
   margin: 0;
+  line-height: 1.5;
+  cursor: default;
+
+  > pre {
+    max-width: 100vw;
+    overflow: auto;
+    height: 100vh;
+    margin: 0;
+    padding: $container_padding;
+  }
 }
 
 main {
@@ -22,6 +32,44 @@ main {
   align-items: center;
   justify-content: flex-start;
   height: 100vh;
+}
+
+.title {
+  @extend %heading-2;
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.paragraph {
+  margin: 0 0 0;
+  margin-bottom: 24px;
+}
+
+.link {
+  color: $accentColor;
+  text-decoration: none;
+  border-bottom: 1px solid rgba($accentColor, 0.25);
+  transition-property: border-bottom-color, opacity;
+  transition-duration: $transitionDuration;
+
+  &:focus,
+  &:hover {
+    border-bottom-color: rgba($accentColor, 0.75);
+  }
+
+  &:active {
+    opacity: .5;
+  }
+
+  &.-white {
+    color: #fff;
+    border-bottom-color: rgba(#fff, 0.25);
+
+    &:focus,
+    &:hover {
+      border-bottom-color: rgba(#fff, 0.75);
+    }
+  }
 }
 
 noscript {
