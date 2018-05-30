@@ -1,7 +1,7 @@
 @mixin fontType($weight, $size, $transform, $spacing) {
   font-weight: $weight;
   font-size: $size * 1px;
-  font-transform: $transform;
+  text-transform: $transform;
   letter-spacing: $spacing / $size * 1rem;
 }
 
