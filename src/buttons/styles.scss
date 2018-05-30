@@ -1,0 +1,15 @@
+@import "../variables";
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  > * {
+    margin-bottom: $container_verticalMargin;
+  }
+
+  > :not(:last-child) {
+    margin-right: $container_horizontalMargin;
+  }
+}
