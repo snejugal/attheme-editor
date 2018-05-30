@@ -15,12 +15,19 @@ const getSetting = async (option) => {
   });
 };
 
-const getThemesData = async () => {
+const getTabs = async () => {
   const workplaces = await getSetting(`workplaces`);
 
   return workplaces || [];
 };
 
+const getActiveTab = async () => {
+  const activeTab = await getSetting(`activeTab`);
+
+  return activeTab || -1;
+};
+
 export {
-  getThemesData,
+  getTabs,
+  getActiveTab,
 };

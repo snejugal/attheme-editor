@@ -7,11 +7,18 @@ import React from "react";
 class NewTab extends React.Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
+    isActive: PropTypes.bool.isRequired,
   }
 
   render () {
+    let className = `tabs_newTab`;
+
+    if (this.props.isActive) {
+      className += ` -active`;
+    }
+
     return (
-      <button className="tabs_newTab" onClick={this.props.onClick}>
+      <button className={className} onClick={this.props.onClick}>
         <Icon/>
       </button>
     );

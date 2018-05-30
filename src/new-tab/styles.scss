@@ -1,14 +1,38 @@
+@import "../variables";
+@import "../tab/styles";
 @import "../tabs/styles";
 @import "../mixins/square";
 
 .tabs_newTab {
   @include square($tabs_height);
+
   border: none;
   background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
+  position: relative;
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: $activeLine_height;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: $theme_accentColor;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition-property: transform;
+    transition-duration: $transitionDuration;
+    border-top-left-radius: $activeLine_height;
+    border-top-right-radius: $activeLine_height;
+  }
+
+  &.-active::before {
+    transform: scaleY(1);
+  }
 
   svg {
     @include square($tabs_iconSize);
