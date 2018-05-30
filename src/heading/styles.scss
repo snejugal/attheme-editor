@@ -1,0 +1,7 @@
+@import "../typography";
+
+.heading {
+  @extend %heading-2;
+  margin: 0;
+  margin-bottom: 24px;
+}
