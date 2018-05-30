@@ -1,14 +1,15 @@
 import "./general.scss";
 
-import "./handle-errors";
-
 import * as serviceWorker from './service-worker';
 import App from "./app";
+import ErrorHandler from "./error-handler/component";
 import React from "react";
 import ReactDOM from "react-dom";
 
-const root = document.querySelector(`main`);
+const appRoot = document.querySelector(`main`);
+const errorsRoot = document.querySelector(`.errors`);
 
-ReactDOM.render(<App/>, root);
+ReactDOM.render(<App/>, appRoot);
+ReactDOM.render(<ErrorHandler/>, errorsRoot);
 
 serviceWorker.register();
