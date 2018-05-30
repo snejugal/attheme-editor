@@ -1,0 +1,28 @@
+@import "../variables";
+
+.link {
+  color: $theme_accentColor;
+  text-decoration: none;
+  border-bottom: 1px solid rgba($theme_accentColor, 0.25);
+  transition-property: border-bottom-color, opacity;
+  transition-duration: $transitionDuration;
+
+  &:focus,
+  &:hover {
+    border-bottom-color: rgba($theme_accentColor, 0.75);
+  }
+
+  &:active {
+    opacity: .5;
+  }
+
+  &.-white {
+    color: #fff;
+    border-bottom-color: rgba(#fff, 0.25);
+
+    &:focus,
+    &:hover {
+      border-bottom-color: rgba(#fff, 0.75);
+    }
+  }
+}
