@@ -1,0 +1,28 @@
+@import "../typography";
+@import "../variables";
+@import "../mixins/shadow";
+
+$button_background: $theme_accentColor;
+$button_textColor: $theme_textColor;
+$button_horizontalPadding: 16px;
+$button_height: 36px;
+
+.button {
+  @extend %button;
+  @include shadow(2);
+
+  background-color: $button_background;
+  color: $button_textColor;
+  border-radius: $container_borderRadius;
+  border: none;
+  transition-property: box-shadow;
+  transition-duration: $transitionDuration;
+  font-family: inherit;
+  height: $button_height;
+  padding: 0 $button_horizontalPadding;
+  margin: 0;
+
+  &:active {
+    @include shadow(8);
+  }
+}
