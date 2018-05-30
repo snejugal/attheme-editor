@@ -1,5 +1,6 @@
 import "./styles.scss";
 
+import Heading from "../heading/component";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
@@ -13,7 +14,9 @@ class ErrorElement extends React.Component {
   render () {
     return (
       <div className="error" onClick={this.props.onDismissed}>
-        <h2 className="title error_title">{localization.error_title()}</h2>
+        <Heading level={2} className="error_title">
+          {localization.error_title()}
+        </Heading>
         <p className="paragraph error_description">
           {localization.error_description()}
         </p>
