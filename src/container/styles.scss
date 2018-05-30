@@ -1,0 +1,9 @@
+@import "../variables";
+
+$maxWidth: 960px;
+
+.container {
+  max-width: $maxWidth;
+  width: 100%;
+  padding: $container_padding;
+}
