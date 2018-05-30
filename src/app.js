@@ -1,4 +1,5 @@
 import * as database from "./database/api";
+import EmptyWorkspace from "./empty-workspace/component";
 import Header from "./header/component";
 import React from "react";
 
@@ -26,6 +27,10 @@ class App extends React.Component {
           workplaces={this.state.workplaces}
           activeTab={this.state.activeTab}
         />
+        {this.state.activeTab === -1
+          ? <EmptyWorkspace />
+          : null
+        }
       </React.Fragment>
     );
   }
