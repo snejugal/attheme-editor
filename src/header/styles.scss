@@ -1,3 +1,4 @@
+@import "../variables";
 @import "../mixins/shadow";
 
 $header_height: 64px;
@@ -6,6 +7,7 @@ $header_verticalGap: 12px;
 $header_horizontalGap: 16px;
 
 $header_background: #424242;
+$header_textColor: $theme_textColor;
 
 .header {
   @include shadow(4);
@@ -16,11 +18,11 @@ $header_background: #424242;
   display: flex;
   align-items: center;
 
-  :not(:last-child) {
+  > :not(:last-child) {
     margin-right: $header_horizontalGap;
   }
 
-  :first-child {
+  > :first-child {
     margin-left: $header_horizontalGap;
   }
 }

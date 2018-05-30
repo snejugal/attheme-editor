@@ -1,0 +1,17 @@
+@import "../tabs/styles";
+@import "../mixins/square";
+
+.tabs_newTab {
+  @include square($tabs_height);
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  svg {
+    @include square($tabs_iconSize);
+    fill: $tabs_color;
+  }
+}

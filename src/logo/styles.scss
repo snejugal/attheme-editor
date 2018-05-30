@@ -1,13 +1,13 @@
 @import "../variables";
 @import "../header/styles";
+@import "../mixins/square";
 
-$logoSize: $header_height / 2;
-$logoColor: $theme_textColor;
+$logo_size: $header_height / 2;
+$logo_color: $theme_textColor;
 
 .logo {
-  width: $logoSize;
-  height: $logoSize;
-  fill: $logoColor;
+  @include square($logo_size);
+  fill: $logo_color;
   margin-right: $header_horizontalGap;
   flex-shrink: 0;
 }
