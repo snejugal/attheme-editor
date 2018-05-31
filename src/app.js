@@ -2,6 +2,7 @@ import * as database from "./database/api";
 import EmptyWorkspace from "./empty-workspace/component";
 import Header from "./header/component";
 import React from "react";
+import { addUpdatee as addLocalizationUpdatee } from "./localization";
 
 class App extends React.Component {
   constructor (props) {
@@ -17,6 +18,10 @@ class App extends React.Component {
     this.setState({
       workplaces: await database.getTabs(),
       activeTab: await database.getActiveTab(),
+    });
+
+    addLocalizationUpdatee(() => {
+      this.forceUpdate();
     });
   }
 
