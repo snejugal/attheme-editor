@@ -22,7 +22,6 @@ rules:
   no-empty-character-class: warn
   no-ex-assign: warn
   no-extra-boolean-cast: warn
-  no-extra-parens: warn
   no-extra-semi: warn
   no-func-assign: error
   no-inner-declarations: warn
