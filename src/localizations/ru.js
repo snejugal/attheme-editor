@@ -18,7 +18,7 @@ const localization = {
   emptyWorkspace_createTheme: () => `Создать новую тему`,
   emptyWorkspace_openTheme: () => `Открыть существующую тему`,
 
-  theme_defaultName: () => `Замечательная тема`,
+  theme_defaultName: () => `Классная тема`,
 
   workspace_themeNameLabel: () => `Название темы`,
   workspace_closeTheme: () => `Закрыть тему`,
