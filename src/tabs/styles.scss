@@ -1,0 +1,10 @@
+@import "./variables";
+@import "../header/variables";
+
+.tabs {
+  display: flex;
+  align-items: stretch;
+  height: $header_height;
+  width: 100%;
+  overflow: auto;
+}

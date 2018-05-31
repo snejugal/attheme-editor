@@ -1,0 +1,44 @@
+@import "./variables";
+@import "../tabs/variables";
+@import "../mixins/hover-shade";
+@import "../typography";
+
+.tab {
+  @include hoverShade($tabs_color);
+
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: $tabs_color;
+  padding: 0 $tabs_horizontalPadding;
+  font-family: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &_title {
+    @extend %subtitle-1;
+  }
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: $activeLine_height;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: $theme_accentColor;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition-property: transform;
+    transition-duration: $transitionDuration;
+    border-top-left-radius: $activeLine_height;
+    border-top-right-radius: $activeLine_height;
+  }
+
+  &.-active::before {
+    transform: scaleY(1);
+  }
+}

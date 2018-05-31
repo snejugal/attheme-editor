@@ -11,7 +11,7 @@ class NewTab extends React.Component {
   }
 
   render () {
-    let className = `tabs_newTab`;
+    let className = `tab -new`;
 
     if (this.props.isActive) {
       className += ` -active`;

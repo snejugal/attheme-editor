@@ -39,12 +39,21 @@ class App extends React.Component {
     });
   }
 
+  handleActiveTabChange = (newActiveTab) => {
+    database.updateActiveTab(newActiveTab);
+
+    this.setState({
+      activeTab: newActiveTab,
+    });
+  }
+
   render () {
     return (
       <React.Fragment>
         <Header
           workplaces={this.state.workplaces}
           activeTab={this.state.activeTab}
+          onActiveTabChange={this.handleActiveTabChange}
         />
         <Container>
           {

@@ -62,10 +62,24 @@ const updateWorkplaces = (workplaces) => setSetting(`workplaces`, workplaces);
 
 const updateActiveTab = (activeTab) => setSetting(`activeTab`, activeTab);
 
+const getTheme = async (id) => {
+  const database = await getDatabase();
+
+  return new Promise((resolve) => {
+    const query = database
+      .transaction(`themes`)
+      .objectStore(`themes`)
+      .get(id);
+
+    query.onsuccess = () => resolve(query.result);
+  });
+};
+
 export {
   getTabs,
   getActiveTab,
   createTheme,
   updateWorkplaces,
   updateActiveTab,
+  getTheme,
 };
