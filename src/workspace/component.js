@@ -91,7 +91,7 @@ class Workplace extends React.Component {
           </Field>
           <Buttons>
             <Button onClick={this.props.onClosePrompt} isDangerous={true}>
-              Close theme
+              {localization.workspace_closeTheme()}
             </Button>
           </Buttons>
         </React.Fragment>

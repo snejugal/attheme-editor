@@ -19,6 +19,7 @@ const localization = {
   theme_defaultName: () => `Awesome Theme`,
 
   workspace_themeNameLabel: () => `Theme name`,
+  workspace_closeTheme: () => `Close theme`,
 };
 
 export default localization;

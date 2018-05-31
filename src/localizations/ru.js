@@ -21,6 +21,7 @@ const localization = {
   theme_defaultName: () => `Замечательная тема`,
 
   workspace_themeNameLabel: () => `Название темы`,
+  workspace_closeTheme: () => `Закрыть тему`,
 };
 
 export default localization;
