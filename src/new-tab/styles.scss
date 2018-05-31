@@ -2,9 +2,11 @@
 @import "../tab/variables";
 @import "../tabs/variables";
 @import "../mixins/square";
+@import "../mixins/hover-shade";
 
 .tabs_newTab {
   @include square($tabs_height);
+  @include hoverShade($tabs_color);
 
   border: none;
   background-color: transparent;
