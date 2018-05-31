@@ -19,6 +19,8 @@ const localization = {
   emptyWorkspace_openTheme: () => `Открыть существующую тему`,
 
   theme_defaultName: () => `Замечательная тема`,
+
+  workspace_themeNameLabel: () => `Название темы`,
 };
 
 export default localization;

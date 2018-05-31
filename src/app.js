@@ -3,6 +3,7 @@ import Container from "./container/component";
 import EmptyWorkspace from "./empty-workspace/component";
 import Header from "./header/component";
 import React from "react";
+import Workspace from "./workspace/component";
 import { addUpdatee as addLocalizationUpdatee } from "./localization";
 
 class App extends React.Component {
@@ -14,6 +15,8 @@ class App extends React.Component {
       activeTab: null,
     };
   }
+
+  activeTab = React.createRef()
 
   componentDidMount = async () => {
     this.setState({
@@ -47,20 +50,34 @@ class App extends React.Component {
     });
   }
 
+  handleNameChange = (name) => {
+    this.activeTab.current.updateTitle(name);
+  }
+
   render () {
+    let workspace = null;
+
+    if (this.state.activeTab === -1) {
+      workspace = <EmptyWorkspace onTheme={this.handleTheme}/>;
+    } else if (this.state.activeTab !== null) {
+      workspace = (
+        <Workspace
+          themeId={this.state.activeTab}
+          onNameChange={this.handleNameChange}
+        />
+      );
+    }
+
     return (
       <React.Fragment>
         <Header
           workplaces={this.state.workplaces}
           activeTab={this.state.activeTab}
           onActiveTabChange={this.handleActiveTabChange}
+          activeTabRef={this.activeTab}
         />
         <Container>
-          {
-            this.state.activeTab === -1
-              ? <EmptyWorkspace onTheme={this.handleTheme}/>
-              : null
-          }
+          {workspace}
         </Container>
       </React.Fragment>
     );

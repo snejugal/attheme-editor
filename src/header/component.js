@@ -10,6 +10,7 @@ class Header extends React.Component {
     workplaces: PropTypes.array.isRequired,
     activeTab: PropTypes.number,
     onActiveTabChange: PropTypes.func.isRequired,
+    activeTabRef: PropTypes.object.isRequired,
   }
 
   render () {
@@ -20,6 +21,7 @@ class Header extends React.Component {
           workplaces={this.props.workplaces}
           activeTab={this.props.activeTab}
           onActiveTabChange={this.props.onActiveTabChange}
+          activeTabRef={this.props.activeTabRef}
         />
       </header>
     );

@@ -1,0 +1,17 @@
+@import "../variables";
+@import "../typography";
+
+.workspace {
+  &_themeName {
+    width: 100%;
+  }
+}
+
+#workspace_themeName {
+  @extend %heading-4;
+
+  @media (min-width: $container_maxWidth) {
+    // Suddenly SCSS doesn't allow extending in @media, so ¯\_(ツ)_/¯
+    font-size: 48px;
+  }
+}

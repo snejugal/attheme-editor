@@ -75,6 +75,19 @@ const getTheme = async (id) => {
   });
 };
 
+const updateTheme = async (id, theme) => {
+  const database = await getDatabase();
+
+  return new Promise((resolve) => {
+    const query = database
+      .transaction(`themes`, `readwrite`)
+      .objectStore(`themes`)
+      .put(theme, id);
+
+    query.onsuccess = () => resolve(query.result);
+  });
+};
+
 export {
   getTabs,
   getActiveTab,
@@ -82,4 +95,5 @@ export {
   updateWorkplaces,
   updateActiveTab,
   getTheme,
+  updateTheme,
 };

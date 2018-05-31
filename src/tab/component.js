@@ -15,7 +15,7 @@ class Tab extends React.Component {
     super(props);
 
     this.state = {
-      name: ``,
+      title: ``,
     };
   }
 
@@ -23,7 +23,13 @@ class Tab extends React.Component {
     const { name } = await database.getTheme(this.props.id);
 
     this.setState({
-      name,
+      title: name,
+    });
+  }
+
+  updateTitle = (title) => {
+    this.setState({
+      title,
     });
   }
 
@@ -36,7 +42,7 @@ class Tab extends React.Component {
 
     return (
       <button className={className} onClick={this.props.onClick}>
-        <h3 className="tab_title">{this.state.name}</h3>
+        <h3 className="tab_title">{this.state.title}</h3>
       </button>
     );
   }

@@ -10,6 +10,7 @@ class Tabs extends React.Component {
     workplaces: PropTypes.array.isRequired,
     activeTab: PropTypes.number,
     onActiveTabChange: PropTypes.func.isRequired,
+    activeTabRef: PropTypes.object.isRequired,
   }
 
   handleNewTabClick = () => this.props.onActiveTabChange(-1);
@@ -19,11 +20,18 @@ class Tabs extends React.Component {
       <div className="tabs">
         {
           this.props.workplaces.map((themeId) => {
+            const ref = {};
+
+            if (this.props.activeTab === themeId) {
+              ref.ref = this.props.activeTabRef;
+            }
+
             return <Tab
               id={themeId}
               key={themeId}
               isActive={this.props.activeTab === themeId}
               onClick={() => this.props.onActiveTabChange(themeId)}
+              {...ref}
             />;
           })
         }
