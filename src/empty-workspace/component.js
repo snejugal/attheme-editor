@@ -1,6 +1,5 @@
 import Button from "../button/component";
 import Buttons from "../buttons/component";
-import Container from "../container/component";
 import Heading from "../heading/component";
 import PropTypes from "prop-types";
 import React from "react";
@@ -42,7 +41,7 @@ class EmptyWorkspace extends React.Component {
 
   render () {
     return (
-      <Container>
+      <React.Fragment>
         <Heading level={2}>{localization.emptyWorkspace_title()}</Heading>
         <Buttons>
           <Button onClick={this.handleCreateButtonClick}>
@@ -59,7 +58,7 @@ class EmptyWorkspace extends React.Component {
           onChange={this.handleChange}
           accept=".attheme,.attheme-editor"
         />
-      </Container>
+      </React.Fragment>
     );
   }
 }
