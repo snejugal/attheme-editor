@@ -17,6 +17,8 @@ const localization = {
   emptyWorkspace_title: () => `Начните работать над своей темой`,
   emptyWorkspace_createTheme: () => `Создать новую тему`,
   emptyWorkspace_openTheme: () => `Открыть существующую тему`,
+
+  theme_defaultName: () => `Замечательная тема`,
 };
 
 export default localization;

@@ -15,6 +15,8 @@ const localization = {
   emptyWorkspace_title: () => `Start working on your theme`,
   emptyWorkspace_createTheme: () => `Create a new theme`,
   emptyWorkspace_openTheme: () => `Open an existing theme`,
+
+  theme_defaultName: () => `Awesome theme`,
 };
 
 export default localization;
