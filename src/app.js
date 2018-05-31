@@ -27,9 +27,10 @@ class App extends React.Component {
           workplaces={this.state.workplaces}
           activeTab={this.state.activeTab}
         />
-        {this.state.activeTab === -1
-          ? <EmptyWorkspace />
-          : null
+        {
+          this.state.activeTab === -1
+            ? <EmptyWorkspace/>
+            : null
         }
       </React.Fragment>
     );

@@ -6,25 +6,36 @@ import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 import parseTheme from "../parse-theme";
+import readFile from "../read-file";
 
 class EmptyWorkspace extends React.Component {
   static propTypes = {
-    handleTheme: PropTypes.func.isRequired,
+    onTheme: PropTypes.func.isRequired,
   }
 
   filesInput = React.createRef()
 
   handleCreateButtonClick = () => {
-    this.props.handleTheme({
+    this.props.onTheme({
       name: localization.theme_defaultName(),
       theme: {},
+      wallpaper: ``,
+      palette: [],
     });
   }
 
   handleChange = async () => {
-    const theme = await parseTheme(this.filesInput.current.files[0]);
+    if (this.filesInput.current.files.length === 0) {
+      return;
+    }
 
-    this.props.handleTheme(theme);
+    const file = await readFile(this.filesInput.current.files[0]);
+    const theme = parseTheme({
+      file,
+      filename: this.filesInput.current.files[0].name,
+    });
+
+    this.props.onTheme(theme);
   }
 
   handleOpenButtonClick = () => this.filesInput.current.click()
