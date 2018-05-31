@@ -1,6 +1,8 @@
 import "./styles.scss";
 
 import * as database from "../database/api";
+import Button from "../button/component";
+import Buttons from "../buttons/component";
 import Field from "../field/component";
 import PropTypes from "prop-types";
 import React from "react";
@@ -10,6 +12,7 @@ class Workplace extends React.Component {
   static propTypes = {
     themeId: PropTypes.number.isRequired,
     onNameChange: PropTypes.func.isRequired,
+    onClosePrompt: PropTypes.func.isRequired,
   }
 
   constructor (props) {
@@ -68,7 +71,7 @@ class Workplace extends React.Component {
     database.updateTheme(this.props.themeId, theme);
   }
 
-  handleNameFieldEnter = (event) => event.target.blur();
+  handleNameFieldEnter = ({ target }) => target.blur();
 
   render () {
     return this.state.theme === null
@@ -86,6 +89,11 @@ class Workplace extends React.Component {
           >
             {localization.workspace_themeNameLabel()}
           </Field>
+          <Buttons>
+            <Button onClick={this.props.onClosePrompt} isDangerous={true}>
+              Close theme
+            </Button>
+          </Buttons>
         </React.Fragment>
       );
   }

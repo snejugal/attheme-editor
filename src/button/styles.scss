@@ -23,4 +23,8 @@
   &:active {
     @include shadow(8);
   }
+
+  &.-dangerous {
+    background-color: $button_backround-dangerous;
+  }
 }

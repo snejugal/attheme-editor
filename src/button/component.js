@@ -8,17 +8,25 @@ class Button extends React.Component {
     type: PropTypes.string,
     children: PropTypes.any,
     onClick: PropTypes.func.isRequired,
+    isDangerous: PropTypes.bool,
   }
 
   static defaultProps = {
     type: `button`,
+    isDangerous: false,
   }
 
   render () {
+    let className = `button`;
+
+    if (this.props.isDangerous) {
+      className += ` -dangerous`;
+    }
+
     return (
       <button
         type={this.props.type}
-        className="button"
+        className={className}
         onClick={this.props.onClick}
       >
         {this.props.children}

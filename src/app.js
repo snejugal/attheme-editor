@@ -54,6 +54,26 @@ class App extends React.Component {
     this.activeTab.current.updateTitle(name);
   }
 
+  handleClosePrompt = async () => {
+    // TODO: confirm closing
+    const workplaces = [...this.state.workplaces];
+    const currentIndex = workplaces.indexOf(this.state.activeTab);
+
+    workplaces.splice(currentIndex, 1);
+
+    const newActiveTabIndex = Math.min(currentIndex, workplaces.length - 1);
+    const activeTab = workplaces[newActiveTabIndex];
+
+    this.setState({
+      workplaces,
+      activeTab,
+    });
+
+    await database.deleteTheme(this.state.activeTab);
+    await database.updateWorkplaces(workplaces);
+    await database.updateActiveTab(activeTab);
+  }
+
   render () {
     let workspace = null;
 
@@ -64,6 +84,7 @@ class App extends React.Component {
         <Workspace
           themeId={this.state.activeTab}
           onNameChange={this.handleNameChange}
+          onClosePrompt={this.handleClosePrompt}
         />
       );
     }

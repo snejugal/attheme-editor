@@ -88,6 +88,19 @@ const updateTheme = async (id, theme) => {
   });
 };
 
+const deleteTheme = async (id) => {
+  const database = await getDatabase();
+
+  return new Promise((resolve) => {
+    const query = database
+      .transaction(`themes`, `readwrite`)
+      .objectStore(`themes`)
+      .delete(id);
+
+    query.onsuccess = () => resolve();
+  });
+};
+
 export {
   getTabs,
   getActiveTab,
@@ -96,4 +109,5 @@ export {
   updateActiveTab,
   getTheme,
   updateTheme,
+  deleteTheme,
 };
