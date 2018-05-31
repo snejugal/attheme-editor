@@ -13,11 +13,25 @@ class Tabs extends React.Component {
     activeTabRef: PropTypes.object.isRequired,
   }
 
+  tabs = React.createRef()
+
   handleNewTabClick = () => this.props.onActiveTabChange(-1);
+
+  handleWheel = (event) => {
+    if (event.deltaX) {
+      return;
+    }
+
+    event.preventDefault();
+    this.tabs.current.scrollBy({
+      left: event.deltaY,
+      behavior: `smooth`,
+    });
+  }
 
   render () {
     return (
-      <div className="tabs">
+      <div className="tabs" onWheel={this.handleWheel} ref={this.tabs}>
         {
           this.props.workplaces.map((themeId) => {
             const ref = {};
