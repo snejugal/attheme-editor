@@ -17,6 +17,7 @@ $header_textColor: $theme_textColor;
   background-color: $header_background;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 
   > :not(:last-child) {
     margin-right: $header_horizontalGap;

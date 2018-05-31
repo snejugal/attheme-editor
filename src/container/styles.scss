@@ -1,9 +1,10 @@
 @import "../variables";
-
-$maxWidth: 960px;
+@import "../header/styles";
 
 .container {
-  max-width: $maxWidth;
+  max-width: $container_maxWidth;
   width: 100%;
   padding: $container_padding;
+  height: calc(100vh - #{$header_height});
+  overflow: auto;
 }
