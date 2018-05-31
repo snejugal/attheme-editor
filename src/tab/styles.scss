@@ -1,4 +1,5 @@
 @import "./variables";
+@import "../variables";
 @import "../tabs/variables";
 @import "../mixins/hover-shade";
 @import "../typography";
@@ -17,6 +18,9 @@
   font-family: inherit;
   white-space: nowrap;
   flex-shrink: 0;
+  opacity: .5;
+  transition-property: opacity;
+  transition-duration: $transitionDuration;
 
   &_title {
     @extend %subtitle-1;
@@ -38,7 +42,11 @@
     border-top-right-radius: $activeLine_height;
   }
 
-  &.-active::before {
-    transform: scaleY(1);
+  &.-active {
+    opacity: 1;
+
+    &::before {
+      transform: scaleY(1);
+    }
   }
 }
