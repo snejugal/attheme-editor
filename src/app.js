@@ -26,6 +26,19 @@ class App extends React.Component {
     });
   }
 
+  handleTheme = async (theme) => {
+    const themeId = await database.createTheme(theme);
+    const workplaces = [...this.state.workplaces, themeId];
+
+    database.updateWorkplaces(workplaces);
+    database.updateActiveTab(themeId);
+
+    this.setState({
+      workplaces,
+      activeTab: themeId,
+    });
+  }
+
   render () {
     return (
       <React.Fragment>
@@ -36,7 +49,7 @@ class App extends React.Component {
         <Container>
           {
             this.state.activeTab === -1
-              ? <EmptyWorkspace/>
+              ? <EmptyWorkspace onTheme={this.handleTheme}/>
               : null
           }
         </Container>

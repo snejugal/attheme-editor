@@ -15,6 +15,24 @@ const getSetting = async (option) => {
   });
 };
 
+const setSetting = async (option, value) => {
+  const database = await getDatabase();
+
+  const query = database
+    .transaction(`settings`, `readwrite`)
+    .objectStore(`settings`)
+    .put({
+      option,
+      value,
+    });
+
+  return new Promise((resolve) => {
+    query.onsuccess = () => {
+      resolve();
+    };
+  });
+};
+
 const getTabs = async () => {
   const workplaces = await getSetting(`workplaces`);
 
@@ -27,7 +45,27 @@ const getActiveTab = async () => {
   return activeTab || -1;
 };
 
+const createTheme = async (theme) => {
+  const database = await getDatabase();
+
+  return new Promise((resolve) => {
+    const query = database
+      .transaction(`themes`, `readwrite`)
+      .objectStore(`themes`)
+      .put(theme);
+
+    query.onsuccess = () => resolve(query.result);
+  });
+};
+
+const updateWorkplaces = (workplaces) => setSetting(`workplaces`, workplaces);
+
+const updateActiveTab = (activeTab) => setSetting(`activeTab`, activeTab);
+
 export {
   getTabs,
   getActiveTab,
+  createTheme,
+  updateWorkplaces,
+  updateActiveTab,
 };
