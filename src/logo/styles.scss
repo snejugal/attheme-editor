@@ -1,9 +1,5 @@
-@import "../variables";
-@import "../header/styles";
+@import "./variables";
 @import "../mixins/square";
-
-$logo_size: $header_height / 2;
-$logo_color: $theme_textColor;
 
 .logo {
   @include square($logo_size);

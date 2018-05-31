@@ -1,11 +1,6 @@
+@import "./variables";
 @import "../typography";
-@import "../variables";
 @import "../mixins/shadow";
-
-$button_background: $theme_accentColor;
-$button_textColor: $theme_textColor;
-$button_horizontalPadding: 16px;
-$button_height: 36px;
 
 .button {
   @extend %button;
