@@ -1,11 +1,14 @@
 @import "../variables";
 
+$error_maxWidth: 512px;
+
 .errors {
   position: fixed;
   bottom: 0;
   right: 0;
   padding: $container_padding;
-  max-width: 512px;
+  max-width: $error_maxWidth;
+  width: 100vw;
   max-height: 100vh;
   display: flex;
   flex-direction: column-reverse;
