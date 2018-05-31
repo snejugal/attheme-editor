@@ -11,12 +11,13 @@ class Header extends React.Component {
     activeTab: PropTypes.number,
     onActiveTabChange: PropTypes.func.isRequired,
     activeTabRef: PropTypes.object.isRequired,
+    onLogoClick: PropTypes.func.isRequired,
   }
 
   render () {
     return (
       <header className="header">
-        <Logo/>
+        <Logo onClick={this.props.onLogoClick}/>
         <Tabs
           workplaces={this.props.workplaces}
           activeTab={this.props.activeTab}

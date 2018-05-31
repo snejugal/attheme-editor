@@ -6,6 +6,8 @@ import React from "react";
 import Workspace from "./workspace/component";
 import { addUpdatee as addLocalizationUpdatee } from "./localization";
 
+const HANDLE_SCROLL_DELAY = 300;
+
 class App extends React.Component {
   constructor (props) {
     super(props);
@@ -13,10 +15,14 @@ class App extends React.Component {
     this.state = {
       workplaces: [],
       activeTab: null,
+      scrollTo: 0,
+      handleScroll: true,
     };
   }
 
   activeTab = React.createRef()
+
+  container = React.createRef()
 
   componentDidMount = async () => {
     this.setState({
@@ -74,6 +80,32 @@ class App extends React.Component {
     await database.updateActiveTab(activeTab);
   }
 
+  handleLogoClick = () => {
+    const { scrollTo } = this.state;
+
+    this.setState({
+      scrollTo: this.container.current.scrollTop,
+      handleScroll: false,
+    });
+
+    setTimeout(() => this.setState({
+      handleScroll: true,
+    }), HANDLE_SCROLL_DELAY);
+
+    this.container.current.scrollTo({
+      top: scrollTo,
+      behavior: `smooth`,
+    });
+  }
+
+  handleContainerScroll = () => {
+    if (this.state.handleScroll && this.state.scrollTo !== 0) {
+      this.setState({
+        scrollTo: 0,
+      });
+    }
+  }
+
   render () {
     let workspace = null;
 
@@ -96,8 +128,12 @@ class App extends React.Component {
           activeTab={this.state.activeTab}
           onActiveTabChange={this.handleActiveTabChange}
           activeTabRef={this.activeTab}
+          onLogoClick={this.handleLogoClick}
         />
-        <Container>
+        <Container
+          containerRef={this.container}
+          onScroll={this.handleContainerScroll}
+        >
           {workspace}
         </Container>
       </React.Fragment>

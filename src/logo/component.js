@@ -1,12 +1,16 @@
 import "./styles.scss";
 
 import { ReactComponent as LogoSVG } from "./logo.svg";
+import PropTypes from "prop-types";
 import React from "react";
 
 class Logo extends React.Component {
-  // eslint-disable-next-line class-methods-use-this
+  static propTypes = {
+    onClick: PropTypes.func.isRequired,
+  }
+
   render () {
-    return <LogoSVG className="logo"/>;
+    return <LogoSVG className="logo" onClick={this.props.onClick}/>;
   }
 }
 
