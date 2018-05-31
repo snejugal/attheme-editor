@@ -6,5 +6,6 @@
   align-items: stretch;
   height: $header_height;
   width: 100%;
-  overflow: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
