@@ -12,4 +12,4 @@ const errorsRoot = document.querySelector(`.errors`);
 ReactDOM.render(<App/>, appRoot);
 ReactDOM.render(<ErrorHandler/>, errorsRoot);
 
-serviceWorker.register();
+serviceWorker.register({});
