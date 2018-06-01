@@ -6,10 +6,21 @@ import React from "react";
 class Buttons extends React.Component {
   static propTypes = {
     children: PropTypes.any,
+    className: PropTypes.string,
+  }
+
+  static defaultProps = {
+    className: ``,
   }
 
   render () {
-    return <div className="buttons">{this.props.children}</div>;
+    let className = `buttons`;
+
+    if (this.props.className) {
+      className += ` ${this.props.className}`;
+    }
+
+    return <div className={className}>{this.props.children}</div>;
   }
 }
 
