@@ -13,11 +13,13 @@ class Container extends React.Component {
   render () {
     return (
       <div
-        className="container"
+        className="container -outer"
         ref={this.props.containerRef}
         onScroll={this.props.onScroll}
       >
-        {this.props.children}
+        <div className="container -inner">
+          {this.props.children}
+        </div>
       </div>
     );
   }

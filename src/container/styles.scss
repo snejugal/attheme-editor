@@ -2,9 +2,16 @@
 @import "../header/variables";
 
 .container {
-  max-width: $container_maxWidth;
-  width: 100%;
-  padding: $container_padding;
-  height: 100%;
-  overflow: auto;
+  &.-outer {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
+
+  &.-inner {
+    max-width: $container_maxWidth;
+    width: 100%;
+    padding: $container_padding;
+    margin: auto;
+  }
 }
