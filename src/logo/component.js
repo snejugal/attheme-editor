@@ -9,6 +9,8 @@ class Logo extends React.Component {
     onClick: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate = ({ onClick }) => onClick !== this.props.onClick
+
   render () {
     return <LogoSVG className="logo" onClick={this.props.onClick}/>;
   }

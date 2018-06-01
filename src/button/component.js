@@ -16,6 +16,13 @@ class Button extends React.Component {
     isDangerous: false,
   }
 
+  shouldComponentUpdate = (nextProps) => (
+    nextProps.type !== this.props.type ||
+    nextProps.children !== this.props.children ||
+    nextProps.onClick !== this.props.onClick ||
+    nextProps.isDangerous !== this.props.isDangerous
+  )
+
   render () {
     let className = `button`;
 

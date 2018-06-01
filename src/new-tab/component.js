@@ -10,6 +10,11 @@ class NewTab extends React.Component {
     isActive: PropTypes.bool.isRequired,
   }
 
+  shouldComponentUpdate = (nextProps) => (
+    nextProps.onClick !== this.props.onClick ||
+    nextProps.isActive !== this.props.isActive
+  )
+
   render () {
     let className = `tab -new`;
 
