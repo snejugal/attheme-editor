@@ -22,6 +22,10 @@ const localization = {
 
   workspace_themeNameLabel: () => `Название темы`,
   workspace_closeTheme: () => `Закрыть тему`,
+  workspace_closeThemePrompt: () => `Вы уверены, что хотите закрыть тему?`,
+
+  confirmDialog_yes: () => `Да`,
+  confirmDialog_no: () => `Нет`,
 };
 
 export default localization;

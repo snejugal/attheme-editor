@@ -1,10 +1,13 @@
 import * as database from "./database/api";
+import localization, {
+  addUpdatee as addLocalizationUpdatee,
+} from "./localization";
+import ConfirmDialog from "./confirm-dialog/component";
 import Container from "./container/component";
 import EmptyWorkspace from "./empty-workspace/component";
 import Header from "./header/component";
 import React from "react";
 import Workspace from "./workspace/component";
-import { addUpdatee as addLocalizationUpdatee } from "./localization";
 
 const HANDLE_SCROLL_DELAY = 300;
 
@@ -17,6 +20,7 @@ class App extends React.Component {
       activeTab: null,
       scrollTo: 0,
       handleScroll: true,
+      confirmClosing: false,
     };
   }
 
@@ -60,26 +64,6 @@ class App extends React.Component {
     this.activeTab.current.updateTitle(name);
   }
 
-  handleClosePrompt = async () => {
-    // TODO: confirm closing
-    const workplaces = [...this.state.workplaces];
-    const currentIndex = workplaces.indexOf(this.state.activeTab);
-
-    workplaces.splice(currentIndex, 1);
-
-    const newActiveTabIndex = Math.min(currentIndex, workplaces.length - 1);
-    const activeTab = workplaces[newActiveTabIndex];
-
-    this.setState({
-      workplaces,
-      activeTab,
-    });
-
-    await database.deleteTheme(this.state.activeTab);
-    await database.updateWorkplaces(workplaces);
-    await database.updateActiveTab(activeTab);
-  }
-
   handleLogoClick = () => {
     const { scrollTo } = this.state;
 
@@ -104,6 +88,41 @@ class App extends React.Component {
         scrollTo: 0,
       });
     }
+  }
+
+  handleClosePrompt = () => {
+    this.setState({
+      confirmClosing: true,
+    });
+  }
+
+  handleCloseDismissed = () => {
+    this.setState({
+      confirmClosing: false,
+    });
+  }
+
+  handleCloseConfirmed = async () => {
+    this.setState({
+      confirmClosing: false,
+    });
+
+    const workplaces = [...this.state.workplaces];
+    const currentIndex = workplaces.indexOf(this.state.activeTab);
+
+    workplaces.splice(currentIndex, 1);
+
+    const newActiveTabIndex = Math.min(currentIndex, workplaces.length - 1);
+    const activeTab = workplaces[newActiveTabIndex];
+
+    this.setState({
+      workplaces,
+      activeTab,
+    });
+
+    await database.deleteTheme(this.state.activeTab);
+    await database.updateWorkplaces(workplaces);
+    await database.updateActiveTab(activeTab);
   }
 
   render () {
@@ -136,6 +155,18 @@ class App extends React.Component {
         >
           {workspace}
         </Container>
+        {
+          this.state.confirmClosing
+            ? (
+              <ConfirmDialog
+                onDismissed={this.handleCloseDismissed}
+                onConfirmed={this.handleCloseConfirmed}
+              >
+                {localization.workspace_closeThemePrompt()}
+              </ConfirmDialog>
+            )
+            : null
+        }
       </React.Fragment>
     );
   }
