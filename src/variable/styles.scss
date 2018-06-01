@@ -1,0 +1,74 @@
+@import "./variables";
+@import "../variables";
+@import "../typography";
+@import "../mixins/shadow";
+@import "../mixins/hover-shade";
+
+.variable {
+  @include shadow(2);
+  @include hoverShade(currentColor);
+
+  color: inherit;
+  font: inherit;
+  padding: $container_padding;
+  border-radius: $container_borderRadius;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+    background-image: url("./transparency-grid.svg");
+    background-size: 10px 10px;
+    z-index: -1;
+  }
+
+  &.-wallpaper::before {
+    z-index: 0;
+    background-size: 100% 100%;
+    background-image: linear-gradient(
+      to top,
+      transparent,
+      $variable-wallpaper_shadowColor
+    );
+  }
+
+  &.-darkText {
+    color: rgba(#000000, .87);
+  }
+
+  &_title {
+    @extend %heading-5;
+    word-break: break-all;
+    text-align: left;
+    z-index: 1;
+  }
+
+  &_color {
+    margin: 0;
+
+    &::before {
+      opacity: 0.54;
+      margin-right: 24px;
+    }
+
+    &.-hex::before {
+      content: "HEX";
+    }
+
+    &.-rgb::before {
+      content: "RGB";
+    }
+  }
+}

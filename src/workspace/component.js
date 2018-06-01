@@ -6,6 +6,7 @@ import Buttons from "../buttons/component";
 import Field from "../field/component";
 import PropTypes from "prop-types";
 import React from "react";
+import Variables from "../variables/component";
 import localization from "../localization";
 
 class Workplace extends React.Component {
@@ -94,6 +95,11 @@ class Workplace extends React.Component {
               {localization.workspace_closeTheme()}
             </Button>
           </Buttons>
+          <Variables
+            themeId={this.props.themeId}
+            theme={this.state.theme.theme}
+            wallpaper={this.state.theme.wallpaper}
+          />
         </React.Fragment>
       );
   }
