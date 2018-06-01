@@ -15,8 +15,8 @@ class Variable extends React.Component {
   }
 
   shouldComponentUpdate = (nextProps) => (
-    `color` in nextProps && !(`color` in this.props) ||
-    `wallaper` in nextProps && !(`wallaper` in this.props) ||
+    (`color` in nextProps && !(`color` in this.props)) ||
+    (`wallaper` in nextProps && !(`wallaper` in this.props)) ||
     (nextProps.color && (
       nextProps.variableName !== this.props.variableName ||
       nextProps.color.red !== this.props.color.red ||
