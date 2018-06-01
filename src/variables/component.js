@@ -32,6 +32,10 @@ class Variables extends React.Component {
     }
 
     for (const variableName of variablesOrder) {
+      if (variableName === `chat_wallpaper` && this.props.wallpaper) {
+        continue;
+      }
+
       const variableElement = <Variable
         variableName={variableName}
         key={variableName}
