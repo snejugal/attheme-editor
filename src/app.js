@@ -9,7 +9,7 @@ import Header from "./header/component";
 import React from "react";
 import Workspace from "./workspace/component";
 
-const HANDLE_SCROLL_DELAY = 300;
+const HANDLE_SCROLL_INTERVAL = 200;
 
 class App extends React.Component {
   constructor (props) {
@@ -18,11 +18,15 @@ class App extends React.Component {
     this.state = {
       workplaces: [],
       activeTab: null,
-      scrollTo: 0,
-      handleScroll: true,
       confirmClosing: false,
     };
   }
+
+
+  // we don't need to update the whole dom just to scroll
+  doHandleScroll = true
+
+  doScrollTo = 0
 
   activeTab = React.createRef()
 
@@ -65,28 +69,34 @@ class App extends React.Component {
   }
 
   handleLogoClick = () => {
-    const { scrollTo } = this.state;
+    const { doScrollTo } = this;
 
-    this.setState({
-      scrollTo: this.container.current.scrollTop,
-      handleScroll: false,
-    });
-
-    setTimeout(() => this.setState({
-      handleScroll: true,
-    }), HANDLE_SCROLL_DELAY);
+    this.doScrollTo = this.container.current.scrollTop;
+    this.doHandleScroll = false;
 
     this.container.current.scrollTo({
-      top: scrollTo,
+      top: doScrollTo,
       behavior: `smooth`,
     });
   }
 
   handleContainerScroll = () => {
-    if (this.state.handleScroll && this.state.scrollTo !== 0) {
-      this.setState({
-        scrollTo: 0,
-      });
+    if (this.doHandleScroll) {
+      this.doScrollTo = 0;
+    } else {
+      // Expecting smooth scroll so we'll catch scroll events by browser in a
+      // while. We don't need them, so we ignore them. Anyway, even if it won't
+      // scroll smoothly, we'll start thinking that the user is scrolling in
+      // 200 ms.
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+
+      this.timer = setTimeout(() => {
+        this.doHandleScroll = true;
+        clearTimeout(this.timer);
+        this.timer = null;
+      }, HANDLE_SCROLL_INTERVAL);
     }
   }
 
