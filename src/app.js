@@ -113,7 +113,7 @@ class App extends React.Component {
     workplaces.splice(currentIndex, 1);
 
     const newActiveTabIndex = Math.min(currentIndex, workplaces.length - 1);
-    const activeTab = workplaces[newActiveTabIndex];
+    const activeTab = workplaces[newActiveTabIndex] || -1;
 
     this.setState({
       workplaces,
