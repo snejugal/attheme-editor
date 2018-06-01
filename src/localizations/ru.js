@@ -23,6 +23,7 @@ const localization = {
   workspace_themeNameLabel: () => `Название темы`,
   workspace_closeTheme: () => `Закрыть тему`,
   workspace_closeThemePrompt: () => `Вы уверены, что хотите закрыть тему?`,
+  workspace_downloadThemeFile: () => `Скачать .attheme напрямую`,
 
   confirmDialog_yes: () => `Да`,
   confirmDialog_no: () => `Нет`,

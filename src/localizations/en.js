@@ -21,6 +21,7 @@ const localization = {
   workspace_themeNameLabel: () => `Theme name`,
   workspace_closeTheme: () => `Close theme`,
   workspace_closeThemePrompt: () => `Are you sure you want to close the theme?`,
+  workspace_downloadThemeFile: () => `Download .attheme directly`,
 
   confirmDialog_yes: () => `Yes`,
   confirmDialog_no: () => `No`,

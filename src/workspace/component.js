@@ -1,6 +1,7 @@
 import "./styles.scss";
 
 import * as database from "../database/api";
+import Attheme from "attheme-js";
 import Button from "../button/component";
 import Buttons from "../buttons/component";
 import Field from "../field/component";
@@ -74,6 +75,37 @@ class Workplace extends React.Component {
 
   handleNameFieldEnter = ({ target }) => target.blur();
 
+  downloadThemeFile = () => {
+    const theme = new Attheme(``, this.state.theme.theme);
+    const themeFileName = `${this.state.theme.name}.attheme`;
+
+    if (this.state.theme.wallpaper) {
+      theme[Attheme.IMAGE_KEY] = atob(this.state.theme.wallpaper);
+    }
+
+    const string = Attheme.asText(theme);
+    const stringLength = string.length;
+
+    const buffer = new Uint8Array(stringLength);
+
+    for (let i = 0; i < stringLength; i++) {
+      buffer[i] = string.charCodeAt(i);
+    }
+
+    const blob = URL.createObjectURL(
+      new File([buffer], themeFileName)
+    );
+
+    const link = document.createElement(`a`);
+
+    link.href = blob;
+    link.download = themeFileName;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   render () {
     return this.state.theme === null
       ? null
@@ -93,6 +125,9 @@ class Workplace extends React.Component {
           <Buttons>
             <Button onClick={this.props.onClosePrompt} isDangerous={true}>
               {localization.workspace_closeTheme()}
+            </Button>
+            <Button onClick={this.downloadThemeFile}>
+              {localization.workspace_downloadThemeFile()}
             </Button>
           </Buttons>
           <Variables
