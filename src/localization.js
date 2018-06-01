@@ -1,6 +1,6 @@
 import englishLocalization from "./localizations/en";
 
-const languages = [`en`, `ru`];
+const languages = [`en`, `ru`, `uk`];
 
 const localization = {
   ...englishLocalization,
