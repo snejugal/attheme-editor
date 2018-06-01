@@ -1,0 +1,59 @@
+@import "../mixins/shadow";
+@import "../typography";
+@import "../variables";
+@import "./variables";
+
+.dialogContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($shadowColor, .5);
+  padding: $container_padding;
+  z-index: 2;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.dialog {
+  @include shadow(24);
+  padding: $container_padding;
+  background-color: $theme_backgroundColor;
+  width: 100%;
+  max-width: $dialog_maxWidth;
+  border-radius: $container_borderRadius;
+
+  &_title.heading { // so it's higher than just .heading
+    @extend %heading-5;
+  }
+
+  &_buttons {
+    margin-top: $dialogButtons_padding;
+    margin-left: -$container_horizontalMargin;
+    margin-right: -$container_horizontalMargin;
+    margin-bottom: -$container_verticalMargin;
+    padding: $dialogButtons_padding;
+    flex-direction: row-reverse;
+
+    .button {
+      background-color: transparent;
+      color: $theme_accentColor;
+      box-shadow: none !important;
+      margin-bottom: 0;
+
+      &:not(:first-child) {
+        margin-right: $container_horizontalMargin;
+      }
+
+      &:first-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
