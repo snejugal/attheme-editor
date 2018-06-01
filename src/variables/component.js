@@ -20,7 +20,7 @@ class Variables extends React.Component {
     if (this.props.wallpaper) {
       const variableElement = <Variable
         variableName="chat_wallpaper"
-        key={`${this.props.themeId} chat_wallpaper`}
+        key="chat_wallpaper"
         wallpaper={this.props.wallpaper}
 
         // we may meet both color and image at the same time in a theme,
@@ -34,7 +34,7 @@ class Variables extends React.Component {
     for (const variableName of variablesOrder) {
       const variableElement = <Variable
         variableName={variableName}
-        key={`${this.props.themeId} ${variableName}`}
+        key={variableName}
         color={this.props.theme[variableName]}
       />;
 
