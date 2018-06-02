@@ -157,14 +157,14 @@ class Workplace extends React.Component {
             <Button onClick={this.downloadThemeFile}>
               {localization.workspace_downloadThemeFile()}
             </Button>
+            <Button onClick={this.downloadWorkspace}>
+              {localization.workspace_downloadWorkspace()}
+            </Button>
             <Button onClick={this.createPreview}>
               {localization.workspace_createPreview()}
             </Button>
             <Button onClick={this.testTheme}>
               {localization.workspace_testTheme()}
-            </Button>
-            <Button onClick={this.downloadWorkspace}>
-              {localization.workspace_downloadWorkspace()}
             </Button>
           </Buttons>
 
