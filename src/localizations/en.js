@@ -1,6 +1,8 @@
 import Link from "../link/component";
 import React from "react";
 
+const pluralRules = new Intl.PluralRules(`en`);
+
 const localization = {
   error_title: () => `Whoops, some error happened.`,
   error_description: () => <React.Fragment>
@@ -25,6 +27,16 @@ const localization = {
   workspace_createPreview: () => `Create a preview`,
   workspace_testTheme: () => `Test the theme`,
   workspace_downloadWorkspace: () => `Download the workspace`,
+  workspace_variablesAmount: ({ total, theme }) => {
+    const forms = {
+      "one one": `${theme} of ${total} variable is added to the theme`,
+      "one other": `${theme} of ${total} variables is added to the theme`,
+      "other one": `${theme} of ${total} variable are added to the theme`,
+      "other other": `${theme} of ${total} variables are added to the theme`,
+    };
+
+    return forms[`${pluralRules.select(theme)} ${pluralRules.select(total)}`];
+  },
 
   confirmDialog_yes: () => `Yes`,
   confirmDialog_no: () => `No`,

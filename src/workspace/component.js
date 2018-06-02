@@ -5,9 +5,11 @@ import Attheme from "attheme-js";
 import Button from "../button/component";
 import Buttons from "../buttons/component";
 import Field from "../field/component";
+import Hint from "../hint/component";
 import PropTypes from "prop-types";
 import React from "react";
 import Variables from "../variables/component";
+import defaultValues from "attheme-default-values";
 import download from "../download";
 import localization from "../localization";
 import prepareTheme from "../prepare-theme";
@@ -116,10 +118,26 @@ class Workplace extends React.Component {
   })
 
   render () {
+    let variablesAmount;
+
+    if (this.state.theme !== null) {
+      variablesAmount = Object.keys(this.state.theme.theme).length;
+
+      if (this.state.theme.wallpaper && !(this.state.theme.chat_wallpaper)) {
+        variablesAmount++;
+      }
+    }
+
     return this.state.theme === null
       ? null
       : (
         <React.Fragment>
+          <Button
+            onClick={this.downloadThemeViaTelegram}
+            isFloating={true}
+            className="workspace_downloadButton"
+          />
+
           <Field
             className="workspace_themeName"
             id="workspace_themeName"
@@ -156,11 +174,12 @@ class Workplace extends React.Component {
             wallpaper={this.state.theme.wallpaper}
           />
 
-          <Button
-            onClick={this.downloadThemeViaTelegram}
-            isFloating={true}
-            className="workspace_downloadButton"
-          />
+          <Hint>{
+            localization.workspace_variablesAmount({
+              total: Object.keys(defaultValues).length,
+              theme: variablesAmount,
+            })
+          }</Hint>
         </React.Fragment>
       );
   }

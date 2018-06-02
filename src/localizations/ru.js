@@ -3,6 +3,8 @@ import React from "react";
 
 const NBSP = `\xa0`;
 
+const pluralRules = new Intl.PluralRules(`ru`);
+
 const localization = {
   error_title: () => `Упс, произошла ошибка`,
   error_description: () => <React.Fragment>
@@ -27,6 +29,15 @@ const localization = {
   workspace_createPreview: () => `Создать превью`,
   workspace_testTheme: () => `Протестировать тему`,
   workspace_downloadWorkspace: () => `Скачать рабочее окружение`,
+  workspace_variablesAmount: ({ total, theme }) => {
+    const forms = {
+      one: `${theme} переменная из ${total} добавлена в тему`,
+      few: `${theme} переменные из ${total} добавлены в тему`,
+      many: `${theme} переменных из ${total} добавлены в тему`,
+    };
+
+    return forms[pluralRules.select(theme)];
+  },
 
   confirmDialog_yes: () => `Да`,
   confirmDialog_no: () => `Нет`,
