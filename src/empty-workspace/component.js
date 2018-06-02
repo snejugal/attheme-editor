@@ -23,18 +23,20 @@ class EmptyWorkspace extends React.Component {
     });
   }
 
-  handleChange = async () => {
-    if (this.filesInput.current.files.length === 0) {
-      return;
+  handleChange = () => {
+    const files = [...this.filesInput.current.files];
+
+    for (const file of files) {
+      (async () => {
+        const content = await readFile(file);
+        const theme = parseTheme({
+          file: content,
+          filename: file.name,
+        });
+
+        this.props.onTheme(theme);
+      })();
     }
-
-    const file = await readFile(this.filesInput.current.files[0]);
-    const theme = parseTheme({
-      file,
-      filename: this.filesInput.current.files[0].name,
-    });
-
-    this.props.onTheme(theme);
   }
 
   handleOpenButtonClick = () => this.filesInput.current.click()
@@ -57,6 +59,7 @@ class EmptyWorkspace extends React.Component {
           ref={this.filesInput}
           onChange={this.handleChange}
           accept=".attheme,.attheme-editor"
+          multiple={true}
         />
       </React.Fragment>
     );
