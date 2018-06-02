@@ -8,6 +8,8 @@ import EmptyWorkspace from "./empty-workspace/component";
 import Header from "./header/component";
 import React from "react";
 import Workspace from "./workspace/component";
+import parseTheme from "./parse-theme";
+import readFile from "./read-file";
 
 const HANDLE_SCROLL_INTERVAL = 200;
 
@@ -21,7 +23,6 @@ class App extends React.Component {
       confirmClosing: false,
     };
   }
-
 
   // we don't need to update the whole dom just to scroll
   doHandleScroll = true
@@ -40,6 +41,25 @@ class App extends React.Component {
 
     addLocalizationUpdatee(() => {
       this.forceUpdate();
+    });
+
+    document.body.addEventListener(`dragover`, (e) => e.preventDefault());
+    document.body.addEventListener(`drop`, (event) => {
+      event.preventDefault();
+
+      const files = [...event.dataTransfer.files];
+
+      for (const file of files) {
+        (async () => {
+          const content = await readFile(file);
+          const theme = parseTheme({
+            file: content,
+            filename: file.name,
+          });
+
+          this.handleTheme(theme);
+        })();
+      }
     });
   }
 
