@@ -3,6 +3,8 @@ import React from "react";
 
 const NBSP = `\xa0`;
 
+const pluralRules = new Intl.PluralRules(`uk`);
+
 const localization = {
   error_title: () => `Упс, виникла помилка`,
   error_description: () => <React.Fragment>
@@ -24,6 +26,18 @@ const localization = {
   workspace_closeTheme: () => `Закрити тему`,
   workspace_closeThemePrompt: () => `Ви впевнені, що бажаєте закрити тему?`,
   workspace_downloadThemeFile: () => `Завантажити файл .attheme`,
+  workspace_createPreview: () => `Створити прев'ю`,
+  workspace_testTheme: () => `Протестувати тему`,
+  workspace_downloadWorkspace: () => `Завантажити робоче оточення`,
+  workspace_variablesAmount: ({ total, theme }) => {
+    const forms = {
+      one: `${theme} змінна з ${total} додана у тему`,
+      few: `${theme} змінні з ${total} додані у тему`,
+      many: `${theme} змінних з ${total} додані у тему`,
+    };
+
+    return forms[pluralRules.select(theme)];
+  },
 
   confirmDialog_yes: () => `Так`,
   confirmDialog_no: () => `Ні`,
