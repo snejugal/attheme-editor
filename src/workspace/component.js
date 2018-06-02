@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import Variables from "../variables/component";
 import localization from "../localization";
+import prepareTheme from "../prepare-theme";
 
 class Workplace extends React.Component {
   static propTypes = {
@@ -77,12 +78,7 @@ class Workplace extends React.Component {
   handleNameFieldEnter = ({ target }) => target.blur();
 
   downloadThemeFile = () => {
-    const theme = new Attheme(``, this.state.theme.theme);
-    const themeFileName = `${this.state.theme.name}.attheme`;
-
-    if (this.state.theme.wallpaper) {
-      theme[Attheme.IMAGE_KEY] = atob(this.state.theme.wallpaper);
-    }
+    const { theme, fileName } = prepareTheme(this.state.theme);
 
     const string = Attheme.asText(theme);
     const stringLength = string.length;
@@ -94,13 +90,13 @@ class Workplace extends React.Component {
     }
 
     const blob = URL.createObjectURL(
-      new File([buffer], themeFileName)
+      new File([buffer], fileName)
     );
 
     const link = document.createElement(`a`);
 
     link.href = blob;
-    link.download = themeFileName;
+    link.download = fileName;
 
     document.body.appendChild(link);
     link.click();
@@ -108,12 +104,7 @@ class Workplace extends React.Component {
   }
 
   downloadThemeViaTelegram = async () => {
-    const theme = new Attheme(``, this.state.theme.theme);
-    const { name } = this.state.theme;
-
-    if (this.state.theme.wallpaper) {
-      theme[Attheme.IMAGE_KEY] = atob(this.state.theme.wallpaper);
-    }
+    const { theme, name } = prepareTheme(this.state.theme);
 
     const themeId = await atthemeEditorApi.uploadTheme({
       name,
