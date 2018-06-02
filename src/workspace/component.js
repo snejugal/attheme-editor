@@ -8,6 +8,7 @@ import Field from "../field/component";
 import PropTypes from "prop-types";
 import React from "react";
 import Variables from "../variables/component";
+import download from "../download";
 import localization from "../localization";
 import prepareTheme from "../prepare-theme";
 import uploadTheme from "../upload-theme";
@@ -78,29 +79,14 @@ class Workplace extends React.Component {
   handleNameFieldEnter = ({ target }) => target.blur();
 
   downloadThemeFile = () => {
-    const { theme, fileName } = prepareTheme(this.state.theme);
+    const { theme } = prepareTheme(this.state.theme);
+    const content = Attheme.asText(theme);
+    const name = `${this.state.theme.name}.attheme`;
 
-    const string = Attheme.asText(theme);
-    const stringLength = string.length;
-
-    const buffer = new Uint8Array(stringLength);
-
-    for (let i = 0; i < stringLength; i++) {
-      buffer[i] = string.charCodeAt(i);
-    }
-
-    const blob = URL.createObjectURL(
-      new File([buffer], fileName)
-    );
-
-    const link = document.createElement(`a`);
-
-    link.href = blob;
-    link.download = fileName;
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    download({
+      content,
+      name,
+    });
   }
 
   downloadThemeViaTelegram = async () => {
@@ -126,6 +112,7 @@ class Workplace extends React.Component {
           >
             {localization.workspace_themeNameLabel()}
           </Field>
+
           <Buttons>
             <Button onClick={this.props.onClosePrompt} isDangerous={true}>
               {localization.workspace_closeTheme()}
@@ -134,11 +121,13 @@ class Workplace extends React.Component {
               {localization.workspace_downloadThemeFile()}
             </Button>
           </Buttons>
+
           <Variables
             themeId={this.props.themeId}
             theme={this.state.theme.theme}
             wallpaper={this.state.theme.wallpaper}
           />
+
           <Button
             onClick={this.downloadThemeViaTelegram}
             isFloating={true}
