@@ -5,6 +5,10 @@
   &_themeName {
     width: 100%;
   }
+
+  &_downloadButton {
+    background-image: url("./download-icon.svg");
+  }
 }
 
 #workspace_themeName {

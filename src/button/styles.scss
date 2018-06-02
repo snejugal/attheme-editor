@@ -2,6 +2,7 @@
 @import "../typography";
 @import "../mixins/shadow";
 @import "../mixins/hover-shade";
+@import "../mixins/square";
 
 .button {
   @extend %button;
@@ -26,5 +27,16 @@
 
   &.-dangerous {
     background-color: $button_backround-dangerous;
+  }
+
+  &.-floating {
+    @include square($button-floating_size);
+    position: fixed;
+    bottom: $button-floating_sidesDistance;
+    right: $button-floating_sidesDistance;
+    border-radius: $button-floating_size / 2;
+    background-size: $button-floating_size / 2;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }

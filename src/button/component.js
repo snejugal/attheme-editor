@@ -9,18 +9,24 @@ class Button extends React.Component {
     children: PropTypes.any,
     onClick: PropTypes.func.isRequired,
     isDangerous: PropTypes.bool,
+    isFloating: PropTypes.bool,
+    className: PropTypes.string,
   }
 
   static defaultProps = {
     type: `button`,
     isDangerous: false,
+    isFloating: false,
+    className: ``,
   }
 
   shouldComponentUpdate = (nextProps) => (
     nextProps.type !== this.props.type ||
     nextProps.children !== this.props.children ||
     nextProps.onClick !== this.props.onClick ||
-    nextProps.isDangerous !== this.props.isDangerous
+    nextProps.isDangerous !== this.props.isDangerous ||
+    nextProps.isFloating !== this.props.isFloating ||
+    nextProps.className !== this.props.className
   )
 
   render () {
@@ -28,6 +34,14 @@ class Button extends React.Component {
 
     if (this.props.isDangerous) {
       className += ` -dangerous`;
+    }
+
+    if (this.props.isFloating) {
+      className += ` -floating`;
+    }
+
+    if (this.props.className) {
+      className += ` ${this.props.className}`;
     }
 
     return (

@@ -1,5 +1,6 @@
 import "./styles.scss";
 
+import * as atthemeEditorApi from "attheme-editor-api";
 import * as database from "../database/api";
 import Attheme from "attheme-js";
 import Button from "../button/component";
@@ -106,6 +107,24 @@ class Workplace extends React.Component {
     document.body.removeChild(link);
   }
 
+  downloadThemeViaTelegram = async () => {
+    const theme = new Attheme(``, this.state.theme.theme);
+    const { name } = this.state.theme;
+
+    if (this.state.theme.wallpaper) {
+      theme[Attheme.IMAGE_KEY] = atob(this.state.theme.wallpaper);
+    }
+
+    const themeId = await atthemeEditorApi.uploadTheme({
+      name,
+      theme,
+    });
+
+    const tgLink = `tg://resolve?domain=atthemeeditorbot&start=0${themeId}`;
+
+    window.location.href = tgLink;
+  }
+
   render () {
     return this.state.theme === null
       ? null
@@ -134,6 +153,11 @@ class Workplace extends React.Component {
             themeId={this.props.themeId}
             theme={this.state.theme.theme}
             wallpaper={this.state.theme.wallpaper}
+          />
+          <Button
+            onClick={this.downloadThemeViaTelegram}
+            isFloating={true}
+            className="workspace_downloadButton"
           />
         </React.Fragment>
       );
