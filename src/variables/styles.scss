@@ -4,7 +4,11 @@
 
 .variables {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax($variable_minWidth, 1fr));
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: $variables_gap;
   margin-bottom: $container_verticalMargin;
+
+  @media (min-width: $variables_twoColumsMinWidth) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

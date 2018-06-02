@@ -1,2 +1,4 @@
-$variable_minWidth: 320px;
+@import "../variables";
+
+$variable_minWidth: 320px - $container_horizontalMargin * 2;
 $variable-wallpaper_shadowColor: rgba(#000000, 0.5);

@@ -16,10 +16,13 @@
   transition-property: box-shadow;
   transition-duration: $transitionDuration;
   font-family: inherit;
-  height: $button_height;
-  padding: 0 $button_horizontalPadding;
+  padding: $button_verticalPadding $button_horizontalPadding;
   margin: 0;
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: inhertt;
 
   &:active {
     @include shadow(8);
@@ -38,5 +41,6 @@
     background-size: $button-floating_size / 2;
     background-position: center;
     background-repeat: no-repeat;
+    z-index: 2;
   }
 }
