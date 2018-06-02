@@ -1,8 +1,10 @@
 @import "../variable/variables";
 @import "./variables";
+@import "../variables";
 
 .variables {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax($variable_minWidth, 1fr));
   grid-gap: $variables_gap;
+  margin-bottom: $container_verticalMargin;
 }
