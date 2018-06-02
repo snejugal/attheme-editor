@@ -22,6 +22,8 @@ const localization = {
   workspace_closeTheme: () => `Chiudi tema`,
   workspace_closeThemePrompt: () => `Sei sicuro di voler chiudere il tema?`,
   workspace_downloadThemeFile: () => `Scarica direttamente il file .attheme`,
+  workspace_createPreview: () => `Crea un'anteprima`,
+  workspace_testTheme: () => `Prova il tema`,
 
   confirmDialog_yes: () => `Sì`,
   confirmDialog_no: () => `No`,

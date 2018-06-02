@@ -96,6 +96,25 @@ class Workplace extends React.Component {
     window.location.href = tgLink;
   }
 
+  createPreview = async () => {
+    const themeId = await uploadTheme(this.state.theme);
+    const tgLink = `tg://resolve?domain=themepreviewbot&start=${themeId}`;
+
+    window.location.href = tgLink;
+  }
+
+  testTheme = async () => {
+    const themeId = await uploadTheme(this.state.theme);
+    const tgLink = `tg://resolve?domain=testatthemebot&start=${themeId}`;
+
+    window.location.href = tgLink;
+  }
+
+  downloadWorkspace = () => download({
+    content: JSON.stringify(this.state.theme),
+    name: `${this.state.theme.name}.attheme-editor`,
+  })
+
   render () {
     return this.state.theme === null
       ? null
@@ -119,6 +138,15 @@ class Workplace extends React.Component {
             </Button>
             <Button onClick={this.downloadThemeFile}>
               {localization.workspace_downloadThemeFile()}
+            </Button>
+            <Button onClick={this.createPreview}>
+              {localization.workspace_createPreview()}
+            </Button>
+            <Button onClick={this.testTheme}>
+              {localization.workspace_testTheme()}
+            </Button>
+            <Button onClick={this.downloadWorkspace}>
+              {localization.workspace_downloadWorkspace()}
             </Button>
           </Buttons>
 

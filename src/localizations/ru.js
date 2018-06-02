@@ -24,6 +24,9 @@ const localization = {
   workspace_closeTheme: () => `Закрыть тему`,
   workspace_closeThemePrompt: () => `Вы уверены, что хотите закрыть тему?`,
   workspace_downloadThemeFile: () => `Скачать .attheme напрямую`,
+  workspace_createPreview: () => `Создать превью`,
+  workspace_testTheme: () => `Протестировать тему`,
+  workspace_downloadWorkspace: () => `Скачать рабочее окружение`,
 
   confirmDialog_yes: () => `Да`,
   confirmDialog_no: () => `Нет`,
