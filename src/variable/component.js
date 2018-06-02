@@ -6,6 +6,12 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const DARK_THRESHOLD = 0.75;
+const EDTIOR_BACKGROUND = {
+  red: 0x21,
+  green: 0x21,
+  blue: 0x21,
+  alpha: 255,
+};
 
 class Variable extends React.Component {
   static propTypes = {
@@ -37,18 +43,10 @@ class Variable extends React.Component {
     // Telegram respects chat_wallpaper color over image. Doing the same thing.
     if (this.props.color) {
       const { red, green, blue, alpha } = this.props.color;
-      const brightness = Color.brightness({
-        red,
-        green,
-        blue,
-      });
+      const finalColor = Color.overlay(EDTIOR_BACKGROUND, this.props.color);
+      const brightness = Color.brightness(finalColor);
 
-      style.backgroundColor = Color.cssRgb({
-        red,
-        green,
-        blue,
-        alpha,
-      });
+      style.backgroundColor = Color.cssRgb(this.props.color);
 
       if (brightness >= DARK_THRESHOLD) {
         className += ` -darkText`;
@@ -57,12 +55,7 @@ class Variable extends React.Component {
       content = <React.Fragment>
         <p className="variable_color -hex">
           {
-            Color.hex({
-              red,
-              green,
-              blue,
-              alpha,
-            })
+            Color.hex(this.props.color)
           }
         </p>
         <p className="variable_color -rgb">

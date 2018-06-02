@@ -25,6 +25,40 @@ class Color {
 
     return redPart + greenPart + bluePart;
   }
+
+  static overlay (...colors) {
+    const finalColor = {
+      red: 0,
+      green: 0,
+      blue: 0,
+      alpha: 255,
+    };
+
+    colors.forEach((color) => {
+      if (color.alpha === 0) {
+        return;
+      }
+
+      if (color.alpha === CHANNEL) {
+        finalColor.red = color.red;
+        finalColor.green = color.green;
+        finalColor.blue = color.blue;
+      }
+
+      const { red, green, blue } = color;
+      const alpha = color.alpha / CHANNEL;
+
+      const newRed = alpha * (red - finalColor.red) + finalColor.red;
+      const newGreen = alpha * (green - finalColor.red) + finalColor.green;
+      const newBlue = alpha * (blue - finalColor.blue) + finalColor.blue;
+
+      finalColor.red = Math.round(newRed);
+      finalColor.green = Math.round(newGreen);
+      finalColor.blue = Math.round(newBlue);
+    });
+
+    return finalColor;
+  }
 }
 
 export default Color;
