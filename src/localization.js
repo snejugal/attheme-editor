@@ -8,7 +8,7 @@ const localization = {
 
 const updatees = [];
 
-const updateLanguage = () => {
+const updateLanguage = async () => {
   let language = `en`;
 
   if (`languages` in navigator) {
@@ -29,12 +29,10 @@ const updateLanguage = () => {
     }
   }
 
-  import(`./localizations/${language}`)
-    .then(({ default: loadedLocalization }) => {
-      Object.assign(localization, loadedLocalization);
+  const { default: loaded } = await import(`./localizations/${language}`);
 
-      updatees.forEach((updatee) => updatee());
-    });
+  Object.assign(localization, loaded);
+  updatees.forEach((updatee) => updatee());
 };
 
 updateLanguage();
