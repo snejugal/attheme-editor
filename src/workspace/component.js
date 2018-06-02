@@ -120,7 +120,7 @@ class Workplace extends React.Component {
   render () {
     let variablesAmount;
 
-    if (this.state.theme !== null) {
+    if (this.state.theme) {
       variablesAmount = Object.keys(this.state.theme.theme).length;
 
       if (this.state.theme.wallpaper && !(this.state.theme.chat_wallpaper)) {
