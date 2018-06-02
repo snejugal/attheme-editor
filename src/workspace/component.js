@@ -1,6 +1,5 @@
 import "./styles.scss";
 
-import * as atthemeEditorApi from "attheme-editor-api";
 import * as database from "../database/api";
 import Attheme from "attheme-js";
 import Button from "../button/component";
@@ -11,6 +10,7 @@ import React from "react";
 import Variables from "../variables/component";
 import localization from "../localization";
 import prepareTheme from "../prepare-theme";
+import uploadTheme from "../upload-theme";
 
 class Workplace extends React.Component {
   static propTypes = {
@@ -104,13 +104,7 @@ class Workplace extends React.Component {
   }
 
   downloadThemeViaTelegram = async () => {
-    const { theme, name } = prepareTheme(this.state.theme);
-
-    const themeId = await atthemeEditorApi.uploadTheme({
-      name,
-      theme,
-    });
-
+    const themeId = await uploadTheme(this.state.theme);
     const tgLink = `tg://resolve?domain=atthemeeditorbot&start=${themeId}`;
 
     window.location.href = tgLink;
