@@ -13,5 +13,9 @@
     width: 100%;
     padding: $container_padding;
     margin: auto;
+
+    > :last-child {
+      margin-bottom: 0;
+    }
   }
 }
