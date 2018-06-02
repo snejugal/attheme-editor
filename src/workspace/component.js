@@ -120,7 +120,7 @@ class Workplace extends React.Component {
       theme,
     });
 
-    const tgLink = `tg://resolve?domain=atthemeeditorbot&start=0${themeId}`;
+    const tgLink = `tg://resolve?domain=atthemeeditorbot&start=${themeId}`;
 
     window.location.href = tgLink;
   }
