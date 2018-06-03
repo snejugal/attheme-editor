@@ -41,6 +41,12 @@ const localization = {
 
   confirmDialog_yes: () => `Так`,
   confirmDialog_no: () => `Ні`,
+
+  variableEditor_cancel: () => `Відмінити`,
+  variableEditor_save: () => `Зберегти`,
+  variableEditor_red: () => `Червоний`,
+  variableEditor_green: () => `Зелений`,
+  variableEditor_blue: () => `Синій`,
 };
 
 export default localization;

@@ -2,6 +2,7 @@ import Field from "../field/component";
 import Fields from "../fields/component";
 import PropTypes from "prop-types";
 import React from "react";
+import localization from "../localization";
 
 class RgbInput extends React.Component {
   static propTypes = {
@@ -62,7 +63,7 @@ class RgbInput extends React.Component {
           onChange={this.handleRedChange}
           value={this.state.red}
         >
-          Red
+          {localization.variableEditor_red()}
         </Field>
         <Field
           type="number"
@@ -72,7 +73,7 @@ class RgbInput extends React.Component {
           onChange={this.handleGreenChange}
           value={this.state.green}
         >
-          Green
+          {localization.variableEditor_green()}
         </Field>
         <Field
           type="number"
@@ -82,7 +83,7 @@ class RgbInput extends React.Component {
           onChange={this.handleBlueChange}
           value={this.state.blue}
         >
-          Blue
+          {localization.variableEditor_blue()}
         </Field>
       </Fields>
     );

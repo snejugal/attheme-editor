@@ -7,6 +7,7 @@ import Heading from "../heading/component";
 import PropTypes from "prop-types";
 import React from "react";
 import RgbInput from "../rgb-input/component";
+import localization from "../localization";
 
 class VariableEditor extends React.Component {
   static propTypes = {
@@ -43,8 +44,12 @@ class VariableEditor extends React.Component {
         onDismiss={this.props.onCancel}
         buttons={
           <React.Fragment>
-            <Button onClick={this.handleSave}>Save</Button>
-            <Button onClick={this.props.onCancel}>Cancel</Button>
+            <Button onClick={this.handleSave}>
+              {localization.variableEditor_save()}
+            </Button>
+            <Button onClick={this.props.onCancel}>
+              {localization.variableEditor_cancel()}
+            </Button>
           </React.Fragment>
         }
       >

@@ -40,6 +40,12 @@ const localization = {
 
   confirmDialog_yes: () => `Yes`,
   confirmDialog_no: () => `No`,
+
+  variableEditor_cancel: () => `Cancel`,
+  variableEditor_save: () => `Save`,
+  variableEditor_red: () => `Red`,
+  variableEditor_green: () => `Green`,
+  variableEditor_blue: () => `Blue`,
 };
 
 export default localization;
