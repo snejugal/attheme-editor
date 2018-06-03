@@ -13,18 +13,21 @@ class Field extends React.Component {
     className: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
     onEnter: PropTypes.func,
     id: PropTypes.string.isRequired,
     children: PropTypes.any.isRequired,
     autoCapitalize: PropTypes.string,
     min: PropTypes.number,
     max: PropTypes.number,
+    autoFocus: PropTypes.bool,
   }
 
   static defaultProps = {
     type: `text`,
     placeholder: ``,
     className: ``,
+    autofocus: false,
   }
 
   handleKeyUp = (event) => {
@@ -35,7 +38,7 @@ class Field extends React.Component {
 
   render () {
     return (
-      <div className="fieldContainer">
+      <div className={`fieldContainer ${this.props.className}`}>
         <label className="label" htmlFor={this.props.id}>
           {this.props.children}
         </label>
@@ -50,6 +53,8 @@ class Field extends React.Component {
           autoCapitalize={this.props.autoCapitalize}
           min={this.props.min}
           max={this.props.max}
+          onFocus={this.props.onFocus}
+          autoFocus={this.props.autoFocus}
         />
       </div>
     );

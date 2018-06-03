@@ -40,4 +40,12 @@
     @extend %heading-5;
     word-break: break-all;
   }
+
+  &_hexField {
+    grid-column: span 2;
+  }
+
+  &_fields {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

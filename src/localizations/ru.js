@@ -47,6 +47,8 @@ const localization = {
   variableEditor_red: () => `Красный`,
   variableEditor_green: () => `Зелёный`,
   variableEditor_blue: () => `Синий`,
+  variableEditor_hex: () => `HEX`,
+  variableEditor_alpha: () => `Альфа`,
 };
 
 export default localization;

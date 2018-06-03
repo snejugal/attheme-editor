@@ -4,6 +4,7 @@ import Button from "../button/component";
 import Color from "../color";
 import Dialog from "../dialog/component";
 import Heading from "../heading/component";
+import HexInput from "../hex-input/component";
 import PropTypes from "prop-types";
 import React from "react";
 import RgbInput from "../rgb-input/component";
@@ -26,11 +27,15 @@ class VariableEditor extends React.Component {
     };
   }
 
-  handleRgbChange = ({ channel, value }) => this.setState({
+  handleRgbaChange = ({ channel, value }) => this.setState({
     color: {
       ...this.state.color,
       [channel]: value,
     },
+  });
+
+  handleHexChange = (color) => this.setState({
+    color,
   });
 
   handleSave = () => this.props.onSave(this.state.color)
@@ -87,10 +92,17 @@ class VariableEditor extends React.Component {
         {
           this.state.color
             ? (
-              <RgbInput
-                color={this.state.color}
-                onChange={this.handleRgbChange}
-              />
+              <React.Fragment>
+                <HexInput
+                  color={this.state.color}
+                  onAlphaChange={this.handleRgbaChange}
+                  onHexChange={this.handleHexChange}
+                />
+                <RgbInput
+                  color={this.state.color}
+                  onChange={this.handleRgbaChange}
+                />
+              </React.Fragment>
             )
             : null
         }

@@ -10,18 +10,6 @@ class RgbInput extends React.Component {
     onChange: PropTypes.func.isRequired,
   }
 
-  constructor (props) {
-    super(props);
-
-    const { red, blue, green } = this.props.color;
-
-    this.state = {
-      red,
-      green,
-      blue,
-    };
-  }
-
   handleChange = (channel, event) => {
     let correctValue = event.target.valueAsNumber;
 
@@ -35,10 +23,6 @@ class RgbInput extends React.Component {
     ) {
       correctValue = Number(event.target.min);
     }
-
-    this.setState({
-      [channel]: correctValue,
-    });
 
     this.props.onChange({
       channel,
@@ -54,14 +38,14 @@ class RgbInput extends React.Component {
 
   render () {
     return (
-      <Fields>
+      <Fields className="variableEditor_fields">
         <Field
           type="number"
           id="variableEditor_red"
           min={0}
           max={255}
           onChange={this.handleRedChange}
-          value={this.state.red}
+          value={this.props.color.red}
         >
           {localization.variableEditor_red()}
         </Field>
@@ -71,7 +55,7 @@ class RgbInput extends React.Component {
           min={0}
           max={255}
           onChange={this.handleGreenChange}
-          value={this.state.green}
+          value={this.props.color.green}
         >
           {localization.variableEditor_green()}
         </Field>
@@ -81,7 +65,7 @@ class RgbInput extends React.Component {
           min={0}
           max={255}
           onChange={this.handleBlueChange}
-          value={this.state.blue}
+          value={this.props.color.blue}
         >
           {localization.variableEditor_blue()}
         </Field>

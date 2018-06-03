@@ -59,6 +59,61 @@ class Color {
 
     return finalColor;
   }
+
+  static parseHex (hex) {
+    const color = {
+      red: NaN,
+      green: NaN,
+      blue: NaN,
+      alpha: NaN,
+    };
+
+    if (!hex.startsWith(`#`)) {
+      return null;
+    }
+
+    switch (hex.length) {
+      /* eslint-disable no-magic-numbers */
+      case `#rgb`.length: {
+        color.red = parseInt(hex.slice(1, 2).repeat(2), HEX);
+        color.green = parseInt(hex.slice(2, 3).repeat(2), HEX);
+        color.blue = parseInt(hex.slice(3, 4).repeat(2), HEX);
+        color.alpha = 255;
+
+        break;
+      }
+      case `#argb`.length: {
+        color.alpha = parseInt(hex.slice(1, 2).repeat(2), HEX);
+        color.red = parseInt(hex.slice(2, 3).repeat(2), HEX);
+        color.green = parseInt(hex.slice(3, 4).repeat(2), HEX);
+        color.blue = parseInt(hex.slice(4, 5).repeat(2), HEX);
+
+        break;
+      }
+      case `#rrggbb`.length: {
+        color.red = parseInt(hex.slice(1, 3), HEX);
+        color.green = parseInt(hex.slice(3, 5), HEX);
+        color.blue = parseInt(hex.slice(5, 7), HEX);
+        color.alpha = 255;
+
+        break;
+      }
+      case `#aarrggbb`.length: {
+        color.alpha = parseInt(hex.slice(1, 3), HEX);
+        color.red = parseInt(hex.slice(3, 5), HEX);
+        color.green = parseInt(hex.slice(5, 7), HEX);
+        color.blue = parseInt(hex.slice(7, 9), HEX);
+
+        break;
+      }
+      /* eslint-enable no-magic-numbers */
+      default: {
+        return null;
+      }
+    }
+
+    return color;
+  }
 }
 
 export default Color;
