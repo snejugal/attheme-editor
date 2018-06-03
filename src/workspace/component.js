@@ -179,6 +179,7 @@ class Workplace extends React.Component {
                   color={this.state.theme.variables[this.state.editingVariable]}
                   onCancel={this.handleVariableEditCancel}
                   onSave={this.handleVariableEditSave}
+                  wallpaper={this.state.theme.wallpaper}
                 />
               )
               : null

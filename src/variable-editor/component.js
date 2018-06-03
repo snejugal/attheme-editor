@@ -15,6 +15,7 @@ class VariableEditor extends React.Component {
     color: PropTypes.object,
     onCancel: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
+    wallpaper: PropTypes.string,
   }
 
   constructor (props) {
@@ -36,8 +37,17 @@ class VariableEditor extends React.Component {
 
   render () {
     const colorPreviewStyle = {
-      backgroundColor: Color.cssRgb(this.state.color),
     };
+
+    if (this.state.color) {
+      colorPreviewStyle.backgroundColor = Color.cssRgb(this.state.color);
+    }
+
+    let previewOuterClassName = `variableEditor_preview -outer`;
+
+    if (!this.state.color) {
+      previewOuterClassName += ` -imageWrapper`;
+    }
 
     return (
       <Dialog
@@ -53,16 +63,37 @@ class VariableEditor extends React.Component {
           </React.Fragment>
         }
       >
-        <div className="variableEditor_preview -outer">
-          <div
-            className="variableEditor_preview -inner"
-            style={colorPreviewStyle}
-          />
+        <div className={previewOuterClassName}>
+          {
+            this.state.color
+              ? (
+                <div
+                  className="variableEditor_preview -inner"
+                  style={colorPreviewStyle}
+                />
+              )
+              : (
+                <img
+                  className="variableEditor_preview -image"
+                  src={`data:image/jpg;base64,${this.props.wallpaper}`}
+                  alt=""
+                />
+              )
+          }
         </div>
         <Heading level={3} className="variableEditor_title">
           {this.props.variable}
         </Heading>
-        <RgbInput color={this.state.color} onChange={this.handleRgbChange}/>
+        {
+          this.state.color
+            ? (
+              <RgbInput
+                color={this.state.color}
+                onChange={this.handleRgbChange}
+              />
+            )
+            : null
+        }
       </Dialog>
     );
   }
