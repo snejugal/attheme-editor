@@ -62,7 +62,7 @@ class Variable extends React.Component {
           }
         </p>
         <p className="variable_color -rgb">
-          {red} {green} {blue} {alpha} {brightness}
+          {red} {green} {blue} {alpha}
         </p>
       </React.Fragment>;
     } else {
