@@ -1,0 +1,11 @@
+@import "../variables";
+
+.fields {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .fieldContainer:not(:last-child) {
+    margin-right: $container_horizontalMargin;
+  }
+}
