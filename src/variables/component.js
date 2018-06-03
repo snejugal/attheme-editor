@@ -9,6 +9,7 @@ class Variables extends React.Component {
     themeId: PropTypes.number.isRequired,
     theme: PropTypes.object.isRequired,
     wallpaper: PropTypes.string,
+    onClick: PropTypes.func.isRequired,
   }
 
   shouldComponentUpdate = ({ theme }) => theme !== this.props.theme
@@ -17,15 +18,12 @@ class Variables extends React.Component {
     const variablesOrder = Object.keys(this.props.theme);
     const variables = [];
 
-    if (this.props.wallpaper) {
+    if (this.props.wallpaper && !this.props.theme.chat_wallpaper) {
       const variableElement = <Variable
         variableName="chat_wallpaper"
         key="chat_wallpaper"
         wallpaper={this.props.wallpaper}
-
-        // we may meet both color and image at the same time in a theme,
-        // respecting it
-        color={this.props.theme.chat_wallpaper}
+        onClick={this.props.onClick}
       />;
 
       variables.push(variableElement);
@@ -40,6 +38,7 @@ class Variables extends React.Component {
         variableName={variableName}
         key={variableName}
         color={this.props.theme[variableName]}
+        onClick={this.props.onClick}
       />;
 
       variables.push(variableElement);

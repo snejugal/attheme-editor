@@ -5,7 +5,7 @@ import Heading from "../heading/component";
 import PropTypes from "prop-types";
 import React from "react";
 
-const DARK_THRESHOLD = 0.75;
+const DARK_THRESHOLD = 0.6;
 const EDTIOR_BACKGROUND = {
   red: 0x21,
   green: 0x21,
@@ -18,6 +18,7 @@ class Variable extends React.Component {
     variableName: PropTypes.string.isRequired,
     color: PropTypes.object,
     wallpaper: PropTypes.string,
+    onClick: PropTypes.func.isRequired,
   }
 
   shouldComponentUpdate = (nextProps) => (
@@ -32,6 +33,8 @@ class Variable extends React.Component {
     )) ||
     (nextProps.wallpaper !== this.props.wallpaper)
   )
+
+  handleClick = () => this.props.onClick(this.props.variableName)
 
   render () {
     let className = `variable`;
@@ -59,7 +62,7 @@ class Variable extends React.Component {
           }
         </p>
         <p className="variable_color -rgb">
-          {red} {green} {blue} {alpha}
+          {red} {green} {blue} {alpha} {brightness}
         </p>
       </React.Fragment>;
     } else {
@@ -69,7 +72,12 @@ class Variable extends React.Component {
     }
 
     return (
-      <button type="button" className={className} style={style}>
+      <button
+        type="button"
+        className={className}
+        style={style}
+        onClick={this.handleClick}
+      >
         <Heading level={3} className="variable_title">
           {this.props.variableName}
         </Heading>

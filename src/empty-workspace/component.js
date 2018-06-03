@@ -17,7 +17,7 @@ class EmptyWorkspace extends React.Component {
   handleCreateButtonClick = () => {
     this.props.onTheme({
       name: localization.theme_defaultName(),
-      theme: {},
+      variables: {},
       wallpaper: ``,
       palette: [],
     });

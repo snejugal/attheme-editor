@@ -2,7 +2,7 @@ import { basename, extname } from "path";
 import Attheme from "attheme-js";
 
 const parseTheme = ({ file, filename }) => {
-  let theme;
+  let variables;
   let wallpaper;
   let palette;
   let name;
@@ -10,21 +10,21 @@ const parseTheme = ({ file, filename }) => {
   const extension = extname(filename);
 
   if (extension === `.attheme`) {
-    theme = new Attheme(file);
+    variables = new Attheme(file);
 
-    wallpaper = btoa(theme[Attheme.IMAGE_KEY] || ``);
+    wallpaper = btoa(variables[Attheme.IMAGE_KEY] || ``);
     name = basename(filename, extension);
     palette = [];
 
-    delete theme[Attheme.IMAGE_KEY];
+    delete variables[Attheme.IMAGE_KEY];
   } else if (extension === `.attheme-editor`) {
     const json = JSON.parse(file);
 
-    ({ theme, wallpaper, palette, name } = json);
+    ({ theme: variables, variables, wallpaper, palette, name } = json);
   }
 
   return {
-    theme,
+    variables,
     wallpaper,
     palette,
     name,

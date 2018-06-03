@@ -8,6 +8,7 @@ import Field from "../field/component";
 import Hint from "../hint/component";
 import PropTypes from "prop-types";
 import React from "react";
+import VariableEditor from "../variable-editor/component";
 import Variables from "../variables/component";
 import { allVariablesAmount } from "../attheme-variables";
 import download from "../download";
@@ -27,6 +28,7 @@ class Workplace extends React.Component {
 
     this.state = {
       theme: null,
+      editingVariable: null,
     };
   }
 
@@ -117,13 +119,50 @@ class Workplace extends React.Component {
     name: `${this.state.theme.name}.attheme-editor`,
   })
 
+  handleVariableEditStart = (variable) => {
+    this.setState({
+      editingVariable: variable,
+    });
+  }
+
+  handleVariableEditCancel = () => this.setState({
+    editingVariable: null,
+  })
+
+  handleVariableEditSave = (value) => {
+    const variable = this.state.editingVariable;
+
+    this.setState({
+      editingVariable: null,
+    });
+
+    const variables = {
+      ...this.state.theme.variables,
+      [variable]: value,
+    };
+
+    const theme = {
+      ...this.state.theme,
+      variables,
+    };
+
+    this.setState({
+      theme,
+    });
+
+    database.updateTheme(this.props.themeId, theme);
+  }
+
   render () {
     let variablesAmount;
 
     if (this.state.theme) {
-      variablesAmount = Object.keys(this.state.theme.theme).length;
+      variablesAmount = Object.keys(this.state.theme.variables).length;
 
-      if (this.state.theme.wallpaper && !(this.state.theme.chat_wallpaper)) {
+      if (
+        this.state.theme.wallpaper
+        && !(this.state.theme.variables.chat_wallpaper)
+      ) {
         variablesAmount++;
       }
     }
@@ -132,6 +171,18 @@ class Workplace extends React.Component {
       ? null
       : (
         <React.Fragment>
+          {
+            this.state.editingVariable
+              ? (
+                <VariableEditor
+                  variable={this.state.editingVariable}
+                  color={this.state.theme.variables[this.state.editingVariable]}
+                  onCancel={this.handleVariableEditCancel}
+                  onSave={this.handleVariableEditSave}
+                />
+              )
+              : null
+          }
           <Button
             onClick={this.downloadThemeViaTelegram}
             isFloating={true}
@@ -170,8 +221,9 @@ class Workplace extends React.Component {
 
           <Variables
             themeId={this.props.themeId}
-            theme={this.state.theme.theme}
+            theme={this.state.theme.variables}
             wallpaper={this.state.theme.wallpaper}
+            onClick={this.handleVariableEditStart}
           />
 
           <Hint>{
