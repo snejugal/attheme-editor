@@ -1,14 +1,7 @@
 @import "../variables";
 
 .fields {
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-between;
   display: grid;
   grid-template-columns: repeat(auto-fill, 1fr);
   grid-gap: $container_horizontalMargin;
-
-  // .fieldContainer:not(:last-child) {
-  //   margin-right: $container_horizontalMargin;
-  // }
 }
