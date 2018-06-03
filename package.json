@@ -6,6 +6,7 @@
     "attheme-default-values": "^4.8.5",
     "attheme-editor-api": "^1.0.1",
     "attheme-js": "^1.1.1",
+    "fuzzy-search": "^2.0.1",
     "intl-pluralrules": "^0.2.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",

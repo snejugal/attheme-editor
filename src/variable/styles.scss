@@ -71,4 +71,13 @@
       content: "RGB";
     }
   }
+
+  &_badge {
+    @extend %caption;
+    background-color: $theme_accentColor;
+    padding: 4px 8px;
+    border-radius: $container_borderRadius;
+    color: $theme_textColor;
+    margin-bottom: $container_horizontalMargin;
+  }
 }

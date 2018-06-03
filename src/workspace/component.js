@@ -11,6 +11,7 @@ import React from "react";
 import VariableEditor from "../variable-editor/component";
 import Variables from "../variables/component";
 import { allVariablesAmount } from "../attheme-variables";
+import defaultValues from "attheme-default-values";
 import download from "../download";
 import localization from "../localization";
 import prepareTheme from "../prepare-theme";
@@ -29,6 +30,8 @@ class Workplace extends React.Component {
     this.state = {
       theme: null,
       editingVariable: null,
+      searchQuery: ``,
+      color: null,
     };
   }
 
@@ -122,11 +125,13 @@ class Workplace extends React.Component {
   handleVariableEditStart = (variable) => {
     this.setState({
       editingVariable: variable,
+      color: this.state.theme.variables[variable],
     });
   }
 
   handleVariableEditCancel = () => this.setState({
     editingVariable: null,
+    color: null,
   })
 
   handleVariableEditSave = (value) => {
@@ -153,6 +158,15 @@ class Workplace extends React.Component {
     database.updateTheme(this.props.themeId, theme);
   }
 
+  handleSearchChange = (event) => this.setState({
+    searchQuery: event.target.value,
+  });
+
+  handleNewVariable = (variable) => this.setState({
+    editingVariable: variable,
+    color: defaultValues[variable],
+  })
+
   render () {
     let variablesAmount;
 
@@ -176,7 +190,7 @@ class Workplace extends React.Component {
               ? (
                 <VariableEditor
                   variable={this.state.editingVariable}
-                  color={this.state.theme.variables[this.state.editingVariable]}
+                  color={this.state.color}
                   onCancel={this.handleVariableEditCancel}
                   onSave={this.handleVariableEditSave}
                   wallpaper={this.state.theme.wallpaper}
@@ -220,11 +234,23 @@ class Workplace extends React.Component {
             </Button>
           </Buttons>
 
+          <Field
+            type="search"
+            id="workspace_search"
+            value={this.state.searchQuery}
+            onChange={this.handleSearchChange}
+          >
+            Search
+          </Field>
+
           <Variables
             themeId={this.props.themeId}
             theme={this.state.theme.variables}
             wallpaper={this.state.theme.wallpaper}
             onClick={this.handleVariableEditStart}
+            onNewVariable={this.handleNewVariable}
+            displayAll={this.state.searchQuery !== ``}
+            searchQuery={this.state.searchQuery}
           />
 
           <Hint>{

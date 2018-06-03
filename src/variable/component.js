@@ -19,6 +19,11 @@ class Variable extends React.Component {
     color: PropTypes.object,
     wallpaper: PropTypes.string,
     onClick: PropTypes.func.isRequired,
+    isUnadded: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    isUnadded: false,
   }
 
   shouldComponentUpdate = (nextProps) => (
@@ -71,6 +76,10 @@ class Variable extends React.Component {
         `url(data:image/jpg;base64,${this.props.wallpaper})`;
     }
 
+    if (this.props.isUnadded) {
+      className += ` -unadded`;
+    }
+
     return (
       <button
         type="button"
@@ -78,6 +87,15 @@ class Variable extends React.Component {
         style={style}
         onClick={this.handleClick}
       >
+        {
+          this.props.isUnadded
+            ? (
+              <div className="variable_badge">
+                Unadded
+              </div>
+            )
+            : null
+        }
         <Heading level={3} className="variable_title">
           {this.props.variableName}
         </Heading>
