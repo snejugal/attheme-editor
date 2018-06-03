@@ -19,9 +19,9 @@ class Color {
   }
 
   static brightness ({ red, green, blue }) {
-    const redPart = RED_MAX_PART * red / CHANNEL;
-    const greenPart = GREEN_MAX_PART * green / CHANNEL;
-    const bluePart = BLUE_MAX_PART * blue / CHANNEL;
+    const redPart = RED_MAX_PART * (red / CHANNEL);
+    const greenPart = GREEN_MAX_PART * (green / CHANNEL);
+    const bluePart = BLUE_MAX_PART * (blue / CHANNEL);
 
     return redPart + greenPart + bluePart;
   }
@@ -49,7 +49,7 @@ class Color {
       const alpha = color.alpha / CHANNEL;
 
       const newRed = alpha * (red - finalColor.red) + finalColor.red;
-      const newGreen = alpha * (green - finalColor.red) + finalColor.green;
+      const newGreen = alpha * (green - finalColor.green) + finalColor.green;
       const newBlue = alpha * (blue - finalColor.blue) + finalColor.blue;
 
       finalColor.red = Math.round(newRed);
