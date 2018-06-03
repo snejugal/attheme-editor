@@ -9,7 +9,7 @@ import Hint from "../hint/component";
 import PropTypes from "prop-types";
 import React from "react";
 import Variables from "../variables/component";
-import defaultValues from "attheme-default-values";
+import { allVariablesAmount } from "../attheme-variables";
 import download from "../download";
 import localization from "../localization";
 import prepareTheme from "../prepare-theme";
@@ -176,7 +176,7 @@ class Workplace extends React.Component {
 
           <Hint>{
             localization.workspace_variablesAmount({
-              total: Object.keys(defaultValues).length,
+              total: allVariablesAmount,
               theme: variablesAmount,
             })
           }</Hint>
