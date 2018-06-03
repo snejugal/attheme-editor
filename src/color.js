@@ -15,7 +15,7 @@ class Color {
   }
 
   static cssRgb ({ red, green, blue, alpha = CHANNEL }) {
-    return `rgba(${red}, ${green}, ${blue}, ${alpha / CHANNEL}`;
+    return `rgba(${red}, ${green}, ${blue}, ${alpha / CHANNEL})`;
   }
 
   static brightness ({ red, green, blue }) {
