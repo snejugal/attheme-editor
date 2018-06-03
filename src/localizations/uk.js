@@ -29,6 +29,8 @@ const localization = {
   workspace_createPreview: () => `Створити прев'ю`,
   workspace_testTheme: () => `Протестувати тему`,
   workspace_downloadWorkspace: () => `Завантажити робоче оточення`,
+  workspace_unaddedVariable: () => `Не додана`,
+  workspace_search: () => `Пошук`,
   workspace_variablesAmount: ({ total, theme }) => {
     const forms = {
       one: `${theme} змінна з ${total} додана у тему`,

@@ -26,6 +26,9 @@ const localization = {
   workspace_downloadThemeFile: () => `Scarica direttamente il file .attheme`,
   workspace_createPreview: () => `Crea un'anteprima`,
   workspace_testTheme: () => `Prova il tema`,
+  workspace_downloadWorkspace: () => `Scarica l'area di lavoro`,
+  workspace_unaddedVariable: () => `Non aggiunta`,
+  workspace_search: () => `Cerca`,
   workspace_variablesAmount: ({ total, theme }) => {
     const forms = {
       one: `Una variabile su ${total} è stata aggiunta al tema`,
@@ -37,6 +40,14 @@ const localization = {
 
   confirmDialog_yes: () => `Sì`,
   confirmDialog_no: () => `No`,
+
+  variableEditor_cancel: () => `Annulla`,
+  variableEditor_save: () => `Salva`,
+  variableEditor_red: () => `Rosso`,
+  variableEditor_green: () => `Verde`,
+  variableEditor_blue: () => `Blu`,
+  variableEditor_hex: () => `HEX`,
+  variableEditor_alpha: () => `Alpha`,
 };
 
 export default localization;

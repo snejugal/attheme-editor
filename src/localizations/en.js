@@ -27,6 +27,8 @@ const localization = {
   workspace_createPreview: () => `Create a preview`,
   workspace_testTheme: () => `Test the theme`,
   workspace_downloadWorkspace: () => `Download the workspace`,
+  workspace_unaddedVariable: () => `Unadded`,
+  workspace_search: () => `Search`,
   workspace_variablesAmount: ({ total, theme }) => {
     const forms = {
       "one one": `${theme} of ${total} variable is added to the theme`,

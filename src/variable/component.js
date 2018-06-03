@@ -4,6 +4,7 @@ import Color from "../color";
 import Heading from "../heading/component";
 import PropTypes from "prop-types";
 import React from "react";
+import localization from "../localization";
 
 const DARK_THRESHOLD = 0.6;
 const EDTIOR_BACKGROUND = {
@@ -91,7 +92,7 @@ class Variable extends React.Component {
           this.props.isUnadded
             ? (
               <div className="variable_badge">
-                Unadded
+                {localization.workspace_unaddedVariable()}
               </div>
             )
             : null

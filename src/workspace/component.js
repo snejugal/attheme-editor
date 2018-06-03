@@ -240,7 +240,7 @@ class Workplace extends React.Component {
             value={this.state.searchQuery}
             onChange={this.handleSearchChange}
           >
-            Search
+            {localization.workspace_search()}
           </Field>
 
           <Variables
