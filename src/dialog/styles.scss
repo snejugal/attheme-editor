@@ -5,19 +5,23 @@
 
 .dialogContainer {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba($shadowColor, .5);
-  padding: $container_padding;
   z-index: 2;
 
   &:empty {
     display: none;
+  }
+
+  @media (min-width: $container_maxWidth) {
+    align-items: center;
+    padding: $container_padding;
   }
 }
 
@@ -27,7 +31,12 @@
   background-color: $theme_backgroundColor;
   width: 100%;
   max-width: $dialog_maxWidth;
-  border-radius: $container_borderRadius;
+  border-top-left-radius: $container_borderRadius;
+  border-top-right-radius: $container_borderRadius;
+
+  @media (min-width: $container_maxWidth) {
+    border-radius: $container_borderRadius;
+  }
 
   &_title.heading { // so it's higher than just .heading
     @extend %heading-5;
