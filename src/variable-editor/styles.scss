@@ -1,0 +1,31 @@
+@import "../variables";
+@import "../typography";
+
+.variableEditor {
+  &_preview {
+    &.-outer {
+      height: 64px;
+      border-top-left-radius: $container_borderRadius;
+      border-top-right-radius: $container_borderRadius;
+      margin-top: -$container_verticalMargin;
+      margin-left: -$container_horizontalMargin;
+      margin-right: -$container_horizontalMargin;
+      margin-bottom: $container_verticalMargin;
+      position: relative;
+      z-index: 1;
+      background-image: url("../transparency-grid.svg");
+      background-size: 10px 10px;
+    }
+
+    &.-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+    }
+  }
+
+  &_title {
+    @extend %heading-5;
+    word-break: break-all;
+  }
+}
