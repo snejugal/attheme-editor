@@ -6,7 +6,10 @@ import React from "react";
 class Field extends React.Component {
   static propTypes = {
     type: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
     className: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func,
@@ -14,6 +17,8 @@ class Field extends React.Component {
     id: PropTypes.string.isRequired,
     children: PropTypes.any.isRequired,
     autoCapitalize: PropTypes.string,
+    min: PropTypes.number,
+    max: PropTypes.number,
   }
 
   static defaultProps = {
@@ -30,7 +35,7 @@ class Field extends React.Component {
 
   render () {
     return (
-      <React.Fragment>
+      <div className="fieldContainer">
         <label className="label" htmlFor={this.props.id}>
           {this.props.children}
         </label>
@@ -43,8 +48,10 @@ class Field extends React.Component {
           id={this.props.id}
           value={this.props.value}
           autoCapitalize={this.props.autoCapitalize}
+          min={this.props.min}
+          max={this.props.max}
         />
-      </React.Fragment>
+      </div>
     );
   }
 }

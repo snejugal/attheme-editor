@@ -2,6 +2,10 @@
 @import "./variables";
 @import "../typography";
 
+.fieldContainer {
+  flex-grow: 1;
+}
+
 .field {
   background-color: transparent;
   border-radius: $container_borderRadius;
@@ -14,6 +18,7 @@
   transition-property: border-color;
   transition-duration: $transitionDuration;
   margin: 0 0 $input_bottomMargin;
+  width: 100%;
 
   &:focus {
     border-color: $theme_accentColor;
