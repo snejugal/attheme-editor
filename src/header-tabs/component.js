@@ -1,11 +1,11 @@
 import "./styles.scss";
 
+import HeaderTab from "../header-tab/component";
 import NewTab from "../new-tab/component";
 import PropTypes from "prop-types";
 import React from "react";
-import Tab from "../tab/component";
 
-class Tabs extends React.Component {
+class HeaderTabs extends React.Component {
   static propTypes = {
     workplaces: PropTypes.array.isRequired,
     activeTab: PropTypes.number,
@@ -40,7 +40,7 @@ class Tabs extends React.Component {
               ref.ref = this.props.activeTabRef;
             }
 
-            return <Tab
+            return <HeaderTab
               id={themeId}
               key={themeId}
               isActive={this.props.activeTab === themeId}
@@ -58,4 +58,4 @@ class Tabs extends React.Component {
   }
 }
 
-export default Tabs;
+export default HeaderTabs;

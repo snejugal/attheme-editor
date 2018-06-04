@@ -1,9 +1,9 @@
 import "./styles.scss";
 
+import HeaderTabs from "../header-tabs/component";
 import Logo from "../logo/component";
 import PropTypes from "prop-types";
 import React from "react";
-import Tabs from "../tabs/component";
 
 class Header extends React.Component {
   static propTypes = {
@@ -18,7 +18,7 @@ class Header extends React.Component {
     return (
       <header className="header">
         <Logo onClick={this.props.onLogoClick}/>
-        <Tabs
+        <HeaderTabs
           workplaces={this.props.workplaces}
           activeTab={this.props.activeTab}
           onActiveTabChange={this.props.onActiveTabChange}
