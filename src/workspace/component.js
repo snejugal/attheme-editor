@@ -183,6 +183,30 @@ class Workplace extends React.Component {
     color: defaultValues[variable],
   })
 
+  handleVariableDelete = () => {
+    const variables = {
+      ...this.state.theme.variables,
+    };
+
+    delete variables[this.state.editingVariable];
+
+    const theme = {
+      ...this.state.theme,
+      variables,
+    };
+
+    if (this.state.editingVariable === `chat_wallpaper`) {
+      delete theme.wallpaper;
+    }
+
+    this.setState({
+      editingVariable: null,
+      theme,
+    });
+
+    database.updateTheme(this.props.themeId, theme);
+  }
+
   render () {
     let variablesAmount;
 
@@ -209,6 +233,7 @@ class Workplace extends React.Component {
                   color={this.state.color}
                   onCancel={this.handleVariableEditCancel}
                   onSave={this.handleVariableEditSave}
+                  onDelete={this.handleVariableDelete}
                   wallpaper={this.state.theme.wallpaper}
                 />
               )

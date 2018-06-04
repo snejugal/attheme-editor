@@ -17,6 +17,7 @@ class VariableEditor extends React.Component {
     color: PropTypes.object,
     onCancel: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
     wallpaper: PropTypes.string,
   }
 
@@ -91,6 +92,9 @@ class VariableEditor extends React.Component {
             </Button>
             <Button onClick={this.props.onCancel}>
               {localization.variableEditor_cancel()}
+            </Button>
+            <Button onClick={this.props.onDelete}>
+              {localization.variableEditor_delete()}
             </Button>
           </React.Fragment>
         }
