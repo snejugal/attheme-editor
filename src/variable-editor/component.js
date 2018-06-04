@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import RgbInput from "../rgb-input/component";
 import localization from "../localization";
+import readFile from "../read-file";
 
 class VariableEditor extends React.Component {
   static propTypes = {
@@ -24,8 +25,11 @@ class VariableEditor extends React.Component {
 
     this.state = {
       color: this.props.color,
+      wallpaper: this.props.wallpaper,
     };
   }
+
+  filesInput = React.createRef()
 
   handleRgbaChange = ({ channel, value }) => this.setState({
     color: {
@@ -38,7 +42,30 @@ class VariableEditor extends React.Component {
     color,
   });
 
-  handleSave = () => this.props.onSave(this.state.color)
+  handleSave = () => {
+    if (this.state.color) {
+      this.props.onSave(this.state.color);
+    } else {
+      this.props.onSave(this.state.wallpaper);
+    }
+  }
+
+  handleUploadWallpaperClick = () => this.filesInput.current.click()
+
+  handleFileInputChange = async () => {
+    const filesInput = this.filesInput.current;
+
+    if (filesInput.files.length === 0) {
+      return;
+    }
+
+    const wallpaper = btoa(await readFile(filesInput.files[0]));
+
+    this.setState({
+      wallpaper,
+      color: null,
+    });
+  }
 
   render () {
     const colorPreviewStyle = {
@@ -80,7 +107,7 @@ class VariableEditor extends React.Component {
               : (
                 <img
                   className="variableEditor_preview -image"
-                  src={`data:image/jpg;base64,${this.props.wallpaper}`}
+                  src={`data:image/jpg;base64,${this.state.wallpaper}`}
                   alt=""
                 />
               )
@@ -101,6 +128,26 @@ class VariableEditor extends React.Component {
                 <RgbInput
                   color={this.state.color}
                   onChange={this.handleRgbaChange}
+                />
+              </React.Fragment>
+            )
+            : null
+        }
+        {
+          this.props.variable === `chat_wallpaper`
+            ? (
+              <React.Fragment>
+                <Button
+                  onClick={this.handleUploadWallpaperClick}
+                >
+                  Upload an image
+                </Button>
+                <input
+                  hidden={true}
+                  type="file"
+                  ref={this.filesInput}
+                  onChange={this.handleFileInputChange}
+                  accept=".jpg,.jpeg"
                 />
               </React.Fragment>
             )

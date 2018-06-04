@@ -141,15 +141,31 @@ class Workplace extends React.Component {
       editingVariable: null,
     });
 
-    const variables = {
-      ...this.state.theme.variables,
-      [variable]: value,
-    };
+    let theme;
 
-    const theme = {
-      ...this.state.theme,
-      variables,
-    };
+    if (typeof value === `object`) {
+      const variables = {
+        ...this.state.theme.variables,
+        [variable]: value,
+      };
+
+      theme = {
+        ...this.state.theme,
+        variables,
+      };
+    } else {
+      const variables = {
+        ...this.state.theme.variables,
+      };
+
+      delete variables.chat_wallpaper;
+
+      theme = {
+        ...this.state.theme,
+        variables,
+        wallpaper: value,
+      };
+    }
 
     this.setState({
       theme,

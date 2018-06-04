@@ -22,6 +22,9 @@ class Variables extends React.Component {
     newProps.theme !== this.props.theme
     || newProps.displayAll !== this.props.displayAll
     || newProps.searchQuery !== this.props.searchQuery
+    || newProps.wallpaper !== this.props.wallpaper
+    || newProps.onClick !== this.props.onClick
+    || newProps.onNewVariable !== this.props.onNewVariable
   )
 
   render () {
