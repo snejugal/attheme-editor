@@ -46,11 +46,13 @@ const localization = {
 
   variableEditor_cancel: () => `Отменить`,
   variableEditor_save: () => `Сохранить`,
+  variableEditor_delete: () => `Удалить`,
   variableEditor_red: () => `Красный`,
   variableEditor_green: () => `Зелёный`,
   variableEditor_blue: () => `Синий`,
   variableEditor_hex: () => `HEX`,
   variableEditor_alpha: () => `Альфа`,
+  variableEditor_uploadImage: () => `Загрузить картинку`,
 };
 
 export default localization;

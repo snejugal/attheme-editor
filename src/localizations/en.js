@@ -45,11 +45,13 @@ const localization = {
 
   variableEditor_cancel: () => `Cancel`,
   variableEditor_save: () => `Save`,
+  variableEditor_delete: () => `Delete`,
   variableEditor_red: () => `Red`,
   variableEditor_green: () => `Green`,
   variableEditor_blue: () => `Blue`,
   variableEditor_hex: () => `HEX`,
   variableEditor_alpha: () => `Alpha`,
+  variableEditor_uploadImage: () => `Upload an image`,
 };
 
 export default localization;
