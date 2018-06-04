@@ -61,6 +61,29 @@ class App extends React.Component {
         })();
       }
     });
+
+    if (
+      `theme` in localStorage
+      && `themeName` in localStorage
+      && `palette` in localStorage
+    ) {
+      const theme = {
+        variables: JSON.parse(localStorage.theme),
+        name: localStorage.themeName,
+        palette: JSON.parse(localStorage.palette),
+      };
+
+      localStorage.removeItem(`theme`);
+      localStorage.removeItem(`themeName`);
+      localStorage.removeItem(`palette`);
+
+      if (`image` in localStorage) {
+        theme.wallpaper = localStorage.image;
+        localStorage.removeItem(`image`);
+      }
+
+      this.handleTheme(theme);
+    }
   }
 
   handleTheme = async (theme) => {
