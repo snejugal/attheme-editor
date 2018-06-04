@@ -12,23 +12,34 @@ class ErrorHandler extends React.Component {
     };
   }
 
+  handler = (event) => {
+    let stack;
+
+    const { error, reason, timeStamp } = event;
+
+    if (reason) {
+      ({ stack } = reason);
+    } else {
+      ({ stack } = error);
+    }
+
+    this.setState({
+      errors: [
+        ...this.state.errors,
+        {
+          stack,
+          timeStamp,
+        },
+      ],
+    });
+
+    return true;
+  };
+
   componentDidMount = () => {
-    this.handler = ({ error: { stack }, timeStamp }) => {
-      this.setState({
-        errors: [
-          ...this.state.errors,
-          {
-            stack,
-            timeStamp,
-          },
-        ],
-      });
-
-      return true;
-    };
-
     window.onerror = null;
     window.addEventListener(`error`, this.handler);
+    window.addEventListener(`unhandledrejection`, this.handler);
   }
 
   render () {
