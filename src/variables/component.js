@@ -61,6 +61,9 @@ class Variables extends React.Component {
       variablesOrderFS = searcher.search(this.props.searchQuery);
 
       for(let variable of variablesOrder) {
+        if(variablesOrderFS.includes(variable)){
+          continue;
+        }
         if(Color.parseHex(this.props.searchQuery)){
           if (themeVariables.includes(variable) && Color.hex(this.props.theme[variable]).startsWith(Color.hex(Color.parseHex(this.props.searchQuery)))) {
             variablesOrderFS.push(variable);
