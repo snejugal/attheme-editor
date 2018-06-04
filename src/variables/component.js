@@ -1,10 +1,10 @@
 import "./styles.scss";
 
 import { allVariables, defaultValues } from "../attheme-variables";
+import Color from "../color";
 import FuzzySearch from "fuzzy-search";
 import PropTypes from "prop-types";
 import React from "react";
-import Color from "../color";
 import Variable from "../variable/component";
 
 class Variables extends React.Component {
@@ -54,28 +54,39 @@ class Variables extends React.Component {
 
     if (this.props.searchQuery && this.props.searchQuery !== `*`) {
       let variablesOrderFS = [];
+
       const searcher = new FuzzySearch(variablesOrder, [], {
         sort: true,
       });
 
       variablesOrderFS = searcher.search(this.props.searchQuery);
 
-      for(let variable of variablesOrder) {
-        if(Color.parseHex(this.props.searchQuery)){
-          if (themeVariables.includes(variable) && Color.hex(this.props.theme[variable]).startsWith(Color.hex(Color.parseHex(this.props.searchQuery)))) {
+      for (const variable of variablesOrder) {
+        const parsedHex = Color.parseHex(this.props.searchQuery);
+
+        if (parsedHex) {
+          if (
+            themeVariables.includes(variable)
+            && Color.hex(this.props.theme[variable])
+              .startsWith(Color.hex(parsedHex))
+          ) {
+            variablesOrderFS.push(variable);
+          } else if (
+            Color.hex(defaultValues[variable])
+              .startsWith(Color.hex(parsedHex))
+          ) {
             variablesOrderFS.push(variable);
           }
-          else if (Color.hex(defaultValues[variable]).startsWith(Color.hex(Color.parseHex(this.props.searchQuery)))) {
-            variablesOrderFS.push(variable);
-          }
-        }
-        else {
-          if (themeVariables.includes(variable) && Color.hex(this.props.theme[variable]).startsWith(this.props.searchQuery)) {
-            variablesOrderFS.push(variable);
-          }
-          else if (Color.hex(defaultValues[variable]).startsWith(this.props.searchQuery)) {
-            variablesOrderFS.push(variable);
-          }
+        } else if (
+          themeVariables.includes(variable)
+          && Color.hex(this.props.theme[variable])
+            .startsWith(this.props.searchQuery)
+        ) {
+          variablesOrderFS.push(variable);
+        } else if (
+          Color.hex(defaultValues[variable]).startsWith(this.props.searchQuery)
+        ) {
+          variablesOrderFS.push(variable);
         }
       }
       variablesOrder = variablesOrderFS;
