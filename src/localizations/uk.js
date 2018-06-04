@@ -46,9 +46,11 @@ const localization = {
 
   variableEditor_cancel: () => `Відмінити`,
   variableEditor_save: () => `Зберегти`,
+  variableEditor_delete: () => `Видалити`,
   variableEditor_red: () => `Червоний`,
   variableEditor_green: () => `Зелений`,
   variableEditor_blue: () => `Синій`,
+  variableEditor_uploadImage: () => `Завантажити зображення`,
 };
 
 export default localization;
