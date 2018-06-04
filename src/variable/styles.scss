@@ -72,6 +72,14 @@
     }
   }
 
+  &_badges {
+    display: flex;
+
+    > :not(:last-child) {
+      margin-right: $container_horizontalMargin;
+    }
+  }
+
   &_badge {
     @extend %caption;
     background-color: $theme_accentColor;

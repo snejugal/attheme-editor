@@ -1,5 +1,10 @@
 import "./styles.scss";
 
+import {
+  OBSOLETE_VARIABLES,
+  UNUSED_VARIABLES,
+  allVariables,
+} from "../attheme-variables";
 import Color from "../color";
 import Heading from "../heading/component";
 import PropTypes from "prop-types";
@@ -88,15 +93,47 @@ class Variable extends React.Component {
         style={style}
         onClick={this.handleClick}
       >
-        {
-          this.props.isUnadded
-            ? (
-              <div className="variable_badge">
-                {localization.workspace_unaddedVariable()}
-              </div>
+        <div className="variable_badges">
+          {
+            this.props.isUnadded
+              ? (
+                <span className="variable_badge">
+                  {localization.workspace_unaddedVariable()}
+                </span>
+              )
+              : null
+          }
+          {
+            OBSOLETE_VARIABLES.includes(this.props.variableName)
+              ? (
+                <span className="variable_badge">
+                  {localization.workspace_obsoleteVariable()}
+                </span>
+              )
+              : null
+          }
+          {
+            UNUSED_VARIABLES.includes(this.props.variableName)
+              ? (
+                <span className="variable_badge">
+                  {localization.workspace_unusedVariable()}
+                </span>
+              )
+              : null
+          }
+          {
+            (
+              allVariables.includes(this.props.variableName)
+              || UNUSED_VARIABLES.includes(this.props.variableName)
             )
-            : null
-        }
+              ? null
+              : (
+                <span className="variable_badge">
+                  {localization.workspace_nonStandardVariable()}
+                </span>
+              )
+          }
+        </div>
         <Heading level={3} className="variable_title">
           {this.props.variableName}
         </Heading>
