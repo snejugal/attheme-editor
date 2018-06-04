@@ -25,13 +25,13 @@ class App extends React.Component {
   }
 
   // we don't need to update the whole dom just to scroll
-  doHandleScroll = true
+  doHandleScroll = true;
 
-  doScrollTo = 0
+  doScrollTo = 0;
 
-  activeTab = React.createRef()
+  activeTab = React.createRef();
 
-  container = React.createRef()
+  container = React.createRef();
 
   componentDidMount = async () => {
     this.setState({
@@ -84,7 +84,7 @@ class App extends React.Component {
 
       this.handleTheme(theme);
     }
-  }
+  };
 
   handleTheme = async (theme) => {
     const themeId = await database.createTheme(theme);
@@ -97,7 +97,7 @@ class App extends React.Component {
       workplaces,
       activeTab: themeId,
     });
-  }
+  };
 
   handleActiveTabChange = (newActiveTab) => {
     database.updateActiveTab(newActiveTab);
@@ -105,11 +105,11 @@ class App extends React.Component {
     this.setState({
       activeTab: newActiveTab,
     });
-  }
+  };
 
   handleNameChange = (name) => {
     this.activeTab.current.updateTitle(name);
-  }
+  };
 
   handleLogoClick = () => {
     const { doScrollTo } = this;
@@ -121,7 +121,7 @@ class App extends React.Component {
       top: doScrollTo,
       behavior: `smooth`,
     });
-  }
+  };
 
   handleContainerScroll = () => {
     if (this.doHandleScroll) {
@@ -141,19 +141,19 @@ class App extends React.Component {
         this.timer = null;
       }, HANDLE_SCROLL_INTERVAL);
     }
-  }
+  };
 
   handleClosePrompt = () => {
     this.setState({
       confirmClosing: true,
     });
-  }
+  };
 
   handleCloseDismissed = () => {
     this.setState({
       confirmClosing: false,
     });
-  }
+  };
 
   handleCloseConfirmed = async () => {
     this.setState({
@@ -176,7 +176,7 @@ class App extends React.Component {
     await database.deleteTheme(this.state.activeTab);
     await database.updateWorkplaces(workplaces);
     await database.updateActiveTab(activeTab);
-  }
+  };
 
   render () {
     let workspace = null;
