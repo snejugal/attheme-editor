@@ -1,7 +1,18 @@
 import Attheme from "attheme-js";
+import { allVariables } from "./attheme-variables";
 
 const prepareTheme = ({ variables, name, wallpaper }) => {
-  const theme = new Attheme(``, variables);
+  const clearedVariables = {
+    ...variables,
+  };
+
+  for (const variable in clearedVariables) {
+    if (!allVariables.includes(variable)) {
+      delete clearedVariables[variable];
+    }
+  }
+
+  const theme = new Attheme(``, clearedVariables);
 
   if (wallpaper) {
     theme[Attheme.IMAGE_KEY] = atob(wallpaper);
