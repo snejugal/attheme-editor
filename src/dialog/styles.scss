@@ -57,7 +57,7 @@
       margin-bottom: 0;
 
       &:not(:first-child) {
-        margin-right: $container_horizontalMargin;
+        margin-right: $dialogButtons_padding;
       }
 
       &:first-child {
