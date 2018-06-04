@@ -16,6 +16,8 @@ import localization from "../localization";
 import prepareTheme from "../prepare-theme";
 import uploadTheme from "../upload-theme";
 
+const isMac = navigator.platform.toLowerCase().startsWith(`mac`);
+
 class Workplace extends React.Component {
   static propTypes = {
     themeId: PropTypes.number.isRequired,
@@ -34,10 +36,39 @@ class Workplace extends React.Component {
     };
   }
 
+  searchInput = React.createRef()
+
+  isCtrlPressed = false
+
+  handleKeyDown = (event) => {
+    if ((isMac && event.metaKey) || (!isMac && event.ctrlKey)) {
+      this.isCtrlPressed = true;
+    }
+
+    if (this.isCtrlPressed && event.code === `KeyF`) {
+      event.preventDefault();
+      this.searchInput.current.focus();
+    }
+  }
+
+  handleKeyUp = (event) => {
+    if ((isMac && event.metaKey) || (!isMac && event.ctrlKey)) {
+      this.isCtrlPressed = false;
+    }
+  }
+
   componentDidMount = async () => {
     this.setState({
       theme: await database.getTheme(this.props.themeId),
     });
+
+    document.body.addEventListener(`keydown`, this.handleKeyDown);
+    document.body.addEventListener(`keyup`, this.handleKeyUp);
+  }
+
+  componentWillUnmount = () => {
+    document.body.removeEventListener(`keydown`, this.handleKeyDown);
+    document.body.removeEventListener(`keyup`, this.handleKeyUp);
   }
 
   componentDidUpdate = async (prevProps) => {
@@ -279,6 +310,7 @@ class Workplace extends React.Component {
             id="workspace_search"
             value={this.state.searchQuery}
             onChange={this.handleSearchChange}
+            inputRef={this.searchInput}
           >
             {localization.workspace_search()}
           </Field>

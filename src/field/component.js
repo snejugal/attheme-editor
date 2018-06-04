@@ -21,6 +21,7 @@ class Field extends React.Component {
     min: PropTypes.number,
     max: PropTypes.number,
     autoFocus: PropTypes.bool,
+    inputRef: PropTypes.object,
   }
 
   static defaultProps = {
@@ -55,6 +56,7 @@ class Field extends React.Component {
           max={this.props.max}
           onFocus={this.props.onFocus}
           autoFocus={this.props.autoFocus}
+          ref={this.props.inputRef}
         />
       </div>
     );
