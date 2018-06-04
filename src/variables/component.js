@@ -66,34 +66,20 @@ class Variables extends React.Component {
           continue;
         }
 
-        const parsedHex = Color.parseHex(this.props.searchQuery);
+        const search = Color.parseHex(this.props.searchQuery)
+          ? Color.hex(Color.parseHex(this.props.searchQuery))
+          : this.props.searchQuery;
 
-        if (parsedHex) {
-          if (
-            themeVariables.includes(variable)
-            && Color.hex(this.props.theme[variable])
-              .startsWith(Color.hex(parsedHex))
-          ) {
-            variablesOrderFS.push(variable);
-          } else if (
-            Color.hex(defaultValues[variable])
-              .startsWith(Color.hex(parsedHex))
-          ) {
-            variablesOrderFS.push(variable);
-          }
-        } else if (
-          themeVariables.includes(variable)
-          && Color.hex(this.props.theme[variable])
-            .startsWith(this.props.searchQuery)
-        ) {
+        if (themeVariables.includes(variable)
+          && this.props.theme[variable]
+          && Color.hex(this.props.theme[variable]).startsWith(search)) {
           variablesOrderFS.push(variable);
-        } else if (
-          Color.hex(defaultValues[variable]).startsWith(this.props.searchQuery)
-        ) {
+        } else if (defaultValues[variable]
+          && Color.hex(defaultValues[variable]).startsWith(search)) {
           variablesOrderFS.push(variable);
         }
+        variablesOrder = variablesOrderFS;
       }
-      variablesOrder = variablesOrderFS;
     }
 
     const variables = [];
