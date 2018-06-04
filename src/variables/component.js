@@ -1,11 +1,10 @@
 import "./styles.scss";
 
+import { allVariables, defaultValues } from "../attheme-variables";
 import FuzzySearch from "fuzzy-search";
 import PropTypes from "prop-types";
 import React from "react";
 import Variable from "../variable/component";
-import { variables as allVariables } from "../attheme-variables";
-import defaultValues from "attheme-default-values";
 
 class Variables extends React.Component {
   static propTypes = {

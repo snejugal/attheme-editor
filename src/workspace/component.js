@@ -1,6 +1,7 @@
 import "./styles.scss";
 
 import * as database from "../database/api";
+import { allVariablesAmount, defaultValues } from "../attheme-variables";
 import Attheme from "attheme-js";
 import Button from "../button/component";
 import Buttons from "../buttons/component";
@@ -10,8 +11,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import VariableEditor from "../variable-editor/component";
 import Variables from "../variables/component";
-import { allVariablesAmount } from "../attheme-variables";
-import defaultValues from "attheme-default-values";
 import download from "../download";
 import localization from "../localization";
 import prepareTheme from "../prepare-theme";
