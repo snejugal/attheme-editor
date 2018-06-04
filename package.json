@@ -4,7 +4,7 @@
   "homepage": "https://snejugal.ru/attheme-editor/",
   "dependencies": {
     "attheme-default-values": "^4.8.6",
-    "attheme-editor-api": "^1.0.1",
+    "attheme-editor-api": "^1.1.0",
     "attheme-js": "^1.1.1",
     "fuzzy-search": "^2.0.1",
     "intl-pluralrules": "^0.2.1",

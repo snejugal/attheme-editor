@@ -1,4 +1,4 @@
-import * as atthemeEditorApi from "attheme-editor-api";
+import * as atthemeEditorApi from "attheme-editor-api/browser";
 import prepareTheme from "./prepare-theme";
 
 const uploadTheme = async (stateTheme) => {
