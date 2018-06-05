@@ -27,6 +27,7 @@ const localization = {
   workspace_createPreview: () => `Create a preview`,
   workspace_testTheme: () => `Test the theme`,
   workspace_downloadWorkspace: () => `Download the workspace`,
+  workspace_runScript: () => `Run a script`,
   workspace_unaddedVariable: () => `Unadded`,
   workspace_unusedVariable: () => `Unused by Telegram`,
   workspace_obsoleteVariable: () => `Obsolete`,
@@ -55,6 +56,13 @@ const localization = {
   variableEditor_hex: () => `HEX`,
   variableEditor_alpha: () => `Alpha`,
   variableEditor_uploadImage: () => `Upload an image`,
+
+  scriptRunner_title: () => `Run a script`,
+  scriptRunner_description: () => <React.Fragment>
+    .attheme editor lets you easily run scripts wrriten in EcmaScript 2017 to fasten theme developing. You can read more about the API the editor provides on <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">its GitHub repository&apos;s wiki</Link>.
+  </React.Fragment>,
+  scriptRunner_close: () => `Close`,
+  scriptRunner_run: () => `Run`,
 };
 
 export default localization;
