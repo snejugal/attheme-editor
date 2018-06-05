@@ -1,6 +1,7 @@
 import "./styles.scss";
 
 import { allVariables, defaultValues } from "../attheme-variables";
+import Color from "../color";
 import FuzzySearch from "fuzzy-search";
 import PropTypes from "prop-types";
 import React from "react";
@@ -15,7 +16,7 @@ class Variables extends React.Component {
     onNewVariable: PropTypes.func.isRequired,
     displayAll: PropTypes.bool.isRequired,
     searchQuery: PropTypes.string,
-  }
+  };
 
   shouldComponentUpdate = (newProps) => (
     newProps.theme !== this.props.theme
@@ -24,7 +25,7 @@ class Variables extends React.Component {
     || newProps.wallpaper !== this.props.wallpaper
     || newProps.onClick !== this.props.onClick
     || newProps.onNewVariable !== this.props.onNewVariable
-  )
+  );
 
   render () {
     const themeVariables = Object.keys(this.props.theme);
@@ -52,11 +53,33 @@ class Variables extends React.Component {
     variablesOrder.push(...themeVariables);
 
     if (this.props.searchQuery && this.props.searchQuery !== `*`) {
+      let variablesOrderFS = [];
+
       const searcher = new FuzzySearch(variablesOrder, [], {
         sort: true,
       });
 
-      variablesOrder = searcher.search(this.props.searchQuery);
+      variablesOrderFS = searcher.search(this.props.searchQuery);
+
+      for (const variable of variablesOrder) {
+        if (variablesOrderFS.includes(variable)) {
+          continue;
+        }
+
+        const search = Color.parseHex(this.props.searchQuery)
+          ? Color.hex(Color.parseHex(this.props.searchQuery))
+          : this.props.searchQuery;
+
+        if (themeVariables.includes(variable)
+          && this.props.theme[variable]
+          && Color.hex(this.props.theme[variable]).startsWith(search)) {
+          variablesOrderFS.push(variable);
+        } else if (defaultValues[variable]
+          && Color.hex(defaultValues[variable]).startsWith(search)) {
+          variablesOrderFS.push(variable);
+        }
+        variablesOrder = variablesOrderFS;
+      }
     }
 
     const variables = [];
