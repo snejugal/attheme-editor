@@ -29,6 +29,7 @@ const localization = {
   workspace_createPreview: () => `Створити прев'ю`,
   workspace_testTheme: () => `Протестувати тему`,
   workspace_downloadWorkspace: () => `Завантажити робоче оточення`,
+  workspace_runScript: () => `Запустити скрипт`,
   workspace_unaddedVariable: () => `Не додана`,
   workspace_unusedVariable: () => `Не застосовується у Телеграмі`,
   workspace_obsoleteVariable: () => `Устаревшая`,
@@ -54,6 +55,13 @@ const localization = {
   variableEditor_green: () => `Зелений`,
   variableEditor_blue: () => `Синій`,
   variableEditor_uploadImage: () => `Завантажити зображення`,
+
+  scriptRunner_title: () => `Запуск скриптів`,
+  scriptRunner_description: () => <React.Fragment>
+    .аttheme editor дозволяє легко запускати скрипти, написанні на EcmaScript 2017, що прискорює розробку тем. Про API редактора можна дізнатися в <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">вікі GitHub репозиторію редактора</Link>.
+  </React.Fragment>,
+  scriptRunner_close: () => `Закрити`,
+  scriptRunner_run: () => `Запустити`,
 };
 
 export default localization;

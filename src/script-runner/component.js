@@ -12,9 +12,11 @@ class ScriptRunner extends React.Component {
   static propTypes = {
     onClose: PropTypes.func.isRequired,
   }
+
   editor = React.createRef()
 
   handleRun = () => {
+    // eslint-disable-next-line
     const code = this.editor.current.editor.getValue();
   }
 
