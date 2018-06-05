@@ -9,6 +9,7 @@
     "codemirror": "^5.38.0",
     "fuzzy-search": "^2.0.1",
     "intl-pluralrules": "^0.2.1",
+    "js-interpreter": "^1.4.6",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "smoothscroll-polyfill": "^0.4.3"

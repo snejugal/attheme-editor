@@ -54,7 +54,10 @@ class Workplace extends React.Component {
   }
 
   handleKeyUp = (event) => {
-    if ((isMac && event.metaKey) || (!isMac && event.ctrlKey)) {
+    if (
+      (isMac && event.key === `Meta`)
+      || (!isMac && event.key === `Control`)
+    ) {
       this.isCtrlPressed = false;
     }
   }
@@ -247,6 +250,14 @@ class Workplace extends React.Component {
     showScriptRunner: false,
   });
 
+  handleThemeChange = (theme) => {
+    this.setState({
+      theme,
+    });
+
+    database.updateTheme(this.props.themeId, theme);
+  }
+
   render () {
     let variablesAmount;
 
@@ -273,7 +284,11 @@ class Workplace extends React.Component {
         wallpaper={this.state.theme.wallpaper}
       />;
     } else if (this.state.showScriptRunner) {
-      dialog = <ScriptRunner onClose={this.handleScriptRunnerClose}/>;
+      dialog = <ScriptRunner
+        onClose={this.handleScriptRunnerClose}
+        theme={this.state.theme}
+        onThemeChange={this.handleThemeChange}
+      />;
     }
 
     return this.state.theme === null

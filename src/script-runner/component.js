@@ -4,20 +4,37 @@ import Button from "../button/component";
 import CodeMirror from "../codemirror/component";
 import Dialog from "../dialog/component";
 import Hint from "../hint/component";
+import Interpreter from "js-interpreter";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localizations/en";
 
+
 class ScriptRunner extends React.Component {
   static propTypes = {
     onClose: PropTypes.func.isRequired,
+    theme: PropTypes.object.isRequired,
+    onThemeChange: PropTypes.func.isRequired,
   }
 
   editor = React.createRef()
 
   handleRun = () => {
-    // eslint-disable-next-line
+    let activeTheme;
+
+    const prepare = (interpreter, scope) => {
+      activeTheme = interpreter.nativeToPseudo(this.props.theme);
+
+      interpreter.setProperty(scope, `activeTheme`, activeTheme);
+    };
+
     const code = this.editor.current.editor.getValue();
+
+    const script = new Interpreter(code, prepare);
+
+    script.run();
+
+    this.props.onThemeChange(script.pseudoToNative(activeTheme));
   }
 
   render () {
