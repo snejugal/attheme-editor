@@ -1,9 +1,26 @@
 @import "../variables";
+@import "../typography";
 
 .scriptRunner {
   &_editor {
     margin-left: -$container_horizontalMargin;
     margin-right: -$container_horizontalMargin;
+    margin-bottom: $container_verticalMargin;
+  }
+
+  &_output {
+    background-color: rgba(#424242, 0.5);
+    border-radius: $container_borderRadius;
+    padding: $container_padding;
+    overflow: hidden;
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+
+    &Title {
+      @extend %heading-6;
+    }
   }
 }
 

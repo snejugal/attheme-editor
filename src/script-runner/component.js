@@ -9,6 +9,7 @@ import Interpreter from "js-interpreter";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localizations/en";
+import Heading from "../heading/component";
 
 const STEPS_PER_ONCE = 50000;
 
@@ -103,6 +104,21 @@ class ScriptRunner extends React.Component {
   }
 
   render () {
+    let outputTitle;
+    let output;
+
+    if (this.state.isEvaluating) {
+      outputTitle = localization.scriptRunner_isEvaluating();
+    } else if (this.state.isEvaluated) {
+      outputTitle = localization.scriptRunner_isEvaluated();
+    } else if (this.state.runtimeError) {
+      outputTitle = localization.scriptRunner_runtimeError();
+      output = this.state.runtimeError.message;
+    } else if (this.state.parseError) {
+      outputTitle = localization.scriptRunner_syntaxError();
+      output = this.state.parseError.message;
+    }
+
     return (
       <Dialog
         onDismiss={this.props.onClose}
@@ -127,6 +143,22 @@ class ScriptRunner extends React.Component {
           mode="javascript"
           ref={this.editor}
         />
+        {
+          outputTitle
+            ? (
+              <div className="scriptRunner_output">
+                <Heading level={3} className="scriptRunner_outputTitle">
+                  {outputTitle}
+                </Heading>
+                {
+                  output
+                    ? <pre>{output}</pre>
+                    : null
+                }
+              </div>
+            )
+            : null
+        }
       </Dialog>
     );
   }
