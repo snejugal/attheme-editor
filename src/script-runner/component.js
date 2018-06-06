@@ -1,4 +1,5 @@
 import "codemirror/mode/javascript/javascript.js";
+import "./styles.scss";
 
 import Button from "../button/component";
 import CodeMirror from "../codemirror/component";
@@ -9,7 +10,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localizations/en";
 
-const STEPS_PER_ONCE = 200;
+const STEPS_PER_ONCE = 50000;
 
 class ScriptRunner extends React.Component {
   static propTypes = {
@@ -119,6 +120,7 @@ class ScriptRunner extends React.Component {
       >
         <Hint>{localization.scriptRunner_description()}</Hint>
         <CodeMirror
+          className="scriptRunner_editor"
           value=""
           lineNumbers={true}
           mode="javascript"
