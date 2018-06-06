@@ -3,6 +3,7 @@ import "./styles.scss";
 
 import Button from "../button/component";
 import CodeMirror from "../codemirror/component";
+import Color from "../color";
 import Dialog from "../dialog/component";
 import Heading from "../heading/component";
 import Hint from "../hint/component";
@@ -21,6 +22,8 @@ const BABEL_OPTIONS = {
 };
 
 let Babel;
+
+window.Color = Color;
 
 class ScriptRunner extends React.Component {
   static propTypes = {
@@ -71,9 +74,18 @@ class ScriptRunner extends React.Component {
     let activeTheme;
 
     const prepare = (interpreter, scope) => {
+      const colorClass = interpreter.nativeToPseudo({
+        createHex: Color.createHex,
+        parseHex: Color.parseHex,
+        brightness: Color.brightness,
+        overlay: Color.overlay,
+        createCssRgb: Color.createCssRgb,
+      });
+
       activeTheme = interpreter.nativeToPseudo(this.props.theme);
 
       interpreter.setProperty(scope, `activeTheme`, activeTheme);
+      interpreter.setProperty(scope, `Color`, colorClass);
     };
 
     let script;
