@@ -86,6 +86,10 @@ class CodeMirrorEditor extends React.Component {
     const events = {};
 
     for (const option in this.props) {
+      if (option === `className`) {
+        continue;
+      }
+
       if (option.startsWith(`on`)) {
         let eventName = option.slice(`on`.length);
 
@@ -107,7 +111,7 @@ class CodeMirrorEditor extends React.Component {
   }
 
   render () {
-    return <div ref={this.container}/>;
+    return <div className={this.props.className} ref={this.container}/>;
   }
 }
 
