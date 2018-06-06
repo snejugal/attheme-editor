@@ -123,6 +123,7 @@ class ScriptRunner extends React.Component {
           className="scriptRunner_editor"
           value=""
           lineNumbers={true}
+          autofocus={true}
           mode="javascript"
           ref={this.editor}
         />
