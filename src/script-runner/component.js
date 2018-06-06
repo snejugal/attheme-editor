@@ -1,7 +1,6 @@
 import "codemirror/mode/javascript/javascript.js";
 import "./styles.scss";
 
-import * as Babel from "@babel/standalone";
 import Button from "../button/component";
 import CodeMirror from "../codemirror/component";
 import Dialog from "../dialog/component";
@@ -21,7 +20,7 @@ const BABEL_OPTIONS = {
   ],
 };
 
-window.Babel = Babel;
+let Babel;
 
 class ScriptRunner extends React.Component {
   static propTypes = {
@@ -39,6 +38,12 @@ class ScriptRunner extends React.Component {
       isEvaluated: false,
       isEvaluating: false,
     };
+
+    (async () => {
+      if (!Babel) {
+        Babel = await import(`@babel/standalone`);
+      }
+    })();
   }
 
   editor = React.createRef()
