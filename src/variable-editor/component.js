@@ -73,7 +73,7 @@ class VariableEditor extends React.Component {
     };
 
     if (this.state.color) {
-      colorPreviewStyle.backgroundColor = Color.cssRgb(this.state.color);
+      colorPreviewStyle.backgroundColor = Color.createCssRgb(this.state.color);
     }
 
     let previewOuterClassName = `variableEditor_preview -outer`;

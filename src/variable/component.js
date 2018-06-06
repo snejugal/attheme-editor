@@ -60,7 +60,7 @@ class Variable extends React.Component {
       const finalColor = Color.overlay(EDTIOR_BACKGROUND, this.props.color);
       const brightness = Color.brightness(finalColor);
 
-      style.backgroundColor = Color.cssRgb(this.props.color);
+      style.backgroundColor = Color.createCssRgb(this.props.color);
 
       if (brightness >= DARK_THRESHOLD) {
         className += ` -darkText`;
@@ -69,7 +69,7 @@ class Variable extends React.Component {
       content = <React.Fragment>
         <p className="variable_color -hex">
           {
-            Color.hex(this.props.color)
+            Color.createHex(this.props.color)
           }
         </p>
         <p className="variable_color -rgb">

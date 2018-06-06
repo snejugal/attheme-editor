@@ -16,7 +16,7 @@ class HexInput extends React.Component {
     super(props);
 
     this.state = {
-      hex: Color.hex(this.props.color),
+      hex: Color.createHex(this.props.color),
     };
   }
 
@@ -25,7 +25,7 @@ class HexInput extends React.Component {
   componentDidUpdate = (previousProps) => {
     if (this.mayChangeHexValue && previousProps !== this.props) {
       this.setState({
-        hex: Color.hex(this.props.color),
+        hex: Color.createHex(this.props.color),
       });
     }
   }

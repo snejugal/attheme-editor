@@ -5,7 +5,7 @@ const GREEN_MAX_PART = 0.7152;
 const BLUE_MAX_PART = 0.0722;
 
 class Color {
-  static hex ({ red, green, blue, alpha }) {
+  static createHex ({ red, green, blue, alpha }) {
     const redHex = red.toString(HEX).padStart(2, 0);
     const greenHex = green.toString(HEX).padStart(2, 0);
     const blueHex = blue.toString(HEX).padStart(2, 0);
@@ -14,7 +14,7 @@ class Color {
     return `#${alphaHex}${redHex}${greenHex}${blueHex}`;
   }
 
-  static cssRgb ({ red, green, blue, alpha = CHANNEL }) {
+  static createCssRgb ({ red, green, blue, alpha = CHANNEL }) {
     return `rgba(${red}, ${green}, ${blue}, ${alpha / CHANNEL})`;
   }
 

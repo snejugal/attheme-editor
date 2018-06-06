@@ -67,15 +67,15 @@ class Variables extends React.Component {
         }
 
         const search = Color.parseHex(this.props.searchQuery)
-          ? Color.hex(Color.parseHex(this.props.searchQuery))
+          ? Color.createHex(Color.parseHex(this.props.searchQuery))
           : this.props.searchQuery;
 
         if (themeVariables.includes(variable)
           && this.props.theme[variable]
-          && Color.hex(this.props.theme[variable]).startsWith(search)) {
+          && Color.createHex(this.props.theme[variable]).startsWith(search)) {
           variablesOrderFS.push(variable);
         } else if (defaultValues[variable]
-          && Color.hex(defaultValues[variable]).startsWith(search)) {
+          && Color.createHex(defaultValues[variable]).startsWith(search)) {
           variablesOrderFS.push(variable);
         }
         variablesOrder = variablesOrderFS;
