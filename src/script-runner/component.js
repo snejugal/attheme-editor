@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localizations/en";
 
+const STEPS_PER_ONCE = 200;
 
 class ScriptRunner extends React.Component {
   static propTypes = {
@@ -17,9 +18,27 @@ class ScriptRunner extends React.Component {
     onThemeChange: PropTypes.func.isRequired,
   }
 
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      parseError: null,
+      runtimeError: null,
+      isEvaluated: false,
+      isEvaluating: false,
+    };
+  }
+
   editor = React.createRef()
 
   handleRun = () => {
+    this.setState({
+      isEvaluating: true,
+      isEvaluated: false,
+    });
+
+    const code = this.editor.current.editor.getValue();
+
     let activeTheme;
 
     const prepare = (interpreter, scope) => {
@@ -28,13 +47,58 @@ class ScriptRunner extends React.Component {
       interpreter.setProperty(scope, `activeTheme`, activeTheme);
     };
 
-    const code = this.editor.current.editor.getValue();
+    let script;
+    let hasErrors = false;
 
-    const script = new Interpreter(code, prepare);
+    try {
+      script = new Interpreter(code, prepare);
+    } catch (parseError) {
+      this.setState({
+        parseError,
+        isEvaluating: false,
+      });
 
-    script.run();
+      hasErrors = true;
+    }
 
-    this.props.onThemeChange(script.pseudoToNative(activeTheme));
+    if (!hasErrors) {
+      const nextStep = () => {
+        let shouldContinue;
+
+        try {
+          for (let i = 0; i < STEPS_PER_ONCE; i++) {
+            shouldContinue = script.step();
+
+            if (!shouldContinue) {
+              break;
+            }
+          }
+        } catch (runtimeError) {
+          shouldContinue = false;
+          hasErrors = true;
+
+          this.setState({
+            runtimeError,
+            isEvaluating: false,
+          });
+        }
+
+        if (!hasErrors) {
+          if (shouldContinue) {
+            setTimeout(nextStep);
+          } else {
+            this.setState({
+              isEvaluating: false,
+              isEvaluated: true,
+            });
+
+            this.props.onThemeChange(script.pseudoToNative(activeTheme));
+          }
+        }
+      };
+
+      nextStep();
+    }
   }
 
   render () {
