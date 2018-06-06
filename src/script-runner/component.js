@@ -1,17 +1,27 @@
 import "codemirror/mode/javascript/javascript.js";
 import "./styles.scss";
 
+import * as Babel from "@babel/standalone";
 import Button from "../button/component";
 import CodeMirror from "../codemirror/component";
 import Dialog from "../dialog/component";
+import Heading from "../heading/component";
 import Hint from "../hint/component";
 import Interpreter from "js-interpreter";
 import PropTypes from "prop-types";
 import React from "react";
-import localization from "../localizations/en";
-import Heading from "../heading/component";
+import localization from "../localization";
 
 const STEPS_PER_ONCE = 50000;
+const BABEL_OPTIONS = {
+  presets: [
+    `es2015`,
+    `es2016`,
+    `es2017`,
+  ],
+};
+
+window.Babel = Babel;
 
 class ScriptRunner extends React.Component {
   static propTypes = {
@@ -38,8 +48,20 @@ class ScriptRunner extends React.Component {
       isEvaluating: true,
       isEvaluated: false,
     });
+    let hasErrors = false;
 
-    const code = this.editor.current.editor.getValue();
+    let code = this.editor.current.editor.getValue();
+
+    try {
+      ({ code } = Babel.transform(code, BABEL_OPTIONS));
+    } catch (parseError) {
+      this.setState({
+        parseError,
+        isEvaluating: false,
+      });
+
+      hasErrors = true;
+    }
 
     let activeTheme;
 
@@ -50,7 +72,6 @@ class ScriptRunner extends React.Component {
     };
 
     let script;
-    let hasErrors = false;
 
     try {
       script = new Interpreter(code, prepare);
