@@ -64,6 +64,10 @@ const localization = {
   </React.Fragment>,
   scriptRunner_close: () => `Закрыть`,
   scriptRunner_run: () => `Запустить`,
+  scriptRunner_isEvaluating: () => `Скрипт исполняется…`,
+  scriptRunner_isEvaluated: () => `Скрипт успешно выполнился!`,
+  scriptRunner_runtimeError: () => `Упс, в скрипте произошла ошибка:`,
+  scriptRunner_syntaxError: () => `Упс, в скрипте неверный синтаксис:`,
 };
 
 export default localization;
