@@ -168,6 +168,9 @@ class ScriptRunner extends React.Component {
           autofocus={true}
           mode="javascript"
           ref={this.editor}
+          indentUnit={2}
+          indentWithTabs={false}
+          tabSize={2}
         />
         {
           outputTitle
