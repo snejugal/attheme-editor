@@ -50,6 +50,13 @@ class App extends React.Component {
       const files = [...event.dataTransfer.files];
 
       for (const file of files) {
+        if (
+          !file.name.endsWith(`.attheme`)
+          && !file.name.endsWith(`.attheme-editor`)
+        ) {
+          continue;
+        }
+
         (async () => {
           const content = await readFile(file);
           const theme = parseTheme({

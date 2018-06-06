@@ -27,6 +27,12 @@ class EmptyWorkspace extends React.Component {
     const files = [...this.filesInput.current.files];
 
     for (const file of files) {
+      if (
+        !file.name.endsWith(`.attheme`)
+        && !file.name.endsWith(`.attheme-editor`)
+      ) {
+        continue;
+      }
       (async () => {
         const content = await readFile(file);
         const theme = parseTheme({
