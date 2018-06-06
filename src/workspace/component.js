@@ -9,6 +9,7 @@ import Field from "../field/component";
 import Hint from "../hint/component";
 import PropTypes from "prop-types";
 import React from "react";
+import ScriptRunner from "../script-runner/component";
 import VariableEditor from "../variable-editor/component";
 import Variables from "../variables/component";
 import download from "../download";
@@ -33,6 +34,7 @@ class Workplace extends React.Component {
       editingVariable: null,
       searchQuery: ``,
       color: null,
+      showScriptRunner: false,
     };
   }
 
@@ -52,7 +54,10 @@ class Workplace extends React.Component {
   }
 
   handleKeyUp = (event) => {
-    if ((isMac && event.metaKey) || (!isMac && event.ctrlKey)) {
+    if (
+      (isMac && event.key === `Meta`)
+      || (!isMac && event.key === `Control`)
+    ) {
       this.isCtrlPressed = false;
     }
   }
@@ -237,6 +242,22 @@ class Workplace extends React.Component {
     database.updateTheme(this.props.themeId, theme);
   }
 
+  handleRunScriptButtonClick = () => this.setState({
+    showScriptRunner: true,
+  });
+
+  handleScriptRunnerClose = () => this.setState({
+    showScriptRunner: false,
+  });
+
+  handleThemeChange = (theme) => {
+    this.setState({
+      theme,
+    });
+
+    database.updateTheme(this.props.themeId, theme);
+  }
+
   render () {
     let variablesAmount;
 
@@ -251,24 +272,31 @@ class Workplace extends React.Component {
       }
     }
 
+    let dialog = null;
+
+    if (this.state.editingVariable) {
+      dialog = <VariableEditor
+        variable={this.state.editingVariable}
+        color={this.state.color}
+        onCancel={this.handleVariableEditCancel}
+        onSave={this.handleVariableEditSave}
+        onDelete={this.handleVariableDelete}
+        wallpaper={this.state.theme.wallpaper}
+      />;
+    } else if (this.state.showScriptRunner) {
+      dialog = <ScriptRunner
+        onClose={this.handleScriptRunnerClose}
+        theme={this.state.theme}
+        onThemeChange={this.handleThemeChange}
+      />;
+    }
+
     return this.state.theme === null
       ? null
       : (
         <React.Fragment>
-          {
-            this.state.editingVariable
-              ? (
-                <VariableEditor
-                  variable={this.state.editingVariable}
-                  color={this.state.color}
-                  onCancel={this.handleVariableEditCancel}
-                  onSave={this.handleVariableEditSave}
-                  onDelete={this.handleVariableDelete}
-                  wallpaper={this.state.theme.wallpaper}
-                />
-              )
-              : null
-          }
+          {dialog}
+
           <Button
             onClick={this.downloadThemeViaTelegram}
             isFloating={true}
@@ -296,6 +324,9 @@ class Workplace extends React.Component {
             </Button>
             <Button onClick={this.downloadWorkspace}>
               {localization.workspace_downloadWorkspace()}
+            </Button>
+            <Button onClick={this.handleRunScriptButtonClick}>
+              {localization.workspace_runScript()}
             </Button>
             <Button onClick={this.createPreview}>
               {localization.workspace_createPreview()}

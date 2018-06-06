@@ -27,6 +27,7 @@ const localization = {
   workspace_createPreview: () => `Crea un'anteprima`,
   workspace_testTheme: () => `Prova il tema`,
   workspace_downloadWorkspace: () => `Scarica l'area di lavoro`,
+  workspace_runScript: () => `Esegui uno script`,
   workspace_unaddedVariable: () => `Non aggiunta`,
   workspace_unusedVariable: () => `Non utilizzata da Telegram`,
   workspace_obsoleteVariable: () => `Obsoleta`,
@@ -53,6 +54,17 @@ const localization = {
   variableEditor_hex: () => `HEX`,
   variableEditor_alpha: () => `Alpha`,
   variableEditor_uploadImage: () => `Carica un'immagine`,
+
+  scriptRunner_title: () => `Esegui uno script`,
+  scriptRunner_description: () => <React.Fragment>
+    L&apos;editor .attheme ti permette di eseguire facilmente gli script scritti in EcmaScript 2017 per velocizzare lo sviluppo dei temi. Puoi informarti riguardo le API che l&apos;editor mette a disposizione alla <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">wiki del suo repository di GitHub</Link>.
+  </React.Fragment>,
+  scriptRunner_close: () => `Chiudi`,
+  scriptRunner_run: () => `Esegui`,
+  scriptRunner_isEvaluating: () => `Lo script sta venendo eseguito…`,
+  scriptRunner_isEvaluated: () => `Lo script è stato eseguito correttamente!`,
+  scriptRunner_runtimeError: () => `Oops, è stato riscontrato questo errore nel tuo script:`,
+  scriptRunner_syntaxError: () => `Oops, c'è un errore di sintassi nel tuo script:`,
 };
 
 export default localization;

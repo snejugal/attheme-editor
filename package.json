@@ -3,11 +3,14 @@
   "version": "2.0.0",
   "homepage": "https://snejugal.ru/attheme-editor/",
   "dependencies": {
+    "@babel/standalone": "^7.0.0-beta.49",
     "attheme-default-values": "^4.8.6",
     "attheme-editor-api": "^1.1.0",
     "attheme-js": "^1.1.1",
+    "codemirror": "^5.38.0",
     "fuzzy-search": "^2.0.1",
     "intl-pluralrules": "^0.2.1",
+    "js-interpreter": "^1.4.6",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "smoothscroll-polyfill": "^0.4.3"
