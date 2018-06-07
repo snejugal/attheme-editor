@@ -7,7 +7,7 @@ import Color from "../color";
 import Dialog from "../dialog/component";
 import Heading from "../heading/component";
 import Hint from "../hint/component";
-import Interpreter from "js-interpreter";
+import Interpreter from "./interpreter";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
@@ -86,6 +86,12 @@ class ScriptRunner extends React.Component {
 
       interpreter.setProperty(scope, `activeTheme`, activeTheme);
       interpreter.setProperty(scope, `Color`, colorClass);
+      interpreter.setProperty(
+        scope,
+        `editor`,
+        scope,
+        Interpreter.READONLY_DESCRIPTOR,
+      );
     };
 
     let script;
