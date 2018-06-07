@@ -145,3 +145,7 @@ const colorClass = {
 };
 
 export default colorClass;
+
+export {
+  checkRgbColorValidity,
+};

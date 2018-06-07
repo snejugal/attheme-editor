@@ -11,6 +11,7 @@ import Interpreter from "./interpreter";
 import PropTypes from "prop-types";
 import React from "react";
 import colorClass from "./color-class";
+import createTheme from "./theme";
 import localization from "../localization";
 
 const STEPS_PER_ONCE = 50000;
@@ -72,17 +73,19 @@ class ScriptRunner extends React.Component {
       hasErrors = true;
     }
 
-    let activeTheme;
+    const themeCopy = {
+      ...this.props.theme,
+      variables: {
+        ...this.props.theme.variables,
+      },
+      palette: [
+        ...this.props.theme.palette,
+      ],
+    };
+
+    const activeTheme = createTheme(themeCopy);
 
     const prepare = (interpreter, scope) => {
-      // const colorClass = interpreter.nativeToPseudo({
-      //   createHex: Color.createHex,
-      //   parseHex: Color.parseHex,
-      //   brightness: Color.brightness,
-      //   overlay: Color.overlay,
-      //   createCssRgb: Color.createCssRgb,
-      // });
-
       const log = (...messageParts) => {
         // eslint-disable-next-line no-console
         console.log(
@@ -91,8 +94,6 @@ class ScriptRunner extends React.Component {
         );
       };
 
-      activeTheme = interpreter.nativeToPseudo(this.props.theme);
-
       interpreter.setProperty(
         scope,
         `editor`,
@@ -100,7 +101,11 @@ class ScriptRunner extends React.Component {
         Interpreter.READONLY_DESCRIPTOR,
       );
 
-      interpreter.setProperty(scope, `activeTheme`, activeTheme);
+      interpreter.setProperty(
+        scope,
+        `activeTheme`,
+        interpreter.nativeToPseudo(activeTheme),
+      );
       interpreter.setProperty(
         scope,
         `Color`,
@@ -157,7 +162,7 @@ class ScriptRunner extends React.Component {
               isEvaluated: true,
             });
 
-            this.props.onThemeChange(script.pseudoToNative(activeTheme));
+            this.props.onThemeChange(themeCopy);
           }
         }
       };
