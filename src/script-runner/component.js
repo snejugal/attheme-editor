@@ -10,6 +10,7 @@ import Hint from "../hint/component";
 import Interpreter from "./interpreter";
 import PropTypes from "prop-types";
 import React from "react";
+import colorClass from "./color-class";
 import localization from "../localization";
 
 const STEPS_PER_ONCE = 50000;
@@ -74,13 +75,13 @@ class ScriptRunner extends React.Component {
     let activeTheme;
 
     const prepare = (interpreter, scope) => {
-      const colorClass = interpreter.nativeToPseudo({
-        createHex: Color.createHex,
-        parseHex: Color.parseHex,
-        brightness: Color.brightness,
-        overlay: Color.overlay,
-        createCssRgb: Color.createCssRgb,
-      });
+      // const colorClass = interpreter.nativeToPseudo({
+      //   createHex: Color.createHex,
+      //   parseHex: Color.parseHex,
+      //   brightness: Color.brightness,
+      //   overlay: Color.overlay,
+      //   createCssRgb: Color.createCssRgb,
+      // });
 
       const log = (...messageParts) => {
         // eslint-disable-next-line no-console
@@ -100,7 +101,11 @@ class ScriptRunner extends React.Component {
       );
 
       interpreter.setProperty(scope, `activeTheme`, activeTheme);
-      interpreter.setProperty(scope, `Color`, colorClass);
+      interpreter.setProperty(
+        scope,
+        `Color`,
+        interpreter.nativeToPseudo(colorClass),
+      );
       interpreter.setProperty(
         scope,
         `log`,
@@ -213,7 +218,7 @@ class ScriptRunner extends React.Component {
                 </Heading>
                 {
                   output
-                    ? <pre>{output}</pre>
+                    ? <p>{output}</p>
                     : null
                 }
               </div>
