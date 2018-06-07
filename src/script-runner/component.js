@@ -82,15 +82,29 @@ class ScriptRunner extends React.Component {
         createCssRgb: Color.createCssRgb,
       });
 
+      const log = (...messageParts) => {
+        // eslint-disable-next-line no-console
+        console.log(
+          localization.scriptRunner_logMessage(),
+          ...messageParts.map((part) => interpreter.pseudoToNative(part))
+        );
+      };
+
       activeTheme = interpreter.nativeToPseudo(this.props.theme);
 
-      interpreter.setProperty(scope, `activeTheme`, activeTheme);
-      interpreter.setProperty(scope, `Color`, colorClass);
       interpreter.setProperty(
         scope,
         `editor`,
         scope,
         Interpreter.READONLY_DESCRIPTOR,
+      );
+
+      interpreter.setProperty(scope, `activeTheme`, activeTheme);
+      interpreter.setProperty(scope, `Color`, colorClass);
+      interpreter.setProperty(
+        scope,
+        `log`,
+        interpreter.createNativeFunction(log)
       );
     };
 
