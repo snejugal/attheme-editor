@@ -7,7 +7,7 @@ import Color from "../color";
 import Dialog from "../dialog/component";
 import Heading from "../heading/component";
 import Hint from "../hint/component";
-import Interpreter from "./interpreter";
+import Interpreter from "es-interpreter";
 import PropTypes from "prop-types";
 import React from "react";
 import colorClass from "./color-class";
@@ -93,6 +93,8 @@ class ScriptRunner extends React.Component {
           ...messageParts.map((part) => interpreter.pseudoToNative(part))
         );
       };
+
+      window.script = interpreter;
 
       interpreter.setProperty(
         scope,
