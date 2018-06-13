@@ -8,7 +8,7 @@
     "attheme-editor-api": "^1.1.0",
     "attheme-js": "^1.1.1",
     "codemirror": "^5.38.0",
-    "es-interpreter": "^0.1.0",
+    "es-interpreter": "^0.2.0",
     "fuzzy-search": "^2.0.1",
     "intl-pluralrules": "^0.2.1",
     "react": "^16.4.0",
