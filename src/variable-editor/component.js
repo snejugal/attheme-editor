@@ -5,6 +5,7 @@ import Color from "../color";
 import Dialog from "../dialog/component";
 import Heading from "../heading/component";
 import HexInput from "../hex-input/component";
+import HslInput from "../hsl-input/component";
 import PropTypes from "prop-types";
 import React from "react";
 import RgbInput from "../rgb-input/component";
@@ -32,14 +33,14 @@ class VariableEditor extends React.Component {
 
   filesInput = React.createRef()
 
-  handleRgbaChange = ({ channel, value }) => this.setState({
+  handleRgbaChannelChange = ({ channel, value }) => this.setState({
     color: {
       ...this.state.color,
       [channel]: value,
     },
   });
 
-  handleHexChange = (color) => this.setState({
+  handleColorChange = (color) => this.setState({
     color,
   });
 
@@ -126,12 +127,16 @@ class VariableEditor extends React.Component {
               <React.Fragment>
                 <HexInput
                   color={this.state.color}
-                  onAlphaChange={this.handleRgbaChange}
-                  onHexChange={this.handleHexChange}
+                  onAlphaChange={this.handleRgbaChannelChange}
+                  onHexChange={this.handleColorChange}
                 />
                 <RgbInput
                   color={this.state.color}
-                  onChange={this.handleRgbaChange}
+                  onChange={this.handleRgbaChannelChange}
+                />
+                <HslInput
+                  color={this.state.color}
+                  onChange={this.handleColorChange}
                 />
               </React.Fragment>
             )
