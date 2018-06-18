@@ -44,6 +44,8 @@ class HexInput extends React.Component {
       correctValue = Number(event.target.min);
     }
 
+    correctValue = Math.round(correctValue);
+
     this.props.onAlphaChange({
       channel: `alpha`,
       value: correctValue,
