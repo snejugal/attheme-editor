@@ -71,6 +71,7 @@ const localization = {
   scriptRunner_isEvaluated: () => `Скрипт успешно выполнился!`,
   scriptRunner_runtimeError: () => `Упс, в скрипте произошла ошибка:`,
   scriptRunner_syntaxError: () => `Упс, в скрипте неверный синтаксис:`,
+  scriptRunner_logMessage: () => `Ваш скрипт передал в консоль:`,
 };
 
 export default localization;

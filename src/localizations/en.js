@@ -70,7 +70,7 @@ const localization = {
   scriptRunner_isEvaluated: () => `The script has run successfully!`,
   scriptRunner_runtimeError: () => `Whops, the following error happened in your script:`,
   scriptRunner_syntaxError: () => `Whops, you have wrong syntax in your script:`,
-  scriptRunner_logMessage: () => `Your script's log:`,
+  scriptRunner_logMessage: () => `Your script logged:`,
 };
 
 export default localization;

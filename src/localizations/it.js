@@ -53,6 +53,9 @@ const localization = {
   variableEditor_blue: () => `Blu`,
   variableEditor_hex: () => `HEX`,
   variableEditor_alpha: () => `Alpha`,
+  variableEditor_hue: () => `Colore`,
+  variableEditor_lightness: () => `Luminosità`,
+  variableEditor_saturation: () => `Saturazione`,
   variableEditor_uploadImage: () => `Carica un'immagine`,
 
   scriptRunner_title: () => `Esegui uno script`,
@@ -65,6 +68,7 @@ const localization = {
   scriptRunner_isEvaluated: () => `Lo script è stato eseguito correttamente!`,
   scriptRunner_runtimeError: () => `Oops, è stato riscontrato questo errore nel tuo script:`,
   scriptRunner_syntaxError: () => `Oops, c'è un errore di sintassi nel tuo script:`,
+  scriptRunner_logMessage: () => `Il tuo script ha come log:`,
 };
 
 export default localization;
