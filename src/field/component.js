@@ -20,6 +20,7 @@ class Field extends React.Component {
     autoCapitalize: PropTypes.string,
     min: PropTypes.number,
     max: PropTypes.number,
+    step: PropTypes.number,
     autoFocus: PropTypes.bool,
     inputRef: PropTypes.object,
   }
@@ -29,6 +30,7 @@ class Field extends React.Component {
     placeholder: ``,
     className: ``,
     autofocus: false,
+    step: 1,
   }
 
   handleKeyUp = (event) => {
@@ -54,6 +56,7 @@ class Field extends React.Component {
           autoCapitalize={this.props.autoCapitalize}
           min={this.props.min}
           max={this.props.max}
+          step={this.props.step}
           onFocus={this.props.onFocus}
           autoFocus={this.props.autoFocus}
           ref={this.props.inputRef}
