@@ -19,6 +19,15 @@
   &:focus {
     border-color: $theme_accentColor;
   }
+
+  &[type="number"] {
+    -moz-appearance:textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      display: none;
+    }
+  }
 }
 
 .label {
