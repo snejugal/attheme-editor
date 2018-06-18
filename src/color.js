@@ -114,6 +114,97 @@ class Color {
 
     return color;
   }
+
+  /* eslint-disable no-magic-numbers */
+  static rgbToHsl (rgbColor) {
+    const red = rgbColor.red / 255;
+    const green = rgbColor.green / 255;
+    const blue = rgbColor.blue / 255;
+
+    const max = Math.max(red, green, blue);
+    const min = Math.min(red, green, blue);
+    const delta = max - min;
+
+    const lightness = (max + min) / 2;
+
+    const saturation = (delta === 0)
+      ? 0
+      : delta / (1 - Math.abs(2 * lightness - 1));
+
+    let hue = 0;
+
+    if (delta !== 0) {
+      if (max === red) {
+        hue = 60 * (((green - blue) / delta) % 6);
+      }
+
+      if (max === green) {
+        hue = 60 * ((blue - red) / delta + 2);
+      }
+
+      if (max === blue) {
+        hue = 60 * ((red - green) / delta + 4);
+      }
+    }
+
+    return {
+      hue,
+      saturation,
+      lightness,
+      alpha: rgbColor.alpha,
+    };
+  }
+
+  static hslToRgb (hslColor) {
+    const { hue, saturation, lightness, alpha } = hslColor;
+
+    const c = (1 - Math.abs(2 * lightness - 1)) * saturation;
+    const x = c * (1 - Math.abs((hue / 60) % 2 - 1));
+    const m = lightness - c / 2;
+
+    let r;
+    let g;
+    let b;
+
+    // Making conditions look similarly to a <= b < c, as in convertation
+    // formalas
+    /* eslint-disable yoda */
+    if (0 <= hue && hue < 60) {
+      [r, g, b] = [c, x, 0];
+    }
+
+    if (60 <= hue && hue < 120) {
+      [r, g, b] = [x, c, 0];
+    }
+
+    if (120 <= hue && hue < 180) {
+      [r, g, b] = [0, c, x];
+    }
+
+    if (180 <= hue && hue < 240) {
+      [r, g, b] = [0, x, c];
+    }
+
+    if (240 <= hue && hue < 300) {
+      [r, g, b] = [x, 0, c];
+    }
+
+    if (300 <= hue && hue < 360) {
+      [r, g, b] = [c, 0, x];
+    }
+
+    const red = Math.round((r + m) * 255);
+    const green = Math.round((g + m) * 255);
+    const blue = Math.round((b + m) * 255);
+
+    return {
+      red,
+      green,
+      blue,
+      alpha,
+    };
+  }
+  /* eslint-enable no-magic-numbers yoda */
 }
 
 export default Color;
