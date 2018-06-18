@@ -147,6 +147,10 @@ class Color {
       }
     }
 
+    if (hue < 0) {
+      hue += 360;
+    }
+
     return {
       hue,
       saturation,
