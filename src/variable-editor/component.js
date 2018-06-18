@@ -124,7 +124,7 @@ class VariableEditor extends React.Component {
         {
           this.state.color
             ? (
-              <React.Fragment>
+              <form noValidate={true}>
                 <HexInput
                   color={this.state.color}
                   onAlphaChange={this.handleRgbaChannelChange}
@@ -138,7 +138,7 @@ class VariableEditor extends React.Component {
                   color={this.state.color}
                   onChange={this.handleColorChange}
                 />
-              </React.Fragment>
+              </form>
             )
             : null
         }
