@@ -24,6 +24,8 @@ class RgbInput extends React.Component {
       correctValue = Number(event.target.min);
     }
 
+    correctValue = Math.round(correctValue);
+
     this.props.onChange({
       channel,
       value: correctValue,
