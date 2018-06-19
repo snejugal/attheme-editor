@@ -48,4 +48,10 @@
   &_fields {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  &_tabs {
+    margin-top: -$container_verticalMargin;
+    margin-left: -$container_horizontalMargin;
+    margin-right: -$container_horizontalMargin;
+  }
 }

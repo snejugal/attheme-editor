@@ -1,10 +1,16 @@
+@import "./variables";
 @import "../variables";
-@import "../tabs/variables";
-@import "../header-tabs/variables";
 @import "../mixins/hover-shade";
 @import "../typography";
 
-.headerTab {
+.tabs {
+  height: 56px;
+  display: flex;
+  margin-bottom: $container_verticalMargin;
+}
+
+.tab {
+  @extend %subtitle-1;
   @include hoverShade($tabs_color);
 
   border: none;
@@ -17,14 +23,11 @@
   padding: 0 $tabs_horizontalPadding;
   font-family: inherit;
   white-space: nowrap;
+  flex-grow: 1;
   flex-shrink: 0;
   opacity: .5;
   transition-property: opacity;
   transition-duration: $transitionDuration;
-
-  &_title {
-    @extend %subtitle-1;
-  }
 
   &::before {
     content: "";
