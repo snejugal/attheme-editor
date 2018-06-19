@@ -59,6 +59,8 @@ const localization = {
   variableEditor_hex: () => `HEX`,
   variableEditor_alpha: () => `Alpha`,
   variableEditor_uploadImage: () => `Upload an image`,
+  variableEditor_imageTab: () => `Image`,
+  variableEditor_colorModelsTab: () => `Color models`,
 
   scriptRunner_title: () => `Run a script`,
   scriptRunner_description: () => <React.Fragment>

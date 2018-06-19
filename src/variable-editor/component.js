@@ -95,11 +95,11 @@ class VariableEditor extends React.Component {
           tabs={[
             {
               id: `image`,
-              text: `Image`,
+              text: localization.variableEditor_imageTab(),
             },
             {
               id: `color-numeric`,
-              text: `HEX / RGB / HSL`,
+              text: localization.variableEditor_colorModelsTab(),
             },
           ]}
           activeTab={this.state.activeTab}
