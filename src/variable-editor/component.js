@@ -9,6 +9,8 @@ import HslInput from "../hsl-input/component";
 import PropTypes from "prop-types";
 import React from "react";
 import RgbInput from "../rgb-input/component";
+import Tabs from "../tabs/component";
+import { defaultValues } from "../attheme-variables";
 import localization from "../localization";
 import readFile from "../read-file";
 
@@ -20,7 +22,7 @@ class VariableEditor extends React.Component {
     onSave: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     wallpaper: PropTypes.string,
-  }
+  };
 
   constructor (props) {
     super(props);
@@ -28,14 +30,15 @@ class VariableEditor extends React.Component {
     this.state = {
       color: this.props.color,
       wallpaper: this.props.wallpaper,
+      activeTab: this.props.color ? `color-numeric` : `image`,
     };
   }
 
-  filesInput = React.createRef()
+  filesInput = React.createRef();
 
   handleRgbaChannelChange = ({ channel, value }) => this.setState({
     color: {
-      ...this.state.color,
+      ...(this.state.color || defaultValues.chat_wallpaper),
       [channel]: value,
     },
   });
@@ -45,14 +48,14 @@ class VariableEditor extends React.Component {
   });
 
   handleSave = () => {
-    if (this.state.color) {
-      this.props.onSave(this.state.color);
-    } else {
+    if (this.state.activeTab === `image`) {
       this.props.onSave(this.state.wallpaper);
+    } else {
+      this.props.onSave(this.state.color);
     }
-  }
+  };
 
-  handleUploadWallpaperClick = () => this.filesInput.current.click()
+  handleUploadWallpaperClick = () => this.filesInput.current.click();
 
   handleFileInputChange = async () => {
     const filesInput = this.filesInput.current;
@@ -67,21 +70,44 @@ class VariableEditor extends React.Component {
       wallpaper,
       color: null,
     });
-  }
+  };
+
+  handleTabChange = (activeTab) => this.setState({
+    activeTab,
+  });
 
   render () {
-    const colorPreviewStyle = {
-    };
+    const color = this.state.color || defaultValues.chat_wallpaper;
 
-    if (this.state.color) {
-      colorPreviewStyle.backgroundColor = Color.createCssRgb(this.state.color);
-    }
+    const colorPreviewStyle = {
+      backgroundColor: Color.createCssRgb(color),
+    };
 
     let previewOuterClassName = `variableEditor_preview -outer`;
 
-    if (!this.state.color) {
+    if (this.state.activeTab === `image` && this.state.wallpaper) {
       previewOuterClassName += ` -imageWrapper`;
     }
+
+    const tabs = this.props.variable === `chat_wallpaper`
+      ? (
+        <Tabs
+          tabs={[
+            {
+              id: `image`,
+              text: `Image`,
+            },
+            {
+              id: `color-numeric`,
+              text: `HEX / RGB / HSL`,
+            },
+          ]}
+          activeTab={this.state.activeTab}
+          onChange={this.handleTabChange}
+          className="variableEditor_tabs"
+        />
+      )
+      : null;
 
     return (
       <Dialog
@@ -102,65 +128,62 @@ class VariableEditor extends React.Component {
       >
         <div className={previewOuterClassName}>
           {
-            this.state.color
+            this.state.activeTab === `image` && this.state.wallpaper
               ? (
-                <div
-                  className="variableEditor_preview -inner"
-                  style={colorPreviewStyle}
-                />
-              )
-              : (
                 <img
                   className="variableEditor_preview -image"
                   src={`data:image/jpg;base64,${this.state.wallpaper}`}
                   alt=""
                 />
               )
+              : (
+                <div
+                  className="variableEditor_preview -inner"
+                  style={colorPreviewStyle}
+                />
+              )
           }
         </div>
+        {tabs}
         <Heading level={3} className="variableEditor_title">
           {this.props.variable}
         </Heading>
         {
-          this.state.color
-            ? (
-              <form noValidate={true}>
-                <HexInput
-                  color={this.state.color}
-                  onAlphaChange={this.handleRgbaChannelChange}
-                  onHexChange={this.handleColorChange}
-                />
-                <RgbInput
-                  color={this.state.color}
-                  onChange={this.handleRgbaChannelChange}
-                />
-                <HslInput
-                  color={this.state.color}
-                  onChange={this.handleColorChange}
-                />
-              </form>
-            )
-            : null
+          this.state.activeTab === `color-numeric` && (
+            <form noValidate={true}>
+              <HexInput
+                color={color}
+                onAlphaChange={this.handleRgbaChannelChange}
+                onHexChange={this.handleColorChange}
+              />
+              <RgbInput
+                color={color}
+                onChange={this.handleRgbaChannelChange}
+              />
+              <HslInput
+                color={color}
+                onChange={this.handleColorChange}
+              />
+            </form>
+          )
         }
         {
-          this.props.variable === `chat_wallpaper`
-            ? (
-              <React.Fragment>
-                <Button
-                  onClick={this.handleUploadWallpaperClick}
-                >
-                  Upload an image
-                </Button>
-                <input
-                  hidden={true}
-                  type="file"
-                  ref={this.filesInput}
-                  onChange={this.handleFileInputChange}
-                  accept=".jpg,.jpeg"
-                />
-              </React.Fragment>
-            )
-            : null
+          this.state.activeTab === `image` && (
+            <React.Fragment>
+              <Button
+                onClick={this.handleUploadWallpaperClick}
+              >
+                Upload an image
+              </Button>
+              <input
+                hidden={true}
+                type="file"
+                ref={this.filesInput}
+                onChange={this.handleFileInputChange}
+                accept=".jpg,.jpeg"
+              />
+            </React.Fragment>
+          )
         }
       </Dialog>
     );
