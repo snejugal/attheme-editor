@@ -1,4 +1,5 @@
 @import "../variables";
+@import "./variables";
 @import "../typography";
 
 .scriptRunner {
@@ -9,9 +10,17 @@
   }
 
   &_output {
-    background-color: rgba(#424242, 0.5);
+    background-color: $output_background;
     border-radius: $container_borderRadius;
     padding: $container_padding;
+
+    &.-success {
+      background-color: $output_background-success;
+    }
+
+    &.-error {
+      background-color: $output_background-error;
+    }
 
     > :last-child {
       margin-bottom: 0;

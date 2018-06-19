@@ -35,24 +35,39 @@ class ScriptRunner extends React.Component {
     onThemeChange: PropTypes.func.isRequired,
   }
 
-  constructor (props) {
-    super(props);
+  state = {
+    parseError: null,
+    runtimeError: null,
+    isEvaluated: false,
+    isEvaluating: false,
+    isBabelLoaded: Boolean(Babel),
+    isBabelLoading: true,
+  };
 
-    this.state = {
-      parseError: null,
-      runtimeError: null,
-      isEvaluated: false,
-      isEvaluating: false,
-    };
-
-    (async () => {
-      if (!Babel) {
+  componentDidMount = async () => {
+    if (Babel) {
+      this.setState({
+        isBabelLoaded: true,
+        isBabelLoading: false,
+      });
+    } else {
+      try {
         Babel = await import(`@babel/standalone`);
+      } catch (e) {
+        this.setState({
+          isBabelLoaded: false,
+          isBabelLoading: false,
+        });
       }
-    })();
+
+      this.setState({
+        isBabelLoaded: true,
+        isBabelLoading: false,
+      });
+    }
   }
 
-  editor = React.createRef()
+  editor = React.createRef();
 
   handleRun = () => {
     this.setState({
@@ -187,17 +202,24 @@ class ScriptRunner extends React.Component {
   render () {
     let outputTitle;
     let output;
+    let outputClassName = `scriptRunner_output`;
 
     if (this.state.isEvaluating) {
       outputTitle = localization.scriptRunner_isEvaluating();
     } else if (this.state.isEvaluated) {
       outputTitle = localization.scriptRunner_isEvaluated();
+      outputClassName += ` -success`;
     } else if (this.state.runtimeError) {
       outputTitle = localization.scriptRunner_runtimeError();
       output = this.state.runtimeError.message;
+      outputClassName += ` -error`;
     } else if (this.state.parseError) {
       outputTitle = localization.scriptRunner_syntaxError();
       output = this.state.parseError.message;
+      outputClassName += ` -error`;
+    } else if (!this.state.isBabelLoaded && !this.state.isBabelLoading) {
+      outputTitle = localization.scriptRunner_babelLoadingFailed();
+      outputClassName += ` -error`;
     }
 
     return (
@@ -206,7 +228,10 @@ class ScriptRunner extends React.Component {
         title={localization.scriptRunner_title()}
         buttons={
           <React.Fragment>
-            <Button onClick={this.handleRun}>
+            <Button
+              onClick={this.handleRun}
+              isDisabled={!this.state.isBabelLoaded || this.state.isEvaluating}
+            >
               {localization.scriptRunner_run()}
             </Button>
             <Button onClick={this.props.onClose}>
@@ -230,7 +255,7 @@ class ScriptRunner extends React.Component {
         {
           outputTitle
             ? (
-              <div className="scriptRunner_output">
+              <div className={outputClassName}>
                 <Heading level={3} className="scriptRunner_outputTitle">
                   {outputTitle}
                 </Heading>
