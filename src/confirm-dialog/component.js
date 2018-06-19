@@ -9,7 +9,12 @@ class ConfirmDialog extends React.Component {
     children: PropTypes.any,
     onDismissed: PropTypes.func.isRequired,
     onConfirmed: PropTypes.func.isRequired,
-  }
+    isDangerous: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    isDangerous: false,
+  };
 
   render () {
     return (
@@ -17,7 +22,10 @@ class ConfirmDialog extends React.Component {
         onDismiss={this.props.onDismissed}
         buttons={
           <React.Fragment>
-            <Button onClick={this.props.onConfirmed}>
+            <Button
+              onClick={this.props.onConfirmed}
+              isDangerous={this.props.isDangerous}
+            >
               {localization.confirmDialog_yes()}
             </Button>
             <Button onClick={this.props.onDismissed}>
