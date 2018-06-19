@@ -34,7 +34,7 @@ class Tab extends React.Component {
   }
 
   render () {
-    let className = `headerTab`;
+    let className = `tab headerTab`;
 
     if (this.props.isActive) {
       className += ` -active`;

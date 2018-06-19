@@ -4,9 +4,11 @@
 @import "../typography";
 
 .tabs {
-  height: 56px;
+  height: $tabs_height;
   display: flex;
   margin-bottom: $container_verticalMargin;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 .tab {

@@ -31,7 +31,11 @@ class HeaderTabs extends React.Component {
 
   render () {
     return (
-      <div className="headerTabs" onWheel={this.handleWheel} ref={this.tabs}>
+      <div
+        className="tabs headerTabs"
+        onWheel={this.handleWheel}
+        ref={this.tabs}
+      >
         {
           this.props.workplaces.map((themeId) => {
             const ref = {};

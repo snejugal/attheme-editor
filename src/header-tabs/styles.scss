@@ -1,11 +1,7 @@
 @import "./variables";
-@import "../header/variables";
 
-.headerTabs {
-  display: flex;
-  align-items: stretch;
-  height: $header_height;
+.tabs.headerTabs {
+  height: 100%;
   width: 100%;
-  overflow-y: hidden;
-  overflow-x: auto;
+  margin-bottom: 0;
 }

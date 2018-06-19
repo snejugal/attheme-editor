@@ -11,12 +11,12 @@ class NewTab extends React.Component {
   }
 
   shouldComponentUpdate = (nextProps) => (
-    nextProps.onClick !== this.props.onClick ||
-    nextProps.isActive !== this.props.isActive
+    nextProps.onClick !== this.props.onClick
+    || nextProps.isActive !== this.props.isActive
   )
 
   render () {
-    let className = `headerTab -new`;
+    let className = `tab headerTab -new`;
 
     if (this.props.isActive) {
       className += ` -active`;
