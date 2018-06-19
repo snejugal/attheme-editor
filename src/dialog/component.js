@@ -16,18 +16,30 @@ class Dialog extends React.Component {
     onDismiss: PropTypes.func.isRequired,
   }
 
+  wasMouseDown = false;
+
   onRootClick = (event) => {
-    if (event.target === root) {
+    if (event.target === root && this.wasMouseDown) {
       this.props.onDismiss(event);
     }
+
+    this.wasMouseDown = false;
   }
+
+  onRootMouseDown = (event) => {
+    if (event.target === root) {
+      this.wasMouseDown = true;
+    }
+  };
 
   componentDidMount = () => {
     root.addEventListener(`click`, this.onRootClick);
+    root.addEventListener(`mousedown`, this.onRootMouseDown);
   }
 
   componentWillUnmount = () => {
     root.removeEventListener(`click`, this.onRootClick);
+    root.removeEventListener(`mousedown`, this.onRootMouseDown);
   }
 
   render () {
