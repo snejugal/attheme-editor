@@ -34,7 +34,7 @@ class Tab extends React.Component {
   }
 
   render () {
-    let className = `tab`;
+    let className = `headerTab`;
 
     if (this.props.isActive) {
       className += ` -active`;
@@ -42,7 +42,7 @@ class Tab extends React.Component {
 
     return (
       <button className={className} onClick={this.props.onClick}>
-        <h3 className="tab_title">{this.state.title}</h3>
+        <h3 className="headerTab_title">{this.state.title}</h3>
       </button>
     );
   }

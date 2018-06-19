@@ -4,7 +4,7 @@
 @import "../mixins/hover-shade";
 @import "../typography";
 
-.tab {
+.headerTab {
   @include hoverShade($tabs_color);
 
   border: none;

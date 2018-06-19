@@ -3,7 +3,7 @@
 @import "../header-tabs/variables";
 @import "../mixins/square";
 
-.tab.-new {
+.headerTab.-new {
   @include square($tabs_height);
 
   padding: 0;
