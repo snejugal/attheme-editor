@@ -11,6 +11,7 @@ class Button extends React.Component {
     isDangerous: PropTypes.bool,
     isFloating: PropTypes.bool,
     className: PropTypes.string,
+    isDisabled: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -18,15 +19,17 @@ class Button extends React.Component {
     isDangerous: false,
     isFloating: false,
     className: ``,
+    isDisabled: false,
   }
 
   shouldComponentUpdate = (nextProps) => (
-    nextProps.type !== this.props.type ||
-    nextProps.children !== this.props.children ||
-    nextProps.onClick !== this.props.onClick ||
-    nextProps.isDangerous !== this.props.isDangerous ||
-    nextProps.isFloating !== this.props.isFloating ||
-    nextProps.className !== this.props.className
+    nextProps.type !== this.props.type
+    || nextProps.children !== this.props.children
+    || nextProps.onClick !== this.props.onClick
+    || nextProps.isDangerous !== this.props.isDangerous
+    || nextProps.isFloating !== this.props.isFloating
+    || nextProps.isDisabled !== this.props.isDisabled
+    || nextProps.className !== this.props.className
   )
 
   render () {
@@ -49,6 +52,7 @@ class Button extends React.Component {
         type={this.props.type}
         className={className}
         onClick={this.props.onClick}
+        disabled={this.props.isDisabled}
       >
         {this.props.children}
       </button>

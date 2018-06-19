@@ -24,6 +24,14 @@
   justify-content: center;
   line-height: inhertt;
 
+  &:disabled {
+    opacity: $button_disabledOpacity;
+
+    &:hover::after {
+      content: none;
+    }
+  }
+
   &:active {
     @include shadow(8);
   }
