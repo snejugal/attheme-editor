@@ -54,6 +54,11 @@ const localization = {
   variableEditor_red: () => `Червоний`,
   variableEditor_green: () => `Зелений`,
   variableEditor_blue: () => `Синій`,
+  variableEditor_hue: () => `Тон`,
+  variableEditor_lightness: () => `Яскравість`,
+  variableEditor_saturation: () => `Насиченість`,
+  variableEditor_hex: () => `HEX`,
+  variableEditor_alpha: () => `Альфа`,
   variableEditor_uploadImage: () => `Завантажити зображення`,
 
   scriptRunner_title: () => `Запуск скриптів`,
@@ -64,8 +69,9 @@ const localization = {
   scriptRunner_run: () => `Запустити`,
   scriptRunner_isEvaluating: () => `Скрипт виконується…`,
   scriptRunner_isEvaluated: () => `Скрипт успішно виконано!`,
-  scriptRunner_runtimeError: () => `Упс, в скрипте произошла ошибка:`,
-  scriptRunner_syntaxError: () => `Упс, в скрипте неверный синтаксис:`,
+  scriptRunner_runtimeError: () => `Упс, у скрипті виникла помилка`,
+  scriptRunner_syntaxError: () => `Упс, у скрипті невірний синтаксис`,
+  scriptRunner_logMessage: () => `Ваш скрипт передан до консолі:`,
 };
 
 export default localization;
