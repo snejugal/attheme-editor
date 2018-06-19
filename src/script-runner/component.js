@@ -1,6 +1,7 @@
 import "codemirror/mode/javascript/javascript.js";
 import "./styles.scss";
 
+import { allVariables, defaultValues } from "../attheme-variables";
 import Button from "../button/component";
 import CodeMirror from "../codemirror/component";
 import Color from "../color";
@@ -116,7 +117,17 @@ class ScriptRunner extends React.Component {
       interpreter.setProperty(
         scope,
         `log`,
-        interpreter.createNativeFunction(log)
+        interpreter.createNativeFunction(log),
+      );
+      interpreter.setProperty(
+        scope,
+        `allVariablesList`,
+        interpreter.nativeToPseudo(allVariables),
+      );
+      interpreter.setProperty(
+        scope,
+        `allVariablesDefaultValues`,
+        interpreter.nativeToPseudo(defaultValues),
       );
     };
 
