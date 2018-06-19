@@ -221,6 +221,7 @@ class App extends React.Component {
               <ConfirmDialog
                 onDismissed={this.handleCloseDismissed}
                 onConfirmed={this.handleCloseConfirmed}
+                isDangerous={true}
               >
                 {localization.workspace_closeThemePrompt()}
               </ConfirmDialog>

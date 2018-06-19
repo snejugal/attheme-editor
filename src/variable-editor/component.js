@@ -94,7 +94,7 @@ class VariableEditor extends React.Component {
             <Button onClick={this.props.onCancel}>
               {localization.variableEditor_cancel()}
             </Button>
-            <Button onClick={this.props.onDelete}>
+            <Button onClick={this.props.onDelete} isDangerous={true}>
               {localization.variableEditor_delete()}
             </Button>
           </React.Fragment>
