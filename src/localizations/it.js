@@ -54,8 +54,8 @@ const localization = {
   variableEditor_hex: () => `HEX`,
   variableEditor_alpha: () => `Alpha`,
   variableEditor_hue: () => `Colore`,
-  variableEditor_lightness: () => `Luminosità`,
-  variableEditor_saturation: () => `Saturazione`,
+  variableEditor_lightness: () => `Luminosità, %`,
+  variableEditor_saturation: () => `Saturazione, %`,
   variableEditor_uploadImage: () => `Carica un'immagine`,
 
   scriptRunner_title: () => `Esegui uno script`,

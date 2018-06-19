@@ -7,8 +7,9 @@ import localization from "../localization";
 
 const DIGITS_AFTER_PERIOD = 2;
 const ROUND = 10 ** DIGITS_AFTER_PERIOD;
+const PERCENTS = 100;
 
-class RgbInput extends React.Component {
+class HslInput extends React.Component {
   static propTypes = {
     color: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -20,8 +21,8 @@ class RgbInput extends React.Component {
     const { hue, saturation, lightness } = Color.rgbToHsl(props.color);
 
     const roundedHue = Math.round(hue * ROUND) / ROUND;
-    const roundedSaturation = Math.round(saturation * ROUND) / ROUND;
-    const roundedLightness = Math.round(lightness * ROUND) / ROUND;
+    const roundedSaturation = Math.round(saturation * ROUND * PERCENTS) / ROUND;
+    const roundedLightness = Math.round(lightness * ROUND * PERCENTS) / ROUND;
 
     this.state = {
       hue: roundedHue,
@@ -36,11 +37,11 @@ class RgbInput extends React.Component {
       ? updatedValue.hue || 0
       : this.state.hue || 0;
     let saturation = (`saturation` in updatedValue)
-      ? updatedValue.saturation || 0
-      : this.state.saturation || 0;
+      ? updatedValue.saturation / PERCENTS || 0
+      : this.state.saturation / PERCENTS || 0;
     let lightness = (`lightness` in updatedValue)
-      ? updatedValue.lightness || 0
-      : this.state.lightness || 0;
+      ? updatedValue.lightness / PERCENTS || 0
+      : this.state.lightness / PERCENTS || 0;
 
     /* eslint-disable no-magic-numbers */
     if (hue < 0) {
@@ -79,8 +80,8 @@ class RgbInput extends React.Component {
 
     this.setState({
       hue,
-      saturation,
-      lightness,
+      saturation: Math.round(saturation * PERCENTS * ROUND) / ROUND,
+      lightness: Math.round(lightness * PERCENTS * ROUND) / ROUND,
     });
   }
 
@@ -120,8 +121,8 @@ class RgbInput extends React.Component {
     const { hue, saturation, lightness } = Color.rgbToHsl(this.props.color);
 
     const roundedHue = Math.round(hue * ROUND) / ROUND;
-    const roundedSaturation = Math.round(saturation * ROUND) / ROUND;
-    const roundedLightness = Math.round(lightness * ROUND) / ROUND;
+    const roundedSaturation = Math.round(saturation * ROUND * PERCENTS) / ROUND;
+    const roundedLightness = Math.round(lightness * ROUND * PERCENTS) / ROUND;
 
     const updatedState = {
       hue: roundedHue,
@@ -155,8 +156,7 @@ class RgbInput extends React.Component {
           type="number"
           id="variableEditor_saturation"
           min={0}
-          max={1}
-          step={0.1}
+          max={100}
           onChange={this.handleSaturationChange}
           value={this.state.saturation}
           onFocus={this.handleSaturationFocus}
@@ -168,8 +168,7 @@ class RgbInput extends React.Component {
           type="number"
           id="variableEditor_lightness"
           min={0}
-          max={1}
-          step={0.1}
+          max={100}
           onChange={this.handleLightnessChange}
           value={this.state.lightness}
           onFocus={this.handleLightnessFocus}
@@ -182,4 +181,4 @@ class RgbInput extends React.Component {
   }
 }
 
-export default RgbInput;
+export default HslInput;
