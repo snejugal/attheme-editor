@@ -63,6 +63,10 @@
       &:first-child {
         margin-right: 0;
       }
+
+      &.-dangerous {
+        color: $theme_errorColor;
+      }
     }
   }
 }
