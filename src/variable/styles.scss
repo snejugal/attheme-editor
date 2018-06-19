@@ -70,6 +70,10 @@
     &.-rgb::before {
       content: "RGB";
     }
+
+    &.-hsl::before {
+      content: "HSL";
+    }
   }
 
   &_badges {

@@ -18,6 +18,7 @@ const EDTIOR_BACKGROUND = {
   blue: 0x21,
   alpha: 255,
 };
+const PERCENTS = 100;
 
 class Variable extends React.Component {
   static propTypes = {
@@ -66,14 +67,22 @@ class Variable extends React.Component {
         className += ` -darkText`;
       }
 
+      const { hue, saturation, lightness } = Color.rgbToHsl(this.props.color);
+
+      const roundedHue = Math.round(hue);
+      const roundedSaturation =
+        Math.round(saturation * PERCENTS);
+      const roundedLightness = Math.round(lightness * PERCENTS);
+
       content = <React.Fragment>
         <p className="variable_color -hex">
-          {
-            Color.createHex(this.props.color)
-          }
+          {Color.createHex(this.props.color)}
         </p>
         <p className="variable_color -rgb">
-          {red} {green} {blue} {alpha}
+          {red}, {green}, {blue}, {alpha}
+        </p>
+        <p className="variable_color -hsl">
+          {roundedHue}°, {roundedSaturation}%, {roundedLightness}%, {alpha}
         </p>
       </React.Fragment>;
     } else {
