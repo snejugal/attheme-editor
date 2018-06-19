@@ -188,6 +188,10 @@ class Workplace extends React.Component {
         ...this.state.theme,
         variables,
       };
+
+      if (variable === `chat_wallpaper`) {
+        delete theme.wallpaper;
+      }
     } else {
       const variables = {
         ...this.state.theme.variables,
