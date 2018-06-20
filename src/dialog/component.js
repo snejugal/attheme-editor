@@ -45,16 +45,18 @@ class Dialog extends React.Component {
   render () {
     return ReactDOM.createPortal(
       <div className="dialog">
-        {
-          `title` in this.props
-            ? (
-              <Heading level={2} className="dialog_title">
-                {this.props.title}
-              </Heading>
-            )
-            : null
-        }
-        {this.props.children}
+        <div className="dialog_content">
+          {
+            `title` in this.props
+              ? (
+                <Heading level={2} className="dialog_title">
+                  {this.props.title}
+                </Heading>
+              )
+              : null
+          }
+          {this.props.children}
+        </div>
         {
           `buttons` in this.props
             ? <Buttons className="dialog_buttons">{this.props.buttons}</Buttons>

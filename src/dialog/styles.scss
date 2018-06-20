@@ -27,15 +27,24 @@
 
 .dialog {
   @include shadow(24);
-  padding: $container_padding;
   background-color: $theme_backgroundColor;
   width: 100%;
   max-width: $dialog_maxWidth;
   border-top-left-radius: $container_borderRadius;
   border-top-right-radius: $container_borderRadius;
+  max-height: calc(100vh - #{$container_verticalMargin});
+  display: flex;
+  flex-direction: column;
 
   @media (min-width: $container_maxWidth) {
     border-radius: $container_borderRadius;
+  }
+
+  &_content {
+    padding: $container_padding;
+    padding-bottom: 0;
+    flex-grow: 1;
+    overflow-y: auto;
   }
 
   &_title.heading { // so it's higher than just .heading
@@ -43,10 +52,7 @@
   }
 
   &_buttons {
-    margin-top: $dialogButtons_padding;
-    margin-left: -$container_horizontalMargin;
-    margin-right: -$container_horizontalMargin;
-    margin-bottom: -$container_verticalMargin;
+    flex-shrink: 0;
     padding: $dialogButtons_padding;
     flex-direction: row-reverse;
 
