@@ -17,8 +17,6 @@ import localization from "../localization";
 import prepareTheme from "../prepare-theme";
 import uploadTheme from "../upload-theme";
 
-const isMac = navigator.platform.toLowerCase().startsWith(`mac`);
-
 class Workplace extends React.Component {
   static propTypes = {
     themeId: PropTypes.number.isRequired,
@@ -26,55 +24,16 @@ class Workplace extends React.Component {
     onClosePrompt: PropTypes.func.isRequired,
   }
 
-  constructor (props) {
-    super(props);
+  state = {
+    theme: null,
+    editingVariable: null,
+    color: null,
+    showScriptRunner: false,
+  };
 
-    this.state = {
-      theme: null,
-      editingVariable: null,
-      searchQuery: ``,
-      color: null,
-      showScriptRunner: false,
-    };
-  }
-
-  searchInput = React.createRef()
-
-  isCtrlPressed = false
-
-  handleKeyDown = (event) => {
-    if ((isMac && event.metaKey) || (!isMac && event.ctrlKey)) {
-      this.isCtrlPressed = true;
-    }
-
-    if (this.isCtrlPressed && event.code === `KeyF`) {
-      event.preventDefault();
-      this.searchInput.current.focus();
-    }
-  }
-
-  handleKeyUp = (event) => {
-    if (
-      (isMac && event.key === `Meta`)
-      || (!isMac && event.key === `Control`)
-    ) {
-      this.isCtrlPressed = false;
-    }
-  }
-
-  componentDidMount = async () => {
-    this.setState({
-      theme: await database.getTheme(this.props.themeId),
-    });
-
-    document.body.addEventListener(`keydown`, this.handleKeyDown);
-    document.body.addEventListener(`keyup`, this.handleKeyUp);
-  }
-
-  componentWillUnmount = () => {
-    document.body.removeEventListener(`keydown`, this.handleKeyDown);
-    document.body.removeEventListener(`keyup`, this.handleKeyUp);
-  }
+  componentDidMount = async () => this.setState({
+    theme: await database.getTheme(this.props.themeId),
+  });
 
   componentDidUpdate = async (prevProps) => {
     if (prevProps.themeId !== this.props.themeId) {
@@ -213,10 +172,6 @@ class Workplace extends React.Component {
     database.updateTheme(this.props.themeId, theme);
   }
 
-  handleSearchChange = (event) => this.setState({
-    searchQuery: event.target.value,
-  });
-
   handleNewVariable = (variable) => this.setState({
     editingVariable: variable,
     color: defaultValues[variable],
@@ -340,24 +295,12 @@ class Workplace extends React.Component {
             </Button>
           </Buttons>
 
-          <Field
-            type="search"
-            id="workspace_search"
-            value={this.state.searchQuery}
-            onChange={this.handleSearchChange}
-            inputRef={this.searchInput}
-          >
-            {localization.workspace_search()}
-          </Field>
-
           <Variables
             themeId={this.props.themeId}
             theme={this.state.theme.variables}
             wallpaper={this.state.theme.wallpaper}
             onClick={this.handleVariableEditStart}
             onNewVariable={this.handleNewVariable}
-            displayAll={this.state.searchQuery !== ``}
-            searchQuery={this.state.searchQuery}
           />
 
           <Hint>{

@@ -2,10 +2,14 @@ import "./styles.scss";
 
 import { allVariables, defaultValues } from "../attheme-variables";
 import Color from "../color";
+import Field from "../field/component";
 import FuzzySearch from "fuzzy-search";
 import PropTypes from "prop-types";
 import React from "react";
 import Variable from "../variable/component";
+import localization from "../localization";
+
+const isMac = navigator.platform.toLowerCase().startsWith(`mac`);
 
 class Variables extends React.Component {
   static propTypes = {
@@ -14,25 +18,64 @@ class Variables extends React.Component {
     wallpaper: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     onNewVariable: PropTypes.func.isRequired,
-    displayAll: PropTypes.bool.isRequired,
-    searchQuery: PropTypes.string,
   };
 
-  shouldComponentUpdate = (newProps) => (
+  searchInput = React.createRef();
+
+  state = {
+    searchQuery: ``,
+  };
+
+  isCtrlPressed = false;
+
+  handleKeyDown = (event) => {
+    if ((isMac && event.metaKey) || (!isMac && event.ctrlKey)) {
+      this.isCtrlPressed = true;
+    }
+
+    if (this.isCtrlPressed && event.code === `KeyF`) {
+      event.preventDefault();
+      this.searchInput.current.focus();
+    }
+  }
+
+  handleKeyUp = (event) => {
+    if (
+      (isMac && event.key === `Meta`)
+      || (!isMac && event.key === `Control`)
+    ) {
+      this.isCtrlPressed = false;
+    }
+  }
+
+  componentDidMount = () => {
+    document.body.addEventListener(`keydown`, this.handleKeyDown);
+    document.body.addEventListener(`keyup`, this.handleKeyUp);
+  };
+
+  componentWillUnmount = () => {
+    document.body.removeEventListener(`keydown`, this.handleKeyDown);
+    document.body.removeEventListener(`keyup`, this.handleKeyUp);
+  }
+
+  shouldComponentUpdate = (newProps, newState) => (
     newProps.theme !== this.props.theme
-    || newProps.displayAll !== this.props.displayAll
-    || newProps.searchQuery !== this.props.searchQuery
     || newProps.wallpaper !== this.props.wallpaper
     || newProps.onClick !== this.props.onClick
     || newProps.onNewVariable !== this.props.onNewVariable
+    || newState !== this.state
   );
+
+  handleSearchChange = (event) => this.setState({
+    searchQuery: event.target.value,
+  });
 
   render () {
     const themeVariables = Object.keys(this.props.theme);
 
     let variablesOrder = [];
 
-    if (this.props.displayAll) {
+    if (this.state.searchQuery !== ``) {
       for (const variableName of allVariables) {
         if (variableName === `chat_wallpaper` && this.props.wallpaper) {
           continue;
@@ -52,23 +95,23 @@ class Variables extends React.Component {
 
     variablesOrder.push(...themeVariables);
 
-    if (this.props.searchQuery && this.props.searchQuery !== `*`) {
+    if (this.state.searchQuery && this.state.searchQuery !== `*`) {
       let variablesOrderFS = [];
 
       const searcher = new FuzzySearch(variablesOrder, [], {
         sort: true,
       });
 
-      variablesOrderFS = searcher.search(this.props.searchQuery);
+      variablesOrderFS = searcher.search(this.state.searchQuery);
 
       for (const variable of variablesOrder) {
         if (variablesOrderFS.includes(variable)) {
           continue;
         }
 
-        const search = Color.parseHex(this.props.searchQuery)
-          ? Color.createHex(Color.parseHex(this.props.searchQuery))
-          : this.props.searchQuery;
+        const search = Color.parseHex(this.state.searchQuery)
+          ? Color.createHex(Color.parseHex(this.state.searchQuery))
+          : this.state.searchQuery;
 
         if (themeVariables.includes(variable)
           && this.props.theme[variable]
@@ -114,7 +157,20 @@ class Variables extends React.Component {
       variables.push(variableElement);
     }
 
-    return <div className="variables">{variables}</div>;
+    return (
+      <React.Fragment>
+        <Field
+          type="search"
+          id="workspace_search"
+          value={this.state.searchQuery}
+          onChange={this.handleSearchChange}
+          inputRef={this.searchInput}
+        >
+          {localization.workspace_search()}
+        </Field>
+        <div className="variables">{variables}</div>
+      </React.Fragment>
+    );
   }
 }
 
