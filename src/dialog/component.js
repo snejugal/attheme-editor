@@ -32,14 +32,22 @@ class Dialog extends React.Component {
     }
   };
 
+  onDocumentKeyDown = (event) => {
+    if (event.key === `Escape`) {
+      this.props.onDismiss(event);
+    }
+  };
+
   componentDidMount = () => {
     root.addEventListener(`click`, this.onRootClick);
     root.addEventListener(`mousedown`, this.onRootMouseDown);
+    document.body.addEventListener(`keydown`, this.onDocumentKeyDown);
   }
 
   componentWillUnmount = () => {
     root.removeEventListener(`click`, this.onRootClick);
     root.removeEventListener(`mousedown`, this.onRootMouseDown);
+    document.body.removeEventListener(`keydown`, this.onDocumentKeyDown);
   }
 
   render () {
