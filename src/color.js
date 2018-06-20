@@ -3,6 +3,7 @@ const CHANNEL = 255;
 const RED_MAX_PART = 0.2126;
 const GREEN_MAX_PART = 0.7152;
 const BLUE_MAX_PART = 0.0722;
+const LIGHT_THRESHOLD = 0.6;
 
 class Color {
   static createHex ({ red, green, blue, alpha }) {
@@ -209,6 +210,10 @@ class Color {
     };
   }
   /* eslint-enable no-magic-numbers yoda */
+
+  static isLight (color) {
+    return Color.brightness(color) > LIGHT_THRESHOLD;
+  }
 }
 
 export default Color;
