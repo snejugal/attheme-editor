@@ -19,10 +19,10 @@
   padding: $button_verticalPadding $button_horizontalPadding;
   margin: 0;
   user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: inhertt;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  line-height: inherit;
 
   &:disabled {
     opacity: $button_disabledOpacity;

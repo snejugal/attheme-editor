@@ -12,6 +12,7 @@ class Button extends React.Component {
     isFloating: PropTypes.bool,
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
+    backgroundColor: PropTypes.string,
   }
 
   static defaultProps = {
@@ -32,7 +33,7 @@ class Button extends React.Component {
     || nextProps.className !== this.props.className
   )
 
-  render () {
+  render() {
     let className = `button`;
 
     if (this.props.isDangerous) {
@@ -47,12 +48,19 @@ class Button extends React.Component {
       className += ` ${this.props.className}`;
     }
 
+    const styles = {};
+
+    if (this.props.backgroundColor) {
+      styles.backgroundColor = this.props.backgroundColor;
+    }
+
     return (
       <button
         type={this.props.type}
         className={className}
         onClick={this.props.onClick}
         disabled={this.props.isDisabled}
+        style={styles}
       >
         {this.props.children}
       </button>
