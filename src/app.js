@@ -196,6 +196,7 @@ class App extends React.Component {
           themeId={this.state.activeTab}
           onNameChange={this.handleNameChange}
           onClosePrompt={this.handleClosePrompt}
+          isSearchHotkeyEnabled={!this.state.confirmClosing}
         />
       );
     }

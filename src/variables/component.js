@@ -18,6 +18,11 @@ class Variables extends React.Component {
     wallpaper: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     onNewVariable: PropTypes.func.isRequired,
+    isSearchHotkeyEnabled: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    isSearchHotkeyEnabled: true,
   };
 
   searchInput = React.createRef();
@@ -29,6 +34,10 @@ class Variables extends React.Component {
   isCtrlPressed = false;
 
   handleKeyDown = (event) => {
+    if (!this.props.isSearchHotkeyEnabled) {
+      return;
+    }
+
     if ((isMac && event.metaKey) || (!isMac && event.ctrlKey)) {
       this.isCtrlPressed = true;
     }
@@ -40,6 +49,10 @@ class Variables extends React.Component {
   }
 
   handleKeyUp = (event) => {
+    if (!this.props.isSearchHotkeyEnabled) {
+      return;
+    }
+
     if (
       (isMac && event.key === `Meta`)
       || (!isMac && event.key === `Control`)
@@ -63,6 +76,7 @@ class Variables extends React.Component {
     || newProps.wallpaper !== this.props.wallpaper
     || newProps.onClick !== this.props.onClick
     || newProps.onNewVariable !== this.props.onNewVariable
+    || newProps.isSearchHotkeyEnabled !== this.props.isSearchHotkeyEnabled
     || newState !== this.state
   );
 

@@ -22,6 +22,7 @@ class Workplace extends React.Component {
     themeId: PropTypes.number.isRequired,
     onNameChange: PropTypes.func.isRequired,
     onClosePrompt: PropTypes.func.isRequired,
+    isSearchHotkeyEnabled: PropTypes.bool,
   }
 
   state = {
@@ -29,6 +30,7 @@ class Workplace extends React.Component {
     editingVariable: null,
     color: null,
     showScriptRunner: false,
+    isSearchHotkeyEnabled: true,
   };
 
   componentDidMount = async () => this.setState({
@@ -250,6 +252,8 @@ class Workplace extends React.Component {
       />;
     }
 
+    const isSearchHotkeyEnabled = !dialog && this.props.isSearchHotkeyEnabled;
+
     return this.state.theme === null
       ? null
       : (
@@ -301,6 +305,7 @@ class Workplace extends React.Component {
             wallpaper={this.state.theme.wallpaper}
             onClick={this.handleVariableEditStart}
             onNewVariable={this.handleNewVariable}
+            isSearchHotkeyEnabled={isSearchHotkeyEnabled}
           />
 
           <Hint>{
