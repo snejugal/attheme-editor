@@ -48,7 +48,7 @@ class VariableEditor extends React.Component {
   });
 
   handleSave = () => {
-    if (this.state.activeTab === `image`) {
+    if (this.state.activeTab === `image` && this.state.wallpaper) {
       this.props.onSave(this.state.wallpaper);
     } else {
       this.props.onSave(this.state.color);
