@@ -1,0 +1,23 @@
+@import "../variables";
+@import "./variables";
+// @import "../mixins/hover-shade";
+// @import "../mixins/shadow";
+
+.palettes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: stretch;
+  margin-right: -$palettes_gap;
+
+  &_color {
+    margin-right: $palettes_gap;
+    margin-bottom: $palettes_gap;
+    flex-grow: 1;
+    max-width: calc(100% - #{$palettes_gap});
+    overflow-wrap: break-word;
+
+    &.-darkText {
+      color: $paletteColor_textColor-darkText;
+    }
+  }
+}

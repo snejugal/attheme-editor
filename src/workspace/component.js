@@ -5,6 +5,7 @@ import { allVariablesAmount, defaultValues } from "../attheme-variables";
 import Attheme from "attheme-js";
 import Button from "../button/component";
 import Buttons from "../buttons/component";
+import Color from "../color";
 import Field from "../field/component";
 import Hint from "../hint/component";
 import PropTypes from "prop-types";
@@ -220,6 +221,10 @@ class Workplace extends React.Component {
   }
 
   render () {
+    if (!this.state.theme) {
+      return null;
+    }
+
     let variablesAmount;
 
     if (this.state.theme) {
@@ -235,6 +240,16 @@ class Workplace extends React.Component {
 
     let dialog = null;
 
+    const themeColors = [
+      ...new Set(
+        Object.values(this.state.theme.variables)
+          .map((color) => Color.createHex({
+            ...color,
+            alpha: 255,
+          })),
+      ),
+    ];
+
     if (this.state.editingVariable) {
       dialog = <VariableEditor
         variable={this.state.editingVariable}
@@ -243,6 +258,7 @@ class Workplace extends React.Component {
         onSave={this.handleVariableEditSave}
         onDelete={this.handleVariableDelete}
         wallpaper={this.state.theme.wallpaper}
+        themeColors={themeColors}
       />;
     } else if (this.state.showScriptRunner) {
       dialog = <ScriptRunner
@@ -254,68 +270,66 @@ class Workplace extends React.Component {
 
     const isSearchHotkeyEnabled = !dialog && this.props.isSearchHotkeyEnabled;
 
-    return this.state.theme === null
-      ? null
-      : (
-        <React.Fragment>
-          {dialog}
+    return (
+      <React.Fragment>
+        {dialog}
 
-          <Button
-            onClick={this.downloadThemeViaTelegram}
-            isFloating={true}
-            className="workspace_downloadButton"
-          />
+        <Button
+          onClick={this.downloadThemeViaTelegram}
+          isFloating={true}
+          className="workspace_downloadButton"
+        />
 
-          <Field
-            className="workspace_themeName"
-            id="workspace_themeName"
-            onChange={this.handleNameFieldChange}
-            onBlur={this.handleNameFieldBlur}
-            onEnter={this.handleNameFieldEnter}
-            value={this.state.theme.name}
-            autoCapitalize="words"
-          >
-            {localization.workspace_themeNameLabel()}
-          </Field>
+        <Field
+          className="workspace_themeName"
+          id="workspace_themeName"
+          onChange={this.handleNameFieldChange}
+          onBlur={this.handleNameFieldBlur}
+          onEnter={this.handleNameFieldEnter}
+          value={this.state.theme.name}
+          autoCapitalize="words"
+        >
+          {localization.workspace_themeNameLabel()}
+        </Field>
 
-          <Buttons>
-            <Button onClick={this.props.onClosePrompt} isDangerous={true}>
-              {localization.workspace_closeTheme()}
-            </Button>
-            <Button onClick={this.downloadThemeFile}>
-              {localization.workspace_downloadThemeFile()}
-            </Button>
-            <Button onClick={this.downloadWorkspace}>
-              {localization.workspace_downloadWorkspace()}
-            </Button>
-            <Button onClick={this.handleRunScriptButtonClick}>
-              {localization.workspace_runScript()}
-            </Button>
-            <Button onClick={this.createPreview}>
-              {localization.workspace_createPreview()}
-            </Button>
-            <Button onClick={this.testTheme}>
-              {localization.workspace_testTheme()}
-            </Button>
-          </Buttons>
+        <Buttons>
+          <Button onClick={this.props.onClosePrompt} isDangerous={true}>
+            {localization.workspace_closeTheme()}
+          </Button>
+          <Button onClick={this.downloadThemeFile}>
+            {localization.workspace_downloadThemeFile()}
+          </Button>
+          <Button onClick={this.downloadWorkspace}>
+            {localization.workspace_downloadWorkspace()}
+          </Button>
+          <Button onClick={this.handleRunScriptButtonClick}>
+            {localization.workspace_runScript()}
+          </Button>
+          <Button onClick={this.createPreview}>
+            {localization.workspace_createPreview()}
+          </Button>
+          <Button onClick={this.testTheme}>
+            {localization.workspace_testTheme()}
+          </Button>
+        </Buttons>
 
-          <Variables
-            themeId={this.props.themeId}
-            theme={this.state.theme.variables}
-            wallpaper={this.state.theme.wallpaper}
-            onClick={this.handleVariableEditStart}
-            onNewVariable={this.handleNewVariable}
-            isSearchHotkeyEnabled={isSearchHotkeyEnabled}
-          />
+        <Variables
+          themeId={this.props.themeId}
+          theme={this.state.theme.variables}
+          wallpaper={this.state.theme.wallpaper}
+          onClick={this.handleVariableEditStart}
+          onNewVariable={this.handleNewVariable}
+          isSearchHotkeyEnabled={isSearchHotkeyEnabled}
+        />
 
-          <Hint>{
-            localization.workspace_variablesAmount({
-              total: allVariablesAmount,
-              theme: variablesAmount,
-            })
-          }</Hint>
-        </React.Fragment>
-      );
+        <Hint>{
+          localization.workspace_variablesAmount({
+            total: allVariablesAmount,
+            theme: variablesAmount,
+          })
+        }</Hint>
+      </React.Fragment>
+    );
   }
 }
 

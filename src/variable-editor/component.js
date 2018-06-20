@@ -6,6 +6,7 @@ import Dialog from "../dialog/component";
 import Heading from "../heading/component";
 import HexInput from "../hex-input/component";
 import HslInput from "../hsl-input/component";
+import Palettes from "../palettes/component";
 import PropTypes from "prop-types";
 import React from "react";
 import RgbInput from "../rgb-input/component";
@@ -22,6 +23,7 @@ class VariableEditor extends React.Component {
     onSave: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     wallpaper: PropTypes.string,
+    themeColors: PropTypes.arrayOf(PropTypes.string),
   };
 
   constructor (props) {
@@ -89,25 +91,25 @@ class VariableEditor extends React.Component {
       previewOuterClassName += ` -imageWrapper`;
     }
 
-    const tabs = this.props.variable === `chat_wallpaper`
-      ? (
-        <Tabs
-          tabs={[
-            {
-              id: `image`,
-              text: localization.variableEditor_imageTab(),
-            },
-            {
-              id: `color-numeric`,
-              text: localization.variableEditor_colorModelsTab(),
-            },
-          ]}
-          activeTab={this.state.activeTab}
-          onChange={this.handleTabChange}
-          className="variableEditor_tabs"
-        />
-      )
-      : null;
+    const tabs = [
+      {
+        id: `color-numeric`,
+        text: localization.variableEditor_colorModelsTab(),
+      },
+      {
+        id: `palettes`,
+        text: localization.variableEditor_palettesTab(),
+      },
+    ];
+
+    if (this.props.variable === `chat_wallpaper`) {
+      tabs.unshift(
+        {
+          id: `image`,
+          text: localization.variableEditor_imageTab(),
+        },
+      );
+    }
 
     return (
       <Dialog
@@ -144,10 +146,15 @@ class VariableEditor extends React.Component {
               )
           }
         </div>
-        {tabs}
         <Heading level={3} className="variableEditor_title">
           {this.props.variable}
         </Heading>
+        <Tabs
+          tabs={tabs}
+          activeTab={this.state.activeTab}
+          onChange={this.handleTabChange}
+          className="variableEditor_tabs"
+        />
         {
           this.state.activeTab === `color-numeric` && (
             <form noValidate={true}>
@@ -183,6 +190,15 @@ class VariableEditor extends React.Component {
                 accept=".jpg,.jpeg"
               />
             </React.Fragment>
+          )
+        }
+        {
+          this.state.activeTab === `palettes` && (
+            <Palettes
+              onChange={this.handleColorChange}
+              themeColors={this.props.themeColors}
+              alpha={this.state.color.alpha}
+            />
           )
         }
       </Dialog>

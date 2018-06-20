@@ -61,6 +61,7 @@ const localization = {
   variableEditor_uploadImage: () => `Upload an image`,
   variableEditor_imageTab: () => `Image`,
   variableEditor_colorModelsTab: () => `Color models`,
+  variableEditor_palettesTab: () => `Palettes`,
 
   scriptRunner_title: () => `Run a script`,
   scriptRunner_description: () => <React.Fragment>
