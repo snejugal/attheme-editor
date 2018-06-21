@@ -60,6 +60,9 @@ const localization = {
   variableEditor_hex: () => `HEX`,
   variableEditor_alpha: () => `Альфа`,
   variableEditor_uploadImage: () => `Завантажити зображення`,
+  variableEditor_imageTab: () => `Зображення`,
+  variableEditor_colorModelsTab: () => `Кольорові моделі`,
+  variableEditor_palettesTab: () => `Палітри`,
 
   scriptRunner_title: () => `Запуск скриптів`,
   scriptRunner_description: () => <React.Fragment>
@@ -72,6 +75,11 @@ const localization = {
   scriptRunner_runtimeError: () => `Упс, у скрипті виникла помилка`,
   scriptRunner_syntaxError: () => `Упс, у скрипті невірний синтаксис`,
   scriptRunner_logMessage: () => `Ваш скрипт передан до консолі:`,
+  scriptRunner_babelLoadingFailed: () => `Не вдалося завантажити Babel. Перевірте з'єднання та перезавантажте сторінку.`,
+
+  palettes_materialDesign: () => `Material Design`,
+  palettes_css: () => `CSS кольори`,
+  palettes_themeColors: () => `Кольори теми`,
 };
 
 export default localization;
