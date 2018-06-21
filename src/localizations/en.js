@@ -76,6 +76,7 @@ const localization = {
   scriptRunner_logMessage: () => `Your script logged:`,
   scriptRunner_babelLoadingFailed: () => `Failed to load Babel. Check your internet connection and reload the page.`,
 
+  palettes_apple: () => `Apple`,
   palettes_materialDesign: () => `Material Design`,
   palettes_css: () => `CSS colors`,
   palettes_themeColors: () => `The theme's colors`,
