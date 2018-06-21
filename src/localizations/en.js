@@ -75,6 +75,10 @@ const localization = {
   scriptRunner_syntaxError: () => `Whops, you have wrong syntax in your script:`,
   scriptRunner_logMessage: () => `Your script logged:`,
   scriptRunner_babelLoadingFailed: () => `Failed to load Babel. Check your internet connection and reload the page.`,
+
+  palettes_materialDesign: () => `Material Design`,
+  palettes_css: () => `CSS colors`,
+  palettes_themeColors: () => `The theme's colors`,
 };
 
 export default localization;
