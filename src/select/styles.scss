@@ -1,0 +1,21 @@
+@import "../variables";
+@import "./variables";
+
+.select {
+  background-color: transparent;
+  border-radius: $container_borderRadius;
+  border: 1px solid rgba($theme_textColor, 0.1);
+  color: $theme_textColor;
+  font: inherit;
+  display: block;
+  padding: $select_padding;
+  caret-color: $theme_accentColor;
+  transition-property: border-color;
+  transition-duration: $transitionDuration;
+  margin: 0 0 $select_bottomMargin;
+  width: 100%;
+
+  &_option {
+    background-color: $theme_backgroundColor;
+  }
+}
