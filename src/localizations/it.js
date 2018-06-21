@@ -57,6 +57,9 @@ const localization = {
   variableEditor_lightness: () => `Luminosità, %`,
   variableEditor_saturation: () => `Saturazione, %`,
   variableEditor_uploadImage: () => `Carica un'immagine`,
+  variableEditor_imageTab: () => `Immagine`,
+  variableEditor_colorModelsTab: () => `Codici colori`,
+  variableEditor_palettesTab: () => `Tavolozza di colori`,
 
   scriptRunner_title: () => `Esegui uno script`,
   scriptRunner_description: () => <React.Fragment>
@@ -69,6 +72,11 @@ const localization = {
   scriptRunner_runtimeError: () => `Oops, è stato riscontrato questo errore nel tuo script:`,
   scriptRunner_syntaxError: () => `Oops, c'è un errore di sintassi nel tuo script:`,
   scriptRunner_logMessage: () => `Il tuo script ha come log:`,
+  scriptRunner_babelLoadingFailed: () => `Impossibile caricare Babel. Controlla la tua connessione ad internet e ricarica la pagina.`,
+
+  palettes_materialDesign: () => `Material Design`,
+  palettes_css: () => `Colori CSS`,
+  palettes_themeColors: () => `Il colore del tema`,
 };
 
 export default localization;
