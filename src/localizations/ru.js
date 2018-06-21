@@ -60,6 +60,9 @@ const localization = {
   variableEditor_hex: () => `HEX`,
   variableEditor_alpha: () => `Альфа`,
   variableEditor_uploadImage: () => `Загрузить картинку`,
+  variableEditor_imageTab: () => `Картинка`,
+  variableEditor_colorModelsTab: () => `Цветовые модели`,
+  variableEditor_palettesTab: () => `Палитры`,
 
   scriptRunner_title: () => `Запуск скриптов`,
   scriptRunner_description: () => <React.Fragment>
@@ -72,6 +75,11 @@ const localization = {
   scriptRunner_runtimeError: () => `Упс, в скрипте произошла ошибка:`,
   scriptRunner_syntaxError: () => `Упс, в скрипте неверный синтаксис:`,
   scriptRunner_logMessage: () => `Ваш скрипт передал в консоль:`,
+  scriptRunner_babelLoadingFailed: () => `Не удалось загрузить Babel. Проверьте соединение и перезагрузите страницу.`,
+
+  palettes_materialDesign: () => `Material Design`,
+  palettes_css: () => `CSS цвета`,
+  palettes_themeColors: () => `Цвета темы`,
 };
 
 export default localization;
