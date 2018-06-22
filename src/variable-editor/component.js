@@ -26,6 +26,10 @@ class VariableEditor extends React.Component {
     themeColors: PropTypes.arrayOf(PropTypes.string),
   };
 
+  static defaultProps = {
+    color: defaultValues.chat_wallpaper,
+  };
+
   constructor (props) {
     super(props);
 
@@ -40,7 +44,7 @@ class VariableEditor extends React.Component {
 
   handleRgbaChannelChange = ({ channel, value }) => this.setState({
     color: {
-      ...(this.state.color || defaultValues.chat_wallpaper),
+      ...this.state.color,
       [channel]: value,
     },
   });
@@ -70,7 +74,6 @@ class VariableEditor extends React.Component {
 
     this.setState({
       wallpaper,
-      color: null,
     });
   };
 
@@ -79,7 +82,7 @@ class VariableEditor extends React.Component {
   });
 
   render () {
-    const color = this.state.color || defaultValues.chat_wallpaper;
+    const { color } = this.state;
 
     const colorPreviewStyle = {
       backgroundColor: Color.createCssRgb(color),
