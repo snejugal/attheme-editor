@@ -1,16 +1,19 @@
 import "./styles.scss";
 
 import Button from "../button/component";
+import Buttons from "../buttons/component";
 import Color from "../color";
 import Dialog from "../dialog/component";
 import Heading from "../heading/component";
 import HexInput from "../hex-input/component";
+import Hint from "../hint/component";
 import HslInput from "../hsl-input/component";
 import Palettes from "../palettes/component";
 import PropTypes from "prop-types";
 import React from "react";
 import RgbInput from "../rgb-input/component";
 import Tabs from "../tabs/component";
+import Vibrant from "node-vibrant";
 import { defaultValues } from "../attheme-variables";
 import localization from "../localization";
 import readFile from "../read-file";
@@ -37,10 +40,47 @@ class VariableEditor extends React.Component {
       color: this.props.color,
       wallpaper: this.props.wallpaper,
       activeTab: this.props.wallpaper ? `image` : `color-numeric`,
+      wallpaperColors: null,
     };
   }
 
   filesInput = React.createRef();
+
+  componentDidMount = () => {
+    if (this.state.wallpaper) {
+      this.generateWallpaperColors();
+    }
+  };
+
+  generateWallpaperColors = async () => {
+    const vibrant = new Vibrant(
+      `data:image/jpg;base64,${this.state.wallpaper}`,
+    );
+
+    const objectPalette = await vibrant.getPalette();
+    const arrayPalette = [];
+
+    for (const colorName in objectPalette) {
+      if (objectPalette[colorName].getPopulation() === 0) {
+        continue;
+      }
+
+      const [red, green, blue] = objectPalette[colorName].getRgb();
+
+      arrayPalette.push({
+        name: colorName,
+        color: {
+          red,
+          green,
+          blue,
+        },
+      });
+    }
+
+    this.setState({
+      wallpaperColors: arrayPalette,
+    });
+  };
 
   handleRgbaChannelChange = ({ channel, value }) => this.setState({
     color: {
@@ -75,6 +115,8 @@ class VariableEditor extends React.Component {
     this.setState({
       wallpaper,
     });
+
+    this.generateWallpaperColors();
   };
 
   handleTabChange = (activeTab) => this.setState({
@@ -112,6 +154,33 @@ class VariableEditor extends React.Component {
           text: localization.variableEditor_imageTab(),
         },
       );
+    }
+
+    let wallpaperColors;
+
+    if (this.state.wallpaperColors) {
+      wallpaperColors = this.state.wallpaperColors.map((colorData) => {
+        const handleClick = () => {
+          /** @todo */
+        };
+
+        const isLight = Color.isLight(colorData.color);
+
+        let className = `palettes_color`;
+
+        if (isLight) {
+          className += ` -darkText`;
+        }
+
+        return <Button
+          className={className}
+          key={colorData.name}
+          backgroundColor={Color.createCssRgb(colorData.color)}
+          onClick={handleClick}
+        >
+          {colorData.name}
+        </Button>;
+      });
     }
 
     return (
@@ -180,11 +249,25 @@ class VariableEditor extends React.Component {
         {
           this.state.activeTab === `image` && (
             <React.Fragment>
-              <Button
-                onClick={this.handleUploadWallpaperClick}
-              >
-                Upload an image
-              </Button>
+              <Buttons>
+                <Button
+                  onClick={this.handleUploadWallpaperClick}
+                >
+                  {localization.variableEditor_uploadImage()}
+                </Button>
+              </Buttons>
+              {
+                this.state.wallpaperColors && (
+                  <React.Fragment>
+                    <Hint>
+                      {localization.variableEditor_wallpaperColorsHint()}
+                    </Hint>
+                    <div className="palettes">
+                      {wallpaperColors}
+                    </div>
+                  </React.Fragment>
+                )
+              }
               <input
                 hidden={true}
                 type="file"
