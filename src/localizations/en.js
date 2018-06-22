@@ -62,7 +62,7 @@ const localization = {
   variableEditor_imageTab: () => `Image`,
   variableEditor_colorModelsTab: () => `Color models`,
   variableEditor_palettesTab: () => `Palettes`,
-  variableEditor_wallpaperColorsHint: () => `Click a color to add it to your theme's palette`,
+  variableEditor_wallpaperColorsHint: () => `Here are some colors from the wallpaper. Click one to add it to your theme's palette:`,
 
   scriptRunner_title: () => `Run a script`,
   scriptRunner_description: () => <React.Fragment>
