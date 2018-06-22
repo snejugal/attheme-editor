@@ -7,7 +7,7 @@
 .button {
   @extend %button;
   @include shadow(2);
-  @include hoverShade($button_textColor);
+  @include hoverShade(currentColor);
 
   background-color: $button_background;
   color: $button_textColor;
@@ -19,9 +19,6 @@
   padding: $button_verticalPadding $button_horizontalPadding;
   margin: 0;
   user-select: none;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
   line-height: inherit;
 
   &:disabled {
