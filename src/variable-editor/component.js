@@ -36,7 +36,7 @@ class VariableEditor extends React.Component {
     this.state = {
       color: this.props.color,
       wallpaper: this.props.wallpaper,
-      activeTab: this.props.color ? `color-numeric` : `image`,
+      activeTab: this.props.wallpaper ? `image` : `color-numeric`,
     };
   }
 
