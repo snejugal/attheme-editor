@@ -50,6 +50,7 @@ const localization = {
   variableEditor_imageTab: () => `Rasm`,
   variableEditor_colorModelsTab: () => `Rangli modellar`,
   variableEditor_palettesTab: () => `Ranglar`,
+  variableEditor_wallpaperColorsHint: () => `Mana bir nechta ranglash fon rasmladan. Temani sxemasiga qo'shish uchun rangni bosing:`,
 
   scriptRunner_title: () => `Skriptni ishga tushirish`,
   scriptRunner_description: () => <React.Fragment>
@@ -64,9 +65,11 @@ const localization = {
   scriptRunner_logMessage: () => `Sizning skriptinggiz konsolga yubordi:`,
   scriptRunner_babelLoadingFailed: () => `Yuklab bo'lmadi Babel. Aloqani tekshiring va sahifani qayta yuklang.`,
 
+  palettes_apple: () => `Apple`,
   palettes_materialDesign: () => `Material Design`,
   palettes_css: () => `CSS ranglar`,
   palettes_themeColors: () => `Tema ranglari`,
+  palettes_themeCustomPalette: () => ` Maxsus temani palitrasi`,
 };
 
 export default localization;
