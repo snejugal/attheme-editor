@@ -60,6 +60,7 @@ const localization = {
   variableEditor_imageTab: () => `Immagine`,
   variableEditor_colorModelsTab: () => `Codici colori`,
   variableEditor_palettesTab: () => `Tavolozza di colori`,
+  variableEditor_wallpaperColorsHint: () => `Ecco alcuni colori estratti dallo sfondo. Clicca su un colore per aggiungerlo alla paletta del tuo tema:`,
 
   scriptRunner_title: () => `Esegui uno script`,
   scriptRunner_description: () => <React.Fragment>
@@ -74,9 +75,11 @@ const localization = {
   scriptRunner_logMessage: () => `Il tuo script ha come log:`,
   scriptRunner_babelLoadingFailed: () => `Impossibile caricare Babel. Controlla la tua connessione ad internet e ricarica la pagina.`,
 
+  palettes_apple: () => `Apple`,
   palettes_materialDesign: () => `Material Design`,
   palettes_css: () => `Colori CSS`,
   palettes_themeColors: () => `Il colore del tema`,
+  palettes_themeCustomPalette: () => `Paletta personalizzata del tema`,
 };
 
 export default localization;
