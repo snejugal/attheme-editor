@@ -218,6 +218,21 @@ class Workplace extends React.Component {
     });
 
     database.updateTheme(this.props.themeId, theme);
+  };
+
+  handleCustomPaletteColorAdd = (color) => {
+    const palette = [...this.state.theme.palette, color];
+
+    const theme = {
+      ...this.state.theme,
+      palette,
+    };
+
+    this.setState({
+      theme,
+    });
+
+    database.updateTheme(this.props.themeId, theme);
   }
 
   render () {
@@ -259,6 +274,8 @@ class Workplace extends React.Component {
         onDelete={this.handleVariableDelete}
         wallpaper={this.state.theme.wallpaper}
         themeColors={themeColors}
+        themeCustomPalette={this.state.theme.palette}
+        onCustomPaletteColorAdd={this.handleCustomPaletteColorAdd}
       />;
     } else if (this.state.showScriptRunner) {
       dialog = <ScriptRunner

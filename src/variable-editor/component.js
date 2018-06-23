@@ -27,6 +27,13 @@ class VariableEditor extends React.Component {
     onDelete: PropTypes.func.isRequired,
     wallpaper: PropTypes.string,
     themeColors: PropTypes.arrayOf(PropTypes.string),
+    themeCustomPalette: PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+      ])
+    ).isRequired,
+    onCustomPaletteColorAdd: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -39,7 +46,12 @@ class VariableEditor extends React.Component {
     this.state = {
       color: this.props.color,
       wallpaper: this.props.wallpaper,
-      activeTab: this.props.wallpaper ? `image` : `color-numeric`,
+      activeTab: (
+        this.props.wallpaper
+        && this.props.variable === `chat_wallpaper`
+      )
+        ? `image`
+        : `color-numeric`,
       wallpaperColors: null,
     };
   }
@@ -61,7 +73,10 @@ class VariableEditor extends React.Component {
     const arrayPalette = [];
 
     for (const colorName in objectPalette) {
-      if (objectPalette[colorName].getPopulation() === 0) {
+      if (
+        !objectPalette[colorName]
+        || objectPalette[colorName].getPopulation() === 0
+      ) {
         continue;
       }
 
@@ -161,7 +176,7 @@ class VariableEditor extends React.Component {
     if (this.state.wallpaperColors) {
       wallpaperColors = this.state.wallpaperColors.map((colorData) => {
         const handleClick = () => {
-          /** @todo */
+          this.props.onCustomPaletteColorAdd(colorData);
         };
 
         const isLight = Color.isLight(colorData.color);
@@ -284,6 +299,7 @@ class VariableEditor extends React.Component {
               onChange={this.handleColorChange}
               themeColors={this.props.themeColors}
               alpha={this.state.color.alpha}
+              themeCustomPalette={this.props.themeCustomPalette}
             />
           )
         }

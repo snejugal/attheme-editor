@@ -13,11 +13,23 @@ class Palettes extends React.Component {
     themeColors: PropTypes.arrayOf(PropTypes.string).isRequired,
     onChange: PropTypes.func.isRequired,
     alpha: PropTypes.number.isRequired,
+    themeCustomPalette: PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+      ])
+    ).isRequired,
   };
 
-  state = {
-    activePalette: `themeColors`,
-  };
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      activePalette: (this.props.themeCustomPalette.length > 0)
+        ? `themeCustomPalette`
+        : `themeColors`,
+    };
+  }
 
   handlePaletteChange = (activePalette) => this.setState({
     activePalette,
@@ -31,22 +43,38 @@ class Palettes extends React.Component {
         name: hex,
         color: Color.parseHex(hex),
       }));
+    } else if (this.state.activePalette === `themeCustomPalette`) {
+      palette = this.props.themeCustomPalette.map((color) => {
+        if (typeof color === `object`) {
+          return color;
+        }
+
+        return {
+          name: color,
+          color: Color.parseHex(color),
+        };
+      });
     } else {
       palette = builtInPalettes[this.state.activePalette];
     }
 
-    const palettes = Object.keys(builtInPalettes)
-      .map((id) => ({
-        id,
-        title: localization[`palettes_${id}`](),
-      }));
-
-    palettes.unshift(
+    const palettes = [
       {
         id: `themeColors`,
         title: localization.palettes_themeColors(),
       },
-    );
+      {
+        id: `themeCustomPalette`,
+        title: localization.palettes_themeCustomPalette(),
+      },
+      ...(
+        Object.keys(builtInPalettes)
+          .map((id) => ({
+            id,
+            title: localization[`palettes_${id}`](),
+          }))
+      ),
+    ];
 
     return (
       <React.Fragment>

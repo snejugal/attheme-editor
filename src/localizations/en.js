@@ -81,6 +81,7 @@ const localization = {
   palettes_materialDesign: () => `Material Design`,
   palettes_css: () => `CSS colors`,
   palettes_themeColors: () => `The theme's colors`,
+  palettes_themeCustomPalette: () => `The theme's custom palette`,
 };
 
 export default localization;
