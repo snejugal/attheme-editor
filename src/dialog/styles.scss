@@ -35,6 +35,7 @@
   max-height: calc(100vh - #{$container_verticalMargin * 2});
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   @media (min-width: $container_maxWidth) {
     border-radius: $container_borderRadius;
