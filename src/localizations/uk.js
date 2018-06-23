@@ -63,6 +63,7 @@ const localization = {
   variableEditor_imageTab: () => `Зображення`,
   variableEditor_colorModelsTab: () => `Кольорові моделі`,
   variableEditor_palettesTab: () => `Палітри`,
+  variableEditor_wallpaperColorsHint: () => `Ось декілька кольорів зі шпалер. Натисніть на колір, щоби додати його у палітру теми:`,
 
   scriptRunner_title: () => `Запуск скриптів`,
   scriptRunner_description: () => <React.Fragment>
@@ -77,9 +78,11 @@ const localization = {
   scriptRunner_logMessage: () => `Ваш скрипт передан до консолі:`,
   scriptRunner_babelLoadingFailed: () => `Не вдалося завантажити Babel. Перевірте з'єднання та перезавантажте сторінку.`,
 
+  palettes_apple: () => `Apple`,
   palettes_materialDesign: () => `Material Design`,
   palettes_css: () => `CSS кольори`,
   palettes_themeColors: () => `Кольори теми`,
+  palettes_themeCustomPalette: () => `Кастомна палітра теми`,
 };
 
 export default localization;
