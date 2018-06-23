@@ -63,6 +63,7 @@ const localization = {
   variableEditor_imageTab: () => `Картинка`,
   variableEditor_colorModelsTab: () => `Цветовые модели`,
   variableEditor_palettesTab: () => `Палитры`,
+  variableEditor_wallpaperColorsHint: () => `Вот несколько цветов из обоев. Нажмите на цвет, чтобы добавить его в палитру темы:`,
 
   scriptRunner_title: () => `Запуск скриптов`,
   scriptRunner_description: () => <React.Fragment>
@@ -77,9 +78,11 @@ const localization = {
   scriptRunner_logMessage: () => `Ваш скрипт передал в консоль:`,
   scriptRunner_babelLoadingFailed: () => `Не удалось загрузить Babel. Проверьте соединение и перезагрузите страницу.`,
 
+  palettes_apple: () => `Apple`,
   palettes_materialDesign: () => `Material Design`,
   palettes_css: () => `CSS цвета`,
   palettes_themeColors: () => `Цвета темы`,
+  palettes_themeCustomPalette: () => `Кастомная палитра темы`,
 };
 
 export default localization;
