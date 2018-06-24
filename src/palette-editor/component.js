@@ -95,6 +95,17 @@ class PaletteEditor extends React.Component {
     editingColorName: event.target.value,
   });
 
+  handleNewColor = () => this.setState({
+    editingColorIndex: this.state.palette.length,
+    editingColorName: localization.paletteEditor_defaultColorName(),
+    editingColor: {
+      red: 0,
+      green: 0,
+      blue: 0,
+      alpha: 255,
+    },
+  });
+
   render () {
     const title = {};
 
@@ -157,6 +168,9 @@ class PaletteEditor extends React.Component {
               ? localization.paletteEditor_back()
               : localization.paletteEditor_close()
           }
+        </Button>
+        <Button onClick={this.handleNewColor}>
+          {localization.paletteEditor_newColor()}
         </Button>
       </React.Fragment>;
     } else {

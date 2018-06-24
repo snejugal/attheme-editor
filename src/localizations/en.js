@@ -90,7 +90,9 @@ const localization = {
   paletteEditor_save: () => `Save`,
   paletteEditor_delete: () => `Delete`,
   paletteEditor_back: () => `Back to the variable`,
+  paletteEditor_newColor: () => `Add a new color`,
   paletteEditor_title: () => `The theme's custom palette`,
+  paletteEditor_defaultColorName: () => `Beautiful color`,
 };
 
 export default localization;
