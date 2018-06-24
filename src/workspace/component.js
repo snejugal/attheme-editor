@@ -8,6 +8,7 @@ import Buttons from "../buttons/component";
 import Color from "../color";
 import Field from "../field/component";
 import Hint from "../hint/component";
+import PaletteEditor from "../palette-editor/component";
 import PropTypes from "prop-types";
 import React from "react";
 import ScriptRunner from "../script-runner/component";
@@ -32,6 +33,7 @@ class Workplace extends React.Component {
     color: null,
     showScriptRunner: false,
     isSearchHotkeyEnabled: true,
+    isEditingPalette: false,
   };
 
   componentDidMount = async () => this.setState({
@@ -235,6 +237,27 @@ class Workplace extends React.Component {
     database.updateTheme(this.props.themeId, theme);
   }
 
+  handleEditPaletteButtonClick = () => this.setState({
+    isEditingPalette: true,
+  });
+
+  handleEditPaletteClose = () => this.setState({
+    isEditingPalette: false,
+  });
+
+  handlePaletteChange = (palette) => {
+    const theme = {
+      ...this.state.theme,
+      palette,
+    };
+
+    this.setState({
+      theme,
+    });
+
+    database.updateTheme(this.props.themeId, theme);
+  };
+
   render () {
     if (!this.state.theme) {
       return null;
@@ -265,7 +288,13 @@ class Workplace extends React.Component {
       ),
     ];
 
-    if (this.state.editingVariable) {
+    if (this.state.isEditingPalette) {
+      dialog = <PaletteEditor
+        palette={this.state.theme.palette}
+        onChange={this.handlePaletteChange}
+        onClose={this.handleEditPaletteClose}
+      />;
+    } else if (this.state.editingVariable) {
       dialog = <VariableEditor
         variable={this.state.editingVariable}
         color={this.state.color}
@@ -327,6 +356,9 @@ class Workplace extends React.Component {
           </Button>
           <Button onClick={this.testTheme}>
             {localization.workspace_testTheme()}
+          </Button>
+          <Button onClick={this.handleEditPaletteButtonClick}>
+            {localization.workspace_editPalette()}
           </Button>
         </Buttons>
 
