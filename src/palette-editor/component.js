@@ -214,6 +214,7 @@ class PaletteEditor extends React.Component {
                   <Field
                     value={this.state.editingColorName}
                     onChange={this.handleNameChange}
+                    id="paletteEditor_name"
                   >
                     Name
                   </Field>
