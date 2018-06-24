@@ -15,6 +15,11 @@ class PaletteEditor extends React.Component {
     palette: PropTypes.arrayOf(PropTypes.object).isRequired,
     onChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+    isFromVariableEditor: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    isFromVariableEditor: false,
   };
 
   constructor (props) {
@@ -74,7 +79,11 @@ class PaletteEditor extends React.Component {
         buttons={
           <React.Fragment>
             <Button onClick={this.props.onClose}>
-              {localization.paletteEditor_close()}
+              {
+                this.props.isFromVariableEditor
+                  ? localization.paletteEditor_back()
+                  : localization.paletteEditor_close()
+              }
             </Button>
           </React.Fragment>
         }

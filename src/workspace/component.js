@@ -34,6 +34,7 @@ class Workplace extends React.Component {
     showScriptRunner: false,
     isSearchHotkeyEnabled: true,
     isEditingPalette: false,
+    wasEditingPalette: false,
   };
 
   componentDidMount = async () => this.setState({
@@ -130,6 +131,7 @@ class Workplace extends React.Component {
 
   handleVariableEditCancel = () => this.setState({
     editingVariable: null,
+    wasEditingPalette: null,
     color: null,
   })
 
@@ -171,6 +173,7 @@ class Workplace extends React.Component {
     }
 
     this.setState({
+      wasEditingPalette: false,
       theme,
     });
 
@@ -200,6 +203,7 @@ class Workplace extends React.Component {
 
     this.setState({
       editingVariable: null,
+      wasEditingPalette: false,
       theme,
     });
 
@@ -258,6 +262,11 @@ class Workplace extends React.Component {
     database.updateTheme(this.props.themeId, theme);
   };
 
+  handleCustomPaletteEditStart = () => this.setState({
+    isEditingPalette: true,
+    wasEditingPalette: true,
+  });
+
   render () {
     if (!this.state.theme) {
       return null;
@@ -293,6 +302,7 @@ class Workplace extends React.Component {
         palette={this.state.theme.palette}
         onChange={this.handlePaletteChange}
         onClose={this.handleEditPaletteClose}
+        isFromVariableEditor={Boolean(this.state.editingVariable)}
       />;
     } else if (this.state.editingVariable) {
       dialog = <VariableEditor
@@ -305,6 +315,8 @@ class Workplace extends React.Component {
         themeColors={themeColors}
         themeCustomPalette={this.state.theme.palette}
         onCustomPaletteColorAdd={this.handleCustomPaletteColorAdd}
+        onCustomPaletteEditStart={this.handleCustomPaletteEditStart}
+        isFromPaletteEditing={this.state.wasEditingPalette}
       />;
     } else if (this.state.showScriptRunner) {
       dialog = <ScriptRunner

@@ -34,24 +34,33 @@ class VariableEditor extends React.Component {
       ])
     ).isRequired,
     onCustomPaletteColorAdd: PropTypes.func.isRequired,
+    onCustomPaletteEditStart: PropTypes.func.isRequired,
+    isFromPaletteEditing: PropTypes.bool,
   };
 
   static defaultProps = {
     color: defaultValues.chat_wallpaper,
+    isFromPaletteEditing: false,
   };
 
   constructor (props) {
     super(props);
 
+    let activeTab = `color-numeric`;
+
+    if (this.props.isFromPaletteEditing) {
+      activeTab = `palettes`;
+    } else if (
+      this.props.wallpaper
+      && this.props.variable === `chat_wallpaper`
+    ) {
+      activeTab = `image`;
+    }
+
     this.state = {
       color: this.props.color,
       wallpaper: this.props.wallpaper,
-      activeTab: (
-        this.props.wallpaper
-        && this.props.variable === `chat_wallpaper`
-      )
-        ? `image`
-        : `color-numeric`,
+      activeTab,
       wallpaperColors: null,
     };
   }
@@ -300,6 +309,7 @@ class VariableEditor extends React.Component {
               themeColors={this.props.themeColors}
               alpha={this.state.color.alpha}
               themeCustomPalette={this.props.themeCustomPalette}
+              onCustomPaletteEditStart={this.props.onCustomPaletteEditStart}
             />
           )
         }

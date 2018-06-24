@@ -2,6 +2,7 @@ import "./styles.scss";
 
 import * as builtInPalettes from "./built-in-palettes";
 import Button from "../button/component";
+import Buttons from "../buttons/component";
 import Color from "../color";
 import PropTypes from "prop-types";
 import React from "react";
@@ -19,6 +20,7 @@ class Palettes extends React.Component {
         PropTypes.object,
       ])
     ).isRequired,
+    onCustomPaletteEditStart: PropTypes.func.isRequired,
   };
 
   constructor (props) {
@@ -83,6 +85,15 @@ class Palettes extends React.Component {
           activeItem={this.state.activePalette}
           onChange={this.handlePaletteChange}
         />
+        {
+          this.state.activePalette === `themeCustomPalette` && (
+            <Buttons>
+              <Button onClick={this.props.onCustomPaletteEditStart}>
+                {localization.variableEditor_editPalette()}
+              </Button>
+            </Buttons>
+          )
+        }
         <div className="palettes">
           {
             palette.map(({ name, color }) => {

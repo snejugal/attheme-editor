@@ -64,6 +64,7 @@ const localization = {
   variableEditor_colorModelsTab: () => `Color models`,
   variableEditor_palettesTab: () => `Palettes`,
   variableEditor_wallpaperColorsHint: () => `Here are some colors from the wallpaper. Click one to add it to your theme's palette:`,
+  variableEditor_editPalette: () => `Edit the palette`,
 
   scriptRunner_title: () => `Run a script`,
   scriptRunner_description: () => <React.Fragment>
@@ -85,7 +86,7 @@ const localization = {
   palettes_themeCustomPalette: () => `The theme's custom palette`,
 
   paletteEditor_close: () => `Close`,
-  paletteEditor_back: () => `Back to editing the variable`,
+  paletteEditor_back: () => `Back to the variable`,
   paletteEditor_title: () => `The theme's custom palette`,
 };
 
