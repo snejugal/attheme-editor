@@ -28,6 +28,7 @@ const localization = {
   workspace_testTheme: () => `Test the theme`,
   workspace_downloadWorkspace: () => `Download the workspace`,
   workspace_runScript: () => `Run a script`,
+  workspace_editPalette: () => `Edit the theme's custom palette`,
   workspace_unaddedVariable: () => `Unadded`,
   workspace_unusedVariable: () => `Unused by Telegram`,
   workspace_obsoleteVariable: () => `Obsolete`,
@@ -82,6 +83,10 @@ const localization = {
   palettes_css: () => `CSS colors`,
   palettes_themeColors: () => `The theme's colors`,
   palettes_themeCustomPalette: () => `The theme's custom palette`,
+
+  paletteEditor_close: () => `Close`,
+  paletteEditor_back: () => `Back to editing the variable`,
+  paletteEditor_title: () => `The theme's custom palette`,
 };
 
 export default localization;
