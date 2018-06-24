@@ -8,9 +8,14 @@ import localization from "../localization";
 class HexInput extends React.Component {
   static propTypes = {
     color: PropTypes.object.isRequired,
-    onAlphaChange: PropTypes.func.isRequired,
+    onAlphaChange: PropTypes.func,
     onHexChange: PropTypes.func.isRequired,
-  }
+    shouldShowAlpha: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    shouldShowAlpha: true,
+  };
 
   constructor (props) {
     super(props);
@@ -66,6 +71,10 @@ class HexInput extends React.Component {
     });
 
     if (parsedHex !== null) {
+      if (!this.shouldShowAlpha) {
+        parsedHex.alpha = this.props.color.alpha;
+      }
+
       this.props.onHexChange(parsedHex);
     }
   }
@@ -93,16 +102,20 @@ class HexInput extends React.Component {
         >
           {localization.variableEditor_hex()}
         </Field>
-        <Field
-          type="number"
-          id="variableEditor_alpha"
-          min={0}
-          max={255}
-          onChange={this.handleAlphaChange}
-          value={this.props.color.alpha}
-        >
-          {localization.variableEditor_alpha()}
-        </Field>
+        {
+          this.props.shouldShowAlpha && (
+            <Field
+              type="number"
+              id="variableEditor_alpha"
+              min={0}
+              max={255}
+              onChange={this.handleAlphaChange}
+              value={this.props.color.alpha}
+            >
+              {localization.variableEditor_alpha()}
+            </Field>
+          )
+        }
       </Fields>
     );
   }

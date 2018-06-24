@@ -43,6 +43,10 @@
 
   &_hexField {
     grid-column: span 2;
+
+    &:only-child {
+      grid-column: span 3;
+    }
   }
 
   &_fields {
