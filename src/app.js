@@ -8,6 +8,7 @@ import EmptyWorkspace from "./empty-workspace/component";
 import Header from "./header/component";
 import React from "react";
 import Workspace from "./workspace/component";
+import atthemeEditorApi from "attheme-editor-api";
 import parseTheme from "./parse-theme";
 import readFile from "./read-file";
 
@@ -90,6 +91,30 @@ class App extends React.Component {
       }
 
       this.handleTheme(theme);
+    }
+
+    const themeId = new URLSearchParams(window.location.search).get(`themeId`);
+
+    if (themeId) {
+      window.history.replaceState(
+        document.title,
+        null,
+        `${window.location.origin}${window.location.pathname}`,
+      );
+
+      const { name, theme } = await atthemeEditorApi.downloadTheme(themeId);
+
+      const downloadedTheme = {
+        variables: theme,
+        name,
+        palette: [],
+      };
+
+      if (theme[Symbol.for(`image`)]) {
+        downloadedTheme.wallpaper = theme[Symbol.for(`image`)];
+      }
+
+      this.handleTheme(downloadedTheme);
     }
   };
 
