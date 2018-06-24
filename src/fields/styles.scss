@@ -3,4 +3,5 @@
 .fields {
   display: grid;
   grid-gap: $container_horizontalMargin;
+  align-items: end;
 }

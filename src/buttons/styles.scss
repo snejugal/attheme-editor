@@ -5,12 +5,10 @@
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
+  margin-right: -$container_horizontalMargin;
+  padding-right: $container_horizontalMargin;
 
   > * {
     margin-bottom: $container_verticalMargin;
-  }
-
-  > :not(:last-child) {
-    margin-right: $container_horizontalMargin;
   }
 }
