@@ -11,6 +11,16 @@
     margin-bottom: $container_verticalMargin;
   }
 
+  &_colorPreview {
+    height: 64px;
+    border-top-left-radius: $container_borderRadius;
+    border-top-right-radius: $container_borderRadius;
+    margin-top: -$container_verticalMargin;
+    margin-left: -$container_horizontalMargin;
+    margin-right: -$container_horizontalMargin;
+    margin-bottom: $container_verticalMargin;
+  }
+
   &Color {
     @include shadow(2);
     @include hoverShade(currentColor);

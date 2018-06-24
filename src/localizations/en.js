@@ -86,6 +86,9 @@ const localization = {
   palettes_themeCustomPalette: () => `The theme's custom palette`,
 
   paletteEditor_close: () => `Close`,
+  paletteEditor_cancel: () => `Cancel`,
+  paletteEditor_save: () => `Save`,
+  paletteEditor_delete: () => `Delete`,
   paletteEditor_back: () => `Back to the variable`,
   paletteEditor_title: () => `The theme's custom palette`,
 };
