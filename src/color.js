@@ -126,9 +126,9 @@ class Color {
     const min = Math.min(red, green, blue);
     const delta = max - min;
 
-    const lightness = (max + min) / 2;
+    let lightness = (max + min) / 2;
 
-    const saturation = (delta === 0)
+    let saturation = (delta === 0)
       ? 0
       : delta / (1 - Math.abs(2 * lightness - 1));
 
@@ -150,6 +150,18 @@ class Color {
 
     if (hue < 0) {
       hue += 360;
+    }
+
+    if (saturation < 0) {
+      saturation = 0;
+    } else if (saturation > 1) {
+      saturation = 1;
+    }
+
+    if (lightness < 0) {
+      lightness = 0;
+    } else if (lightness > 1) {
+      lightness = 1;
     }
 
     return {
