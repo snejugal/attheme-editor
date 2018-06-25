@@ -46,6 +46,7 @@ const localization = {
   workspace_createPreview: () => `Создать превью`,
   workspace_testTheme: () => `Протестировать тему`,
   workspace_runScript: () => `Запустить скрипт`,
+  workspace_editPalette: () => `Редактировать кастомную палитру темы`,
   workspace_downloadWorkspace: () => `Скачать рабочее окружение`,
   workspace_unaddedVariable: () => `Не добавлена`,
   workspace_unusedVariable: () => `Не используется Телеграмом`,
@@ -81,6 +82,7 @@ const localization = {
   variableEditor_colorModelsTab: () => `Цветовые модели`,
   variableEditor_palettesTab: () => `Палитры`,
   variableEditor_wallpaperColorsHint: () => `Вот несколько цветов из обоев. Нажмите на цвет, чтобы добавить его в палитру темы:`,
+  variableEditor_editPalette: () => `Редактировать палитру`,
 
   scriptRunner_title: () => `Запуск скриптов`,
   scriptRunner_description: () => <React.Fragment>
@@ -100,6 +102,15 @@ const localization = {
   palettes_css: () => `CSS цвета`,
   palettes_themeColors: () => `Цвета темы`,
   palettes_themeCustomPalette: () => `Кастомная палитра темы`,
+
+  paletteEditor_close: () => `Закрыть`,
+  paletteEditor_cancel: () => `Отменить`,
+  paletteEditor_save: () => `Сохранить`,
+  paletteEditor_delete: () => `Удалить`,
+  paletteEditor_back: () => `Обратно к переменной`,
+  paletteEditor_newColor: () => `Добавить новый цвет`,
+  paletteEditor_title: () => `Кастомная палитра темы`,
+  paletteEditor_defaultColorName: () => `Красивый цвет`,
 };
 
 export default localization;
