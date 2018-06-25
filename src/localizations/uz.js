@@ -1,5 +1,8 @@
 import Link from "../link/component";
+import { ReactComponent as LoveEmoji } from "../empty-workspace/love.svg";
 import React from "react";
+
+const pluralRules = new Intl.PluralRules(`uz`);
 
 const localization = {
   error_title: () => `Uzur, xatolik ro'y berdi`,
@@ -15,6 +18,26 @@ const localization = {
   emptyWorkspace_title: () => `O'z temangiz ustida ishlashni boshlang`,
   emptyWorkspace_createTheme: () => `Yangi tema yaratish`,
   emptyWorkspace_openTheme: () => `Mavjud temalarni ochish`,
+  emptyWorkspace_credits: () => <React.Fragment>
+    Tahrirlovchisi yaratildi {}
+    <Link href="//t.me/snejugal">@snejugal</Link>
+    {} va {}
+    <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
+    {} va o&apos;zbek tiliga tarjima qilingan {}
+    <Link href="//t.me/DeduwkA_gg">@DeduwkA_gg</Link>
+    {} i {}
+    <Link href="//t.me/akaRamzEE">@akaRamzEE</Link>
+    {} s {}
+    <LoveEmoji className="emoji" />.
+    {} Qarang {}
+    <Link href="//github.com/snejugal/attheme-editor">
+      GitHub-da manba kodi tahrirlovchisi
+    </Link>
+    {} va obuna bo&apos;ling {}
+    <Link href="//t.me/atthemeeditor">
+      Telegramdagi bizning kanalimiz
+    </Link>!
+  </React.Fragment>,
 
   theme_defaultName: () => `Ajoyib tema`,
 
@@ -25,12 +48,21 @@ const localization = {
   workspace_createPreview: () => `Oldindan ko'rinishini yaratish`,
   workspace_testTheme: () => `Temani sinab ko'rish`,
   workspace_runScript: () => `Skriptni ishga tushirish`,
+  workspace_editPalette: () => `Maxsus tema palitrasini tahrirlash`,
   workspace_downloadWorkspace: () => `Ish muhitini yuklab olish`,
   workspace_unaddedVariable: () => `Qo'shilmadi`,
   workspace_unusedVariable: () => `Telegram orqali foydalanilmaydi`,
   workspace_obsoleteVariable: () => `Eskirgan`,
   workspace_nonStandardVariable: () => `Nostandart`,
   workspace_search: () => `Qidirish`,
+  workspace_variablesAmount: ({ total, theme }) => {
+    const forms = {
+      one: `${theme} ning ${total} o'zgarmaydigan tema qo'shiladi`,
+      other: `${theme} ning ${total} o'zgaruvchiga tema qo'shiladi`,
+    };
+
+    return forms[pluralRules.select(theme)];
+  },
 
   confirmDialog_yes: () => `Ha`,
   confirmDialog_no: () => `Yo'q`,
@@ -51,6 +83,7 @@ const localization = {
   variableEditor_colorModelsTab: () => `Rangli modellar`,
   variableEditor_palettesTab: () => `Ranglar`,
   variableEditor_wallpaperColorsHint: () => `Mana bir nechta ranglash fon rasmladan. Temani sxemasiga qo'shish uchun rangni bosing:`,
+  variableEditor_editPalette: () => `Paletlarni tahrirlash`,
 
   scriptRunner_title: () => `Skriptni ishga tushirish`,
   scriptRunner_description: () => <React.Fragment>
@@ -70,6 +103,15 @@ const localization = {
   palettes_css: () => `CSS ranglar`,
   palettes_themeColors: () => `Tema ranglari`,
   palettes_themeCustomPalette: () => ` Maxsus temani palitrasi`,
+
+  paletteEditor_close: () => `Yopish`,
+  paletteEditor_cancel: () => `Otmena qilish`,
+  paletteEditor_save: () => `Saqlash`,
+  paletteEditor_delete: () => `Udalit`,
+  paletteEditor_back: () => `O'zgaruvchilarga qaytish`,
+  paletteEditor_newColor: () => `Yangi rang qo'shing`,
+  paletteEditor_title: () => `Maxsus tema palitrasi`,
+  paletteEditor_defaultColorName: () => `Yaxshi rang`,
 };
 
 export default localization;
