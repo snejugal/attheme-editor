@@ -8,7 +8,7 @@ import EmptyWorkspace from "./empty-workspace/component";
 import Header from "./header/component";
 import React from "react";
 import Workspace from "./workspace/component";
-import atthemeEditorApi from "attheme-editor-api";
+import atthemeEditorApi from "attheme-editor-api/browser";
 import parseTheme from "./parse-theme";
 import readFile from "./read-file";
 
