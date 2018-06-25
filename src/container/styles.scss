@@ -13,6 +13,11 @@
     width: 100%;
     padding: $container_padding;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    min-height: 100%;
 
     > :last-child {
       margin-bottom: 0;

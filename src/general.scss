@@ -42,6 +42,16 @@ main {
 .paragraph {
   margin: 0;
   margin-bottom: 24px;
+  line-height: 1.75;
+}
+
+.emoji {
+  height: 1em;
+  width: 1em;
+}
+
+.credits {
+  margin-top: auto;
 }
 
 noscript {

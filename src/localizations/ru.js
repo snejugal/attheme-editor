@@ -1,4 +1,5 @@
 import Link from "../link/component";
+import { ReactComponent as LoveEmoji } from "../empty-workspace/love.svg";
 import React from "react";
 
 const NBSP = `\xa0`;
@@ -19,6 +20,22 @@ const localization = {
   emptyWorkspace_title: () => `Начните работать над${NBSP}своей темой`,
   emptyWorkspace_createTheme: () => `Создать новую тему`,
   emptyWorkspace_openTheme: () => `Открыть существующую тему`,
+  emptyWorkspace_credits: () => <React.Fragment>
+    Редактор создан {}
+    <Link href="//t.me/snejugal">@snejugal</Link>
+    {} и {}
+    <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
+    {} с {}
+    <LoveEmoji className="emoji" />.
+    {} Посмотрите {}
+    <Link href="//github.com/snejugal/attheme-editor">
+      исходный код редактора на GitHub
+    </Link>
+    {} и подпишитесь на {}
+    <Link href="//t.me/atthemeeditor">
+      наш канал в Телеграме
+    </Link>!
+  </React.Fragment>,
 
   theme_defaultName: () => `Классная тема`,
 

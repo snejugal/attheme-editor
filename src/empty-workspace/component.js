@@ -1,6 +1,7 @@
 import Button from "../button/component";
 import Buttons from "../buttons/component";
 import Heading from "../heading/component";
+import Hint from "../hint/component";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
@@ -67,6 +68,9 @@ class EmptyWorkspace extends React.Component {
           accept=".attheme,.attheme-editor"
           multiple={true}
         />
+        <Hint className="credits">
+          {localization.emptyWorkspace_credits()}
+        </Hint>
       </React.Fragment>
     );
   }

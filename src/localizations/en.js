@@ -1,4 +1,5 @@
 import Link from "../link/component";
+import { ReactComponent as LoveEmoji } from "../empty-workspace/love.svg";
 import React from "react";
 
 const pluralRules = new Intl.PluralRules(`en`);
@@ -17,6 +18,22 @@ const localization = {
   emptyWorkspace_title: () => `Start working on your theme`,
   emptyWorkspace_createTheme: () => `Create a new theme`,
   emptyWorkspace_openTheme: () => `Open an existing theme`,
+  emptyWorkspace_credits: () => <React.Fragment>
+    Created by {}
+    <Link href="//t.me/snejugal">@snejugal</Link>
+    {} and {}
+    <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
+    {} with {}
+    <LoveEmoji className="emoji" />.
+    {} Check out {}
+    <Link href="//github.com/snejugal/attheme-editor">
+      the editor&apos;s source code on GitHub
+    </Link>
+    {} and subscribe to {}
+    <Link href="//t.me/atthemeeditor">
+      our channel on Telegram
+    </Link>!
+  </React.Fragment>,
 
   theme_defaultName: () => `Awesome Theme`,
 
