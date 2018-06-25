@@ -52,10 +52,11 @@
     @extend %heading-5;
   }
 
-  &_buttons {
+  &_buttons.buttons {
     flex-shrink: 0;
     padding: $dialogButtons_padding;
     flex-direction: row-reverse;
+    margin-right: 0;
 
     .button {
       background-color: transparent;
