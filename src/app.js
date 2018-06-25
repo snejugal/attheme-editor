@@ -111,7 +111,7 @@ class App extends React.Component {
       };
 
       if (theme[Symbol.for(`image`)]) {
-        downloadedTheme.wallpaper = theme[Symbol.for(`image`)];
+        downloadedTheme.wallpaper = btoa(theme[Symbol.for(`image`)]);
       }
 
       this.handleTheme(downloadedTheme);
