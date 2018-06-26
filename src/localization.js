@@ -29,9 +29,15 @@ const updateLanguage = async () => {
     }
   }
 
-  const { default: loaded } = await import(`./localizations/${language}`);
+  let loaded;
 
-  Object.assign(localization, loaded);
+  try {
+    ({ default: loaded } = await import(`./localizations/${language}`));
+  } catch (e) {
+    return;
+  }
+
+  Object.assign(localization, englishLocalization, loaded);
   updatees.forEach((updatee) => updatee());
 };
 
