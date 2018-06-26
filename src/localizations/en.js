@@ -95,6 +95,7 @@ const localization = {
   scriptRunner_syntaxError: () => `Whops, you have wrong syntax in your script:`,
   scriptRunner_logMessage: () => `Your script logged:`,
   scriptRunner_babelLoadingFailed: () => `Failed to load Babel. Check your internet connection and reload the page.`,
+  scriptRunner_interpreterLoadingFailed: () => `Failed to load the interpreter. Check your internet connection and reload the page.`,
 
   palettes_apple: () => `Apple`,
   palettes_materialDesign: () => `Material Design`,

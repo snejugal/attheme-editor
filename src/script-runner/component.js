@@ -8,7 +8,6 @@ import Color from "../color";
 import Dialog from "../dialog/component";
 import Heading from "../heading/component";
 import Hint from "../hint/component";
-import Interpreter from "es-interpreter";
 import PropTypes from "prop-types";
 import React from "react";
 import colorClass from "./color-class";
@@ -25,6 +24,7 @@ const BABEL_OPTIONS = {
 };
 
 let Babel;
+let Interpreter;
 
 window.Color = Color;
 
@@ -40,8 +40,10 @@ class ScriptRunner extends React.Component {
     runtimeError: null,
     isEvaluated: false,
     isEvaluating: false,
-    isBabelLoaded: Boolean(Babel),
+    isBabelLoaded: false,
     isBabelLoading: true,
+    isInterpreterLoaded: false,
+    isInterpreterLoading: true,
   };
 
   componentDidMount = async () => {
@@ -58,11 +60,36 @@ class ScriptRunner extends React.Component {
           isBabelLoaded: false,
           isBabelLoading: false,
         });
+
+        return;
       }
 
       this.setState({
         isBabelLoaded: true,
         isBabelLoading: false,
+      });
+    }
+
+    if (Interpreter) {
+      this.setState({
+        isInterpreterLoaded: true,
+        isInterpreterLoading: false,
+      });
+    } else {
+      try {
+        ({ default: Interpreter } = await import(`es-interpreter`));
+      } catch (e) {
+        this.setState({
+          isInterpreterLoaded: false,
+          isInterpreterLoading: false,
+        });
+
+        return;
+      }
+
+      this.setState({
+        isInterpreterLoaded: true,
+        isInterpreterLoading: false,
       });
     }
   }
@@ -217,8 +244,17 @@ class ScriptRunner extends React.Component {
       outputTitle = localization.scriptRunner_syntaxError();
       output = this.state.parseError.message;
       outputClassName += ` -error`;
-    } else if (!this.state.isBabelLoaded && !this.state.isBabelLoading) {
+    } else if (
+      !this.state.isBabelLoaded
+      && !this.state.isBabelLoading
+    ) {
       outputTitle = localization.scriptRunner_babelLoadingFailed();
+      outputClassName += ` -error`;
+    } else if (
+      !this.state.isInterpreterLoaded
+      && !this.state.isInterpreterLoading
+    ) {
+      outputTitle = localization.scriptRunner_interpreterLoadingFailed();
       outputClassName += ` -error`;
     }
 
@@ -230,7 +266,11 @@ class ScriptRunner extends React.Component {
           <React.Fragment>
             <Button
               onClick={this.handleRun}
-              isDisabled={!this.state.isBabelLoaded || this.state.isEvaluating}
+              isDisabled={
+                !this.state.isBabelLoaded
+                || !this.state.isInterpreterLoaded
+                || this.state.isEvaluating
+              }
             >
               {localization.scriptRunner_run()}
             </Button>
