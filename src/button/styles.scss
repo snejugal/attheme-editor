@@ -20,6 +20,9 @@
   margin: 0;
   user-select: none;
   line-height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:disabled {
     opacity: $button_disabledOpacity;
@@ -47,5 +50,9 @@
     background-position: center;
     background-repeat: no-repeat;
     z-index: 2;
+  }
+
+  .spinner {
+    margin-left: 8px;
   }
 }
