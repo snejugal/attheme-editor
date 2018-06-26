@@ -9,6 +9,10 @@
   margin-bottom: $container_verticalMargin;
   width: 100%;
 
+  &:empty {
+    display: none;
+  }
+
   @media (min-width: $variables_twoColumsMinWidth) {
     grid-template-columns: repeat(2, 1fr);
   }
