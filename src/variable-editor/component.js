@@ -13,11 +13,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import RgbInput from "../rgb-input/component";
 import Tabs from "../tabs/component";
-import Vibrant from "node-vibrant";
-import WebWorkerQuantizer from "node-vibrant/lib/quantizer/worker";
 import { defaultValues } from "../attheme-variables";
 import localization from "../localization";
 import readFile from "../read-file";
+
+let Vibrant;
+let WebWorkerQuantizer;
 
 class VariableEditor extends React.Component {
   static propTypes = {
@@ -75,6 +76,21 @@ class VariableEditor extends React.Component {
   };
 
   generateWallpaperColors = async () => {
+    try {
+      if (!Vibrant) {
+        // somehow default doesn't work
+        Vibrant = await import(`node-vibrant`);
+      }
+
+      if (!WebWorkerQuantizer) {
+        ({
+          default: WebWorkerQuantizer,
+        } = await import(`node-vibrant/lib/quantizer/worker`));
+      }
+    } catch (e) {
+      return;
+    }
+
     const vibrant = new Vibrant(
       `data:image/jpg;base64,${this.state.wallpaper}`,
       {
