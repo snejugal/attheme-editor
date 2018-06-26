@@ -3,7 +3,7 @@ import "./styles.scss";
 
 import { allVariables, defaultValues } from "../attheme-variables";
 import Button from "../button/component";
-import CodeMirror from "../codemirror/component";
+import CodeEditor from "../code-editor/component";
 import Color from "../color";
 import Dialog from "../dialog/component";
 import Heading from "../heading/component";
@@ -241,7 +241,7 @@ class ScriptRunner extends React.Component {
         }
       >
         <Hint>{localization.scriptRunner_description()}</Hint>
-        <CodeMirror
+        <CodeEditor
           className="scriptRunner_editor"
           value=""
           lineNumbers={true}
