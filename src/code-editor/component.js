@@ -1,15 +1,13 @@
-import "codemirror/lib/codemirror.css";
-
-import CodeMirror from "codemirror";
 import PropTypes from "prop-types";
 import React from "react";
 
+let CodeMirror;
+let areStylesImported = false;
+let isJavaScriptModeLoaded = false;
+
 class CodeMirrorEditor extends React.Component {
   static propTypes = {
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.instanceOf(CodeMirror.Doc),
-    ]),
+    value: PropTypes.string,
     mode: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,
@@ -81,7 +79,21 @@ class CodeMirrorEditor extends React.Component {
 
   container = React.createRef();
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
+    if (!CodeMirror) {
+      CodeMirror = await import(`codemirror`);
+    }
+
+    if (!areStylesImported) {
+      await import(`codemirror/lib/codemirror.css`);
+      areStylesImported = true;
+    }
+
+    if (!isJavaScriptModeLoaded) {
+      await import(`codemirror/mode/javascript/javascript.js`);
+      isJavaScriptModeLoaded = true;
+    }
+
     const options = {};
     const events = {};
 

@@ -1,4 +1,3 @@
-import "codemirror/mode/javascript/javascript.js";
 import "./styles.scss";
 
 import { allVariables, defaultValues } from "../attheme-variables";
