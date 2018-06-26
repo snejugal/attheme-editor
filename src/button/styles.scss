@@ -13,7 +13,7 @@
   color: $button_textColor;
   border-radius: $container_borderRadius;
   border: none;
-  transition-property: box-shadow;
+  transition-property: box-shadow, opacity;
   transition-duration: $transitionDuration;
   font-family: inherit;
   padding: $button_verticalPadding $button_horizontalPadding;
