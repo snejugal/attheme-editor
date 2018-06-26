@@ -3,6 +3,7 @@ import "./styles.scss";
 import * as database from "../database/api";
 import PropTypes from "prop-types";
 import React from "react";
+import Spinner from "../spinner/component";
 
 class Tab extends React.Component {
   static propTypes = {
@@ -11,13 +12,9 @@ class Tab extends React.Component {
     onClick: PropTypes.func.isRequired,
   }
 
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      title: ``,
-    };
-  }
+  state = {
+    title: null,
+  };
 
   componentDidMount = async () => {
     const { name } = await database.getTheme(this.props.id);
@@ -27,11 +24,9 @@ class Tab extends React.Component {
     });
   }
 
-  updateTitle = (title) => {
-    this.setState({
-      title,
-    });
-  }
+  updateTitle = (title) => this.setState({
+    title,
+  });
 
   render () {
     let className = `tab headerTab`;
@@ -42,7 +37,13 @@ class Tab extends React.Component {
 
     return (
       <button className={className} onClick={this.props.onClick}>
-        <h3 className="headerTab_title">{this.state.title}</h3>
+        <h3 className="headerTab_title">
+          {
+            typeof this.state.title === `string`
+              ? this.state.title
+              : <Spinner/>
+          }
+        </h3>
       </button>
     );
   }
