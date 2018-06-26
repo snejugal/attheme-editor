@@ -33,7 +33,7 @@ class Button extends React.Component {
     || nextProps.className !== this.props.className
   )
 
-  render() {
+  render () {
     let className = `button`;
 
     if (this.props.isDangerous) {
