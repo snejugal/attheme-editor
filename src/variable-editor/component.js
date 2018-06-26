@@ -14,6 +14,7 @@ import React from "react";
 import RgbInput from "../rgb-input/component";
 import Tabs from "../tabs/component";
 import Vibrant from "node-vibrant";
+import WebWorkerQuantizer from "node-vibrant/lib/quantizer/worker";
 import { defaultValues } from "../attheme-variables";
 import localization from "../localization";
 import readFile from "../read-file";
@@ -76,6 +77,10 @@ class VariableEditor extends React.Component {
   generateWallpaperColors = async () => {
     const vibrant = new Vibrant(
       `data:image/jpg;base64,${this.state.wallpaper}`,
+      {
+        quantizer: WebWorkerQuantizer,
+        quality: 1,
+      },
     );
 
     const objectPalette = await vibrant.getPalette();
