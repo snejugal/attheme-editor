@@ -282,14 +282,7 @@ class ScriptRunner extends React.Component {
         <Hint>{localization.scriptRunner_description()}</Hint>
         <CodeEditor
           className="scriptRunner_editor"
-          value=""
-          lineNumbers={true}
-          autofocus={true}
-          mode="javascript"
           ref={this.editor}
-          indentUnit={2}
-          indentWithTabs={false}
-          tabSize={2}
         />
         {
           outputTitle
