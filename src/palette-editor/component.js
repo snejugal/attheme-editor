@@ -6,6 +6,7 @@ import Dialog from "../dialog/component";
 import Field from "../field/component";
 import Heading from "../heading/component";
 import HexInput from "../hex-input/component";
+import Hint from "../hint/component";
 import HslInput from "../hsl-input/component";
 import PropTypes from "prop-types";
 import React from "react";
@@ -195,45 +196,57 @@ class PaletteEditor extends React.Component {
       >
         {
           this.state.editingColor === null
-            ? (
-              <div className="paletteEditor_colors">
-                {colors}
-              </div>
-            )
-            : (
-              <React.Fragment>
-                <div
-                  className="paletteEditor_colorPreview"
-                  style={{
-                    backgroundColor: Color.createCssRgb(
-                      this.state.editingColor,
-                    ),
-                  }}
+          && colors.length > 0
+          && (
+            <div className="paletteEditor_colors">
+              {colors}
+            </div>
+          )
+        }
+        {
+          this.state.editingColor === null
+          && colors.length === 0
+          && (
+            <Hint className="paletteEditor_colorsPlaceholder">
+              {localization.paletteEditor_placeholder()}
+            </Hint>
+          )
+        }
+        {
+          this.state.editingColor !== null && (
+            <React.Fragment>
+              <div
+                className="paletteEditor_colorPreview"
+                style={{
+                  backgroundColor: Color.createCssRgb(
+                    this.state.editingColor,
+                  ),
+                }}
+              />
+              <form noValidate={true}>
+                <Field
+                  value={this.state.editingColorName}
+                  onChange={this.handleNameChange}
+                  id="paletteEditor_name"
+                >
+                  Name
+                </Field>
+                <HexInput
+                  color={this.state.editingColor}
+                  onHexChange={this.handleColorChange}
+                  shouldShowAlpha={false}
                 />
-                <form noValidate={true}>
-                  <Field
-                    value={this.state.editingColorName}
-                    onChange={this.handleNameChange}
-                    id="paletteEditor_name"
-                  >
-                    Name
-                  </Field>
-                  <HexInput
-                    color={this.state.editingColor}
-                    onHexChange={this.handleColorChange}
-                    shouldShowAlpha={false}
-                  />
-                  <RgbInput
-                    color={this.state.editingColor}
-                    onChange={this.handleChannelChange}
-                  />
-                  <HslInput
-                    color={this.state.editingColor}
-                    onChange={this.handleColorChange}
-                  />
-                </form>
-              </React.Fragment>
-            )
+                <RgbInput
+                  color={this.state.editingColor}
+                  onChange={this.handleChannelChange}
+                />
+                <HslInput
+                  color={this.state.editingColor}
+                  onChange={this.handleColorChange}
+                />
+              </form>
+            </React.Fragment>
+          )
         }
       </Dialog>
     );

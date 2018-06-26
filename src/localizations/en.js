@@ -110,6 +110,7 @@ const localization = {
   paletteEditor_newColor: () => `Add a new color`,
   paletteEditor_title: () => `The theme's custom palette`,
   paletteEditor_defaultColorName: () => `Beautiful color`,
+  paletteEditor_placeholder: () => `Whops, the palette is empty… Yet. Click the “Add a new color” button at the bottom or, if chat_wallpaper is assigned an image, open its editor and add the colors it suggests to this palette!`,
 };
 
 export default localization;
