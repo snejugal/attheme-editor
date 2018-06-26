@@ -80,18 +80,32 @@ class CodeMirrorEditor extends React.Component {
   container = React.createRef();
 
   componentDidMount = async () => {
-    if (!CodeMirror) {
-      CodeMirror = await import(`codemirror`);
-    }
+    try {
+      if (!CodeMirror) {
+        CodeMirror = await import(`codemirror`);
+      }
 
-    if (!areStylesImported) {
-      await import(`codemirror/lib/codemirror.css`);
-      areStylesImported = true;
-    }
+      if (!areStylesImported) {
+        await import(`codemirror/lib/codemirror.css`);
+        areStylesImported = true;
+      }
 
-    if (!isJavaScriptModeLoaded) {
-      await import(`codemirror/mode/javascript/javascript.js`);
-      isJavaScriptModeLoaded = true;
+      if (!isJavaScriptModeLoaded) {
+        await import(`codemirror/mode/javascript/javascript.js`);
+        isJavaScriptModeLoaded = true;
+      }
+    } catch (e) {
+      const textarea = document.createElement(`textarea`);
+
+      this.container.appendChild(textarea);
+
+      this.editor = {
+        getValue () {
+          return textarea.value;
+        },
+      };
+
+      return;
     }
 
     const options = {};
