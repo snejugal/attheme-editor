@@ -97,8 +97,8 @@ class App extends React.Component {
 
     if (themeId) {
       window.history.replaceState(
-        document.title,
         null,
+        document.title,
         `${window.location.origin}${window.location.pathname}`,
       );
 
