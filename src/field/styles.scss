@@ -21,10 +21,16 @@
   }
 
   &[type="number"] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
 
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
+      display: none;
+    }
+  }
+
+  &[type="search"] {
+    &::-webkit-search-cancel-button {
       display: none;
     }
   }
