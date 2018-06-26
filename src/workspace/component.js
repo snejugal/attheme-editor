@@ -125,61 +125,33 @@ class Workplace extends React.Component {
     loaderProperty: `shouldShowDownloadSpinner`,
   });
 
-  createPreview = async () => {
-    this.setState({
-      shouldShowCreatePreviewSpinner: true,
-    });
+  createPreview = () => this.openThemeInBot({
+    botUsername: `themepreviewbot`,
+    loaderProperty: `shouldShowCreatePreviewSpinner`,
+  });
 
-    try {
-      const themeId = await uploadTheme(this.state.theme);
-      const tgLink = `tg://resolve?domain=themepreviewbot&start=${themeId}`;
-
-      window.location.href = tgLink;
-    } catch (e) {
-      /** @todo */
-    }
-
-    this.setState({
-      shouldShowCreatePreviewSpinner: false,
-    });
-  }
-
-  testTheme = async () => {
-    this.setState({
-      shouldShowTestThemeSpinner: true,
-    });
-
-    try {
-      const themeId = await uploadTheme(this.state.theme);
-      const tgLink = `tg://resolve?domain=testatthemebot&start=${themeId}`;
-
-      window.location.href = tgLink;
-    } catch (e) {
-      /** @todo */
-    }
-
-    this.setState({
-      shouldShowTestThemeSpinner: false,
-    });
-  }
+  testTheme = () => this.openThemeInBot({
+    botUsername: `testatthemebot`,
+    loaderProperty: `shouldShowTestThemeSpinner`,
+  });
 
   downloadWorkspace = () => download({
     content: JSON.stringify(this.state.theme),
     name: `${this.state.theme.name}.attheme-editor`,
-  })
+  });
 
   handleVariableEditStart = (variable) => {
     this.setState({
       editingVariable: variable,
       color: this.state.theme.variables[variable],
     });
-  }
+  };
 
   handleVariableEditCancel = () => this.setState({
     editingVariable: null,
     wasEditingPalette: null,
     color: null,
-  })
+  });
 
   handleVariableEditSave = (value) => {
     const variable = this.state.editingVariable;
@@ -224,12 +196,12 @@ class Workplace extends React.Component {
     });
 
     database.updateTheme(this.props.themeId, theme);
-  }
+  };
 
   handleNewVariable = (variable) => this.setState({
     editingVariable: variable,
     color: defaultValues[variable],
-  })
+  });
 
   handleVariableDelete = () => {
     const variables = {
@@ -254,7 +226,7 @@ class Workplace extends React.Component {
     });
 
     database.updateTheme(this.props.themeId, theme);
-  }
+  };
 
   handleRunScriptButtonClick = () => this.setState({
     showScriptRunner: true,
@@ -285,7 +257,7 @@ class Workplace extends React.Component {
     });
 
     database.updateTheme(this.props.themeId, theme);
-  }
+  };
 
   handleEditPaletteButtonClick = () => this.setState({
     isEditingPalette: true,
