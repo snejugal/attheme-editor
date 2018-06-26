@@ -6,6 +6,7 @@ import Attheme from "attheme-js";
 import Button from "../button/component";
 import Buttons from "../buttons/component";
 import Color from "../color";
+import { ReactComponent as DownloadIcon } from "./download-icon.svg";
 import Field from "../field/component";
 import Hint from "../hint/component";
 import PaletteEditor from "../palette-editor/component";
@@ -36,6 +37,9 @@ class Workplace extends React.Component {
     isSearchHotkeyEnabled: true,
     isEditingPalette: false,
     wasEditingPalette: false,
+    shouldShowCreatePreviewSpinner: false,
+    shouldShowTestThemeSpinner: false,
+    shouldShowDownloadSpinner: false,
   };
 
   componentDidMount = async () => this.setState({
@@ -48,7 +52,7 @@ class Workplace extends React.Component {
         theme: await database.getTheme(this.props.themeId),
       });
     }
-  }
+  };
 
   handleNameFieldChange = (event) => {
     const name = event.target.value;
@@ -62,7 +66,7 @@ class Workplace extends React.Component {
     });
 
     this.props.onNameChange(name);
-  }
+  };
 
   handleNameFieldBlur = (event) => {
     let name = event.target.value.trim();
@@ -82,7 +86,7 @@ class Workplace extends React.Component {
     this.props.onNameChange(name);
 
     database.updateTheme(this.props.themeId, theme);
-  }
+  };
 
   handleNameFieldEnter = ({ target }) => target.blur();
 
@@ -95,14 +99,31 @@ class Workplace extends React.Component {
       content,
       name,
     });
-  }
+  };
 
-  downloadThemeViaTelegram = async () => {
-    const themeId = await uploadTheme(this.state.theme);
-    const tgLink = `tg://resolve?domain=atthemeeditorbot&start=${themeId}`;
+  openThemeInBot = async ({ botUsername, loaderProperty }) => {
+    this.setState({
+      [loaderProperty]: true,
+    });
 
-    window.location.href = tgLink;
-  }
+    try {
+      const themeId = await uploadTheme(this.state.theme);
+      const tgLink = `tg://resolve?domain=${botUsername}&start=${themeId}`;
+
+      window.location.href = tgLink;
+    } catch (e) {
+      /** @todo */
+    }
+
+    this.setState({
+      [loaderProperty]: false,
+    });
+  };
+
+  downloadThemeViaTelegram = () => this.openThemeInBot({
+    botUsername: `atthemeeditorbot`,
+    loaderProperty: `shouldShowDownloadSpinner`,
+  });
 
   createPreview = async () => {
     this.setState({
@@ -361,7 +382,14 @@ class Workplace extends React.Component {
           onClick={this.downloadThemeViaTelegram}
           isFloating={true}
           className="workspace_downloadButton"
-        />
+          isDisabled={this.state.shouldShowDownloadSpinner}
+        >
+          {
+            this.state.shouldShowDownloadSpinner
+              ? <Spinner/>
+              : <DownloadIcon/>
+          }
+        </Button>
 
         <Field
           className="workspace_themeName"

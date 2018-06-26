@@ -46,13 +46,15 @@
     bottom: $button-floating_sidesDistance;
     right: $button-floating_sidesDistance;
     border-radius: $button-floating_size / 2;
-    background-size: $button-floating_size / 2;
-    background-position: center;
-    background-repeat: no-repeat;
+    font-size: $button-floating_size / 2.5;
     z-index: 2;
+
+    svg {
+      @include square($button-floating_size / 2);
+    }
   }
 
-  .spinner {
+  &:not(.-floating) .spinner {
     margin-left: 8px;
   }
 }
