@@ -6,9 +6,10 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   margin-right: -$container_horizontalMargin;
+  margin-bottom: $container_verticalMargin - $container_horizontalMargin;
 
   > * {
     margin-right: $container_horizontalMargin;
-    margin-bottom: $container_verticalMargin;
+    margin-bottom: $container_horizontalMargin;
   }
 }
