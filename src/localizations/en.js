@@ -82,6 +82,8 @@ const localization = {
   variableEditor_palettesTab: () => `Palettes`,
   variableEditor_wallpaperColorsHint: () => `Here are some colors from the wallpaper. Click one to add it to your theme's palette:`,
   variableEditor_editPalette: () => `Edit the palette`,
+  variableEditor_themeColorsPlaceholder: () => `Whops, no colors in the theme yet.`,
+  variableEditor_themeCustomPalettePlaceholder: () => `Whops, no colors in the custom palette… yet. Click the “Edit the palette” button above!`,
 
   scriptRunner_title: () => `Run a script`,
   scriptRunner_description: () => <React.Fragment>

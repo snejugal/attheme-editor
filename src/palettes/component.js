@@ -4,6 +4,7 @@ import * as builtInPalettes from "./built-in-palettes";
 import Button from "../button/component";
 import Buttons from "../buttons/component";
 import Color from "../color";
+import Hint from "../hint/component";
 import PropTypes from "prop-types";
 import React from "react";
 import Select from "../select/component";
@@ -78,6 +79,30 @@ class Palettes extends React.Component {
       ),
     ];
 
+    const colors = palette.map(({ name, color }) => {
+      const handleClick = () => {
+        this.props.onChange({
+          ...color,
+          alpha: this.props.alpha,
+        });
+      };
+
+      let className = `palettes_color`;
+
+      if (Color.isLight(color)) {
+        className += ` -darkText`;
+      }
+
+      return <Button
+        className={className}
+        backgroundColor={Color.createCssRgb(color)}
+        key={name}
+        onClick={handleClick}
+      >
+        {name}
+      </Button>;
+    });
+
     return (
       <React.Fragment>
         <Select
@@ -94,33 +119,31 @@ class Palettes extends React.Component {
             </Buttons>
           )
         }
-        <div className="palettes">
-          {
-            palette.map(({ name, color }) => {
-              const handleClick = () => {
-                this.props.onChange({
-                  ...color,
-                  alpha: this.props.alpha,
-                });
-              };
-
-              let className = `palettes_color`;
-
-              if (Color.isLight(color)) {
-                className += ` -darkText`;
-              }
-
-              return <Button
-                className={className}
-                backgroundColor={Color.createCssRgb(color)}
-                key={name}
-                onClick={handleClick}
-              >
-                {name}
-              </Button>;
-            })
-          }
-        </div>
+        {
+          colors.length > 0 && (
+            <div className="palettes">
+              {colors}
+            </div>
+          )
+        }
+        {
+          colors.length === 0
+          && this.state.activePalette === `themeColors`
+          && (
+            <Hint className="palettes_placeholder">
+              {localization.variableEditor_themeColorsPlaceholder()}
+            </Hint>
+          )
+        }
+        {
+          colors.length === 0
+          && this.state.activePalette === `themeCustomPalette`
+          && (
+            <Hint className="palettes_placeholder">
+              {localization.variableEditor_themeCustomPalettePlaceholder()}
+            </Hint>
+          )
+        }
       </React.Fragment>
     );
   }

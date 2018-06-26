@@ -1,13 +1,17 @@
 @import "../variables";
 @import "./variables";
-// @import "../mixins/hover-shade";
-// @import "../mixins/shadow";
+@import "../typography";
 
 .palettes {
   display: flex;
   flex-wrap: wrap;
   justify-content: stretch;
   margin-right: -$palettes_gap;
+
+  &_placeholder {
+    @extend %subtitle-1;
+    text-align: center;
+  }
 
   &_color {
     margin-right: $palettes_gap;
