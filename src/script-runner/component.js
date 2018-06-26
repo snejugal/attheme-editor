@@ -9,6 +9,7 @@ import Heading from "../heading/component";
 import Hint from "../hint/component";
 import PropTypes from "prop-types";
 import React from "react";
+import Spinner from "../spinner/component";
 import colorClass from "./color-class";
 import createTheme from "./theme";
 import localization from "../localization";
@@ -99,6 +100,8 @@ class ScriptRunner extends React.Component {
     this.setState({
       isEvaluating: true,
       isEvaluated: false,
+      runtimeError: null,
+      parseError: null,
     });
     let hasErrors = false;
 
@@ -230,9 +233,7 @@ class ScriptRunner extends React.Component {
     let output;
     let outputClassName = `scriptRunner_output`;
 
-    if (this.state.isEvaluating) {
-      outputTitle = localization.scriptRunner_isEvaluating();
-    } else if (this.state.isEvaluated) {
+    if (this.state.isEvaluated) {
       outputTitle = localization.scriptRunner_isEvaluated();
       outputClassName += ` -success`;
     } else if (this.state.runtimeError) {
@@ -257,6 +258,10 @@ class ScriptRunner extends React.Component {
       outputClassName += ` -error`;
     }
 
+    const isRunButtonDisabled = !this.state.isBabelLoaded
+      || !this.state.isInterpreterLoaded
+      || this.state.isEvaluating;
+
     return (
       <Dialog
         onDismiss={this.props.onClose}
@@ -265,13 +270,10 @@ class ScriptRunner extends React.Component {
           <React.Fragment>
             <Button
               onClick={this.handleRun}
-              isDisabled={
-                !this.state.isBabelLoaded
-                || !this.state.isInterpreterLoaded
-                || this.state.isEvaluating
-              }
+              isDisabled={isRunButtonDisabled}
             >
               {localization.scriptRunner_run()}
+              {isRunButtonDisabled && <Spinner/>}
             </Button>
             <Button onClick={this.props.onClose}>
               {localization.scriptRunner_close()}

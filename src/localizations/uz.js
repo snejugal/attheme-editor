@@ -91,7 +91,6 @@ const localization = {
   </React.Fragment>,
   scriptRunner_close: () => `Yopish`,
   scriptRunner_run: () => `Boshlash`,
-  scriptRunner_isEvaluating: () => `Skript yuklanmoqda…`,
   scriptRunner_isEvaluated: () => `Skript muvaffaqiyatli yuklandi!`,
   scriptRunner_runtimeError: () => `Oops, skriptda xatolik ro'y berdi:`,
   scriptRunner_syntaxError: () => `Oops, skriptda xato sintaksis:`,

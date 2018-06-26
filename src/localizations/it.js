@@ -91,7 +91,6 @@ const localization = {
   </React.Fragment>,
   scriptRunner_close: () => `Chiudi`,
   scriptRunner_run: () => `Esegui`,
-  scriptRunner_isEvaluating: () => `Lo script sta venendo eseguito…`,
   scriptRunner_isEvaluated: () => `Lo script è stato eseguito correttamente!`,
   scriptRunner_runtimeError: () => `Oops, è stato riscontrato questo errore nel tuo script:`,
   scriptRunner_syntaxError: () => `Oops, c'è un errore di sintassi nel tuo script:`,

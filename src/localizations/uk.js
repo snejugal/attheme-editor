@@ -92,7 +92,6 @@ const localization = {
   </React.Fragment>,
   scriptRunner_close: () => `Закрити`,
   scriptRunner_run: () => `Запустити`,
-  scriptRunner_isEvaluating: () => `Скрипт виконується…`,
   scriptRunner_isEvaluated: () => `Скрипт успішно виконано!`,
   scriptRunner_runtimeError: () => `Упс, у скрипті виникла помилка`,
   scriptRunner_syntaxError: () => `Упс, у скрипті невірний синтаксис`,
