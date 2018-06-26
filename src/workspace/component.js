@@ -12,6 +12,7 @@ import PaletteEditor from "../palette-editor/component";
 import PropTypes from "prop-types";
 import React from "react";
 import ScriptRunner from "../script-runner/component";
+import Spinner from "../spinner/component";
 import VariableEditor from "../variable-editor/component";
 import Variables from "../variables/component";
 import download from "../download";
@@ -104,17 +105,41 @@ class Workplace extends React.Component {
   }
 
   createPreview = async () => {
-    const themeId = await uploadTheme(this.state.theme);
-    const tgLink = `tg://resolve?domain=themepreviewbot&start=${themeId}`;
+    this.setState({
+      shouldShowCreatePreviewSpinner: true,
+    });
 
-    window.location.href = tgLink;
+    try {
+      const themeId = await uploadTheme(this.state.theme);
+      const tgLink = `tg://resolve?domain=themepreviewbot&start=${themeId}`;
+
+      window.location.href = tgLink;
+    } catch (e) {
+      /** @todo */
+    }
+
+    this.setState({
+      shouldShowCreatePreviewSpinner: false,
+    });
   }
 
   testTheme = async () => {
-    const themeId = await uploadTheme(this.state.theme);
-    const tgLink = `tg://resolve?domain=testatthemebot&start=${themeId}`;
+    this.setState({
+      shouldShowTestThemeSpinner: true,
+    });
 
-    window.location.href = tgLink;
+    try {
+      const themeId = await uploadTheme(this.state.theme);
+      const tgLink = `tg://resolve?domain=testatthemebot&start=${themeId}`;
+
+      window.location.href = tgLink;
+    } catch (e) {
+      /** @todo */
+    }
+
+    this.setState({
+      shouldShowTestThemeSpinner: false,
+    });
   }
 
   downloadWorkspace = () => download({
@@ -363,11 +388,19 @@ class Workplace extends React.Component {
           <Button onClick={this.handleRunScriptButtonClick}>
             {localization.workspace_runScript()}
           </Button>
-          <Button onClick={this.createPreview}>
+          <Button
+            onClick={this.createPreview}
+            isDisabled={this.state.shouldShowCreatePreviewSpinner}
+          >
             {localization.workspace_createPreview()}
+            {this.state.shouldShowCreatePreviewSpinner && <Spinner/>}
           </Button>
-          <Button onClick={this.testTheme}>
+          <Button
+            onClick={this.testTheme}
+            isDisabled={this.state.shouldShowTestThemeSpinner}
+          >
             {localization.workspace_testTheme()}
+            {this.state.shouldShowTestThemeSpinner && <Spinner/>}
           </Button>
           <Button onClick={this.handleEditPaletteButtonClick}>
             {localization.workspace_editPalette()}
