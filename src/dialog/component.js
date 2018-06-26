@@ -39,16 +39,20 @@ class Dialog extends React.Component {
   };
 
   componentDidMount = () => {
+    window.history.pushState(null, document.title, window.location.href);
+
     root.addEventListener(`click`, this.onRootClick);
     root.addEventListener(`mousedown`, this.onRootMouseDown);
+    window.addEventListener(`popstate`, this.props.onDismiss);
     document.body.addEventListener(`keydown`, this.onDocumentKeyDown);
-  }
+  };
 
   componentWillUnmount = () => {
     root.removeEventListener(`click`, this.onRootClick);
     root.removeEventListener(`mousedown`, this.onRootMouseDown);
+    window.removeEventListener(`popstate`, this.props.onDismiss);
     document.body.removeEventListener(`keydown`, this.onDocumentKeyDown);
-  }
+  };
 
   render () {
     return ReactDOM.createPortal(
