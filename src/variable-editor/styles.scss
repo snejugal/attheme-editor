@@ -57,4 +57,10 @@
     margin-left: -$container_horizontalMargin;
     margin-right: -$container_horizontalMargin;
   }
+
+  &_buttons {
+    .button {
+      flex-grow: 1;
+    }
+  }
 }

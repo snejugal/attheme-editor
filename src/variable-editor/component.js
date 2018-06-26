@@ -294,7 +294,7 @@ class VariableEditor extends React.Component {
         {
           this.state.activeTab === `image` && (
             <React.Fragment>
-              <Buttons>
+              <Buttons className="variableEditor_buttons">
                 <Button
                   onClick={this.handleUploadWallpaperClick}
                 >

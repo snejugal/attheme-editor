@@ -112,7 +112,7 @@ class Palettes extends React.Component {
         />
         {
           this.state.activePalette === `themeCustomPalette` && (
-            <Buttons>
+            <Buttons className="variableEditor_buttons">
               <Button onClick={this.props.onCustomPaletteEditStart}>
                 {localization.variableEditor_editPalette()}
               </Button>
