@@ -11,6 +11,11 @@
     margin-bottom: $container_verticalMargin;
   }
 
+  &_colorsPlaceholder {
+    @extend %subtitle-1;
+    text-align: center;
+  }
+
   &_colorPreview {
     height: 64px;
     border-top-left-radius: $container_borderRadius;
@@ -44,14 +49,12 @@
 
     &_name {
       @extend %heading-5;
-      margin-bottom: 0;
       text-align: left;
     }
 
     &_colorModel {
       opacity: .54;
-      margin-bottom: 0;
-      line-height: 1;
+      margin: 0;
 
       &::before {
         opacity: .54;
