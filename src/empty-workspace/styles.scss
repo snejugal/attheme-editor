@@ -1,0 +1,12 @@
+@import "../typography";
+
+.emptyWorkspace {
+  &_uploadWaysHint {
+    @extend %heading-6;
+  }
+
+  &_credits {
+    @extend %caption;
+    margin-top: auto;
+  }
+}

@@ -17,7 +17,7 @@ const localization = {
 
   emptyWorkspace_title: () => `Start working on your theme`,
   emptyWorkspace_createTheme: () => `Create a new theme`,
-  emptyWorkspace_openTheme: () => `Open an existing theme`,
+  emptyWorkspace_openTheme: () => `Open existing themes`,
   emptyWorkspace_credits: () => <React.Fragment>
     Created by {}
     <Link href="//t.me/snejugal">@snejugal</Link>
@@ -33,6 +33,11 @@ const localization = {
     <Link href="//t.me/atthemeeditor">
       our channel on Telegram
     </Link>!
+  </React.Fragment>,
+  emptyWorkspace_uploadWaysHint: () => <React.Fragment>
+    You can also use drag&apos;n&apos;drop to open themes or use {}
+    <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
+    {} to open themes via Telegram.
   </React.Fragment>,
 
   theme_defaultName: () => `Awesome Theme`,

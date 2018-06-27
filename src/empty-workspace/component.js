@@ -1,3 +1,5 @@
+import "./styles.scss";
+
 import Button from "../button/component";
 import Buttons from "../buttons/component";
 import Heading from "../heading/component";
@@ -68,7 +70,10 @@ class EmptyWorkspace extends React.Component {
           accept=".attheme,.attheme-editor"
           multiple={true}
         />
-        <Hint className="credits">
+        <Hint className="emptyWorkspace_uploadWaysHint">
+          {localization.emptyWorkspace_uploadWaysHint()}
+        </Hint>
+        <Hint className="emptyWorkspace_credits">
           {localization.emptyWorkspace_credits()}
         </Hint>
       </React.Fragment>
