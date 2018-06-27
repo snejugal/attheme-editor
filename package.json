@@ -4,7 +4,7 @@
   "homepage": ".",
   "dependencies": {
     "@babel/standalone": "^7.0.0-beta.49",
-    "attheme-default-values": "^4.8.6",
+    "attheme-default-values": "^4.8.11",
     "attheme-editor-api": "^1.1.0",
     "attheme-js": "^1.1.1",
     "codemirror": "^5.38.0",
