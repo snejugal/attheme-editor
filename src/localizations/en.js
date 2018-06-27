@@ -6,6 +6,7 @@ const pluralRules = new Intl.PluralRules(`en`);
 
 const localization = {
   dropHint: () => `Drop .attheme or .attheme-editor files here`,
+
   error_title: () => `Whoops, some error happened.`,
   error_description: () => <React.Fragment>
     Please send a screenshot of the following error to {}
@@ -69,7 +70,7 @@ const localization = {
   },
   workspace_noVariablesPlaceholder: () => `You don't have any variables in the theme yet :( Go and add some via the search field above!`,
   workspace_noResultsPlaceholder: () => `Whops, the search didn't give any results. Maybe you have a typo in your query?`,
-  workspace_uploadError: () => `Whops, the editor couldn't upload the theme to the bot. Please check your internet connection and try again.`,
+  workspace_uploadError: () => `Whops, the editor couldn't upload the theme to the bot. Сheck your internet connection and try again.`,
 
   confirmDialog_yes: () => `Yes`,
   confirmDialog_no: () => `No`,
