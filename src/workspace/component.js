@@ -13,6 +13,7 @@ import PaletteEditor from "../palette-editor/component";
 import PropTypes from "prop-types";
 import React from "react";
 import ScriptRunner from "../script-runner/component";
+import Snackbar from "../snackbar/component";
 import Spinner from "../spinner/component";
 import VariableEditor from "../variable-editor/component";
 import Variables from "../variables/component";
@@ -40,6 +41,7 @@ class Workplace extends React.Component {
     shouldShowCreatePreviewSpinner: false,
     shouldShowTestThemeSpinner: false,
     shouldShowDownloadSpinner: false,
+    hasUploadError: false,
   };
 
   componentDidMount = async () => this.setState({
@@ -112,7 +114,9 @@ class Workplace extends React.Component {
 
       window.location.href = tgLink;
     } catch (e) {
-      /** @todo */
+      this.setState({
+        hasUploadError: true,
+      });
     }
 
     this.setState({
@@ -285,6 +289,10 @@ class Workplace extends React.Component {
     editorState: backupState,
   });
 
+  handleSnackbarDismiss = () => this.setState({
+    hasUploadError: false,
+  });
+
   render () {
     if (!this.state.theme) {
       return null;
@@ -349,6 +357,18 @@ class Workplace extends React.Component {
     return (
       <React.Fragment>
         {dialog}
+
+        {
+          this.state.hasUploadError && (
+            <Snackbar
+              timeout={5000}
+              onDismiss={this.handleSnackbarDismiss}
+              isError={true}
+            >
+              {localization.workspace_uploadError()}
+            </Snackbar>
+          )
+        }
 
         <Button
           onClick={this.downloadThemeViaTelegram}
