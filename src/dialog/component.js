@@ -56,7 +56,7 @@ class Dialog extends React.Component {
 
   render () {
     return ReactDOM.createPortal(
-      <dialog className="dialog">
+      <dialog className="dialog" open={true}>
         <div className="dialog_content">
           {
             `title` in this.props
