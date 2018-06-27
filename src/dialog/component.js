@@ -56,7 +56,7 @@ class Dialog extends React.Component {
 
   render () {
     return ReactDOM.createPortal(
-      <div className="dialog">
+      <dialog className="dialog">
         <div className="dialog_content">
           {
             `title` in this.props
@@ -74,7 +74,7 @@ class Dialog extends React.Component {
             ? <Buttons className="dialog_buttons">{this.props.buttons}</Buttons>
             : null
         }
-      </div>,
+      </dialog>,
       root,
     );
   }
