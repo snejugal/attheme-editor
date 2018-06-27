@@ -20,6 +20,7 @@
   height: auto;
   background-size: cover;
   background-position: center;
+  user-select: none;
 
   &::before {
     content: "";

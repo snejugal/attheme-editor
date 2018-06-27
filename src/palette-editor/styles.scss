@@ -42,6 +42,7 @@
     height: auto;
     transition-property: box-shadow;
     transition-duration: $transitionDuration;
+    user-select: none;
 
     &:active {
       @include shadow(8);
