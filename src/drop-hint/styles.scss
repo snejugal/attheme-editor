@@ -1,0 +1,34 @@
+@import "../variables";
+@import "../typography";
+
+.dropHint {
+  @extend %heading-2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overscroll-behavior: none;
+  background-color: rgba($theme_accentColor, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: $container_padding;
+  z-index: 4;
+  animation-name: fade-out;
+  animation-duration: $transitionDuration;
+  transition-duration: $transitionDuration;
+  transition-property: opacity;
+  opacity: 1;
+
+  &.-disappear {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 0;
+  }
+}

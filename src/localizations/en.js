@@ -5,6 +5,7 @@ import React from "react";
 const pluralRules = new Intl.PluralRules(`en`);
 
 const localization = {
+  dropHint: () => `Drop .attheme or .attheme-editor files here`,
   error_title: () => `Whoops, some error happened.`,
   error_description: () => <React.Fragment>
     Please send a screenshot of the following error to {}
