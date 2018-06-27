@@ -67,6 +67,8 @@ const localization = {
 
     return forms[`${pluralRules.select(theme)} ${pluralRules.select(total)}`];
   },
+  workspace_noVariablesPlaceholder: () => `You don't have any variables in the theme yet :( Go and add some via the search field above!`,
+  workspace_noResultsPlaceholder: () => `Whops, the search didn't give any results. Maybe you have a typo in your query?`,
 
   confirmDialog_yes: () => `Yes`,
   confirmDialog_no: () => `No`,

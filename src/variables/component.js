@@ -4,6 +4,7 @@ import { allVariables, defaultValues } from "../attheme-variables";
 import Color from "../color";
 import Field from "../field/component";
 import FuzzySearch from "fuzzy-search";
+import Hint from "../hint/component";
 import PropTypes from "prop-types";
 import React from "react";
 import Variable from "../variable/component";
@@ -86,10 +87,11 @@ class Variables extends React.Component {
 
   render () {
     const themeVariables = Object.keys(this.props.theme);
+    const query = this.state.searchQuery.trim();
 
     let variablesOrder = [];
 
-    if (this.state.searchQuery !== ``) {
+    if (query !== ``) {
       for (const variableName of allVariables) {
         if (variableName === `chat_wallpaper` && this.props.wallpaper) {
           continue;
@@ -109,30 +111,34 @@ class Variables extends React.Component {
 
     variablesOrder.push(...themeVariables);
 
-    if (this.state.searchQuery && this.state.searchQuery !== `*`) {
+    if (query && query !== `*`) {
       let variablesOrderFS = [];
 
       const searcher = new FuzzySearch(variablesOrder, [], {
         sort: true,
       });
 
-      variablesOrderFS = searcher.search(this.state.searchQuery);
+      variablesOrderFS = searcher.search(query);
 
       for (const variable of variablesOrder) {
         if (variablesOrderFS.includes(variable)) {
           continue;
         }
 
-        const search = Color.parseHex(this.state.searchQuery)
-          ? Color.createHex(Color.parseHex(this.state.searchQuery))
-          : this.state.searchQuery;
+        const search = Color.parseHex(query)
+          ? Color.createHex(Color.parseHex(query))
+          : query;
 
-        if (themeVariables.includes(variable)
+        if (
+          themeVariables.includes(variable)
           && this.props.theme[variable]
-          && Color.createHex(this.props.theme[variable]).startsWith(search)) {
+          && Color.createHex(this.props.theme[variable]).startsWith(search)
+        ) {
           variablesOrderFS.push(variable);
-        } else if (defaultValues[variable]
-          && Color.createHex(defaultValues[variable]).startsWith(search)) {
+        } else if (
+          defaultValues[variable]
+          && Color.createHex(defaultValues[variable]).startsWith(search)
+        ) {
           variablesOrderFS.push(variable);
         }
         variablesOrder = variablesOrderFS;
@@ -182,7 +188,29 @@ class Variables extends React.Component {
         >
           {localization.workspace_search()}
         </Field>
-        <div className="variables">{variables}</div>
+        {
+          variables.length > 0 && (
+            <div className="variables">{variables}</div>
+          )
+        }
+        {
+          variables.length === 0
+          && this.state.searchQuery.trim() === ``
+          && (
+            <Hint className="variables_placeholder">
+              {localization.workspace_noVariablesPlaceholder()}
+            </Hint>
+          )
+        }
+        {
+          variables.length === 0
+          && this.state.searchQuery.trim() !== ``
+          && (
+            <Hint className="variables_placeholder">
+              {localization.workspace_noResultsPlaceholder()}
+            </Hint>
+          )
+        }
       </React.Fragment>
     );
   }
