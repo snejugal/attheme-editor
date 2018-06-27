@@ -2,6 +2,7 @@ import "./styles.scss";
 
 import Button from "../button/component";
 import Buttons from "../buttons/component";
+import { ReactComponent as Check } from "./check.svg";
 import Color from "../color";
 import Dialog from "../dialog/component";
 import Heading from "../heading/component";
@@ -227,13 +228,23 @@ class VariableEditor extends React.Component {
           className += ` -darkText`;
         }
 
+        const isAlreadyInPalette = this.props.themeCustomPalette.some(
+          (customPaletteColor) => (
+            customPaletteColor.color.red === colorData.color.red
+            && customPaletteColor.color.green === colorData.color.green
+            && customPaletteColor.color.blue === colorData.color.blue
+          ),
+        );
+
         return <Button
           className={className}
           key={colorData.name}
           backgroundColor={Color.createCssRgb(colorData.color)}
           onClick={handleClick}
+          isDisabled={isAlreadyInPalette}
         >
           {colorData.name}
+          {isAlreadyInPalette && <Check className="icon"/>}
         </Button>;
       });
     }

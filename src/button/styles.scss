@@ -54,7 +54,10 @@
     }
   }
 
-  &:not(.-floating) .spinner {
-    margin-left: 8px;
+  &:not(.-floating) {
+    .icon,
+    .spinner {
+      margin-left: 8px;
+    }
   }
 }

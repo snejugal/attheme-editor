@@ -46,9 +46,14 @@ main {
   line-height: 1.75;
 }
 
+.icon,
 .emoji {
   height: 1em;
   width: 1em;
+}
+
+.icon {
+  fill: currentColor;
 }
 
 noscript {
