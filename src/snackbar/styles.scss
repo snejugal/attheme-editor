@@ -1,0 +1,48 @@
+@import "./variables";
+@import "../variables";
+@import "../mixins/shadow";
+
+.snackbars {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  width: 100%;
+  z-index: 3;
+}
+
+.snackbarWrapper {
+  width: 100%;
+  max-width: $snackbar_maxWidth;
+}
+
+.snackbar {
+  @include shadow(12);
+
+  padding: $container_padding;
+  background-color: $snackbar_background;
+  border-top-left-radius: $container_borderRadius;
+  border-top-right-radius: $container_borderRadius;
+  animation-name: snackbar_appear;
+  transition-property: transform, opacity;
+  animation-duration: $transitionDuration;
+  transition-duration: $transitionDuration;
+
+  &.-disappearing {
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
+  }
+
+  &.-error {
+    background-color: $theme_errorColor;
+  }
+}
+
+@keyframes snackbar_appear {
+  from {
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
+  }
+}
