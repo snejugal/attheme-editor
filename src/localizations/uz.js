@@ -124,7 +124,7 @@ const localization = {
   paletteEditor_newColor: () => `Yangi rang qo'shing`,
   paletteEditor_title: () => `Maxsus tema palitrasi`,
   paletteEditor_defaultColorName: () => `Yaxshi rang`,
-  paletteEditor_placeholder: () => `Oops, palitra bo'sh ... hozir. «Yangi rang qo'shish» tugmasini bosing, agar chat_wallpaper-da rasm bo'lsa, bu o'zgaruvchining muharriri-ni oching va taklif qilayotgan ranglarni qo'shing!`,
+  paletteEditor_placeholder: () => `Oops, palitra bo'sh ... hozir. “Yangi rang qo'shish” tugmasini bosing, agar chat_wallpaper-da rasm bo'lsa, bu o'zgaruvchining muharriri-ni oching va taklif qilayotgan ranglarni qo'shing!`,
 };
 
 export default localization;
