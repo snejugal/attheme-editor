@@ -5,6 +5,8 @@ import React from "react";
 const pluralRules = new Intl.PluralRules(`uz`);
 
 const localization = {
+  dropHint: () => `Fayllarni bu yerga o'tkazing .attheme или .attheme-editor `,
+
   error_title: () => `Uzur, xatolik ro'y berdi`,
   error_description: () => <React.Fragment>
     Iltimos, xato skrinshotini Telegram {}
@@ -17,7 +19,7 @@ const localization = {
 
   emptyWorkspace_title: () => `O'z temangiz ustida ishlashni boshlang`,
   emptyWorkspace_createTheme: () => `Yangi tema yaratish`,
-  emptyWorkspace_openTheme: () => `Mavjud temalarni ochish`,
+  emptyWorkspace_openTheme: () => `Mavjud temalarni oching`,
   emptyWorkspace_credits: () => <React.Fragment>
     Tahrirlovchisi yaratildi {}
     <Link href="//t.me/snejugal">@snejugal</Link>
@@ -37,6 +39,11 @@ const localization = {
     <Link href="//t.me/atthemeeditor">
       Telegramdagi bizning kanalimiz
     </Link>!
+  </React.Fragment>,
+  emptyWorkspace_uploadWaysHint: () => <React.Fragment>
+    Bundan tashqari, faylni bu yerga tashlang yoki foydalaning {}
+    <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>,
+    {} Telegram orqali temalarni ochish.
   </React.Fragment>,
 
   theme_defaultName: () => `Ajoyib tema`,
@@ -63,6 +70,9 @@ const localization = {
 
     return forms[pluralRules.select(theme)];
   },
+  workspace_noVariablesPlaceholder: () => `Temada hech qanday o'zgaruvchan narsa yo'q. :( Yuqoridagi qidirish qutisiga ularni qo'shing!`,
+  workspace_noResultsPlaceholder: () => `Afsuski, qidiruv hech qanday natija bermadi. Ehtimol, so'rovda typo bormi?`,
+  workspace_uploadError: () => `Xato, muharriri temani botga yuklab bo'lmadi. Ulanishni tekshiring va qaytadan urinib ko'ring.`,
 
   confirmDialog_yes: () => `Ha`,
   confirmDialog_no: () => `Yo'q`,
@@ -84,6 +94,8 @@ const localization = {
   variableEditor_palettesTab: () => `Ranglar`,
   variableEditor_wallpaperColorsHint: () => `Mana bir nechta ranglash fon rasmladan. Temani sxemasiga qo'shish uchun rangni bosing:`,
   variableEditor_editPalette: () => `Paletlarni tahrirlash`,
+  variableEditor_themeColorsPlaceholder: () => `Afsuski, tema bo'yicha hech qanday rang yo'q`,
+  variableEditor_themeCustomPalettePlaceholder: () => `Oops, maxsus palitrada gullar yo'q ... hozir. Yuqoridagi «Paletni tahrirlash» tugmasini bosing!`,
 
   scriptRunner_title: () => `Skriptni ishga tushirish`,
   scriptRunner_description: () => <React.Fragment>
@@ -96,6 +108,7 @@ const localization = {
   scriptRunner_syntaxError: () => `Oops, skriptda xato sintaksis:`,
   scriptRunner_logMessage: () => `Sizning skriptinggiz konsolga yubordi:`,
   scriptRunner_babelLoadingFailed: () => `Yuklab bo'lmadi Babel. Aloqani tekshiring va sahifani qayta yuklang.`,
+  scriptRunner_interpreterLoadingFailed: () => `Tarjimonni yuklab bo'lmadi. Ulanishni tekshiring va sahifani qayta kiriting.`,
 
   palettes_apple: () => `Apple`,
   palettes_materialDesign: () => `Material Design`,
@@ -111,6 +124,7 @@ const localization = {
   paletteEditor_newColor: () => `Yangi rang qo'shing`,
   paletteEditor_title: () => `Maxsus tema palitrasi`,
   paletteEditor_defaultColorName: () => `Yaxshi rang`,
+  paletteEditor_placeholder: () => `Oops, palitra bo'sh ... hozir. «Yangi rang qo'shish» tugmasini bosing, agar chat_wallpaper-da rasm bo'lsa, bu o'zgaruvchining muharriri-ni oching va taklif qilayotgan ranglarni qo'shing!`,
 };
 
 export default localization;
