@@ -44,6 +44,7 @@ class ScriptRunner extends React.Component {
     isBabelLoading: true,
     isInterpreterLoaded: false,
     isInterpreterLoading: true,
+    handleHide: null,
   };
 
   componentDidMount = async () => {
@@ -236,6 +237,10 @@ class ScriptRunner extends React.Component {
     }
   };
 
+  handleClose = () => this.setState({
+    handleHide: this.props.onClose,
+  });
+
   render () {
     let outputTitle;
     let output;
@@ -274,6 +279,7 @@ class ScriptRunner extends React.Component {
       <Dialog
         onDismiss={this.props.onClose}
         title={localization.scriptRunner_title()}
+        onHide={this.state.handleHide}
         buttons={
           <React.Fragment>
             <Button
@@ -283,7 +289,7 @@ class ScriptRunner extends React.Component {
               {localization.scriptRunner_run()}
               {isRunButtonDisabled && <Spinner/>}
             </Button>
-            <Button onClick={this.props.onClose}>
+            <Button onClick={this.handleClose}>
               {localization.scriptRunner_close()}
             </Button>
           </React.Fragment>

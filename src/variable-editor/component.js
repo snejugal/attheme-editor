@@ -69,6 +69,7 @@ class VariableEditor extends React.Component {
       wallpaper: this.props.wallpaper,
       activeTab,
       wallpaperColors: null,
+      handleHide: null,
     };
   }
 
@@ -175,9 +176,16 @@ class VariableEditor extends React.Component {
 
   hanldeCustomPaletteEditStart = () => {
     this.props.onCustomPaletteEditStart({
-      backupState: this.state,
+      backupState: {
+        ...this.state,
+        handleHide: null,
+      },
     });
   };
+
+  handleHideDecorator = (handleHide) => () => this.setState({
+    handleHide,
+  });
 
   render () {
     const { color } = this.state;
@@ -252,15 +260,19 @@ class VariableEditor extends React.Component {
     return (
       <Dialog
         onDismiss={this.props.onCancel}
+        onHide={this.state.handleHide}
         buttons={
           <React.Fragment>
-            <Button onClick={this.handleSave}>
+            <Button onClick={this.handleHideDecorator(this.handleSave)}>
               {localization.variableEditor_save()}
             </Button>
-            <Button onClick={this.props.onCancel}>
+            <Button onClick={this.handleHideDecorator(this.props.onCancel)}>
               {localization.variableEditor_cancel()}
             </Button>
-            <Button onClick={this.props.onDelete} isDangerous={true}>
+            <Button
+              onClick={this.handleHideDecorator(this.props.onDelete)}
+              isDangerous={true}
+            >
               {localization.variableEditor_delete()}
             </Button>
           </React.Fragment>
@@ -351,7 +363,9 @@ class VariableEditor extends React.Component {
               themeColors={this.props.themeColors}
               alpha={this.state.color.alpha}
               themeCustomPalette={this.props.themeCustomPalette}
-              onCustomPaletteEditStart={this.hanldeCustomPaletteEditStart}
+              onCustomPaletteEditStart={this.handleHideDecorator(
+                this.hanldeCustomPaletteEditStart,
+              )}
             />
           )
         }

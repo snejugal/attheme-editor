@@ -35,6 +35,7 @@ class PaletteEditor extends React.Component {
       editingColorIndex: null,
       editingColorName: null,
       editingColor: null,
+      handleHide: null,
     };
   }
 
@@ -94,6 +95,10 @@ class PaletteEditor extends React.Component {
 
   handleNameChange = (event) => this.setState({
     editingColorName: event.target.value,
+  });
+
+  handleHideDecorator = (handleHide) => () => this.setState({
+    handleHide,
   });
 
   handleNewColor = () => this.setState({
@@ -163,7 +168,7 @@ class PaletteEditor extends React.Component {
         );
       });
       buttons = <React.Fragment>
-        <Button onClick={this.props.onClose}>
+        <Button onClick={this.handleHideDecorator(this.props.onClose)}>
           {
             this.props.isFromVariableEditor
               ? localization.paletteEditor_back()
@@ -191,6 +196,7 @@ class PaletteEditor extends React.Component {
     return (
       <Dialog
         onDismiss={this.props.onClose}
+        onHide={this.state.handleHide}
         buttons={buttons}
         {...title}
       >

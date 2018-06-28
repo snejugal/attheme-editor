@@ -16,19 +16,32 @@ class ConfirmDialog extends React.Component {
     isDangerous: false,
   };
 
+  state = {
+    handleHide: null,
+  };
+
+  handleConfirmed = () => this.setState({
+    handleHide: this.props.onConfirmed,
+  });
+
+  handleDismissed = () => this.setState({
+    handleHide: this.props.onDismissed,
+  });
+
   render () {
     return (
       <Dialog
         onDismiss={this.props.onDismissed}
+        onHide={this.state.handleHide}
         buttons={
           <React.Fragment>
             <Button
-              onClick={this.props.onConfirmed}
+              onClick={this.handleConfirmed}
               isDangerous={this.props.isDangerous}
             >
               {localization.confirmDialog_yes()}
             </Button>
-            <Button onClick={this.props.onDismissed}>
+            <Button onClick={this.handleDismissed}>
               {localization.confirmDialog_no()}
             </Button>
           </React.Fragment>
