@@ -5,6 +5,8 @@ import React from "react";
 const pluralRules = new Intl.PluralRules(`it`);
 
 const localization = {
+  dropHint: () => `Invia qui i file .attheme oppure .attheme-editor`,
+
   error_title: () => `Oops, c'è stato un errore.`,
   error_description: () => <React.Fragment>
     Per favore, manda uno screenshot dell&apos;errore al seguente indirizzo {}
@@ -17,7 +19,7 @@ const localization = {
 
   emptyWorkspace_title: () => `Comincia a lavorare sul tuo tema`,
   emptyWorkspace_createTheme: () => `Crea un nuovo tema`,
-  emptyWorkspace_openTheme: () => `Apri un tema esistente`,
+  emptyWorkspace_openTheme: () => `Apri un tema già esistente`,
   emptyWorkspace_credits: () => <React.Fragment>
     Creato da {}
     <Link href="//t.me/snejugal">@snejugal</Link>
@@ -37,6 +39,11 @@ const localization = {
     <Link href="//t.me/atthemeeditor">
       per il nostro canale Telegram
     </Link>!
+  </React.Fragment>,
+  emptyWorkspace_uploadWaysHint: () => <React.Fragment>
+    Puoi anche usare il drag&apos;n&apos;drop per aprire temi oppure usa {}
+    <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
+    {} per aprire i temi direttamente da Telegram.
   </React.Fragment>,
 
   theme_defaultName: () => `Bel tema`,
@@ -63,6 +70,9 @@ const localization = {
 
     return forms[pluralRules.select(theme)];
   },
+  workspace_noVariablesPlaceholder: () => `Non hai ancora alcuna variabile nel tema :( Aggiungine qualcuna tramite il campo di ricerca in alto!`,
+  workspace_noResultsPlaceholder: () => `Oops, la ricerca non ha prodotto alcun risultato. Magari hai sbagliato a scrivere?`,
+  workspace_uploadError: () => `Oops, l'editor non è riuscito a caricare il tuo tema al bot. Controlla la tua connessione ad internet e prova di nuovo`,
 
   confirmDialog_yes: () => `Sì`,
   confirmDialog_no: () => `No`,
@@ -84,6 +94,8 @@ const localization = {
   variableEditor_palettesTab: () => `Palette dei colori`,
   variableEditor_wallpaperColorsHint: () => `Ecco alcuni colori estratti dallo sfondo. Clicca su un colore per aggiungerlo alla paletta del tuo tema:`,
   variableEditor_editPalette: () => `Modifica la pelette dei colori`,
+  variableEditor_themeColorsPlaceholder: () => `Oops, non ci sono ancora colori nel tuo tema.`,
+  variableEditor_themeCustomPalettePlaceholder: () => `Oops, non c'è ancora alcun colore nella palette colori personalizzata. Premi il tasto "Modifica la palette colori" qui sopra!`,
 
   scriptRunner_title: () => `Esegui uno script`,
   scriptRunner_description: () => <React.Fragment>
@@ -96,6 +108,7 @@ const localization = {
   scriptRunner_syntaxError: () => `Oops, c'è un errore di sintassi nel tuo script:`,
   scriptRunner_logMessage: () => `Il tuo script ha come log:`,
   scriptRunner_babelLoadingFailed: () => `Impossibile caricare Babel. Controlla la tua connessione ad internet e ricarica la pagina.`,
+  scriptRunner_interpreterLoadingFailed: () => `Impossibile caricare l'interprete. Controlla la tua connessione ad internet e ricarica la pagina.`,
 
   palettes_apple: () => `Apple`,
   palettes_materialDesign: () => `Material Design`,
@@ -111,6 +124,7 @@ const localization = {
   paletteEditor_newColor: () => `Aggiungi un nuovo colore`,
   paletteEditor_title: () => `La palette colori del tema`,
   paletteEditor_defaultColorName: () => `Bel colore`,
+  paletteEditor_placeholder: () => `Oops, la palette colori è vuota… Per ora. Premi il tasto "Aggiungi un nuovo colore" in fondo, oppure se hai assegnato un'immagine a chat_wallpaper, apri il suo editor e aggiungi il colore che viene consigliato a questa palette!`,
 };
 
 export default localization;
