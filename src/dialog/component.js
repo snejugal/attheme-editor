@@ -14,17 +14,24 @@ class Dialog extends React.Component {
     title: PropTypes.any,
     buttons: PropTypes.any,
     onDismiss: PropTypes.func.isRequired,
-  }
+    onHide: PropTypes.func,
+  };
+
+  state = {
+    isDisappearing: false,
+  };
 
   wasMouseDown = false;
 
+  dialog = React.createRef();
+
   onRootClick = (event) => {
     if (event.target === root && this.wasMouseDown) {
-      this.props.onDismiss(event);
+      this.hide();
     }
 
     this.wasMouseDown = false;
-  }
+  };
 
   onRootMouseDown = (event) => {
     if (event.target === root) {
@@ -34,7 +41,23 @@ class Dialog extends React.Component {
 
   onDocumentKeyDown = (event) => {
     if (event.key === `Escape`) {
-      this.props.onDismiss(event);
+      this.hide();
+    }
+  };
+
+  hide = () => this.setState({
+    isDisappearing: true,
+  });
+
+  handleRootTransitionEnd = ({ target }) => {
+    if (target === this.dialog.current) {
+      if (this.props.onHide) {
+        this.props.onHide();
+      } else {
+        this.props.onDismiss();
+      }
+
+      root.classList.remove(`-disappear`);
     }
   };
 
@@ -66,9 +89,20 @@ class Dialog extends React.Component {
     }
   };
 
+  componentDidUpdate = () => {
+    if (this.state.isDisappearing || this.props.onHide) {
+      root.classList.add(`-disappear`);
+      root.addEventListener(`transitionend`, this.handleRootTransitionEnd);
+    }
+  };
+
   render () {
     return ReactDOM.createPortal(
-      <dialog className="dialog" open={true}>
+      <dialog
+        className="dialog"
+        open={true}
+        ref={this.dialog}
+      >
         <div className="dialog_content">
           {
             `title` in this.props

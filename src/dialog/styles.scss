@@ -13,7 +13,15 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba($shadowColor, .5);
+  animation-name: dialogBackdrop_appear;
+  animation-duration: $transitionDuration;
+  transition-property: opacity;
+  transition-duration: $transitionDuration;
   z-index: 2;
+
+  &.-disappear {
+    opacity: 0;
+  }
 
   &:empty {
     display: none;
@@ -39,9 +47,18 @@
   border: none;
   padding: 0;
   color: inherit;
+  animation-name: dialog_appear;
+  animation-duration: $transitionDuration;
+  transition-property: transform;
+  transition-duration: $transitionDuration;
 
   @media (min-width: $container_maxWidth) {
     border-radius: $container_borderRadius;
+  }
+
+  .dialogContainer.-disappear & {
+    // opacity: 0;
+    transform: translate3d(0, 256px, 0);
   }
 
   &_content {
@@ -80,5 +97,17 @@
         color: $theme_errorColor;
       }
     }
+  }
+}
+
+@keyframes dialog_appear {
+  from {
+    transform: translate3d(0, 256px, 0);
+  }
+}
+
+@keyframes dialogBackdrop_appear {
+  from {
+    opacity: 0;
   }
 }
