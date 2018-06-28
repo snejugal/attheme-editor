@@ -8,6 +8,7 @@ let isJavaScriptModeLoaded = false;
 class CodeMirrorEditor extends React.Component {
   static propTypes = {
     className: PropTypes.string,
+    onFocus: PropTypes.func,
   };
 
   container = React.createRef();
@@ -30,13 +31,19 @@ class CodeMirrorEditor extends React.Component {
     } catch (e) {
       const textarea = document.createElement(`textarea`);
 
-      this.container.appendChild(textarea);
+      textarea.autofocus = true;
+
+      if (this.props.onFocus) {
+        textarea.addEventListener(`focus`, this.props.onFocus);
+      }
 
       this.editor = {
         getValue () {
           return textarea.value;
         },
       };
+
+      this.container.appendChild(textarea);
 
       return;
     }
@@ -50,6 +57,10 @@ class CodeMirrorEditor extends React.Component {
       indentWithTabs: false,
       tabSize: 2,
     });
+
+    if (this.props.onFocus) {
+      editor.on(`focus`, this.props.onFocus);
+    }
 
     this.editor = editor;
   }

@@ -226,7 +226,15 @@ class ScriptRunner extends React.Component {
 
       nextStep();
     }
-  }
+  };
+
+  handleEditorFocus = () => {
+    if (this.state.isEvaluated) {
+      this.setState({
+        isEvaluated: false,
+      });
+    }
+  };
 
   render () {
     let outputTitle;
@@ -285,6 +293,7 @@ class ScriptRunner extends React.Component {
         <CodeEditor
           className="scriptRunner_editor"
           ref={this.editor}
+          onFocus={this.handleEditorFocus}
         />
         {
           outputTitle
