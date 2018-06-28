@@ -66,7 +66,7 @@ class Dialog extends React.Component {
 
     root.addEventListener(`click`, this.onRootClick);
     root.addEventListener(`mousedown`, this.onRootMouseDown);
-    window.addEventListener(`popstate`, this.props.onDismiss);
+    window.addEventListener(`popstate`, this.hide);
     document.body.addEventListener(`keydown`, this.onDocumentKeyDown);
 
     this.shouldRestoreTabIndex = Array.from(
@@ -81,7 +81,7 @@ class Dialog extends React.Component {
   componentWillUnmount = () => {
     root.removeEventListener(`click`, this.onRootClick);
     root.removeEventListener(`mousedown`, this.onRootMouseDown);
-    window.removeEventListener(`popstate`, this.props.onDismiss);
+    window.removeEventListener(`popstate`, this.hide);
     document.body.removeEventListener(`keydown`, this.onDocumentKeyDown);
 
     for (const element of this.shouldRestoreTabIndex) {
