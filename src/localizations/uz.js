@@ -95,7 +95,7 @@ const localization = {
   variableEditor_wallpaperColorsHint: () => `Mana bir nechta ranglash fon rasmladan. Temani sxemasiga qo'shish uchun rangni bosing:`,
   variableEditor_editPalette: () => `Paletlarni tahrirlash`,
   variableEditor_themeColorsPlaceholder: () => `Afsuski, tema bo'yicha hech qanday rang yo'q`,
-  variableEditor_themeCustomPalettePlaceholder: () => `Oops, maxsus palitrada gullar yo'q ... hozir. Yuqoridagi «Paletni tahrirlash» tugmasini bosing!`,
+  variableEditor_themeCustomPalettePlaceholder: () => `Oops, maxsus palitrada gullar yo'q ... hozir. Yuqoridagi “Paletni tahrirlash” tugmasini bosing!`,
 
   scriptRunner_title: () => `Skriptni ishga tushirish`,
   scriptRunner_description: () => <React.Fragment>
