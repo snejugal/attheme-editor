@@ -14,6 +14,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import RgbInput from "../rgb-input/component";
 import Tabs from "../tabs/component";
+import VariablePreview from "../variable-preview/component";
 import { defaultValues } from "../attheme-variables";
 import localization from "../localization";
 import readFile from "../read-file";
@@ -286,24 +287,31 @@ class VariableEditor extends React.Component {
           </React.Fragment>
         }
       >
-        <div className={previewOuterClassName}>
-          {
-            this.state.activeTab === `image` && this.state.wallpaper
-              ? (
-                <img
-                  className="variableEditor_preview -image"
-                  src={`data:image/jpg;base64,${this.state.wallpaper}`}
-                  alt=""
-                />
-              )
-              : (
-                <div
-                  className="variableEditor_preview -inner"
-                  style={colorPreviewStyle}
-                />
-              )
+        <VariablePreview
+          theme={this.props.theme}
+          variable={this.props.variable}
+          color={this.state.color}
+          fallback={
+            <div className={previewOuterClassName}>
+              {
+                this.state.activeTab === `image` && this.state.wallpaper
+                  ? (
+                    <img
+                      className="variableEditor_preview -image"
+                      src={`data:image/jpg;base64,${this.state.wallpaper}`}
+                      alt=""
+                    />
+                  )
+                  : (
+                    <div
+                      className="variableEditor_preview -inner"
+                      style={colorPreviewStyle}
+                    />
+                  )
+              }
+            </div>
           }
-        </div>
+        />
         <Heading level={3} className="variableEditor_title">
           {this.props.variable}
         </Heading>
