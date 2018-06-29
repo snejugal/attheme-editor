@@ -5,7 +5,6 @@ import { allVariablesAmount, defaultValues } from "../attheme-variables";
 import Attheme from "attheme-js";
 import Button from "../button/component";
 import Buttons from "../buttons/component";
-import Color from "../color";
 import { ReactComponent as DownloadIcon } from "./download-icon.svg";
 import Field from "../field/component";
 import Hint from "../hint/component";
