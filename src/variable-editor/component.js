@@ -184,16 +184,6 @@ class VariableEditor extends React.Component {
   render () {
     const { color } = this.state;
 
-    const colorPreviewStyle = {
-      backgroundColor: Color.createCssRgb(color),
-    };
-
-    let previewOuterClassName = `variableEditor_preview -outer`;
-
-    if (this.state.activeTab === `image` && this.state.wallpaper) {
-      previewOuterClassName += ` -imageWrapper`;
-    }
-
     const tabs = [
       {
         id: `color-numeric`,
@@ -290,26 +280,13 @@ class VariableEditor extends React.Component {
         <VariablePreview
           theme={this.props.theme}
           variable={this.props.variable}
-          color={this.state.color}
-          fallback={
-            <div className={previewOuterClassName}>
-              {
-                this.state.activeTab === `image` && this.state.wallpaper
-                  ? (
-                    <img
-                      className="variableEditor_preview -image"
-                      src={`data:image/jpg;base64,${this.state.wallpaper}`}
-                      alt=""
-                    />
-                  )
-                  : (
-                    <div
-                      className="variableEditor_preview -inner"
-                      style={colorPreviewStyle}
-                    />
-                  )
-              }
-            </div>
+          currentColor={this.state.color}
+          currentWallpaper={this.state.wallpaper}
+          shouldShowWallpaper={
+            Boolean(
+              this.state.activeTab === `image`
+              && this.state.wallpaper,
+            )
           }
         />
         <Heading level={3} className="variableEditor_title">

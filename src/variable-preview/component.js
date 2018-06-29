@@ -1,3 +1,5 @@
+import "./styles.scss";
+
 import Color from "../color";
 import PropTypes from "prop-types";
 import React from "react";
@@ -10,8 +12,9 @@ class VariablePreview extends React.Component {
   static propTypes = {
     theme: PropTypes.object.isRequired,
     variable: PropTypes.string.isRequired,
-    color: PropTypes.object,
-    fallback: PropTypes.node.isRequired,
+    currentColor: PropTypes.object,
+    currentWallpaper: PropTypes.string,
+    shouldShowWallpaper: PropTypes.bool,
   };
 
   state = {
@@ -81,7 +84,7 @@ class VariablePreview extends React.Component {
       return;
     }
 
-    const cssRgb = Color.createCssRgb(this.props.color);
+    const cssRgb = Color.createCssRgb(this.props.currentColor);
 
     for (const element of this.state.updateeElements) {
       element.style.fill = cssRgb;
@@ -91,7 +94,29 @@ class VariablePreview extends React.Component {
   render () {
     return (
       <div className="variablePreview" ref={this.preview}>
-        {!this.state.updateeElements && this.props.fallback}
+        {
+          !this.state.updateeElements
+          && this.props.shouldShowWallpaper
+          && (
+            <img
+              className="variablePreview_image"
+              src={`data:image/jpg;base64,${this.props.currentWallpaper}`}
+              alt=""
+            />
+          )
+        }
+        {
+          !this.state.updateeElements
+          && !this.props.shouldShowWallpaper
+          && (
+            <div
+              className="variablePreview_color"
+              style={{
+                backgroundColor: Color.createCssRgb(this.props.currentColor),
+              }}
+            />
+          )
+        }
       </div>
     );
   }
