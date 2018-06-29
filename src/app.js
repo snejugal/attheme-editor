@@ -200,14 +200,14 @@ class App extends React.Component {
     const newActiveTabIndex = Math.min(currentIndex, workplaces.length - 1);
     const activeTab = workplaces[newActiveTabIndex] || -1;
 
+    await database.deleteTheme(this.state.activeTab);
+    await database.updateWorkplaces(workplaces);
+    await database.updateActiveTab(activeTab);
+
     this.setState({
       workplaces,
       activeTab,
     });
-
-    await database.deleteTheme(this.state.activeTab);
-    await database.updateWorkplaces(workplaces);
-    await database.updateActiveTab(activeTab);
   };
 
   render () {
