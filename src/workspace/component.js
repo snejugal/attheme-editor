@@ -313,16 +313,6 @@ class Workplace extends React.Component {
 
     let dialog = null;
 
-    const themeColors = [
-      ...new Set(
-        Object.values(this.state.theme.variables)
-          .map((color) => Color.createHex({
-            ...color,
-            alpha: 255,
-          })),
-      ),
-    ];
-
     if (this.state.isEditingPalette) {
       dialog = <PaletteEditor
         palette={this.state.theme.palette}
@@ -337,9 +327,7 @@ class Workplace extends React.Component {
         onCancel={this.handleVariableEditCancel}
         onSave={this.handleVariableEditSave}
         onDelete={this.handleVariableDelete}
-        wallpaper={this.state.theme.wallpaper}
-        themeColors={themeColors}
-        themeCustomPalette={this.state.theme.palette}
+        theme={this.state.theme}
         onCustomPaletteColorAdd={this.handleCustomPaletteColorAdd}
         onCustomPaletteEditStart={this.handleCustomPaletteEditStart}
         stateBackup={this.state.editorState}

@@ -28,17 +28,10 @@ class VariableEditor extends React.Component {
     onCancel: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    wallpaper: PropTypes.string,
-    themeColors: PropTypes.arrayOf(PropTypes.string),
-    themeCustomPalette: PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.object,
-      ])
-    ).isRequired,
     onCustomPaletteColorAdd: PropTypes.func.isRequired,
     onCustomPaletteEditStart: PropTypes.func.isRequired,
     stateBackup: PropTypes.object,
+    theme: PropTypes.object,
   };
 
   static defaultProps = {
@@ -58,7 +51,7 @@ class VariableEditor extends React.Component {
     let activeTab = `color-numeric`;
 
     if (
-      this.props.wallpaper
+      this.props.theme.wallpaper
       && this.props.variable === `chat_wallpaper`
     ) {
       activeTab = `image`;
@@ -66,7 +59,7 @@ class VariableEditor extends React.Component {
 
     this.state = {
       color: this.props.color,
-      wallpaper: this.props.wallpaper,
+      wallpaper: this.props.theme.wallpaper,
       activeTab,
       wallpaperColors: null,
       handleHide: null,
@@ -236,7 +229,7 @@ class VariableEditor extends React.Component {
           className += ` -darkText`;
         }
 
-        const isAlreadyInPalette = this.props.themeCustomPalette.some(
+        const isAlreadyInPalette = this.props.theme.palette.some(
           (customPaletteColor) => (
             customPaletteColor.color.red === colorData.color.red
             && customPaletteColor.color.green === colorData.color.green
@@ -255,6 +248,21 @@ class VariableEditor extends React.Component {
           {isAlreadyInPalette && <Check className="icon"/>}
         </Button>;
       });
+    }
+
+    const themeColors = [];
+
+    if (this.state.activeTab === `palettes`) {
+      const allColors = Object.values(this.props.theme.variables);
+      const hexes = allColors.map(({ red, green, blue }) => Color.createHex({
+        red,
+        green,
+        blue,
+        alpha: 255,
+      }));
+      const uniqueHexes = new Set(hexes);
+
+      themeColors.push(...uniqueHexes);
     }
 
     return (
@@ -360,9 +368,9 @@ class VariableEditor extends React.Component {
           this.state.activeTab === `palettes` && (
             <Palettes
               onChange={this.handleColorChange}
-              themeColors={this.props.themeColors}
+              themeColors={themeColors}
               alpha={this.state.color.alpha}
-              themeCustomPalette={this.props.themeCustomPalette}
+              themeCustomPalette={this.props.theme.palette}
               onCustomPaletteEditStart={this.handleHideDecorator(
                 this.hanldeCustomPaletteEditStart,
               )}
