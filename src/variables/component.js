@@ -109,26 +109,28 @@ class Variables extends React.Component {
 
     variablesOrder.push(...themeVariables);
 
-    if (query.startsWith(`#`)) {
-      const parsedSearchHex = Color.parseHex(query);
+    if (query) {
+      if (query.startsWith(`#`)) {
+        const parsedSearchHex = Color.parseHex(query);
 
-      const searchHex = parsedSearchHex
-        ? Color.createHex(parsedSearchHex)
-        : query;
+        const searchHex = parsedSearchHex
+          ? Color.createHex(parsedSearchHex)
+          : query;
 
-      variablesOrder = variablesOrder.filter((variable) => {
-        const color = this.props.theme[variable] || defaultValues[variable];
+        variablesOrder = variablesOrder.filter((variable) => {
+          const color = this.props.theme[variable] || defaultValues[variable];
 
-        const variableHex = Color.createHex(color);
+          const variableHex = Color.createHex(color);
 
-        return variableHex.startsWith(searchHex);
-      });
-    } else if (query !== `*`) {
-      const searcher = new FuzzySearch(variablesOrder, [], {
-        sort: true,
-      });
+          return variableHex.startsWith(searchHex);
+        });
+      } else if (query !== `*`) {
+        const searcher = new FuzzySearch(variablesOrder, [], {
+          sort: true,
+        });
 
-      variablesOrder = searcher.search(query);
+        variablesOrder = searcher.search(query);
+      }
     }
 
     const variables = [];
