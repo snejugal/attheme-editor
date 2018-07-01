@@ -103,46 +103,32 @@ class Variables extends React.Component {
       }
     }
 
-    if (this.props.wallpaper && !this.props.theme.chat_wallpaper) {
-      if (!themeVariables.includes(`chat_wallpaper`)) {
-        variablesOrder.push(`chat_wallpaper`);
-      }
+    if (this.props.wallpaper && !themeVariables.includes(`chat_wallpaper`)) {
+      variablesOrder.push(`chat_wallpaper`);
     }
 
     variablesOrder.push(...themeVariables);
 
-    if (query && query !== `*`) {
-      let variablesOrderFS = [];
+    if (query.startsWith(`#`)) {
+      const parsedSearchHex = Color.parseHex(query);
 
+      const searchHex = parsedSearchHex
+        ? Color.createHex(parsedSearchHex)
+        : query;
+
+      variablesOrder = variablesOrder.filter((variable) => {
+        const color = this.props.theme[variable] || defaultValues[variable];
+
+        const variableHex = Color.createHex(color);
+
+        return variableHex.startsWith(searchHex);
+      });
+    } else if (query !== `*`) {
       const searcher = new FuzzySearch(variablesOrder, [], {
         sort: true,
       });
 
-      variablesOrderFS = searcher.search(query);
-
-      for (const variable of variablesOrder) {
-        if (variablesOrderFS.includes(variable)) {
-          continue;
-        }
-
-        const search = Color.parseHex(query)
-          ? Color.createHex(Color.parseHex(query))
-          : query;
-
-        if (
-          themeVariables.includes(variable)
-          && this.props.theme[variable]
-          && Color.createHex(this.props.theme[variable]).startsWith(search)
-        ) {
-          variablesOrderFS.push(variable);
-        } else if (
-          defaultValues[variable]
-          && Color.createHex(defaultValues[variable]).startsWith(search)
-        ) {
-          variablesOrderFS.push(variable);
-        }
-        variablesOrder = variablesOrderFS;
-      }
+      variablesOrder = searcher.search(query);
     }
 
     const variables = [];
