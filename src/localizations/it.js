@@ -17,7 +17,7 @@ const localization = {
   </React.Fragment>,
   error_dismiss: () => `Per chiudere la finestra di errore fai tap qui.`,
 
-  emptyWorkspace_title: () => `Comincia a lavorare sul tuo tema`,
+  emptyWorkspace_title: () => `Comincia a lavorare al tuo tema`,
   emptyWorkspace_createTheme: () => `Crea un nuovo tema`,
   emptyWorkspace_openTheme: () => `Apri dei temi già esistenti`,
   emptyWorkspace_credits: () => <React.Fragment>
