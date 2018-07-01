@@ -15,11 +15,11 @@ const localization = {
     </Link>
     {} e descrivi cosa hai fatto che ha causato l&apos;errore. Potrebbe essere necessario mandare anche il file originale del tema che hai usato.
   </React.Fragment>,
-  error_dismiss: () => `Per respingere l'errore tappa qui.`,
+  error_dismiss: () => `Per chiudere la finestra di errore fai tap qui.`,
 
-  emptyWorkspace_title: () => `Comincia a lavorare sul tuo tema`,
+  emptyWorkspace_title: () => `Comincia a lavorare al tuo tema`,
   emptyWorkspace_createTheme: () => `Crea un nuovo tema`,
-  emptyWorkspace_openTheme: () => `Apri un tema già esistente`,
+  emptyWorkspace_openTheme: () => `Apri dei temi già esistenti`,
   emptyWorkspace_credits: () => <React.Fragment>
     Creato da {}
     <Link href="//t.me/snejugal">@snejugal</Link>
@@ -33,15 +33,15 @@ const localization = {
     <LoveEmoji className="emoji" />.
     {} Guarda {}
     <Link href="//github.com/snejugal/attheme-editor">
-      per il codice sorgente dell&apos;editor su GitHub
+      il codice sorgente dell&apos;editor su GitHub
     </Link>
-    {} e iscriviti su {}
+    {} e iscriviti al {}
     <Link href="//t.me/atthemeeditor">
-      per il nostro canale Telegram
+      nostro canale Telegram
     </Link>!
   </React.Fragment>,
   emptyWorkspace_uploadWaysHint: () => <React.Fragment>
-    Puoi anche usare il drag&apos;n&apos;drop per aprire temi oppure usa {}
+    Per aprire i temi puoi anche usare il drag&apos;n&apos;drop oppure usa {}
     <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
     {} per aprire i temi direttamente da Telegram.
   </React.Fragment>,
@@ -65,14 +65,14 @@ const localization = {
   workspace_variablesAmount: ({ total, theme }) => {
     const forms = {
       one: `Una variabile su ${total} è stata aggiunta al tema`,
-      other: `${theme} variabili  su ${total} sono state aggiunte al tema`,
+      other: `${theme} variabili su ${total} sono state aggiunte al tema`,
     };
 
     return forms[pluralRules.select(theme)];
   },
-  workspace_noVariablesPlaceholder: () => `Non hai ancora alcuna variabile nel tema :( Aggiungine qualcuna tramite il campo di ricerca in alto!`,
+  workspace_noVariablesPlaceholder: () => `Non hai ancora inserito variabili nel tema :( Aggiungine qualcuna tramite il campo di ricerca in alto!`,
   workspace_noResultsPlaceholder: () => `Oops, la ricerca non ha prodotto alcun risultato. Magari hai sbagliato a scrivere?`,
-  workspace_uploadError: () => `Oops, l'editor non è riuscito a caricare il tuo tema al bot. Controlla la tua connessione ad internet e prova di nuovo`,
+  workspace_uploadError: () => `Oops, l'editor non è riuscito ad inviare il tuo tema al bot. Controlla la tua connessione ad internet e prova di nuovo`,
 
   confirmDialog_yes: () => `Sì`,
   confirmDialog_no: () => `No`,
@@ -92,14 +92,14 @@ const localization = {
   variableEditor_imageTab: () => `Immagine`,
   variableEditor_colorModelsTab: () => `Codici colori`,
   variableEditor_palettesTab: () => `Palette dei colori`,
-  variableEditor_wallpaperColorsHint: () => `Ecco alcuni colori estratti dallo sfondo. Clicca su un colore per aggiungerlo alla paletta del tuo tema:`,
-  variableEditor_editPalette: () => `Modifica la pelette dei colori`,
+  variableEditor_wallpaperColorsHint: () => `Ecco alcuni colori estratti dallo sfondo. Clicca su un colore per aggiungerlo alla palette del tuo tema:`,
+  variableEditor_editPalette: () => `Modifica la palette dei colori`,
   variableEditor_themeColorsPlaceholder: () => `Oops, non ci sono ancora colori nel tuo tema.`,
   variableEditor_themeCustomPalettePlaceholder: () => `Oops, non c'è ancora alcun colore nella palette colori personalizzata. Premi il tasto "Modifica la palette colori" qui sopra!`,
 
   scriptRunner_title: () => `Esegui uno script`,
   scriptRunner_description: () => <React.Fragment>
-    L&apos;editor .attheme ti permette di eseguire facilmente gli script scritti in EcmaScript 2017 per velocizzare lo sviluppo dei temi. Puoi informarti riguardo le API che l&apos;editor mette a disposizione alla <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">wiki del suo repository di GitHub</Link>.
+    L&apos;editor .attheme ti permette di eseguire facilmente degli script in linguaggio EcmaScript 2017 per velocizzare lo sviluppo dei temi. Puoi trovare informazioni sulle API che l&apos;editor mette a disposizione alla <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">wiki del suo repository su GitHub</Link>.
   </React.Fragment>,
   scriptRunner_close: () => `Chiudi`,
   scriptRunner_run: () => `Esegui`,
@@ -114,7 +114,7 @@ const localization = {
   palettes_materialDesign: () => `Material Design`,
   palettes_css: () => `Colori CSS`,
   palettes_themeColors: () => `Il colore del tema`,
-  palettes_themeCustomPalette: () => `Paletta personalizzata del tema`,
+  palettes_themeCustomPalette: () => `Palette personalizzata del tema`,
 
   paletteEditor_close: () => `Chiudi`,
   paletteEditor_cancel: () => `Annulla`,
