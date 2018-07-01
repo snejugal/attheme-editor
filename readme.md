@@ -7,7 +7,7 @@ A powerful editor of Android Telegram themes on the web.
 The editor provides plenty of addtional features which the Telegram's built-in lacks like:
 - Search by variables and colors;
 - HEX and HSL color models support;
-- Variables previews _(Note: this is not what we have implemented right now but we will have by the first stable release)_;
+- Variables previews;
 - Palettes;
 - Editing of mutliple themes at the same time (tabs);
 - Theme renaming;
