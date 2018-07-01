@@ -19,7 +19,7 @@ const localization = {
 
   emptyWorkspace_title: () => `Comincia a lavorare sul tuo tema`,
   emptyWorkspace_createTheme: () => `Crea un nuovo tema`,
-  emptyWorkspace_openTheme: () => `Apri un tema già esistente`,
+  emptyWorkspace_openTheme: () => `Apri dei temi già esistenti`,
   emptyWorkspace_credits: () => <React.Fragment>
     Creato da {}
     <Link href="//t.me/snejugal">@snejugal</Link>
