@@ -222,7 +222,8 @@ class VariableEditor extends React.Component {
 
         const isAlreadyInPalette = this.props.theme.palette.some(
           (customPaletteColor) => (
-            customPaletteColor.color.red === colorData.color.red
+            typeof customPaletteColor === `object`
+            && customPaletteColor.color.red === colorData.color.red
             && customPaletteColor.color.green === colorData.color.green
             && customPaletteColor.color.blue === colorData.color.blue
           ),
