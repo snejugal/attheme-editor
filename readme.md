@@ -1,8 +1,6 @@
 # [.attheme editor]
 A powerful editor of Android Telegram themes on the web.
 
-[.attheme editor]: https://snejugal.ru/attheme-editor/beta/
-
 ## About
 The editor provides plenty of addtional features which the Telegram's built-in lacks like:
 - Search by variables and colors;
@@ -32,3 +30,5 @@ Developed by [@snejugal] and [@AlexStrNik]. Also thanks to these amazing people 
 [@tfroke]: https://t.me/tfroke
 [@DeduwkA_gg]: https://t.me/deduwkA_gg
 [@akaRamzEE]: https://t.me/akaRamzEE
+
+[.attheme editor]: https://snejugal.ru/attheme-editor/
