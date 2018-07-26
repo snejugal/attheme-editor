@@ -81,7 +81,7 @@ rules:
   consistent-this: warn
   eol-last:
     - warn
-    - never
+    - always
   func-call-spacing: warn
   func-names:
     - warn
