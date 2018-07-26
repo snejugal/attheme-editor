@@ -21,12 +21,15 @@ The editor also resolves some bugs of the built-in editor like absence of some v
 The editor can be run on both phones and desktops in the browser, and even offline.
 
 ---
+
 Developed by [@snejugal] and [@AlexStrNik]. Also thanks to these amazing people who translate the editor:
 
 - Italian: [@SventraPopizz] and [@supervalery];
 - Russian: [@snejugal];
 - Ukrainian: [@tfroke];
 - Uzbek: [@DeduwkA_gg] and [@akaRamzEE].
+
+Also, [@ItaPathfinderDM] and [@danicotra] made some previews for the editor. Thanks to them too!
 
 [@snejugal]: https://t.me/snejugal
 [@AlexStrNik]: https://t.me/AlexStrNik
@@ -35,5 +38,7 @@ Developed by [@snejugal] and [@AlexStrNik]. Also thanks to these amazing people 
 [@tfroke]: https://t.me/tfroke
 [@DeduwkA_gg]: https://t.me/deduwkA_gg
 [@akaRamzEE]: https://t.me/akaRamzEE
+[@ItaPathfinderDM]: https://t.me/ItaPathfinderDM
+[@danicotra]: https://t.me/danicotra
 
 [.attheme editor]: https://snejugal.ru/attheme-editor/
