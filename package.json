@@ -6,7 +6,7 @@
     "@babel/standalone": "^7.0.0-beta.49",
     "attheme-default-values": "^5.1.1",
     "attheme-editor-api": "^1.1.0",
-    "attheme-js": "^1.1.1",
+    "attheme-js": "^1.1.2",
     "codemirror": "^5.38.0",
     "es-interpreter": "^0.2.0",
     "fuzzy-search": "^2.0.1",
