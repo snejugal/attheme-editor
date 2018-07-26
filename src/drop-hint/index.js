@@ -49,6 +49,10 @@ document.documentElement.addEventListener(`dragleave`, ({ target }) => {
 
 document.documentElement.addEventListener(`drop`, hide);
 
+root.addEventListener(`click`, () => {
+  document.body.removeChild(root);
+});
+
 addLocalizationUpdatee(() => {
   root.textContent = localization.dropHint();
 });
