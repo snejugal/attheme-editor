@@ -63,7 +63,10 @@ class VariablePreview extends React.Component {
       let color = this.props.theme.variables[variable];
 
       if (!color && `fallback` in element.dataset) {
-        color = this.props.theme.variables[element.dataset.fallback];
+        color = (
+          this.props.theme.variables[element.dataset.fallback]
+          || defaultValues[element.dataset.fallback]
+        );
 
         if (`fallbackAlpha` in element.dataset) {
           color.alpha = Number(element.dataset.fallbackAlpha) * CHANNEL;
