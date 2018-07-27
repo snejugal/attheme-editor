@@ -105,10 +105,13 @@ class VariablePreview extends React.Component {
         svg.querySelectorAll(`[data-wallpaper]`),
       );
 
-      const wallpaperSize = calculateWallpaperSize(this.props.currentWallpaper);
-      const wallpaperRatio = wallpaperSize.width / wallpaperSize.height;
 
       if (wallpaperElements.length > 0) {
+        const wallpaperSize = await calculateWallpaperSize(
+          this.props.currentWallpaper,
+        );
+        const wallpaperRatio = wallpaperSize.width / wallpaperSize.height;
+
         const image = `data:image;base64,${this.props.currentWallpaper}`;
 
         for (const imageElement of wallpaperElements) {
