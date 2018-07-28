@@ -71,7 +71,7 @@ class HexInput extends React.Component {
     });
 
     if (parsedHex !== null) {
-      if (!this.shouldShowAlpha) {
+      if (!this.props.shouldShowAlpha) {
         parsedHex.alpha = this.props.color.alpha;
       }
 
