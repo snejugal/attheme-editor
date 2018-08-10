@@ -9,9 +9,9 @@ const localization = {
 
   error_title: () => `Vaya, parece que ha habido un error.`,
   error_description: () => <React.Fragment>
-    Envie una captura de pantalla del siguiente error a {}
+    Envie una captura de pantalla del siguiente error {}
     <Link href="//t.me/snejugal" isWhite={true}>
-      el desarrollador en Telegram
+      al desarrollador en Telegram
     </Link>
     {} y describe lo que hiciste para que ocurriera el error. Es posible que también deba enviar el archivo del tema oirginal que utilizó.
   </React.Fragment>,
