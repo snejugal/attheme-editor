@@ -34,9 +34,9 @@
   },
   "devDependencies": {
     "eslint-plugin-react": "^7.8.2",
-    "node-sass": "^4.9.0",
-    "react-scripts": "^2.0.0-next.66cc7a90",
-    "source-map-explorer": "^1.5.0",
+    "node-sass": "^4.9.3",
+    "react-scripts": "2.0.0-next.66cc7a90",
+    "source-map-explorer": "^1.6.0",
     "worker-loader": "^2.0.0"
   }
 }
