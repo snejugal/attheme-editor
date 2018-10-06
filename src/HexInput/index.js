@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 
-class HexInput extends React.Component {
+export default class HexInput extends React.Component {
   static propTypes = {
     color: PropTypes.object.isRequired,
     onAlphaChange: PropTypes.func,
@@ -120,5 +120,3 @@ class HexInput extends React.Component {
     );
   }
 }
-
-export default HexInput;

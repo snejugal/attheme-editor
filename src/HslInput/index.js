@@ -8,7 +8,7 @@ import localization from "../localization";
 const ROUND = 100;
 const PERCENTS = 100;
 
-class HslInput extends React.Component {
+export default class HslInput extends React.Component {
   static propTypes = {
     color: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -179,5 +179,3 @@ class HslInput extends React.Component {
     );
   }
 }
-
-export default HslInput;

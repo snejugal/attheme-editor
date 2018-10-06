@@ -15,7 +15,7 @@ import localization from "../localization";
 
 const PERCENTS = 100;
 
-class PaletteEditor extends React.Component {
+export default class PaletteEditor extends React.Component {
   static propTypes = {
     palette: PropTypes.arrayOf(PropTypes.object).isRequired,
     onChange: PropTypes.func.isRequired,
@@ -256,5 +256,3 @@ class PaletteEditor extends React.Component {
     );
   }
 }
-
-export default PaletteEditor;

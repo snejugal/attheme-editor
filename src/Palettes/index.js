@@ -10,7 +10,7 @@ import React from "react";
 import Select from "../Select";
 import localization from "../localization";
 
-class Palettes extends React.Component {
+export default class Palettes extends React.Component {
   static propTypes = {
     themeColors: PropTypes.arrayOf(PropTypes.string).isRequired,
     onChange: PropTypes.func.isRequired,
@@ -146,5 +146,3 @@ class Palettes extends React.Component {
     </>;
   }
 }
-
-export default Palettes;

@@ -3,7 +3,7 @@ import "./styles.scss";
 import PropTypes from "prop-types";
 import React from "react";
 
-class Buttons extends React.Component {
+export default class Buttons extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,
@@ -23,5 +23,3 @@ class Buttons extends React.Component {
     return <div className={className}>{this.props.children}</div>;
   }
 }
-
-export default Buttons;

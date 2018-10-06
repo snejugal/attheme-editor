@@ -3,7 +3,7 @@ import "./styles.scss";
 import PropTypes from "prop-types";
 import React from "react";
 
-class Heading extends React.Component {
+export default class Heading extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     level: PropTypes.number.isRequired,
@@ -24,5 +24,3 @@ class Heading extends React.Component {
     );
   }
 }
-
-export default Heading;

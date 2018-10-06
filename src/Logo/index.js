@@ -4,7 +4,7 @@ import { ReactComponent as LogoSVG } from "./logo.svg";
 import PropTypes from "prop-types";
 import React from "react";
 
-class Logo extends React.Component {
+export default class Logo extends React.Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
   }
@@ -15,5 +15,3 @@ class Logo extends React.Component {
     return <LogoSVG className="logo" onClick={this.props.onClick}/>;
   }
 }
-
-export default Logo;

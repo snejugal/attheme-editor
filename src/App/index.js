@@ -14,7 +14,7 @@ import readFile from "../readFile";
 
 const HANDLE_SCROLL_INTERVAL = 200;
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor (props) {
     super(props);
 
@@ -256,5 +256,3 @@ class App extends React.Component {
     </>;
   }
 }
-
-export default App;

@@ -5,7 +5,7 @@ import NewTab from "../NewTab";
 import PropTypes from "prop-types";
 import React from "react";
 
-class HeaderTabs extends React.Component {
+export default class HeaderTabs extends React.Component {
   static propTypes = {
     workplaces: PropTypes.array.isRequired,
     activeTab: PropTypes.number,
@@ -61,5 +61,3 @@ class HeaderTabs extends React.Component {
     );
   }
 }
-
-export default HeaderTabs;

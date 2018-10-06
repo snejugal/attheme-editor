@@ -10,7 +10,7 @@ import localization from "../localization";
 import parseTheme from "../parseTheme";
 import readFile from "../readFile";
 
-class EmptyWorkspace extends React.Component {
+export default class EmptyWorkspace extends React.Component {
   static propTypes = {
     onTheme: PropTypes.func.isRequired,
   }
@@ -78,5 +78,3 @@ class EmptyWorkspace extends React.Component {
     </>;
   }
 }
-
-export default EmptyWorkspace;

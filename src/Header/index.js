@@ -5,7 +5,7 @@ import Logo from "../Logo";
 import PropTypes from "prop-types";
 import React from "react";
 
-class Header extends React.Component {
+export default class Header extends React.Component {
   static propTypes = {
     workplaces: PropTypes.array.isRequired,
     activeTab: PropTypes.number,
@@ -28,5 +28,3 @@ class Header extends React.Component {
     );
   }
 }
-
-export default Header;

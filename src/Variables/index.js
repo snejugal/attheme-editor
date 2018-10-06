@@ -12,7 +12,7 @@ import localization from "../localization";
 
 const isMac = navigator.platform.toLowerCase().startsWith(`mac`);
 
-class Variables extends React.Component {
+export default class Variables extends React.Component {
   static propTypes = {
     themeId: PropTypes.number.isRequired,
     theme: PropTypes.object.isRequired,
@@ -201,5 +201,3 @@ class Variables extends React.Component {
     </>;
   }
 }
-
-export default Variables;

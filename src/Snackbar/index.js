@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 
 const root = document.querySelector(`.snackbars`);
 
-class Snackbar extends React.Component {
+export default class Snackbar extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     timeout: PropTypes.number,
@@ -65,5 +65,3 @@ class Snackbar extends React.Component {
     );
   }
 }
-
-export default Snackbar;
