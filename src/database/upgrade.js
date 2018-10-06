@@ -7,7 +7,7 @@ const SCHEME = {
   },
 };
 
-const upgrade = (database) => new Promise((resolve) => {
+export default (database) => new Promise((resolve) => {
   const objectStoresAmount = Object.keys(SCHEME).length;
 
   let completedAmount = 0;
@@ -29,5 +29,3 @@ const upgrade = (database) => new Promise((resolve) => {
     objectStore.oncomplete = resolver;
   }
 });
-
-export default upgrade;
