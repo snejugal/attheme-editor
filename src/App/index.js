@@ -1,4 +1,4 @@
-import * as database from "../database/api";
+import * as database from "../database/";
 import localization, {
   addUpdatee as addLocalizationUpdatee,
 } from "../localization";

@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-import * as database from "../database/api";
+import * as database from "../database/";
 import { allVariablesAmount, defaultValues } from "../atthemeVariables";
 import Attheme from "attheme-js";
 import Button from "../Button";
