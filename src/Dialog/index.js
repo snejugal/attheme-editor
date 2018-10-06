@@ -1,5 +1,6 @@
 import "./styles.scss";
 
+import Button from "../Button";
 import Buttons from "../Buttons";
 import Heading from "../Heading";
 import PropTypes from "prop-types";
@@ -12,13 +13,19 @@ export default class Dialog extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     title: PropTypes.any,
-    buttons: PropTypes.any,
-    onDismiss: PropTypes.func.isRequired,
-    onHide: PropTypes.func,
+    buttons: PropTypes.arrayOf(PropTypes.shape({
+      caption: PropTypes.any,
+      onClick: PropTypes.func,
+      shouldCloseAfterClick: PropTypes.bool,
+      isDangerous: PropTypes.bool,
+      isDisabled: PropTypes.bool,
+    })).isRequired,
+    onDismiss: PropTypes.func,
+    onClose: PropTypes.func.isRequired,
   };
 
   state = {
-    isDisappearing: false,
+    isClosing: false,
   };
 
   wasMouseDown = false;
@@ -27,7 +34,7 @@ export default class Dialog extends React.Component {
 
   onRootClick = (event) => {
     if (event.target === root && this.wasMouseDown) {
-      this.hide();
+      this.close();
     }
 
     this.wasMouseDown = false;
@@ -41,23 +48,35 @@ export default class Dialog extends React.Component {
 
   onDocumentKeyDown = (event) => {
     if (event.key === `Escape`) {
-      this.hide();
+      this.close();
     }
   };
 
-  hide = () => this.setState({
-    isDisappearing: true,
-  });
+  close = () => {
+    if (this.props.onDismiss) {
+      this.props.onDismiss();
+    }
+
+    this.setState({
+      isClosing: true,
+    });
+  };
 
   handleRootTransitionEnd = ({ target }) => {
     if (target === this.dialog.current) {
-      if (this.props.onHide) {
-        this.props.onHide();
-      } else {
-        this.props.onDismiss();
-      }
+      this.props.onClose();
 
       root.classList.remove(`-disappear`);
+    }
+  };
+
+  handleButtonClick = (button) => {
+    if (button.onClick) {
+      button.onClick();
+    }
+
+    if (button.shouldCloseAfterClick) {
+      this.close();
     }
   };
 
@@ -66,7 +85,7 @@ export default class Dialog extends React.Component {
 
     root.addEventListener(`click`, this.onRootClick);
     root.addEventListener(`mousedown`, this.onRootMouseDown);
-    window.addEventListener(`popstate`, this.hide);
+    window.addEventListener(`popstate`, this.close);
     document.body.addEventListener(`keydown`, this.onDocumentKeyDown);
 
     this.shouldRestoreTabIndex = Array.from(
@@ -81,7 +100,7 @@ export default class Dialog extends React.Component {
   componentWillUnmount = () => {
     root.removeEventListener(`click`, this.onRootClick);
     root.removeEventListener(`mousedown`, this.onRootMouseDown);
-    window.removeEventListener(`popstate`, this.hide);
+    window.removeEventListener(`popstate`, this.close);
     document.body.removeEventListener(`keydown`, this.onDocumentKeyDown);
 
     for (const element of this.shouldRestoreTabIndex) {
@@ -89,37 +108,38 @@ export default class Dialog extends React.Component {
     }
   };
 
-  componentDidUpdate = () => {
-    if (this.state.isDisappearing || this.props.onHide) {
+  componentDidUpdate(oldProps, oldState) {
+    if (this.state.isClosing && !oldState.isClosing) {
       root.classList.add(`-disappear`);
       root.addEventListener(`transitionend`, this.handleRootTransitionEnd);
     }
-  };
+  }
 
   render () {
     return ReactDOM.createPortal(
-      <dialog
-        className="dialog"
-        open={true}
-        ref={this.dialog}
-      >
+      <dialog className="dialog" open={true} ref={this.dialog}>
         <div className="dialog_content">
-          {
-            `title` in this.props
-              ? (
-                <Heading level={2} className="dialog_title">
-                  {this.props.title}
-                </Heading>
-              )
-              : null
-          }
+          {this.props.title && (
+            <Heading level={2} className="dialog_title">
+              {this.props.title}
+            </Heading>
+          )}
           {this.props.children}
         </div>
-        {
-          `buttons` in this.props
-            ? <Buttons className="dialog_buttons">{this.props.buttons}</Buttons>
-            : null
-        }
+        {`buttons` in this.props && (
+          <Buttons className="dialog_buttons">
+            {this.props.buttons.map((button) => (
+              <Button
+                key={button.caption}
+                onClick={() => this.handleButtonClick(button)}
+                isDangerous={button.isDangerous}
+                isDisabled={button.isDisabled}
+              >
+                {button.caption}
+              </Button>
+            ))}
+          </Buttons>
+        )}
       </dialog>,
       root,
     );

@@ -1,7 +1,6 @@
 import "./styles.scss";
 
 import { allVariables, defaultValues } from "../atthemeVariables";
-import Button from "../Button";
 import CodeEditor from "../CodeEditor";
 import Color from "@snejugal/color";
 import Dialog from "../Dialog";
@@ -13,6 +12,7 @@ import Spinner from "../Spinner";
 import colorClass from "./colorClass";
 import createTheme from "./theme";
 import localization from "../localization";
+import deepClone from "lodash/cloneDeep";
 
 const STEPS_PER_ONCE = 50000;
 const BABEL_OPTIONS = {
@@ -33,7 +33,7 @@ export default class ScriptRunner extends React.Component {
     onClose: PropTypes.func.isRequired,
     theme: PropTypes.object.isRequired,
     onThemeChange: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     parseError: null,
@@ -44,10 +44,9 @@ export default class ScriptRunner extends React.Component {
     isBabelLoading: true,
     isInterpreterLoaded: false,
     isInterpreterLoading: true,
-    handleHide: null,
   };
 
-  componentDidMount = async () => {
+  async componentDidMount() {
     if (Babel) {
       this.setState({
         isBabelLoaded: true,
@@ -78,7 +77,7 @@ export default class ScriptRunner extends React.Component {
       });
     } else {
       try {
-        ({ default: Interpreter } = await import(`es-interpreter`));
+        Interpreter = (await import(`es-interpreter`)).default;
       } catch (e) {
         this.setState({
           isInterpreterLoaded: false,
@@ -104,8 +103,8 @@ export default class ScriptRunner extends React.Component {
       runtimeError: null,
       parseError: null,
     });
-    let hasErrors = false;
 
+    let hasErrors = false;
     let code = this.editor.current.editor.getValue();
 
     try {
@@ -119,16 +118,7 @@ export default class ScriptRunner extends React.Component {
       hasErrors = true;
     }
 
-    const themeCopy = {
-      ...this.props.theme,
-      variables: {
-        ...this.props.theme.variables,
-      },
-      palette: [
-        ...this.props.theme.palette,
-      ],
-    };
-
+    const themeCopy = deepClone(this.props.theme);
     const activeTheme = createTheme(themeCopy);
 
     const prepare = (interpreter, scope) => {
@@ -237,11 +227,7 @@ export default class ScriptRunner extends React.Component {
     }
   };
 
-  handleClose = () => this.setState({
-    handleHide: this.props.onClose,
-  });
-
-  render () {
+  render() {
     let outputTitle;
     let output;
     let outputClassName = `scriptRunner_output`;
@@ -271,27 +257,30 @@ export default class ScriptRunner extends React.Component {
       outputClassName += ` -error`;
     }
 
-    const isRunButtonDisabled = !this.state.isBabelLoaded
+    const isRunButtonDisabled = (
+      !this.state.isBabelLoaded
       || !this.state.isInterpreterLoaded
-      || this.state.isEvaluating;
+      || this.state.isEvaluating
+    );
 
     return (
       <Dialog
-        onDismiss={this.props.onClose}
         title={localization.scriptRunner_title()}
-        onHide={this.state.handleHide}
-        buttons={<>
-          <Button
-            onClick={this.handleRun}
-            isDisabled={isRunButtonDisabled}
-          >
-            {localization.scriptRunner_run()}
-            {isRunButtonDisabled && <Spinner/>}
-          </Button>
-          <Button onClick={this.handleClose}>
-            {localization.scriptRunner_close()}
-          </Button>
-        </>}
+        onClose={this.props.onClose}
+        buttons={[
+          {
+            caption: <>
+              {localization.scriptRunner_run()}
+              {isRunButtonDisabled && <Spinner/>}
+            </>,
+            onClick: this.handleRun,
+            isDisabled: isRunButtonDisabled,
+          },
+          {
+            caption: localization.scriptRunner_close(),
+            shouldCloseAfterClick: true,
+          },
+        ]}
       >
         <Hint>{localization.scriptRunner_description()}</Hint>
         <CodeEditor
@@ -299,22 +288,14 @@ export default class ScriptRunner extends React.Component {
           ref={this.editor}
           onFocus={this.handleEditorFocus}
         />
-        {
-          outputTitle
-            ? (
-              <div className={outputClassName}>
-                <Heading level={3} className="scriptRunner_outputTitle">
-                  {outputTitle}
-                </Heading>
-                {
-                  output
-                    ? <p>{output}</p>
-                    : null
-                }
-              </div>
-            )
-            : null
-        }
+        {outputTitle && (
+          <div className={outputClassName}>
+            <Heading level={3} className="scriptRunner_outputTitle">
+              {outputTitle}
+            </Heading>
+            {output && <p>{output}</p>}
+          </div>
+        )}
       </Dialog>
     );
   }

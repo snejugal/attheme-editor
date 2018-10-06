@@ -176,15 +176,7 @@ export default class App extends React.Component {
     confirmClosing: true,
   });
 
-  handleCloseDismissed = () => this.setState({
-    confirmClosing: false,
-  });
-
-  handleCloseConfirmed = () => {
-    this.setState({
-      confirmClosing: false,
-    });
-
+  handleConfirm = () => {
     const workplaces = [...this.state.workplaces];
     const currentIndex = workplaces.indexOf(this.state.activeTab);
 
@@ -202,6 +194,10 @@ export default class App extends React.Component {
       activeTab,
     });
   };
+
+  handleConfirmClose = () => this.setState({
+    confirmClosing: false,
+  });
 
   render() {
     let workspace = null;
@@ -235,8 +231,8 @@ export default class App extends React.Component {
       </Container>
       {this.state.confirmClosing && (
         <ConfirmDialog
-          onDismissed={this.handleCloseDismissed}
-          onConfirmed={this.handleCloseConfirmed}
+          onConfirm={this.handleConfirm}
+          onClose={this.handleConfirmClose}
           isDangerous={true}
         >
           {localization.workspace_closeThemePrompt()}

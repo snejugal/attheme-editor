@@ -1,6 +1,5 @@
 import "./styles.scss";
 
-import Button from "../Button";
 import Color from "@snejugal/color";
 import Dialog from "../Dialog";
 import Field from "../Field";
@@ -97,10 +96,6 @@ export default class PaletteEditor extends React.Component {
     editingColorName: event.target.value,
   });
 
-  handleHideDecorator = (handleHide) => () => this.setState({
-    handleHide,
-  });
-
   handleNewColor = () => this.setState({
     editingColorIndex: this.state.palette.length,
     editingColorName: localization.paletteEditor_defaultColorName(),
@@ -112,14 +107,13 @@ export default class PaletteEditor extends React.Component {
     },
   });
 
-  render () {
-    const title = {};
-
+  render() {
+    let title;
     let buttons;
     let colors;
 
     if (this.state.editingColorIndex === null) {
-      title.title = localization.paletteEditor_title();
+      title = localization.paletteEditor_title();
       colors = this.state.palette.map(({ name, color }, i) => {
         color.alpha = 255;
 
@@ -167,91 +161,84 @@ export default class PaletteEditor extends React.Component {
           </button>
         );
       });
-      buttons = <>
-        <Button onClick={this.handleHideDecorator(this.props.onClose)}>
-          {
-            this.props.isFromVariableEditor
-              ? localization.paletteEditor_back()
-              : localization.paletteEditor_close()
-          }
-        </Button>
-        <Button onClick={this.handleNewColor}>
-          {localization.paletteEditor_newColor()}
-        </Button>
-      </>;
+      buttons = [
+        {
+          caption: this.props.isFromVariableEditor
+            ? localization.paletteEditor_back()
+            : localization.paletteEditor_close(),
+          shouldCloseAfterClick: true,
+        },
+        {
+          caption: localization.paletteEditor_newColor(),
+          onClick: this.handleNewColor,
+        },
+      ];
     } else {
-      buttons = <>
-        <Button onClick={this.handleSave}>
-          {localization.paletteEditor_save()}
-        </Button>
-        <Button onClick={this.handleCancel}>
-          {localization.paletteEditor_cancel()}
-        </Button>
-        <Button onClick={this.handleDelete} isDangerous={true}>
-          {localization.paletteEditor_delete()}
-        </Button>
-      </>;
+      buttons = [
+        {
+          caption: localization.paletteEditor_save(),
+          onClick: this.handleSave,
+        },
+        {
+          caption: localization.paletteEditor_cancel(),
+          onClick: this.handleCancel,
+        },
+        {
+          caption: localization.paletteEditor_delete(),
+          onClick: this.handleCancel,
+          isDangerous: true,
+        },
+      ];
     }
 
     return (
       <Dialog
-        onDismiss={this.props.onClose}
-        onHide={this.state.handleHide}
+        onClose={this.props.onClose}
         buttons={buttons}
-        {...title}
+        title={title}
       >
-        {
-          this.state.editingColor === null
-          && colors.length > 0
-          && (
-            <div className="paletteEditor_colors">
-              {colors}
-            </div>
-          )
-        }
-        {
-          this.state.editingColor === null
-          && colors.length === 0
-          && (
-            <Hint className="paletteEditor_colorsPlaceholder">
-              {localization.paletteEditor_placeholder()}
-            </Hint>
-          )
-        }
-        {
-          this.state.editingColor !== null && <>
-            <div
-              className="paletteEditor_colorPreview"
-              style={{
-                backgroundColor: Color.createCssRgb(
-                  this.state.editingColor,
-                ),
-              }}
+        {this.state.editingColor === null && colors.length > 0 && (
+          <div className="paletteEditor_colors">
+            {colors}
+          </div>
+        )}
+        {this.state.editingColor === null && colors.length === 0 && (
+          <Hint className="paletteEditor_colorsPlaceholder">
+            {localization.paletteEditor_placeholder()}
+          </Hint>
+        )}
+        {this.state.editingColor !== null && <>
+          <div
+            className="paletteEditor_colorPreview"
+            style={{
+              backgroundColor: Color.createCssRgb(
+                this.state.editingColor,
+              ),
+            }}
+          />
+          <form noValidate={true}>
+            <Field
+              value={this.state.editingColorName}
+              onChange={this.handleNameChange}
+              id="paletteEditor_name"
+            >
+              Name
+            </Field>
+            <HexInput
+              color={this.state.editingColor}
+              onHexChange={this.handleColorChange}
+              shouldShowAlpha={false}
             />
-            <form noValidate={true}>
-              <Field
-                value={this.state.editingColorName}
-                onChange={this.handleNameChange}
-                id="paletteEditor_name"
-              >
-                Name
-              </Field>
-              <HexInput
-                color={this.state.editingColor}
-                onHexChange={this.handleColorChange}
-                shouldShowAlpha={false}
-              />
-              <RgbInput
-                color={this.state.editingColor}
-                onChange={this.handleChannelChange}
-              />
-              <HslInput
-                color={this.state.editingColor}
-                onChange={this.handleColorChange}
-              />
-            </form>
-          </>
-        }
+            <RgbInput
+              color={this.state.editingColor}
+              onChange={this.handleChannelChange}
+            />
+            <HslInput
+              color={this.state.editingColor}
+              onChange={this.handleColorChange}
+            />
+          </form>
+        </>}
       </Dialog>
     );
   }
