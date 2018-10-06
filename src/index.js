@@ -3,7 +3,7 @@ import "./general.scss";
 import "intl-pluralrules";
 import "./dropHint";
 import * as serviceWorker from './serviceWorker';
-import App from "./app";
+import App from "./App";
 import ErrorHandler from "./ErrorHandler/component";
 import React from "react";
 import ReactDOM from "react-dom";
