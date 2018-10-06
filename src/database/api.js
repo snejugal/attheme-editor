@@ -1,105 +1,63 @@
-import getDatabase from "./getDatabase";
+import database from "./getDatabase";
 
-const getSetting = async (option) => {
-  const database = await getDatabase();
-
-  const query = database
+const getSetting = (option) => new Promise(async (resolve) => {
+  (await database)
     .transaction(`settings`)
     .objectStore(`settings`)
-    .get(option);
+    .get(option)
+    .onsuccess = ({ target }) => resolve(target.result && target.result.value);
+});
 
-  return new Promise((resolve) => {
-    query.onsuccess = () => {
-      resolve(query.result && query.result.value);
-    };
-  });
-};
-
-const setSetting = async (option, value) => {
-  const database = await getDatabase();
-
-  const query = database
+const setSetting = (option, value) => new Promise(async (resolve) => {
+  (await database)
     .transaction(`settings`, `readwrite`)
     .objectStore(`settings`)
     .put({
       option,
       value,
-    });
+    })
+    .onsuccess = () => resolve();
+});
 
-  return new Promise((resolve) => {
-    query.onsuccess = () => {
-      resolve();
-    };
-  });
-};
+const getTabs = async () => (await getSetting(`workplaces`) || []);
 
-const getTabs = async () => {
-  const workplaces = await getSetting(`workplaces`);
+const getActiveTab = async () => (await getSetting(`activeTab`) || -1);
 
-  return workplaces || [];
-};
-
-const getActiveTab = async () => {
-  const activeTab = await getSetting(`activeTab`);
-
-  return activeTab || -1;
-};
-
-const createTheme = async (theme) => {
-  const database = await getDatabase();
-
-  return new Promise((resolve) => {
-    const query = database
-      .transaction(`themes`, `readwrite`)
-      .objectStore(`themes`)
-      .put(theme);
-
-    query.onsuccess = () => resolve(query.result);
-  });
-};
+const createTheme = (theme) => new Promise(async (resolve) => {
+  (await database)
+    .transaction(`themes`, `readwrite`)
+    .objectStore(`themes`)
+    .put(theme)
+    .onsuccess = ({ target }) => resolve(target.result);
+});
 
 const updateWorkplaces = (workplaces) => setSetting(`workplaces`, workplaces);
 
 const updateActiveTab = (activeTab) => setSetting(`activeTab`, activeTab);
 
-const getTheme = async (id) => {
-  const database = await getDatabase();
+const getTheme = (id) => new Promise(async (resolve) => {
+  (await database)
+    .transaction(`themes`)
+    .objectStore(`themes`)
+    .get(id)
+    .onsuccess = ({ target }) => resolve(target.result);
+});
 
-  return new Promise((resolve) => {
-    const query = database
-      .transaction(`themes`)
-      .objectStore(`themes`)
-      .get(id);
+const updateTheme = (id, theme) => new Promise(async (resolve) => {
+  (await database)
+    .transaction(`themes`, `readwrite`)
+    .objectStore(`themes`)
+    .put(theme, id)
+    .onsuccess = () => resolve();
+});
 
-    query.onsuccess = () => resolve(query.result);
-  });
-};
-
-const updateTheme = async (id, theme) => {
-  const database = await getDatabase();
-
-  return new Promise((resolve) => {
-    const query = database
-      .transaction(`themes`, `readwrite`)
-      .objectStore(`themes`)
-      .put(theme, id);
-
-    query.onsuccess = () => resolve(query.result);
-  });
-};
-
-const deleteTheme = async (id) => {
-  const database = await getDatabase();
-
-  return new Promise((resolve) => {
-    const query = database
-      .transaction(`themes`, `readwrite`)
-      .objectStore(`themes`)
-      .delete(id);
-
-    query.onsuccess = () => resolve();
-  });
-};
+const deleteTheme = (id) => new Promise(async (resolve) => {
+  (await database)
+    .transaction(`themes`, `readwrite`)
+    .objectStore(`themes`)
+    .delete(id)
+    .onsuccess = () => resolve();
+});
 
 export {
   getTabs,
