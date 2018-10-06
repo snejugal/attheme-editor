@@ -2,8 +2,6 @@ parser: babel-eslint
 parserOptions:
   ecmaVersion: 6
   sourceType: module
-  ecmaFeatures:
-    experimentalObjectRestSpread: true
 env:
   es6: true
 rules:
@@ -64,7 +62,6 @@ rules:
   prefer-template: warn
   require-yield: error
   rest-spread-spacing: error
-  sort-imports: warn
   symbol-description: warn
   template-curly-spacing: warn
   yield-star-spacing: warn
@@ -181,6 +178,9 @@ rules:
     - prev: import
       blankLine: any
       next: import
+    - prev: export
+      blankLine: any
+      next: export
 
     - prev: "*"
       blankLine: always
@@ -267,14 +267,12 @@ rules:
   no-lone-blocks: warn
   no-magic-numbers:
     - warn
-    - ignoreArrayIndexes: true
-      enforceConst: true
+    - enforceConst: true
       ignore:
         - -1
         - 0
         - 1
         - 2
-        - 10
   no-multi-spaces: warn
   no-new-func: error
   no-new-wrappers: warn

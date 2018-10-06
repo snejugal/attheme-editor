@@ -1,5 +1,6 @@
 import englishLocalization from "./localizations/en";
 
+const LANGUAGE_NAME_LENGTH = 2;
 const languages = [`en`, `ru`, `uk`, `it`, `uz`];
 
 const localization = {
@@ -13,7 +14,7 @@ const updateLanguage = async () => {
 
   if (`languages` in navigator) {
     for (const fullLanguage of navigator.languages) {
-      const shortLanguage = fullLanguage.slice(0, 2);
+      const shortLanguage = fullLanguage.slice(0, LANGUAGE_NAME_LENGTH);
 
       if (languages.includes(shortLanguage)) {
         language = shortLanguage;
@@ -22,7 +23,7 @@ const updateLanguage = async () => {
       }
     }
   } else if (`language` in navigator) {
-    const shortLanguage = navigator.language.slice(0, 2);
+    const shortLanguage = navigator.language.slice(0, LANGUAGE_NAME_LENGTH);
 
     if (languages.includes(shortLanguage)) {
       language = shortLanguage;
