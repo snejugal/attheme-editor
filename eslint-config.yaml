@@ -217,7 +217,6 @@ rules:
   semi-spacing: warn
   semi-style: warn
   space-before-blocks: warn
-  space-before-function-paren: warn
   space-in-parens: warn
   space-infix-ops: warn
   space-unary-ops: warn
