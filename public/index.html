@@ -18,11 +18,11 @@
     <div class="errors"></div>
     <div class="snackbars"></div>
     <script>
-      window.onerror = (_, __, ___, ____, error) => {
-        document.body.innerHTML = "";
+      window.onerror = function(a, b, c, d, error) {
         var pre = document.createElement("pre");
-        pre.textContent = "An error happened during loading and the editor can't run. Probably, you need to update your browser.\n\n" + error.stack;
 
+        pre.textContent = "An error happened during loading and the editor can't run. Perhaps you need to update your browser.\n\n" + error.stack;
+        document.body.innerHTML = "";
         document.body.appendChild(pre);
 
         return true;
