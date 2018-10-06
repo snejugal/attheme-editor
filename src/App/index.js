@@ -2,12 +2,12 @@ import * as database from "../database/api";
 import localization, {
   addUpdatee as addLocalizationUpdatee,
 } from "../localization";
-import ConfirmDialog from "../ConfirmDialog/component";
-import Container from "../Container/component";
-import EmptyWorkspace from "../EmptyWorkspace/component";
-import Header from "../Header/component";
+import ConfirmDialog from "../ConfirmDialog";
+import Container from "../Container";
+import EmptyWorkspace from "../EmptyWorkspace";
+import Header from "../Header";
 import React from "react";
-import Workspace from "../Workspace/component";
+import Workspace from "../Workspace";
 import atthemeEditorApi from "attheme-editor-api/browser";
 import parseTheme from "../parseTheme";
 import readFile from "../readFile";

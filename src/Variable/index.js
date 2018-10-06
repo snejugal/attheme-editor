@@ -6,7 +6,7 @@ import {
   allVariables,
 } from "../atthemeVariables";
 import Color from "@snejugal/color";
-import Heading from "../Heading/component";
+import Heading from "../Heading";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";

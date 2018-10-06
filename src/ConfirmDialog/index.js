@@ -1,5 +1,5 @@
-import Button from "../Button/component";
-import Dialog from "../Dialog/component";
+import Button from "../Button";
+import Dialog from "../Dialog";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";

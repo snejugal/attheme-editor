@@ -1,15 +1,15 @@
 import "./styles.scss";
 
 import { allVariables, defaultValues } from "../atthemeVariables";
-import Button from "../Button/component";
-import CodeEditor from "../CodeEditor/component";
+import Button from "../Button";
+import CodeEditor from "../CodeEditor";
 import Color from "@snejugal/color";
-import Dialog from "../Dialog/component";
-import Heading from "../Heading/component";
-import Hint from "../Hint/component";
+import Dialog from "../Dialog";
+import Heading from "../Heading";
+import Hint from "../Hint";
 import PropTypes from "prop-types";
 import React from "react";
-import Spinner from "../Spinner/component";
+import Spinner from "../Spinner";
 import colorClass from "./colorClass";
 import createTheme from "./theme";
 import localization from "../localization";

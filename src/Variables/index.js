@@ -2,12 +2,12 @@ import "./styles.scss";
 
 import { allVariables, defaultValues } from "../atthemeVariables";
 import Color from "@snejugal/color";
-import Field from "../Field/component";
+import Field from "../Field";
 import FuzzySearch from "fuzzy-search";
-import Hint from "../Hint/component";
+import Hint from "../Hint";
 import PropTypes from "prop-types";
 import React from "react";
-import Variable from "../Variable/component";
+import Variable from "../Variable";
 import localization from "../localization";
 
 const isMac = navigator.platform.toLowerCase().startsWith(`mac`);

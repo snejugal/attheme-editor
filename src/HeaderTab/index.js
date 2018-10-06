@@ -3,7 +3,7 @@ import "./styles.scss";
 import * as database from "../database/api";
 import PropTypes from "prop-types";
 import React from "react";
-import Spinner from "../Spinner/component";
+import Spinner from "../Spinner";
 
 class Tab extends React.Component {
   static propTypes = {

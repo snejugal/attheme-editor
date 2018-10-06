@@ -1,4 +1,4 @@
-import Link from "../Link/component";
+import Link from "../Link";
 import { ReactComponent as LoveEmoji } from "../EmptyWorkspace/love.svg";
 import React from "react";
 

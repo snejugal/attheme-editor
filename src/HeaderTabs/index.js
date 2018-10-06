@@ -1,7 +1,7 @@
 import "./styles.scss";
 
-import HeaderTab from "../HeaderTab/component";
-import NewTab from "../NewTab/component";
+import HeaderTab from "../HeaderTab";
+import NewTab from "../NewTab";
 import PropTypes from "prop-types";
 import React from "react";
 
