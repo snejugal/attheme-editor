@@ -165,42 +165,40 @@ class Variables extends React.Component {
       variables.push(variableElement);
     }
 
-    return (
-      <React.Fragment>
-        <Field
-          type="search"
-          id="workspace_search"
-          value={this.state.searchQuery}
-          onChange={this.handleSearchChange}
-          inputRef={this.searchInput}
-        >
-          {localization.workspace_search()}
-        </Field>
-        {
-          variables.length > 0 && (
-            <div className="variables">{variables}</div>
-          )
-        }
-        {
-          variables.length === 0
-          && this.state.searchQuery.trim() === ``
-          && (
-            <Hint className="variables_placeholder">
-              {localization.workspace_noVariablesPlaceholder()}
-            </Hint>
-          )
-        }
-        {
-          variables.length === 0
-          && this.state.searchQuery.trim() !== ``
-          && (
-            <Hint className="variables_placeholder">
-              {localization.workspace_noResultsPlaceholder()}
-            </Hint>
-          )
-        }
-      </React.Fragment>
-    );
+    return <>
+      <Field
+        type="search"
+        id="workspace_search"
+        value={this.state.searchQuery}
+        onChange={this.handleSearchChange}
+        inputRef={this.searchInput}
+      >
+        {localization.workspace_search()}
+      </Field>
+      {
+        variables.length > 0 && (
+          <div className="variables">{variables}</div>
+        )
+      }
+      {
+        variables.length === 0
+        && this.state.searchQuery.trim() === ``
+        && (
+          <Hint className="variables_placeholder">
+            {localization.workspace_noVariablesPlaceholder()}
+          </Hint>
+        )
+      }
+      {
+        variables.length === 0
+        && this.state.searchQuery.trim() !== ``
+        && (
+          <Hint className="variables_placeholder">
+            {localization.workspace_noResultsPlaceholder()}
+          </Hint>
+        )
+      }
+    </>;
   }
 }
 

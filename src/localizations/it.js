@@ -8,19 +8,19 @@ const localization = {
   dropHint: () => `Invia qui i file .attheme oppure .attheme-editor`,
 
   error_title: () => `Oops, c'è stato un errore.`,
-  error_description: () => <React.Fragment>
+  error_description: () => <>
     Per favore, manda uno screenshot dell&apos;errore al seguente indirizzo {}
     <Link href="//t.me/snejugal" isWhite={true}>
       lo sviluppatore su Telegram
     </Link>
     {} e descrivi cosa hai fatto che ha causato l&apos;errore. Potrebbe essere necessario mandare anche il file originale del tema che hai usato.
-  </React.Fragment>,
+  </>,
   error_dismiss: () => `Per chiudere la finestra di errore fai tap qui.`,
 
   emptyWorkspace_title: () => `Comincia a lavorare al tuo tema`,
   emptyWorkspace_createTheme: () => `Crea un nuovo tema`,
   emptyWorkspace_openTheme: () => `Apri dei temi già esistenti`,
-  emptyWorkspace_credits: () => <React.Fragment>
+  emptyWorkspace_credits: () => <>
     Creato da {}
     <Link href="//t.me/snejugal">@snejugal</Link>
     {} e {}
@@ -39,12 +39,12 @@ const localization = {
     <Link href="//t.me/atthemeeditor">
       nostro canale Telegram
     </Link>!
-  </React.Fragment>,
-  emptyWorkspace_uploadWaysHint: () => <React.Fragment>
+  </>,
+  emptyWorkspace_uploadWaysHint: () => <>
     Per aprire i temi puoi anche usare il drag&apos;n&apos;drop oppure usa {}
     <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
     {} per aprire i temi direttamente da Telegram.
-  </React.Fragment>,
+  </>,
 
   theme_defaultName: () => `Bel tema`,
 
@@ -98,9 +98,9 @@ const localization = {
   variableEditor_themeCustomPalettePlaceholder: () => `Oops, non c'è ancora alcun colore nella palette colori personalizzata. Premi il tasto "Modifica la palette colori" qui sopra!`,
 
   scriptRunner_title: () => `Esegui uno script`,
-  scriptRunner_description: () => <React.Fragment>
+  scriptRunner_description: () => <>
     L&apos;editor .attheme ti permette di eseguire facilmente degli script in linguaggio EcmaScript 2017 per velocizzare lo sviluppo dei temi. Puoi trovare informazioni sulle API che l&apos;editor mette a disposizione alla <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">wiki del suo repository su GitHub</Link>.
-  </React.Fragment>,
+  </>,
   scriptRunner_close: () => `Chiudi`,
   scriptRunner_run: () => `Esegui`,
   scriptRunner_isEvaluated: () => `Lo script è stato eseguito correttamente!`,

@@ -77,7 +77,7 @@ class Variable extends React.Component {
         Math.round(saturation * PERCENTS);
       const roundedLightness = Math.round(lightness * PERCENTS);
 
-      content = <React.Fragment>
+      content = <>
         <p className="variable_color -hex">
           {Color.createHex(this.props.color)}
         </p>
@@ -87,7 +87,7 @@ class Variable extends React.Component {
         <p className="variable_color -hsl">
           {roundedHue}°, {roundedSaturation}%, {roundedLightness}%, {alpha}
         </p>
-      </React.Fragment>;
+      </>;
     } else {
       className += ` -wallpaper`;
       style.backgroundImage =

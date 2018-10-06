@@ -51,33 +51,31 @@ class EmptyWorkspace extends React.Component {
   handleOpenButtonClick = () => this.filesInput.current.click()
 
   render () {
-    return (
-      <React.Fragment>
-        <Heading level={2}>{localization.emptyWorkspace_title()}</Heading>
-        <Buttons>
-          <Button onClick={this.handleCreateButtonClick}>
-            {localization.emptyWorkspace_createTheme()}
-          </Button>
-          <Button onClick={this.handleOpenButtonClick}>
-            {localization.emptyWorkspace_openTheme()}
-          </Button>
-        </Buttons>
-        <input
-          hidden={true}
-          type="file"
-          ref={this.filesInput}
-          onChange={this.handleChange}
-          accept=".attheme,.attheme-editor"
-          multiple={true}
-        />
-        <Hint className="emptyWorkspace_uploadWaysHint">
-          {localization.emptyWorkspace_uploadWaysHint()}
-        </Hint>
-        <Hint className="emptyWorkspace_credits">
-          {localization.emptyWorkspace_credits()}
-        </Hint>
-      </React.Fragment>
-    );
+    return <>
+      <Heading level={2}>{localization.emptyWorkspace_title()}</Heading>
+      <Buttons>
+        <Button onClick={this.handleCreateButtonClick}>
+          {localization.emptyWorkspace_createTheme()}
+        </Button>
+        <Button onClick={this.handleOpenButtonClick}>
+          {localization.emptyWorkspace_openTheme()}
+        </Button>
+      </Buttons>
+      <input
+        hidden={true}
+        type="file"
+        ref={this.filesInput}
+        onChange={this.handleChange}
+        accept=".attheme,.attheme-editor"
+        multiple={true}
+      />
+      <Hint className="emptyWorkspace_uploadWaysHint">
+        {localization.emptyWorkspace_uploadWaysHint()}
+      </Hint>
+      <Hint className="emptyWorkspace_credits">
+        {localization.emptyWorkspace_credits()}
+      </Hint>
+    </>;
   }
 }
 

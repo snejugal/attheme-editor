@@ -341,96 +341,94 @@ class Workplace extends React.Component {
 
     const isSearchHotkeyEnabled = !dialog && this.props.isSearchHotkeyEnabled;
 
-    return (
-      <React.Fragment>
-        {dialog}
+    return <>
+      {dialog}
 
+      {
+        this.state.hasUploadError && (
+          <Snackbar
+            timeout={5000}
+            onDismiss={this.handleSnackbarDismiss}
+            isError={true}
+          >
+            {localization.workspace_uploadError()}
+          </Snackbar>
+        )
+      }
+
+      <Button
+        onClick={this.downloadThemeViaTelegram}
+        isFloating={true}
+        className="workspace_downloadButton"
+        isDisabled={this.state.shouldShowDownloadSpinner}
+      >
         {
-          this.state.hasUploadError && (
-            <Snackbar
-              timeout={5000}
-              onDismiss={this.handleSnackbarDismiss}
-              isError={true}
-            >
-              {localization.workspace_uploadError()}
-            </Snackbar>
-          )
+          this.state.shouldShowDownloadSpinner
+            ? <Spinner/>
+            : <DownloadIcon/>
         }
+      </Button>
 
-        <Button
-          onClick={this.downloadThemeViaTelegram}
-          isFloating={true}
-          className="workspace_downloadButton"
-          isDisabled={this.state.shouldShowDownloadSpinner}
-        >
-          {
-            this.state.shouldShowDownloadSpinner
-              ? <Spinner/>
-              : <DownloadIcon/>
-          }
+      <Field
+        className="workspace_themeName"
+        id="workspace_themeName"
+        onChange={this.handleNameFieldChange}
+        onBlur={this.handleNameFieldBlur}
+        onEnter={this.handleNameFieldEnter}
+        value={this.state.theme.name}
+        autoCapitalize="words"
+      >
+        {localization.workspace_themeNameLabel()}
+      </Field>
+
+      <Buttons>
+        <Button onClick={this.props.onClosePrompt} isDangerous={true}>
+          {localization.workspace_closeTheme()}
         </Button>
-
-        <Field
-          className="workspace_themeName"
-          id="workspace_themeName"
-          onChange={this.handleNameFieldChange}
-          onBlur={this.handleNameFieldBlur}
-          onEnter={this.handleNameFieldEnter}
-          value={this.state.theme.name}
-          autoCapitalize="words"
+        <Button onClick={this.downloadThemeFile}>
+          {localization.workspace_downloadThemeFile()}
+        </Button>
+        <Button onClick={this.downloadWorkspace}>
+          {localization.workspace_downloadWorkspace()}
+        </Button>
+        <Button onClick={this.handleRunScriptButtonClick}>
+          {localization.workspace_runScript()}
+        </Button>
+        <Button
+          onClick={this.createPreview}
+          isDisabled={this.state.shouldShowCreatePreviewSpinner}
         >
-          {localization.workspace_themeNameLabel()}
-        </Field>
+          {localization.workspace_createPreview()}
+          {this.state.shouldShowCreatePreviewSpinner && <Spinner/>}
+        </Button>
+        <Button
+          onClick={this.testTheme}
+          isDisabled={this.state.shouldShowTestThemeSpinner}
+        >
+          {localization.workspace_testTheme()}
+          {this.state.shouldShowTestThemeSpinner && <Spinner/>}
+        </Button>
+        <Button onClick={this.handleEditPaletteButtonClick}>
+          {localization.workspace_editPalette()}
+        </Button>
+      </Buttons>
 
-        <Buttons>
-          <Button onClick={this.props.onClosePrompt} isDangerous={true}>
-            {localization.workspace_closeTheme()}
-          </Button>
-          <Button onClick={this.downloadThemeFile}>
-            {localization.workspace_downloadThemeFile()}
-          </Button>
-          <Button onClick={this.downloadWorkspace}>
-            {localization.workspace_downloadWorkspace()}
-          </Button>
-          <Button onClick={this.handleRunScriptButtonClick}>
-            {localization.workspace_runScript()}
-          </Button>
-          <Button
-            onClick={this.createPreview}
-            isDisabled={this.state.shouldShowCreatePreviewSpinner}
-          >
-            {localization.workspace_createPreview()}
-            {this.state.shouldShowCreatePreviewSpinner && <Spinner/>}
-          </Button>
-          <Button
-            onClick={this.testTheme}
-            isDisabled={this.state.shouldShowTestThemeSpinner}
-          >
-            {localization.workspace_testTheme()}
-            {this.state.shouldShowTestThemeSpinner && <Spinner/>}
-          </Button>
-          <Button onClick={this.handleEditPaletteButtonClick}>
-            {localization.workspace_editPalette()}
-          </Button>
-        </Buttons>
+      <Variables
+        themeId={this.props.themeId}
+        theme={this.state.theme.variables}
+        wallpaper={this.state.theme.wallpaper}
+        onClick={this.handleVariableEditStart}
+        onNewVariable={this.handleNewVariable}
+        isSearchHotkeyEnabled={isSearchHotkeyEnabled}
+      />
 
-        <Variables
-          themeId={this.props.themeId}
-          theme={this.state.theme.variables}
-          wallpaper={this.state.theme.wallpaper}
-          onClick={this.handleVariableEditStart}
-          onNewVariable={this.handleNewVariable}
-          isSearchHotkeyEnabled={isSearchHotkeyEnabled}
-        />
-
-        <Hint>{
-          localization.workspace_variablesAmount({
-            total: allVariablesAmount,
-            theme: variablesAmount,
-          })
-        }</Hint>
-      </React.Fragment>
-    );
+      <Hint>{
+        localization.workspace_variablesAmount({
+          total: allVariablesAmount,
+          theme: variablesAmount,
+        })
+      }</Hint>
+    </>;
   }
 }
 

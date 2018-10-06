@@ -260,22 +260,20 @@ class VariableEditor extends React.Component {
       <Dialog
         onDismiss={this.props.onCancel}
         onHide={this.state.handleHide}
-        buttons={
-          <React.Fragment>
-            <Button onClick={this.handleHideDecorator(this.handleSave)}>
-              {localization.variableEditor_save()}
-            </Button>
-            <Button onClick={this.handleHideDecorator(this.props.onCancel)}>
-              {localization.variableEditor_cancel()}
-            </Button>
-            <Button
-              onClick={this.handleHideDecorator(this.props.onDelete)}
-              isDangerous={true}
-            >
-              {localization.variableEditor_delete()}
-            </Button>
-          </React.Fragment>
-        }
+        buttons={<>
+          <Button onClick={this.handleHideDecorator(this.handleSave)}>
+            {localization.variableEditor_save()}
+          </Button>
+          <Button onClick={this.handleHideDecorator(this.props.onCancel)}>
+            {localization.variableEditor_cancel()}
+          </Button>
+          <Button
+            onClick={this.handleHideDecorator(this.props.onDelete)}
+            isDangerous={true}
+          >
+            {localization.variableEditor_delete()}
+          </Button>
+        </>}
       >
         <VariablePreview
           theme={this.props.theme}
@@ -318,36 +316,32 @@ class VariableEditor extends React.Component {
           )
         }
         {
-          this.state.activeTab === `image` && (
-            <React.Fragment>
-              <Buttons className="variableEditor_buttons">
-                <Button
-                  onClick={this.handleUploadWallpaperClick}
-                >
-                  {localization.variableEditor_uploadImage()}
-                </Button>
-              </Buttons>
-              {
-                this.state.wallpaperColors && (
-                  <React.Fragment>
-                    <Hint>
-                      {localization.variableEditor_wallpaperColorsHint()}
-                    </Hint>
-                    <div className="palettes">
-                      {wallpaperColors}
-                    </div>
-                  </React.Fragment>
-                )
-              }
-              <input
-                hidden={true}
-                type="file"
-                ref={this.filesInput}
-                onChange={this.handleFileInputChange}
-                accept=".jpg,.jpeg"
-              />
-            </React.Fragment>
-          )
+          this.state.activeTab === `image` && <>
+            <Buttons className="variableEditor_buttons">
+              <Button
+                onClick={this.handleUploadWallpaperClick}
+              >
+                {localization.variableEditor_uploadImage()}
+              </Button>
+            </Buttons>
+            {
+              this.state.wallpaperColors && <>
+                <Hint>
+                  {localization.variableEditor_wallpaperColorsHint()}
+                </Hint>
+                <div className="palettes">
+                  {wallpaperColors}
+                </div>
+              </>
+            }
+            <input
+              hidden={true}
+              type="file"
+              ref={this.filesInput}
+              onChange={this.handleFileInputChange}
+              accept=".jpg,.jpeg"
+            />
+          </>
         }
         {
           this.state.activeTab === `palettes` && (

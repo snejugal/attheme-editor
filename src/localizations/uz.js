@@ -8,19 +8,19 @@ const localization = {
   dropHint: () => `Fayllarni bu yerga o'tkazing .attheme или .attheme-editor `,
 
   error_title: () => `Uzur, xatolik ro'y berdi`,
-  error_description: () => <React.Fragment>
+  error_description: () => <>
     Iltimos, xato skrinshotini Telegram {}
     <Link href="//t.me/snejugal" isWhite={true}>
       orqali ishlab chiqaruvchiga yuboring
     </Link>
     {} i Xato paydo bo&apos;lishidan oldin, nima qilganinggiz, qaysi harakatlarni bajarganinggizni ta&apos;riflab bering. Ehtimol, siz ishlatgan original tema faylini yuborishishga t&apos;g&apos;ri keladi.
-  </React.Fragment>,
+  </>,
   error_dismiss: () => `Xatolik haqidagi habarni o'chirish uchun, shunchaki buning ustiga bosing.`,
 
   emptyWorkspace_title: () => `O'z temangiz ustida ishlashni boshlang`,
   emptyWorkspace_createTheme: () => `Yangi tema yaratish`,
   emptyWorkspace_openTheme: () => `Mavjud temalarni oching`,
-  emptyWorkspace_credits: () => <React.Fragment>
+  emptyWorkspace_credits: () => <>
     Tahrirlovchisi yaratildi {}
     <Link href="//t.me/snejugal">@snejugal</Link>
     {} va {}
@@ -39,12 +39,12 @@ const localization = {
     <Link href="//t.me/atthemeeditor">
       Telegramdagi bizning kanalimiz
     </Link>!
-  </React.Fragment>,
-  emptyWorkspace_uploadWaysHint: () => <React.Fragment>
+  </>,
+  emptyWorkspace_uploadWaysHint: () => <>
     Bundan tashqari, faylni bu yerga tashlang yoki foydalaning {}
     <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>,
     {} Telegram orqali temalarni ochish.
-  </React.Fragment>,
+  </>,
 
   theme_defaultName: () => `Ajoyib tema`,
 
@@ -98,9 +98,9 @@ const localization = {
   variableEditor_themeCustomPalettePlaceholder: () => `Oops, maxsus palitrada gullar yo'q ... hozir. Yuqoridagi “Paletni tahrirlash” tugmasini bosing!`,
 
   scriptRunner_title: () => `Skriptni ishga tushirish`,
-  scriptRunner_description: () => <React.Fragment>
+  scriptRunner_description: () => <>
     .attheme editor EcmaScript 2017 yordamida yozilgan skriptni oson ishga tushirish imkonini yaratib beradi va tema yaratish vaqtini qisqaytiradi. API redaktori haqida bu yerdan ma&apos;lumot olishingiz mumkin <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">wiki GitHub redaktor ma&apos;lumotlar omborxonasi</Link>.
-  </React.Fragment>,
+  </>,
   scriptRunner_close: () => `Yopish`,
   scriptRunner_run: () => `Boshlash`,
   scriptRunner_isEvaluated: () => `Skript muvaffaqiyatli yuklandi!`,

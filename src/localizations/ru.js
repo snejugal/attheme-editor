@@ -10,19 +10,19 @@ const localization = {
   dropHint: () => `Перекиньте сюда файлы .attheme или${NBSP}.attheme-editor `,
 
   error_title: () => `Упс, произошла ошибка`,
-  error_description: () => <React.Fragment>
+  error_description: () => <>
     Пожалуйста, отправьте скриншот ошибки {}
     <Link href="//t.me/snejugal" isWhite={true}>
       разработчику по&nbsp;Телеграму
     </Link>
     {} и&nbsp;опишите, что&nbsp;вы&nbsp;сделали, после чего возникла ошибка. Возможно, понадобится отправить и&nbsp;оригинальный файл темы, который вы&nbsp;использовали.
-  </React.Fragment>,
+  </>,
   error_dismiss: () => `Чтобы закрыть сообщение об${NBSP}ошибке, просто нажмите на${NBSP}него.`,
 
   emptyWorkspace_title: () => `Начните работать над${NBSP}своей темой`,
   emptyWorkspace_createTheme: () => `Создать новую тему`,
   emptyWorkspace_openTheme: () => `Открыть существующие темы`,
-  emptyWorkspace_credits: () => <React.Fragment>
+  emptyWorkspace_credits: () => <>
     Редактор создан {}
     <Link href="//t.me/snejugal">@snejugal</Link>
     {} и&nbsp;
@@ -37,12 +37,12 @@ const localization = {
     <Link href="//t.me/atthemeeditor">
       наш канал в&nbsp;Телеграме
     </Link>!
-  </React.Fragment>,
-  emptyWorkspace_uploadWaysHint: () => <React.Fragment>
+  </>,
+  emptyWorkspace_uploadWaysHint: () => <>
     Также можно перекинуть сюда файл или&nbsp;использовать {}
     <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>,
     {} чтобы открывать темы через&nbsp;Телеграм.
-  </React.Fragment>,
+  </>,
 
   theme_defaultName: () => `Классная тема`,
 
@@ -97,9 +97,9 @@ const localization = {
   variableEditor_themeCustomPalettePlaceholder: () => `Упс, в${NBSP}кастомной палитре нет цветов… пока${NBSP}что. Нажмите на кнопку «Редактировать палитру» выше!`,
 
   scriptRunner_title: () => `Запуск скриптов`,
-  scriptRunner_description: () => <React.Fragment>
+  scriptRunner_description: () => <>
     .attheme editor позволяет легко запускать скрипты, написанные на&nbsp;EcmaScript 2017, что ускоряет разработку тем. Про API редактора можно узнать в&nbsp;<Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">вики GitHub репозитория редактора</Link>.
-  </React.Fragment>,
+  </>,
   scriptRunner_close: () => `Закрыть`,
   scriptRunner_run: () => `Запустить`,
   scriptRunner_isEvaluated: () => `Скрипт успешно выполнился!`,
