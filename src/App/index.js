@@ -35,39 +35,38 @@ export default class App extends React.Component {
   container = React.createRef();
 
   componentDidMount = async () => {
+    const tabs = database.getTabs();
+    const activeTab = database.getActiveTab();
+
     this.setState({
-      workplaces: await database.getTabs(),
-      activeTab: await database.getActiveTab(),
+      workplaces: await tabs,
+      activeTab: await activeTab,
     });
 
-    addLocalizationUpdatee(() => {
-      this.forceUpdate();
-    });
+    addLocalizationUpdatee(() => this.forceUpdate());
 
     document.body.addEventListener(`dragover`, (e) => e.preventDefault());
     document.body.addEventListener(`drop`, (event) => {
       event.preventDefault();
 
-      const files = [...event.dataTransfer.files];
+      const { files } = event.dataTransfer;
 
-      for (const file of files) {
+      Array.prototype.forEach.call(this, files, async (file) => {
         if (
           !file.name.endsWith(`.attheme`)
           && !file.name.endsWith(`.attheme-editor`)
         ) {
-          continue;
+          return;
         }
 
-        (async () => {
-          const content = await readFile(file);
-          const theme = parseTheme({
-            file: content,
-            filename: file.name,
-          });
+        const content = await readFile(file);
+        const theme = parseTheme({
+          file: content,
+          filename: file.name,
+        });
 
-          this.handleTheme(theme);
-        })();
-      }
+        this.handleTheme(theme);
+      });
     });
 
     if (
@@ -99,7 +98,7 @@ export default class App extends React.Component {
       window.history.replaceState(
         null,
         document.title,
-        `${window.location.origin}${window.location.pathname}`,
+        window.location.origin + window.location.pathname,
       );
 
       const { name, theme } = await atthemeEditorApi.downloadTheme(themeId);
@@ -139,9 +138,7 @@ export default class App extends React.Component {
     });
   };
 
-  handleNameChange = (name) => {
-    this.activeTab.current.updateTitle(name);
-  };
+  handleNameChange = (name) => this.activeTab.current.updateTitle(name);
 
   handleLogoClick = () => {
     const { doScrollTo } = this;
@@ -175,19 +172,15 @@ export default class App extends React.Component {
     }
   };
 
-  handleClosePrompt = () => {
-    this.setState({
-      confirmClosing: true,
-    });
-  };
+  handleClosePrompt = () => this.setState({
+    confirmClosing: true,
+  });
 
-  handleCloseDismissed = () => {
-    this.setState({
-      confirmClosing: false,
-    });
-  };
+  handleCloseDismissed = () => this.setState({
+    confirmClosing: false,
+  });
 
-  handleCloseConfirmed = async () => {
+  handleCloseConfirmed = () => {
     this.setState({
       confirmClosing: false,
     });
@@ -200,9 +193,9 @@ export default class App extends React.Component {
     const newActiveTabIndex = Math.min(currentIndex, workplaces.length - 1);
     const activeTab = workplaces[newActiveTabIndex] || -1;
 
-    await database.deleteTheme(this.state.activeTab);
-    await database.updateWorkplaces(workplaces);
-    await database.updateActiveTab(activeTab);
+    database.deleteTheme(this.state.activeTab);
+    database.updateWorkplaces(workplaces);
+    database.updateActiveTab(activeTab);
 
     this.setState({
       workplaces,
@@ -210,7 +203,7 @@ export default class App extends React.Component {
     });
   };
 
-  render () {
+  render() {
     let workspace = null;
 
     if (this.state.activeTab === -1) {
@@ -240,19 +233,15 @@ export default class App extends React.Component {
       >
         {workspace}
       </Container>
-      {
-        this.state.confirmClosing
-          ? (
-            <ConfirmDialog
-              onDismissed={this.handleCloseDismissed}
-              onConfirmed={this.handleCloseConfirmed}
-              isDangerous={true}
-            >
-              {localization.workspace_closeThemePrompt()}
-            </ConfirmDialog>
-          )
-          : null
-      }
+      {this.state.confirmClosing && (
+        <ConfirmDialog
+          onDismissed={this.handleCloseDismissed}
+          onConfirmed={this.handleCloseConfirmed}
+          isDangerous={true}
+        >
+          {localization.workspace_closeThemePrompt()}
+        </ConfirmDialog>
+      )}
     </>;
   }
 }
