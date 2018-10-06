@@ -2,6 +2,7 @@ import "./styles.scss";
 
 import PropTypes from "prop-types";
 import React from "react";
+import isEqual from "lodash/isEqual";
 
 export default class Button extends React.Component {
   static propTypes = {
@@ -13,7 +14,7 @@ export default class Button extends React.Component {
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
     backgroundColor: PropTypes.string,
-  }
+  };
 
   static defaultProps = {
     type: `button`,
@@ -21,19 +22,11 @@ export default class Button extends React.Component {
     isFloating: false,
     className: ``,
     isDisabled: false,
-  }
+  };
 
-  shouldComponentUpdate = (nextProps) => (
-    nextProps.type !== this.props.type
-    || nextProps.children !== this.props.children
-    || nextProps.onClick !== this.props.onClick
-    || nextProps.isDangerous !== this.props.isDangerous
-    || nextProps.isFloating !== this.props.isFloating
-    || nextProps.isDisabled !== this.props.isDisabled
-    || nextProps.className !== this.props.className
-  )
+  shouldComponentUpdate = (nextProps) => !isEqual(nextProps);
 
-  render () {
+  render() {
     let className = `button`;
 
     if (this.props.isDangerous) {
