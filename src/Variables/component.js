@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 import { allVariables, defaultValues } from "../atthemeVariables";
-import Color from "../color";
+import Color from "@snejugal/color";
 import Field from "../Field/component";
 import FuzzySearch from "fuzzy-search";
 import Hint from "../Hint/component";

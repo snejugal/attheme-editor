@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-import Color from "../color";
+import Color from "@snejugal/color";
 import PropTypes from "prop-types";
 import React from "react";
 import calculateWallpaperSize from "../calculateWallpaperSize";

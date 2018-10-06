@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 import Button from "../Button/component";
-import Color from "../color";
+import Color from "@snejugal/color";
 import Dialog from "../Dialog/component";
 import Field from "../Field/component";
 import Heading from "../Heading/component";

@@ -1,4 +1,4 @@
-import Color from "../color";
+import Color from "@snejugal/color";
 import Field from "../Field/component";
 import Fields from "../Fields/component";
 import PropTypes from "prop-types";

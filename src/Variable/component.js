@@ -5,7 +5,7 @@ import {
   UNUSED_VARIABLES,
   allVariables,
 } from "../atthemeVariables";
-import Color from "../color";
+import Color from "@snejugal/color";
 import Heading from "../Heading/component";
 import PropTypes from "prop-types";
 import React from "react";
