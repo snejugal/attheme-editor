@@ -1,0 +1,15 @@
+@import "../variables";
+@import "../Tabs/variables";
+@import "../HeaderTabs/variables";
+@import "../mixins/hoverShade";
+@import "../typography";
+
+.headerTab {
+  &.tab {
+    flex-grow: 0;
+  }
+
+  &_title {
+    @extend %subtitle-1;
+  }
+}

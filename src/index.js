@@ -1,10 +1,10 @@
 import "./general.scss";
 
 import "intl-pluralrules";
-import "./drop-hint";
-import * as serviceWorker from './service-worker';
+import "./dropHint";
+import * as serviceWorker from './serviceWorker';
 import App from "./app";
-import ErrorHandler from "./error-handler/component";
+import ErrorHandler from "./ErrorHandler/component";
 import React from "react";
 import ReactDOM from "react-dom";
 import smoothscroll from "smoothscroll-polyfill";

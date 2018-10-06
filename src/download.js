@@ -1,4 +1,4 @@
-import createBuffer from "./create-buffer";
+import createBuffer from "./crateThemeBuffer";
 
 const download = ({ content, name }) => {
   const buffer = createBuffer(content);

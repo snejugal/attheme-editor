@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-import Heading from "../heading/component";
+import Heading from "../Heading/component";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";

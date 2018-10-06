@@ -1,4 +1,4 @@
-import getDatabase from "./get-database";
+import getDatabase from "./getDatabase";
 
 const getSetting = async (option) => {
   const database = await getDatabase();
