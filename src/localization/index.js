@@ -1,4 +1,4 @@
-import englishLocalization from "./localizations/en";
+import englishLocalization from "./en";
 
 const LANGUAGE_NAME_LENGTH = 2;
 const languages = [`en`, `ru`, `uk`, `it`, `uz`];
@@ -34,7 +34,7 @@ const updateLanguage = async () => {
 
   if (language !== `en`) {
     try {
-      ({ default: loaded } = await import(`./localizations/${language}`));
+      ({ default: loaded } = await import(`./${language}`));
     } catch (e) {
       return;
     }
