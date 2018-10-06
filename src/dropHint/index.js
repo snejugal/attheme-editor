@@ -4,11 +4,11 @@ import localization, {
   addUpdatee as addLocalizationUpdatee,
 } from "../localization";
 
-const root = document.querySelector(`.dropHint`);
+const root = document.createElement(`div`);
 
 let shouldShowHint = true;
 
-document.body.removeChild(root);
+root.className = `dropHint`;
 root.textContent = localization.dropHint();
 
 const onDragEnter = () => {
