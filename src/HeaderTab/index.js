@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-import * as database from "../database/api";
+import * as database from "../database/";
 import PropTypes from "prop-types";
 import React from "react";
 import Spinner from "../Spinner";
