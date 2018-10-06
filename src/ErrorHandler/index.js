@@ -3,7 +3,7 @@ import "./styles.scss";
 import ErrorElement from "../Error";
 import React from "react";
 
-class ErrorHandler extends React.Component {
+export default class ErrorHandler extends React.Component {
   constructor (props) {
     super(props);
 
@@ -68,5 +68,3 @@ class ErrorHandler extends React.Component {
     return errorMessages;
   }
 }
-
-export default ErrorHandler;

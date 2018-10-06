@@ -3,7 +3,7 @@ import "./styles.scss";
 import PropTypes from "prop-types";
 import React from "react";
 
-class Tabs extends React.Component {
+export default class Tabs extends React.Component {
   static propTypes = {
     tabs: PropTypes.arrayOf(PropTypes.object).isRequired,
     activeTab: PropTypes.string.isRequired,
@@ -39,5 +39,3 @@ class Tabs extends React.Component {
     );
   }
 }
-
-export default Tabs;

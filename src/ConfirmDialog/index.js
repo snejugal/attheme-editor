@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 
-class ConfirmDialog extends React.Component {
+export class ConfirmDialog extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     onDismissed: PropTypes.func.isRequired,

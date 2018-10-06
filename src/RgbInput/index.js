@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 
-class RgbInput extends React.Component {
+export default class RgbInput extends React.Component {
   static propTypes = {
     color: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -75,5 +75,3 @@ class RgbInput extends React.Component {
     );
   }
 }
-
-export default RgbInput;

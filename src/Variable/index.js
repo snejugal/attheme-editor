@@ -20,7 +20,7 @@ const EDTIOR_BACKGROUND = {
 };
 const PERCENTS = 100;
 
-class Variable extends React.Component {
+export default class Variable extends React.Component {
   static propTypes = {
     variableName: PropTypes.string.isRequired,
     color: PropTypes.object,
@@ -154,5 +154,3 @@ class Variable extends React.Component {
     );
   }
 }
-
-export default Variable;

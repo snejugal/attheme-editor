@@ -8,7 +8,7 @@ import ReactDOM from "react-dom";
 
 const root = document.querySelector(`.dialogContainer`);
 
-class Dialog extends React.Component {
+export default class Dialog extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     title: PropTypes.any,
@@ -125,5 +125,3 @@ class Dialog extends React.Component {
     );
   }
 }
-
-export default Dialog;

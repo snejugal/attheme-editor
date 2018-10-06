@@ -11,7 +11,7 @@ const CHANNEL = 255;
 
 const parser = new DOMParser();
 
-class VariablePreview extends React.Component {
+export default class VariablePreview extends React.Component {
   static propTypes = {
     theme: PropTypes.object.isRequired,
     variable: PropTypes.string.isRequired,
@@ -233,5 +233,3 @@ class VariablePreview extends React.Component {
     );
   }
 }
-
-export default VariablePreview;

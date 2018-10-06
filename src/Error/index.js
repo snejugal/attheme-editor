@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 
-class ErrorElement extends React.Component {
+export default class ErrorElement extends React.Component {
   static propTypes = {
     errorStack: PropTypes.string.isRequired,
     onDismissed: PropTypes.func.isRequired,
@@ -28,5 +28,3 @@ class ErrorElement extends React.Component {
     );
   }
 }
-
-export default ErrorElement;

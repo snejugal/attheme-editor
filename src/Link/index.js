@@ -3,7 +3,7 @@ import "./styles.scss";
 import PropTypes from "prop-types";
 import React from "react";
 
-class Link extends React.Component {
+export default class Link extends React.Component {
   static propTypes = {
     href: PropTypes.string.isRequired,
     children: PropTypes.any,
@@ -36,5 +36,3 @@ class Link extends React.Component {
     );
   }
 }
-
-export default Link;

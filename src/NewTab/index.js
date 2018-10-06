@@ -4,7 +4,7 @@ import { ReactComponent as Icon } from "./icon.svg";
 import PropTypes from "prop-types";
 import React from "react";
 
-class NewTab extends React.Component {
+export default class NewTab extends React.Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
     isActive: PropTypes.bool.isRequired,
@@ -29,5 +29,3 @@ class NewTab extends React.Component {
     );
   }
 }
-
-export default NewTab;

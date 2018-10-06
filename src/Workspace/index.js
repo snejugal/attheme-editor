@@ -21,7 +21,7 @@ import localization from "../localization";
 import prepareTheme from "../prepareTheme";
 import uploadTheme from "../uploadTheme";
 
-class Workplace extends React.Component {
+export default class Workplace extends React.Component {
   static propTypes = {
     themeId: PropTypes.number.isRequired,
     onNameChange: PropTypes.func.isRequired,
@@ -431,5 +431,3 @@ class Workplace extends React.Component {
     </>;
   }
 }
-
-export default Workplace;

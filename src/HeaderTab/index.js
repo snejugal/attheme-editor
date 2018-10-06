@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import Spinner from "../Spinner";
 
-class Tab extends React.Component {
+export default class Tab extends React.Component {
   static propTypes = {
     id: PropTypes.number.isRequired,
     isActive: PropTypes.bool.isRequired,
@@ -48,5 +48,3 @@ class Tab extends React.Component {
     );
   }
 }
-
-export default Tab;

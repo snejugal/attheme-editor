@@ -5,7 +5,7 @@ let CodeMirror;
 let areStylesImported = false;
 let isJavaScriptModeLoaded = false;
 
-class CodeMirrorEditor extends React.Component {
+export default class CodeMirrorEditor extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     onFocus: PropTypes.func,
@@ -69,5 +69,3 @@ class CodeMirrorEditor extends React.Component {
     return <div className={this.props.className} ref={this.container}/>;
   }
 }
-
-export default CodeMirrorEditor;

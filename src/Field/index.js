@@ -3,7 +3,7 @@ import "./styles.scss";
 import PropTypes from "prop-types";
 import React from "react";
 
-class Field extends React.Component {
+export default class Field extends React.Component {
   static propTypes = {
     type: PropTypes.string,
     value: PropTypes.oneOfType([
@@ -65,5 +65,3 @@ class Field extends React.Component {
     );
   }
 }
-
-export default Field;

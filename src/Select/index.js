@@ -3,7 +3,7 @@ import "./styles.scss";
 import PropTypes from "prop-types";
 import React from "react";
 
-class Select extends React.Component {
+export default class Select extends React.Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     onChange: PropTypes.func.isRequired,
@@ -34,5 +34,3 @@ class Select extends React.Component {
     );
   }
 }
-
-export default Select;

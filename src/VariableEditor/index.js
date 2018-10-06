@@ -22,7 +22,7 @@ import readFile from "../readFile";
 let Vibrant;
 let WebWorkerQuantizer;
 
-class VariableEditor extends React.Component {
+export default class VariableEditor extends React.Component {
   static propTypes = {
     variable: PropTypes.string.isRequired,
     color: PropTypes.object,
@@ -360,5 +360,3 @@ class VariableEditor extends React.Component {
     );
   }
 }
-
-export default VariableEditor;

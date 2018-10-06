@@ -28,7 +28,7 @@ let Interpreter;
 
 window.Color = Color;
 
-class ScriptRunner extends React.Component {
+export default class ScriptRunner extends React.Component {
   static propTypes = {
     onClose: PropTypes.func.isRequired,
     theme: PropTypes.object.isRequired,
@@ -319,5 +319,3 @@ class ScriptRunner extends React.Component {
     );
   }
 }
-
-export default ScriptRunner;
