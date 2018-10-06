@@ -280,20 +280,18 @@ class ScriptRunner extends React.Component {
         onDismiss={this.props.onClose}
         title={localization.scriptRunner_title()}
         onHide={this.state.handleHide}
-        buttons={
-          <React.Fragment>
-            <Button
-              onClick={this.handleRun}
-              isDisabled={isRunButtonDisabled}
-            >
-              {localization.scriptRunner_run()}
-              {isRunButtonDisabled && <Spinner/>}
-            </Button>
-            <Button onClick={this.handleClose}>
-              {localization.scriptRunner_close()}
-            </Button>
-          </React.Fragment>
-        }
+        buttons={<>
+          <Button
+            onClick={this.handleRun}
+            isDisabled={isRunButtonDisabled}
+          >
+            {localization.scriptRunner_run()}
+            {isRunButtonDisabled && <Spinner/>}
+          </Button>
+          <Button onClick={this.handleClose}>
+            {localization.scriptRunner_close()}
+          </Button>
+        </>}
       >
         <Hint>{localization.scriptRunner_description()}</Hint>
         <CodeEditor

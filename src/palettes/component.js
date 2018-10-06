@@ -103,49 +103,47 @@ class Palettes extends React.Component {
       </Button>;
     });
 
-    return (
-      <React.Fragment>
-        <Select
-          items={palettes}
-          activeItem={this.state.activePalette}
-          onChange={this.handlePaletteChange}
-        />
-        {
-          this.state.activePalette === `themeCustomPalette` && (
-            <Buttons className="variableEditor_buttons">
-              <Button onClick={this.props.onCustomPaletteEditStart}>
-                {localization.variableEditor_editPalette()}
-              </Button>
-            </Buttons>
-          )
-        }
-        {
-          colors.length > 0 && (
-            <div className="palettes">
-              {colors}
-            </div>
-          )
-        }
-        {
-          colors.length === 0
-          && this.state.activePalette === `themeColors`
-          && (
-            <Hint className="palettes_placeholder">
-              {localization.variableEditor_themeColorsPlaceholder()}
-            </Hint>
-          )
-        }
-        {
-          colors.length === 0
-          && this.state.activePalette === `themeCustomPalette`
-          && (
-            <Hint className="palettes_placeholder">
-              {localization.variableEditor_themeCustomPalettePlaceholder()}
-            </Hint>
-          )
-        }
-      </React.Fragment>
-    );
+    return <>
+      <Select
+        items={palettes}
+        activeItem={this.state.activePalette}
+        onChange={this.handlePaletteChange}
+      />
+      {
+        this.state.activePalette === `themeCustomPalette` && (
+          <Buttons className="variableEditor_buttons">
+            <Button onClick={this.props.onCustomPaletteEditStart}>
+              {localization.variableEditor_editPalette()}
+            </Button>
+          </Buttons>
+        )
+      }
+      {
+        colors.length > 0 && (
+          <div className="palettes">
+            {colors}
+          </div>
+        )
+      }
+      {
+        colors.length === 0
+        && this.state.activePalette === `themeColors`
+        && (
+          <Hint className="palettes_placeholder">
+            {localization.variableEditor_themeColorsPlaceholder()}
+          </Hint>
+        )
+      }
+      {
+        colors.length === 0
+        && this.state.activePalette === `themeCustomPalette`
+        && (
+          <Hint className="palettes_placeholder">
+            {localization.variableEditor_themeCustomPalettePlaceholder()}
+          </Hint>
+        )
+      }
+    </>;
   }
 }
 

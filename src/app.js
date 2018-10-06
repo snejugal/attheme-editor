@@ -226,36 +226,34 @@ class App extends React.Component {
       );
     }
 
-    return (
-      <React.Fragment>
-        <Header
-          workplaces={this.state.workplaces}
-          activeTab={this.state.activeTab}
-          onActiveTabChange={this.handleActiveTabChange}
-          activeTabRef={this.activeTab}
-          onLogoClick={this.handleLogoClick}
-        />
-        <Container
-          containerRef={this.container}
-          onScroll={this.handleContainerScroll}
-        >
-          {workspace}
-        </Container>
-        {
-          this.state.confirmClosing
-            ? (
-              <ConfirmDialog
-                onDismissed={this.handleCloseDismissed}
-                onConfirmed={this.handleCloseConfirmed}
-                isDangerous={true}
-              >
-                {localization.workspace_closeThemePrompt()}
-              </ConfirmDialog>
-            )
-            : null
-        }
-      </React.Fragment>
-    );
+    return <>
+      <Header
+        workplaces={this.state.workplaces}
+        activeTab={this.state.activeTab}
+        onActiveTabChange={this.handleActiveTabChange}
+        activeTabRef={this.activeTab}
+        onLogoClick={this.handleLogoClick}
+      />
+      <Container
+        containerRef={this.container}
+        onScroll={this.handleContainerScroll}
+      >
+        {workspace}
+      </Container>
+      {
+        this.state.confirmClosing
+          ? (
+            <ConfirmDialog
+              onDismissed={this.handleCloseDismissed}
+              onConfirmed={this.handleCloseConfirmed}
+              isDangerous={true}
+            >
+              {localization.workspace_closeThemePrompt()}
+            </ConfirmDialog>
+          )
+          : null
+      }
+    </>;
   }
 }
 

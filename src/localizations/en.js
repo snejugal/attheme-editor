@@ -8,19 +8,19 @@ const localization = {
   dropHint: () => `Drop .attheme or .attheme-editor files here`,
 
   error_title: () => `Whoops, some error happened.`,
-  error_description: () => <React.Fragment>
+  error_description: () => <>
     Please send a screenshot of the following error to {}
     <Link href="//t.me/snejugal" isWhite={true}>
       the developer on Telegram
     </Link>
     {} and describe what you did so the error happened. You may also need to send the original theme file you used.
-  </React.Fragment>,
+  </>,
   error_dismiss: () => `To dismiss the error, just tap it.`,
 
   emptyWorkspace_title: () => `Start working on your theme`,
   emptyWorkspace_createTheme: () => `Create a new theme`,
   emptyWorkspace_openTheme: () => `Open existing themes`,
-  emptyWorkspace_credits: () => <React.Fragment>
+  emptyWorkspace_credits: () => <>
     Created by {}
     <Link href="//t.me/snejugal">@snejugal</Link>
     {} and {}
@@ -35,12 +35,12 @@ const localization = {
     <Link href="//t.me/atthemeeditor">
       our channel on Telegram
     </Link>!
-  </React.Fragment>,
-  emptyWorkspace_uploadWaysHint: () => <React.Fragment>
+  </>,
+  emptyWorkspace_uploadWaysHint: () => <>
     You can also use drag&apos;n&apos;drop to open themes or use {}
     <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
     {} to open themes via Telegram.
-  </React.Fragment>,
+  </>,
 
   theme_defaultName: () => `Awesome Theme`,
 
@@ -96,9 +96,9 @@ const localization = {
   variableEditor_themeCustomPalettePlaceholder: () => `Whops, no colors in the custom palette… yet. Click the “Edit the palette” button above!`,
 
   scriptRunner_title: () => `Run a script`,
-  scriptRunner_description: () => <React.Fragment>
+  scriptRunner_description: () => <>
     .attheme editor lets you easily run scripts wrriten in EcmaScript 2017 to fasten theme developing. You can read more about the API the editor provides on <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">its GitHub repository&apos;s wiki</Link>.
-  </React.Fragment>,
+  </>,
   scriptRunner_close: () => `Close`,
   scriptRunner_run: () => `Run`,
   scriptRunner_isEvaluated: () => `The script has run successfully!`,
