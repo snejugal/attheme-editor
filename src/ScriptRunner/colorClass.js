@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-import Color from "../color";
+import Color from "@snejugal/color";
 
 const RGBA_CHANNELS = [`red`, `green`, `blue`, `alpha`];
 const HSLA_CHANNELS = [`hue`, `saturation`, `lightness`, `alpha`];

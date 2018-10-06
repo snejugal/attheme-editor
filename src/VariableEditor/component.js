@@ -3,7 +3,7 @@ import "./styles.scss";
 import Button from "../Button/component";
 import Buttons from "../Buttons/component";
 import { ReactComponent as Check } from "./check.svg";
-import Color from "../color";
+import Color from "@snejugal/color";
 import Dialog from "../Dialog/component";
 import Heading from "../Heading/component";
 import HexInput from "../HexInput/component";

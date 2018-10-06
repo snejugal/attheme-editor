@@ -3,7 +3,7 @@ import "./styles.scss";
 import { allVariables, defaultValues } from "../atthemeVariables";
 import Button from "../Button/component";
 import CodeEditor from "../CodeEditor/component";
-import Color from "../color";
+import Color from "@snejugal/color";
 import Dialog from "../Dialog/component";
 import Heading from "../Heading/component";
 import Hint from "../Hint/component";

@@ -3,7 +3,7 @@ import "./styles.scss";
 import * as builtInPalettes from "./builtIn";
 import Button from "../Button/component";
 import Buttons from "../Buttons/component";
-import Color from "../color";
+import Color from "@snejugal/color";
 import Hint from "../Hint/component";
 import PropTypes from "prop-types";
 import React from "react";
