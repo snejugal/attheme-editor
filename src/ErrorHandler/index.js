@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-import ErrorElement from "../Error/component";
+import ErrorElement from "../Error";
 import React from "react";
 
 class ErrorHandler extends React.Component {

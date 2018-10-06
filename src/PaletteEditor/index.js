@@ -1,16 +1,16 @@
 import "./styles.scss";
 
-import Button from "../Button/component";
+import Button from "../Button";
 import Color from "@snejugal/color";
-import Dialog from "../Dialog/component";
-import Field from "../Field/component";
-import Heading from "../Heading/component";
-import HexInput from "../HexInput/component";
-import Hint from "../Hint/component";
-import HslInput from "../HslInput/component";
+import Dialog from "../Dialog";
+import Field from "../Field";
+import Heading from "../Heading";
+import HexInput from "../HexInput";
+import Hint from "../Hint";
+import HslInput from "../HslInput";
 import PropTypes from "prop-types";
 import React from "react";
-import RgbInput from "../RgbInput/component";
+import RgbInput from "../RgbInput";
 import localization from "../localization";
 
 const PERCENTS = 100;

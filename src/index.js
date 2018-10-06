@@ -4,7 +4,7 @@ import "intl-pluralrules";
 import "./dropHint";
 import * as serviceWorker from './serviceWorker';
 import App from "./App";
-import ErrorHandler from "./ErrorHandler/component";
+import ErrorHandler from "./ErrorHandler";
 import React from "react";
 import ReactDOM from "react-dom";
 import smoothscroll from "smoothscroll-polyfill";

@@ -1,5 +1,5 @@
-import Field from "../Field/component";
-import Fields from "../Fields/component";
+import Field from "../Field";
+import Fields from "../Fields";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";

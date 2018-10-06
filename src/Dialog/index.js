@@ -1,7 +1,7 @@
 import "./styles.scss";
 
-import Buttons from "../Buttons/component";
-import Heading from "../Heading/component";
+import Buttons from "../Buttons";
+import Heading from "../Heading";
 import PropTypes from "prop-types";
 import React from "react";
 import ReactDOM from "react-dom";

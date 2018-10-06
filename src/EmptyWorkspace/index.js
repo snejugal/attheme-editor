@@ -1,9 +1,9 @@
 import "./styles.scss";
 
-import Button from "../Button/component";
-import Buttons from "../Buttons/component";
-import Heading from "../Heading/component";
-import Hint from "../Hint/component";
+import Button from "../Button";
+import Buttons from "../Buttons";
+import Heading from "../Heading";
+import Hint from "../Hint";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
