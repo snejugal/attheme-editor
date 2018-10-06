@@ -78,8 +78,7 @@ class VariableEditor extends React.Component {
   generateWallpaperColors = async () => {
     try {
       if (!Vibrant) {
-        // somehow default doesn't work
-        Vibrant = await import(`node-vibrant`);
+        Vibrant = (await import(`node-vibrant`)).default;
       }
 
       if (!WebWorkerQuantizer) {

@@ -16,7 +16,7 @@ class CodeMirrorEditor extends React.Component {
   componentDidMount = async () => {
     try {
       if (!CodeMirror) {
-        CodeMirror = await import(`codemirror`);
+        CodeMirror = (await import(`codemirror`)).default;
       }
 
       if (!areStylesImported) {
