@@ -5,8 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 
-const DIGITS_AFTER_PERIOD = 2;
-const ROUND = 10 ** DIGITS_AFTER_PERIOD;
+const ROUND = 100;
 const PERCENTS = 100;
 
 class HslInput extends React.Component {
