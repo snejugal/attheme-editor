@@ -22,7 +22,7 @@
       window.onerror = (_, __, ___, ____, error) => {
         document.body.innerHTML = "";
         var pre = document.createElement("pre");
-        pre.innerHTML = "An error happened during loading and the editor can't run. Probably, you need to update your browser.\n\n" + error.stack;
+        pre.textContent = "An error happened during loading and the editor can't run. Probably, you need to update your browser.\n\n" + error.stack;
 
         document.body.appendChild(pre);
 
