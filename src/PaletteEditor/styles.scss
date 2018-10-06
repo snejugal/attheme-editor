@@ -1,0 +1,82 @@
+@import "../typography";
+@import "../variables";
+@import "../mixins/shadow";
+@import "../mixins/hoverShade";
+
+.paletteEditor {
+  &_colors {
+    display: grid;
+    gap: $container_horizontalMargin;
+    grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+    margin-bottom: $container_verticalMargin;
+  }
+
+  &_colorsPlaceholder {
+    @extend %subtitle-1;
+    text-align: center;
+  }
+
+  &_colorPreview {
+    height: 64px;
+    border-top-left-radius: $container_borderRadius;
+    border-top-right-radius: $container_borderRadius;
+    margin-top: -$container_verticalMargin;
+    margin-left: -$container_horizontalMargin;
+    margin-right: -$container_horizontalMargin;
+    margin-bottom: $container_verticalMargin;
+  }
+
+  &Color {
+    @include shadow(2);
+    @include hoverShade(currentColor);
+
+    color: inherit;
+    font: inherit;
+    padding: $container_padding;
+    border-radius: $container_borderRadius;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: auto;
+    transition-property: box-shadow;
+    transition-duration: $transitionDuration;
+    user-select: none;
+
+    &:active {
+      @include shadow(8);
+    }
+
+    &_name {
+      @extend %heading-5;
+      text-align: left;
+    }
+
+    &_colorModel {
+      opacity: .54;
+      margin: 0;
+
+      &::before {
+        opacity: .54;
+        margin-right: $container_horizontalMargin;
+      }
+
+      &.-hex::before {
+        content: "HEX";
+      }
+
+      &.-rgb::before {
+        content: "RGB";
+      }
+
+      &.-hsl::before {
+        content: "HSL";
+      }
+    }
+
+    &.-darkText {
+      color: rgba(#000, .87);
+    }
+  }
+}

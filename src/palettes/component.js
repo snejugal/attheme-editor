@@ -1,13 +1,13 @@
 import "./styles.scss";
 
-import * as builtInPalettes from "./built-in-palettes";
-import Button from "../button/component";
-import Buttons from "../buttons/component";
+import * as builtInPalettes from "./builtIn";
+import Button from "../Button/component";
+import Buttons from "../Buttons/component";
 import Color from "../color";
-import Hint from "../hint/component";
+import Hint from "../Hint/component";
 import PropTypes from "prop-types";
 import React from "react";
-import Select from "../select/component";
+import Select from "../Select/component";
 import localization from "../localization";
 
 class Palettes extends React.Component {

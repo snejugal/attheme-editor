@@ -1,5 +1,5 @@
-import Link from "../link/component";
-import { ReactComponent as LoveEmoji } from "../empty-workspace/love.svg";
+import Link from "../Link/component";
+import { ReactComponent as LoveEmoji } from "../EmptyWorkspace/love.svg";
 import React from "react";
 
 const pluralRules = new Intl.PluralRules(`en`);

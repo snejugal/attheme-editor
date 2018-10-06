@@ -1,13 +1,13 @@
 import "./styles.scss";
 
-import { allVariables, defaultValues } from "../attheme-variables";
+import { allVariables, defaultValues } from "../atthemeVariables";
 import Color from "../color";
-import Field from "../field/component";
+import Field from "../Field/component";
 import FuzzySearch from "fuzzy-search";
-import Hint from "../hint/component";
+import Hint from "../Hint/component";
 import PropTypes from "prop-types";
 import React from "react";
-import Variable from "../variable/component";
+import Variable from "../Variable/component";
 import localization from "../localization";
 
 const isMac = navigator.platform.toLowerCase().startsWith(`mac`);

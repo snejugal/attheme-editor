@@ -1,0 +1,25 @@
+@import "../variables";
+@import "./variables";
+
+.variablePreview {
+  margin-top: -$container_verticalMargin;
+  margin-left: -$container_horizontalMargin;
+  margin-right: -$container_horizontalMargin;
+  margin-bottom: $container_verticalMargin;
+  background-image: url("../transparencyGrid.svg");
+  background-size: $grid_size $grid_size;
+
+  &_color {
+    height: $colorPreview_height;
+  }
+
+  &_image {
+    max-height: 50vh;
+    display: block;
+    margin: auto;
+  }
+
+  svg {
+    display: block;
+  }
+}

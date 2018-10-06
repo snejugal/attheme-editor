@@ -1,7 +1,7 @@
 import "./styles.scss";
 
-import HeaderTabs from "../header-tabs/component";
-import Logo from "../logo/component";
+import HeaderTabs from "../HeaderTabs/component";
+import Logo from "../Logo/component";
 import PropTypes from "prop-types";
 import React from "react";
 

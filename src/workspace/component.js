@@ -1,25 +1,25 @@
 import "./styles.scss";
 
 import * as database from "../database/api";
-import { allVariablesAmount, defaultValues } from "../attheme-variables";
+import { allVariablesAmount, defaultValues } from "../atthemeVariables";
 import Attheme from "attheme-js";
-import Button from "../button/component";
-import Buttons from "../buttons/component";
+import Button from "../Button/component";
+import Buttons from "../Buttons/component";
 import { ReactComponent as DownloadIcon } from "./download-icon.svg";
-import Field from "../field/component";
-import Hint from "../hint/component";
-import PaletteEditor from "../palette-editor/component";
+import Field from "../Field/component";
+import Hint from "../Hint/component";
+import PaletteEditor from "../PaletteEditor/component";
 import PropTypes from "prop-types";
 import React from "react";
-import ScriptRunner from "../script-runner/component";
-import Snackbar from "../snackbar/component";
-import Spinner from "../spinner/component";
-import VariableEditor from "../variable-editor/component";
-import Variables from "../variables/component";
+import ScriptRunner from "../ScriptRunner/component";
+import Snackbar from "../Snackbar/component";
+import Spinner from "../Spinner/component";
+import VariableEditor from "../VariableEditor/component";
+import Variables from "../Variables/component";
 import download from "../download";
 import localization from "../localization";
-import prepareTheme from "../prepare-theme";
-import uploadTheme from "../upload-theme";
+import prepareTheme from "../prepareTheme";
+import uploadTheme from "../uploadTheme";
 
 class Workplace extends React.Component {
   static propTypes = {

@@ -4,9 +4,9 @@ import {
   OBSOLETE_VARIABLES,
   UNUSED_VARIABLES,
   allVariables,
-} from "../attheme-variables";
+} from "../atthemeVariables";
 import Color from "../color";
-import Heading from "../heading/component";
+import Heading from "../Heading/component";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";

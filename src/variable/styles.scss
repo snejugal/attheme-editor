@@ -2,7 +2,7 @@
 @import "../variables";
 @import "../typography";
 @import "../mixins/shadow";
-@import "../mixins/hover-shade";
+@import "../mixins/hoverShade";
 
 .variable {
   @include shadow(2);
@@ -30,7 +30,7 @@
     top: 0;
     left: 0;
     border-radius: inherit;
-    background-image: url("../transparency-grid.svg");
+    background-image: url("../transparencyGrid.svg");
     background-size: 10px 10px;
     z-index: -1;
   }
