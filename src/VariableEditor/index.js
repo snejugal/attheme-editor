@@ -26,7 +26,7 @@ export default class VariableEditor extends React.Component {
   static propTypes = {
     variable: PropTypes.string.isRequired,
     color: PropTypes.object,
-    onCancel: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     onCustomPaletteColorAdd: PropTypes.func.isRequired,
@@ -40,11 +40,13 @@ export default class VariableEditor extends React.Component {
     isFromPaletteEditing: false,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     if (this.props.stateBackup) {
-      this.state = this.props.stateBackup;
+      this.state = {
+        ...this.props.stateBackup,
+      };
 
       return;
     }
@@ -63,17 +65,19 @@ export default class VariableEditor extends React.Component {
       wallpaper: this.props.theme.wallpaper,
       activeTab,
       wallpaperColors: null,
-      handleHide: null,
+      isEditingPalette: false,
     };
   }
 
   filesInput = React.createRef();
 
-  componentDidMount = () => {
+  dialog = React.createRef();
+
+  componentDidMount() {
     if (this.state.wallpaper) {
       this.generateWallpaperColors();
     }
-  };
+  }
 
   generateWallpaperColors = async () => {
     try {
@@ -168,17 +172,25 @@ export default class VariableEditor extends React.Component {
   });
 
   hanldeCustomPaletteEditStart = () => {
-    this.props.onCustomPaletteEditStart({
-      backupState: {
-        ...this.state,
-        handleHide: null,
-      },
+    this.setState({
+      isEditingPalette: true,
     });
+
+    this.dialog.current.close();
   };
 
-  handleHideDecorator = (handleHide) => () => this.setState({
-    handleHide,
-  });
+  handleClose = () => {
+    if (this.state.isEditingPalette) {
+      this.props.onCustomPaletteEditStart({
+        backupState: {
+          ...this.state,
+          isEditingPalette: false,
+        },
+      });
+    } else {
+      this.props.onClose();
+    }
+  };
 
   render () {
     const { color } = this.state;
@@ -258,34 +270,35 @@ export default class VariableEditor extends React.Component {
 
     return (
       <Dialog
-        onDismiss={this.props.onCancel}
-        onHide={this.state.handleHide}
-        buttons={<>
-          <Button onClick={this.handleHideDecorator(this.handleSave)}>
-            {localization.variableEditor_save()}
-          </Button>
-          <Button onClick={this.handleHideDecorator(this.props.onCancel)}>
-            {localization.variableEditor_cancel()}
-          </Button>
-          <Button
-            onClick={this.handleHideDecorator(this.props.onDelete)}
-            isDangerous={true}
-          >
-            {localization.variableEditor_delete()}
-          </Button>
-        </>}
+        ref={this.dialog}
+        onClose={this.handleClose}
+        buttons={[
+          {
+            caption: localization.variableEditor_save(),
+            onClick: this.handleSave,
+            shouldCloseAfterClick: true,
+          },
+          {
+            caption: localization.variableEditor_cancel(),
+            shouldCloseAfterClick: true,
+          },
+          {
+            caption: localization.variableEditor_delete(),
+            onClick: this.props.onDelete,
+            shouldCloseAfterClick: true,
+            isDangerous: true,
+          },
+        ]}
       >
         <VariablePreview
           theme={this.props.theme}
           variable={this.props.variable}
           currentColor={this.state.color}
           currentWallpaper={this.state.wallpaper}
-          shouldShowWallpaper={
-            Boolean(
-              this.state.activeTab === `image`
-              && this.state.wallpaper,
-            )
-          }
+          shouldShowWallpaper={Boolean(
+            this.state.activeTab === `image`
+            && this.state.wallpaper,
+          )}
         />
         <Heading level={3} className="variableEditor_title">
           {this.props.variable}
@@ -296,66 +309,56 @@ export default class VariableEditor extends React.Component {
           onChange={this.handleTabChange}
           className="variableEditor_tabs"
         />
-        {
-          this.state.activeTab === `color-numeric` && (
-            <form noValidate={true}>
-              <HexInput
-                color={color}
-                onAlphaChange={this.handleRgbaChannelChange}
-                onHexChange={this.handleColorChange}
-              />
-              <RgbInput
-                color={color}
-                onChange={this.handleRgbaChannelChange}
-              />
-              <HslInput
-                color={color}
-                onChange={this.handleColorChange}
-              />
-            </form>
-          )
-        }
-        {
-          this.state.activeTab === `image` && <>
-            <Buttons className="variableEditor_buttons">
-              <Button
-                onClick={this.handleUploadWallpaperClick}
-              >
-                {localization.variableEditor_uploadImage()}
-              </Button>
-            </Buttons>
-            {
-              this.state.wallpaperColors && <>
-                <Hint>
-                  {localization.variableEditor_wallpaperColorsHint()}
-                </Hint>
-                <div className="palettes">
-                  {wallpaperColors}
-                </div>
-              </>
-            }
-            <input
-              hidden={true}
-              type="file"
-              ref={this.filesInput}
-              onChange={this.handleFileInputChange}
-              accept=".jpg,.jpeg"
+        {this.state.activeTab === `color-numeric` && (
+          <form noValidate={true}>
+            <HexInput
+              color={color}
+              onAlphaChange={this.handleRgbaChannelChange}
+              onHexChange={this.handleColorChange}
             />
-          </>
-        }
-        {
-          this.state.activeTab === `palettes` && (
-            <Palettes
+            <RgbInput
+              color={color}
+              onChange={this.handleRgbaChannelChange}
+            />
+            <HslInput
+              color={color}
               onChange={this.handleColorChange}
-              themeColors={themeColors}
-              alpha={this.state.color.alpha}
-              themeCustomPalette={this.props.theme.palette}
-              onCustomPaletteEditStart={this.handleHideDecorator(
-                this.hanldeCustomPaletteEditStart,
-              )}
             />
-          )
-        }
+          </form>
+        )}
+        {this.state.activeTab === `image` && <>
+          <Buttons className="variableEditor_buttons">
+            <Button
+              onClick={this.handleUploadWallpaperClick}
+            >
+              {localization.variableEditor_uploadImage()}
+            </Button>
+          </Buttons>
+          {this.state.wallpaperColors && <>
+            <Hint>
+              {localization.variableEditor_wallpaperColorsHint()}
+            </Hint>
+            <div className="palettes">
+              {wallpaperColors}
+            </div>
+          </>}
+          <input
+            hidden={true}
+            type="file"
+            ref={this.filesInput}
+            onChange={this.handleFileInputChange}
+            accept=".jpg,.jpeg"
+          />
+        </>}
+        {this.state.activeTab === `palettes` && (
+          <Palettes
+            onChange={this.handleColorChange}
+            themeColors={themeColors}
+            alpha={this.state.color.alpha}
+            themeCustomPalette={this.props.theme.palette}
+            onCustomPaletteEditStart={this.hanldeCustomPaletteEditStart}
+          />
+        )}
       </Dialog>
     );
   }

@@ -150,7 +150,7 @@ export default class Workplace extends React.Component {
     });
   };
 
-  handleVariableEditCancel = () => this.setState({
+  handleVariableEditClose = () => this.setState({
     editingVariable: null,
     editorState: null,
     color: null,
@@ -158,10 +158,6 @@ export default class Workplace extends React.Component {
 
   handleVariableEditSave = (value) => {
     const variable = this.state.editingVariable;
-
-    this.setState({
-      editingVariable: null,
-    });
 
     let theme;
 
@@ -223,7 +219,6 @@ export default class Workplace extends React.Component {
     }
 
     this.setState({
-      editingVariable: null,
       editorState: null,
       theme,
     });
@@ -323,7 +318,7 @@ export default class Workplace extends React.Component {
       dialog = <VariableEditor
         variable={this.state.editingVariable}
         color={this.state.color}
-        onCancel={this.handleVariableEditCancel}
+        onClose={this.handleVariableEditClose}
         onSave={this.handleVariableEditSave}
         onDelete={this.handleVariableDelete}
         theme={this.state.theme}
@@ -343,30 +338,22 @@ export default class Workplace extends React.Component {
 
     return <>
       {dialog}
-
-      {
-        this.state.hasUploadError && (
-          <Snackbar
-            timeout={5000}
-            onDismiss={this.handleSnackbarDismiss}
-            isError={true}
-          >
-            {localization.workspace_uploadError()}
-          </Snackbar>
-        )
-      }
-
+      {this.state.hasUploadError && (
+        <Snackbar
+          timeout={5000}
+          onDismiss={this.handleSnackbarDismiss}
+          isError={true}
+        >
+          {localization.workspace_uploadError()}
+        </Snackbar>
+      )}
       <Button
         onClick={this.downloadThemeViaTelegram}
         isFloating={true}
         className="workspace_downloadButton"
         isDisabled={this.state.shouldShowDownloadSpinner}
       >
-        {
-          this.state.shouldShowDownloadSpinner
-            ? <Spinner/>
-            : <DownloadIcon/>
-        }
+        {this.state.shouldShowDownloadSpinner ? <Spinner/> : <DownloadIcon/>}
       </Button>
 
       <Field
@@ -422,12 +409,12 @@ export default class Workplace extends React.Component {
         isSearchHotkeyEnabled={isSearchHotkeyEnabled}
       />
 
-      <Hint>{
-        localization.workspace_variablesAmount({
+      <Hint>
+        {localization.workspace_variablesAmount({
           total: allVariablesAmount,
           theme: variablesAmount,
-        })
-      }</Hint>
+        })}
+      </Hint>
     </>;
   }
 }
