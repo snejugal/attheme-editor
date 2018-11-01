@@ -8,6 +8,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 import parseTheme from "../parseTheme";
+import fromFile from "attheme-js/lib/tools/browser/fromFile";
+import parseWorkspace from "../parseWorkspace";
 import readFile from "../readFile";
 
 export default class EmptyWorkspace extends React.Component {
@@ -27,25 +29,19 @@ export default class EmptyWorkspace extends React.Component {
   };
 
   handleChange = () => {
-    const files = [...this.filesInput.current.files];
+    [...this.filesInput.current.files].forEach(async (file) => {
+      let theme;
 
-    for (const file of files) {
-      if (
-        !file.name.endsWith(`.attheme`)
-        && !file.name.endsWith(`.attheme-editor`)
-      ) {
-        continue;
+      if (file.name.endsWith(`.attheme`)) {
+        theme = parseTheme(await fromFile(file), file.name);
+      } else if (file.name.endsWith(`.attheme-editor`)) {
+        theme = parseWorkspace(await readFile(file));
+      } else {
+        return;
       }
-      (async () => {
-        const content = await readFile(file);
-        const theme = parseTheme({
-          file: content,
-          filename: file.name,
-        });
 
-        this.props.onTheme(theme);
-      })();
-    }
+      this.props.onTheme(theme);
+    });
   };
 
   handleOpenButtonClick = () => this.filesInput.current.click();
