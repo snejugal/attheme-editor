@@ -48,7 +48,7 @@ export default class App extends React.Component {
 
       const { files } = event.dataTransfer;
 
-      Array.prototype.forEach.call(this, files, async (file) => {
+      Array.from(files).forEach(async (file) => {
         if (
           !file.name.endsWith(`.attheme`)
           && !file.name.endsWith(`.attheme-editor`)

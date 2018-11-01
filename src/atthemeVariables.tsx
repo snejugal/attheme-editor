@@ -1,4 +1,5 @@
-import allVariablesValues from "attheme-default-values";
+import defaultTheme from "attheme-js/lib/defaultThemes/default";
+import { Color } from "attheme-js/lib/types";
 
 const OBSOLETE_VARIABLES = [
   `listSelector`,
@@ -12,13 +13,19 @@ const UNUSED_VARIABLES = [
   `windowBackgroundWhiteBlueText2`,
 ];
 
-const defaultValues = {
-  ...allVariablesValues,
-};
+const defaultValues = [...defaultTheme.entries()]
+  .reduce((object: { [key: string]: Color }, [variable, value]) => {
+    if (
+      OBSOLETE_VARIABLES.includes(variable)
+      || UNUSED_VARIABLES.includes(variable)
+    ) {
+      return object;
+    }
 
-for (const unusedVariable of UNUSED_VARIABLES) {
-  delete defaultValues[unusedVariable];
-}
+    object[variable] = value;
+
+    return object;
+}, {});
 
 const allVariables = Object.keys(defaultValues);
 const allVariablesAmount = allVariables.length;
