@@ -184,7 +184,7 @@ export default class ScriptRunner extends React.Component {
         let shouldContinue;
 
         try {
-          for (let i = 0; i < STEPS_PER_ONCE; i++) {
+          for (let step = 0; step < STEPS_PER_ONCE; step++) {
             shouldContinue = script.step();
 
             if (!shouldContinue) {

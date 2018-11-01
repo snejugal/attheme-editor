@@ -79,7 +79,7 @@ export default class Palettes extends React.Component {
       ),
     ];
 
-    const colors = palette.map(({ name, color }, i) => {
+    const colors = palette.map(({ name, color }, index) => {
       const handleClick = () => {
         this.props.onChange({
           ...color,
@@ -96,7 +96,7 @@ export default class Palettes extends React.Component {
       return <Button
         className={className}
         backgroundColor={Color.createCssRgb(color)}
-        key={i}
+        key={index}
         onClick={handleClick}
       >
         {name}

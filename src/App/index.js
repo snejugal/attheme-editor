@@ -45,6 +45,7 @@ export default class App extends React.Component {
 
     addLocalizationUpdatee(() => this.forceUpdate());
 
+    // eslint-disable-next-line id-length
     document.body.addEventListener(`dragover`, (e) => e.preventDefault());
     document.body.addEventListener(`drop`, (event) => {
       event.preventDefault();

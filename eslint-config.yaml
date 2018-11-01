@@ -292,3 +292,7 @@ rules:
   require-await: warn
   vars-on-top: warn
   yoda: warn
+  complexity: warn
+  id-length:
+    - warn
+    - min: 2
