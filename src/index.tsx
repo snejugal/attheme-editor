@@ -16,4 +16,4 @@ ReactDOM.render(<App/>, appRoot);
 ReactDOM.render(<ErrorHandler/>, errorsRoot);
 
 smoothscroll.polyfill();
-serviceWorker.register({});
+serviceWorker.register();
