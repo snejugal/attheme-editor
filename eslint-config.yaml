@@ -1,4 +1,4 @@
-parser: babel-eslint
+parser: typescript-eslint-parser
 parserOptions:
   ecmaVersion: 6
   sourceType: module
@@ -220,7 +220,11 @@ rules:
   space-in-parens: warn
   space-infix-ops: warn
   space-unary-ops: warn
-  spaced-comment: warn
+  spaced-comment:
+      - warn
+      - always
+      - markers:
+          - /
   switch-colon-spacing: warn
   template-tag-spacing: warn
   no-buffer-constructor: warn
