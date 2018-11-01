@@ -296,3 +296,5 @@ rules:
   id-length:
     - warn
     - min: 2
+      exceptions:
+        - _

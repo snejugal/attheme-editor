@@ -15,15 +15,11 @@ import readFile from "../readFile";
 const HANDLE_SCROLL_INTERVAL = 200;
 
 export default class App extends React.Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      workplaces: [],
-      activeTab: null,
-      confirmClosing: false,
-    };
-  }
+  state = {
+    workplaces: [],
+    activeTab: null,
+    confirmClosing: false,
+  };
 
   // we don't need to update the whole dom just to scroll
   doHandleScroll = true;
@@ -34,7 +30,7 @@ export default class App extends React.Component {
 
   container = React.createRef();
 
-  componentDidMount = async () => {
+  async componentDidMount() {
     const tabs = database.getTabs();
     const activeTab = database.getActiveTab();
 
@@ -116,7 +112,7 @@ export default class App extends React.Component {
 
       this.handleTheme(downloadedTheme);
     }
-  };
+  }
 
   handleTheme = async (theme) => {
     const themeId = await database.createTheme(theme);

@@ -24,7 +24,9 @@ export default class Button extends React.Component {
     isDisabled: false,
   };
 
-  shouldComponentUpdate = (nextProps) => !isEqual(nextProps);
+  shouldComponentUpdate(nextProps) {
+    return !isEqual(this.props, nextProps);
+  }
 
   render() {
     let className = `button`;

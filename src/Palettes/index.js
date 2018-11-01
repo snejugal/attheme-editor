@@ -24,7 +24,7 @@ export default class Palettes extends React.Component {
     onCustomPaletteEditStart: PropTypes.func.isRequired,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -38,7 +38,7 @@ export default class Palettes extends React.Component {
     activePalette,
   });
 
-  render () {
+  render() {
     let palette;
 
     if (this.state.activePalette === `themeColors`) {

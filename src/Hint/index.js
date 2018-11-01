@@ -11,9 +11,9 @@ export default class Hint extends React.Component {
 
   static defaultProps = {
     className: ``,
-  }
+  };
 
-  render () {
+  render() {
     return (
       <p className={`paragraph hint ${this.props.className}`}>
         {this.props.children}

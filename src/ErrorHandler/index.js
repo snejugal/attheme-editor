@@ -4,13 +4,9 @@ import ErrorElement from "../Error";
 import React from "react";
 
 export default class ErrorHandler extends React.Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      errors: [],
-    };
-  }
+  state = {
+    errors: [],
+  };
 
   handler = (event) => {
     let stack;
@@ -36,13 +32,13 @@ export default class ErrorHandler extends React.Component {
     return true;
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     window.onerror = null;
     window.addEventListener(`error`, this.handler);
     window.addEventListener(`unhandledrejection`, this.handler);
   }
 
-  render () {
+  render() {
     if (this.state.errors.length === 0) {
       return null;
     }

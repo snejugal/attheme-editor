@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import Variable from "../Variable";
 import localization from "../localization";
+import isEqual from "lodash/isEqual";
 
 const isMac = navigator.platform.toLowerCase().startsWith(`mac`);
 
@@ -47,7 +48,7 @@ export default class Variables extends React.Component {
       event.preventDefault();
       this.searchInput.current.focus();
     }
-  }
+  };
 
   handleKeyUp = (event) => {
     if (!this.props.isSearchHotkeyEnabled) {
@@ -62,30 +63,25 @@ export default class Variables extends React.Component {
     }
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     document.body.addEventListener(`keydown`, this.handleKeyDown);
     document.body.addEventListener(`keyup`, this.handleKeyUp);
-  };
+  }
 
-  componentWillUnmount = () => {
+  componentWillUnmount() {
     document.body.removeEventListener(`keydown`, this.handleKeyDown);
     document.body.removeEventListener(`keyup`, this.handleKeyUp);
   }
 
-  shouldComponentUpdate = (newProps, newState) => (
-    newProps.theme !== this.props.theme
-    || newProps.wallpaper !== this.props.wallpaper
-    || newProps.onClick !== this.props.onClick
-    || newProps.onNewVariable !== this.props.onNewVariable
-    || newProps.isSearchHotkeyEnabled !== this.props.isSearchHotkeyEnabled
-    || newState !== this.state
-  );
+  shouldComponentUpdate(nextProps, nextState) {
+    return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
+  }
 
   handleSearchChange = (event) => this.setState({
     searchQuery: event.target.value,
   });
 
-  render () {
+  render() {
     const themeVariables = Object.keys(this.props.theme);
     const query = this.state.searchQuery.trim();
 

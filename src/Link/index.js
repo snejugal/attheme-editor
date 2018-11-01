@@ -8,15 +8,15 @@ export default class Link extends React.Component {
     href: PropTypes.string.isRequired,
     children: PropTypes.any,
     isWhite: PropTypes.bool,
-  }
+  };
 
   static defaultProps = {
     isWhite: false,
-  }
+  };
 
-  stopPropagation = (event) => event.stopPropagation()
+  stopPropagation = (event) => event.stopPropagation();
 
-  render () {
+  render() {
     let className = `link`;
 
     if (this.props.isWhite) {

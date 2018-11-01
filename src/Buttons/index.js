@@ -7,13 +7,13 @@ export default class Buttons extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,
-  }
+  };
 
   static defaultProps = {
     className: ``,
-  }
+  };
 
-  render () {
+  render() {
     let className = `buttons`;
 
     if (this.props.className) {

@@ -16,7 +16,7 @@ export class ConfirmDialog extends React.Component {
     isDangerous: false,
   };
 
-  render () {
+  render() {
     return (
       <Dialog
         onDismiss={this.props.onDismiss}

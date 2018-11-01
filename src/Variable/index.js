@@ -10,6 +10,7 @@ import Heading from "../Heading";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
+import isEqual from "lodash/isEqual";
 
 const DARK_THRESHOLD = 0.6;
 const EDTIOR_BACKGROUND = {
@@ -33,25 +34,13 @@ export default class Variable extends React.Component {
     isUnadded: false,
   };
 
-  shouldComponentUpdate = (nextProps) => (
-    (nextProps.color && !this.props.color)
-    || (nextProps.wallpaper && !this.props.wallpaper)
-    || (
-      nextProps.color && (
-        nextProps.variableName !== this.props.variableName
-        || nextProps.color.red !== this.props.color.red
-        || nextProps.color.green !== this.props.color.green
-        || nextProps.color.blue !== this.props.color.blue
-        || nextProps.color.alpha !== this.props.color.alpha
-      )
-    )
-    || nextProps.wallpaper !== this.props.wallpaper
-    || nextProps.isUnadded !== this.props.isUnadded
-  );
+  shouldComponentUpdate(nextProps) {
+    return !isEqual(this.props, nextProps);
+  }
 
   handleClick = () => this.props.onClick(this.props.variableName);
 
-  render () {
+  render() {
     let className = `variable`;
 
     const style = {};

@@ -8,9 +8,9 @@ export default class Container extends React.Component {
     children: PropTypes.any,
     containerRef: PropTypes.any.isRequired,
     onScroll: PropTypes.func.isRequired,
-  }
+  };
 
-  render () {
+  render() {
     return (
       <div
         className="container -outer"

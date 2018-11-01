@@ -80,7 +80,7 @@ export default class Dialog extends React.Component {
     }
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     window.history.pushState(null, document.title, window.location.href);
 
     root.addEventListener(`click`, this.onRootClick);
@@ -95,9 +95,9 @@ export default class Dialog extends React.Component {
     for (const element of this.shouldRestoreTabIndex) {
       element.tabIndex = -1;
     }
-  };
+  }
 
-  componentWillUnmount = () => {
+  componentWillUnmount() {
     root.removeEventListener(`click`, this.onRootClick);
     root.removeEventListener(`mousedown`, this.onRootMouseDown);
     window.removeEventListener(`popstate`, this.close);
@@ -106,16 +106,16 @@ export default class Dialog extends React.Component {
     for (const element of this.shouldRestoreTabIndex) {
       element.removeAttribute(`tabindex`);
     }
-  };
+  }
 
-  componentDidUpdate(oldProps, oldState) {
+  componentDidUpdate(_, oldState) {
     if (this.state.isClosing && !oldState.isClosing) {
       root.classList.add(`-disappear`);
       root.addEventListener(`transitionend`, this.handleRootTransitionEnd);
     }
   }
 
-  render () {
+  render() {
     return ReactDOM.createPortal(
       <dialog className="dialog" open={true} ref={this.dialog}>
         <div className="dialog_content">

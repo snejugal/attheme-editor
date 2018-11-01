@@ -8,7 +8,7 @@ export default class RgbInput extends React.Component {
   static propTypes = {
     color: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
-  }
+  };
 
   handleChange = (channel, event) => {
     let correctValue = event.target.valueAsNumber;
@@ -30,15 +30,15 @@ export default class RgbInput extends React.Component {
       channel,
       value: correctValue,
     });
-  }
+  };
 
-  handleRedChange = (event) => this.handleChange(`red`, event)
+  handleRedChange = (event) => this.handleChange(`red`, event);
 
-  handleGreenChange = (event) => this.handleChange(`green`, event)
+  handleGreenChange = (event) => this.handleChange(`green`, event);
 
-  handleBlueChange = (event) => this.handleChange(`blue`, event)
+  handleBlueChange = (event) => this.handleChange(`blue`, event);
 
-  render () {
+  render() {
     return (
       <Fields className="variableEditor_fields">
         <Field

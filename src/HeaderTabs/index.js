@@ -11,9 +11,9 @@ export default class HeaderTabs extends React.Component {
     activeTab: PropTypes.number,
     onActiveTabChange: PropTypes.func.isRequired,
     activeTabRef: PropTypes.object.isRequired,
-  }
+  };
 
-  tabs = React.createRef()
+  tabs = React.createRef();
 
   handleNewTabClick = () => this.props.onActiveTabChange(-1);
 
@@ -27,32 +27,30 @@ export default class HeaderTabs extends React.Component {
       left: event.deltaY,
       behavior: `smooth`,
     });
-  }
+  };
 
-  render () {
+  render() {
     return (
       <div
         className="tabs headerTabs"
         onWheel={this.handleWheel}
         ref={this.tabs}
       >
-        {
-          this.props.workplaces.map((themeId) => {
-            const ref = {};
+        {this.props.workplaces.map((themeId) => {
+          const ref = {};
 
-            if (this.props.activeTab === themeId) {
-              ref.ref = this.props.activeTabRef;
-            }
+          if (this.props.activeTab === themeId) {
+            ref.ref = this.props.activeTabRef;
+          }
 
-            return <HeaderTab
-              id={themeId}
-              key={themeId}
-              isActive={this.props.activeTab === themeId}
-              onClick={() => this.props.onActiveTabChange(themeId)}
-              {...ref}
-            />;
-          })
-        }
+          return <HeaderTab
+            id={themeId}
+            key={themeId}
+            isActive={this.props.activeTab === themeId}
+            onClick={() => this.props.onActiveTabChange(themeId)}
+            {...ref}
+          />;
+        })}
         <NewTab
           isActive={this.props.activeTab === -1}
           onClick={this.handleNewTabClick}
