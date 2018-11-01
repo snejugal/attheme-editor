@@ -90,7 +90,7 @@ export default class VariableEditor extends React.Component {
           default: WebWorkerQuantizer,
         } = await import(`node-vibrant/lib/quantizer/worker`));
       }
-    } catch (e) {
+    } catch {
       return;
     }
 

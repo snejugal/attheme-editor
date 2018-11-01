@@ -55,7 +55,7 @@ export default class ScriptRunner extends React.Component {
     } else {
       try {
         Babel = await import(`@babel/standalone`);
-      } catch (e) {
+      } catch {
         this.setState({
           isBabelLoaded: false,
           isBabelLoading: false,
@@ -78,7 +78,7 @@ export default class ScriptRunner extends React.Component {
     } else {
       try {
         Interpreter = (await import(`es-interpreter`)).default;
-      } catch (e) {
+      } catch {
         this.setState({
           isInterpreterLoaded: false,
           isInterpreterLoading: false,

@@ -112,7 +112,7 @@ export default class Workplace extends React.Component {
       const tgLink = `tg://resolve?domain=${botUsername}&start=${themeId}`;
 
       window.location.href = tgLink;
-    } catch (e) {
+    } catch {
       this.setState({
         hasUploadError: true,
       });
