@@ -10,6 +10,8 @@ import React from "react";
 import Workspace from "../Workspace";
 import atthemeEditorApi from "attheme-editor-api/browser";
 import parseTheme from "../parseTheme";
+import parseWorkspace from "../parseWorkspace";
+import fromFile from "attheme-js/lib/tools/browser/fromFile";
 import readFile from "../readFile";
 
 const HANDLE_SCROLL_INTERVAL = 200;
@@ -49,18 +51,15 @@ export default class App extends React.Component {
       const { files } = event.dataTransfer;
 
       Array.from(files).forEach(async (file) => {
-        if (
-          !file.name.endsWith(`.attheme`)
-          && !file.name.endsWith(`.attheme-editor`)
-        ) {
+        let theme;
+
+        if (file.name.endsWith(`.attheme`)) {
+          theme = parseTheme(await fromFile(file), file.name);
+        } else if (file.name.endsWith(`.attheme-editor`)) {
+          theme = parseWorkspace(await readFile(file));
+        } else {
           return;
         }
-
-        const content = await readFile(file);
-        const theme = parseTheme({
-          file: content,
-          filename: file.name,
-        });
 
         this.handleTheme(theme);
       });

@@ -1,7 +1,7 @@
 import Attheme from "attheme-js";
 import { allVariables } from "./atthemeVariables";
 
-const prepareTheme = ({ variables, name, wallpaper }) => {
+export default ({ variables, name, wallpaper }) => {
   const theme = new Attheme();
 
   for (const variable in variables) {
@@ -19,5 +19,3 @@ const prepareTheme = ({ variables, name, wallpaper }) => {
     name,
   };
 };
-
-export default prepareTheme;

@@ -1,14 +1,14 @@
-const readFile = (file) => new Promise((resolve) => {
+export default (file: File) => new Promise((resolve) => {
   const reader = new FileReader();
 
   reader.onload = () => {
-    const chars = new Uint8Array(reader.result);
+    const chars = new Uint8Array(reader.result as ArrayBuffer);
     const { length } = chars;
 
     let content = ``;
 
-    for (let i = 0; i < length; i++) {
-      content += String.fromCharCode(chars[i]);
+    for (let charIndex = 0; charIndex < length; charIndex++) {
+      content += String.fromCharCode(chars[charIndex]);
     }
 
     resolve(content);
@@ -20,5 +20,3 @@ const readFile = (file) => new Promise((resolve) => {
 
   reader.readAsArrayBuffer(file);
 });
-
-export default readFile;
