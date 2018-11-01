@@ -1,9 +1,4 @@
-import createBuffer from "./createThemeBuffer";
-
-export default ({ content, name }: { content: string, name: string }) => {
-  const buffer = createBuffer(content);
-  const blob = URL.createObjectURL(new File([buffer], name));
-
+export default (blob: string, name: string) => {
   const link = document.createElement(`a`);
 
   link.href = blob;

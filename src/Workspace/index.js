@@ -19,6 +19,7 @@ import download from "../download";
 import localization from "../localization";
 import prepareTheme from "../prepareTheme";
 import uploadTheme from "../uploadTheme";
+import toBlob from "attheme-js/lib/tools/browser/toBlob";
 
 export default class Workplace extends React.Component {
   static propTypes = {
@@ -94,13 +95,10 @@ export default class Workplace extends React.Component {
 
   downloadThemeFile = () => {
     const { theme } = prepareTheme(this.state.theme);
-    const content = theme.toString();
     const name = `${this.state.theme.name}.attheme`;
+    const blob = toBlob(theme, name);
 
-    download({
-      content,
-      name,
-    });
+    download(blob, name);
   };
 
   openThemeInBot = async ({ botUsername, loaderProperty }) => {
@@ -139,10 +137,20 @@ export default class Workplace extends React.Component {
     loaderProperty: `shouldShowTestThemeSpinner`,
   });
 
-  downloadWorkspace = () => download({
-    content: JSON.stringify(this.state.theme),
-    name: `${this.state.theme.name}.attheme-editor`,
-  });
+  downloadWorkspace = () => {
+    const name = `${this.state.theme.name}.attheme-editor`;
+    const serialized = JSON.stringify(this.state.theme);
+    const length = serialized.length;
+    const buffer = new Uint8Array(length);
+
+    for (let charIndex = 0; charIndex < length; charIndex++) {
+      buffer[charIndex] = serialized.codePointAt(charIndex);
+    }
+
+    const blob = URL.createObjectURL(new File([buffer], name));
+
+    download(blob, name);
+  }
 
   handleVariableEditStart = (variable) => {
     this.setState({
