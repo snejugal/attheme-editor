@@ -4,3 +4,6 @@ env:
 extends:
   - ./eslint-config.yaml
   - plugin:react/recommended
+settings:
+  react:
+    version: 16.6.0
