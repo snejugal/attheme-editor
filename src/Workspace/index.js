@@ -2,7 +2,6 @@ import "./styles.scss";
 
 import * as database from "../database/";
 import { allVariablesAmount, defaultValues } from "../atthemeVariables";
-import Attheme from "attheme-js";
 import Button from "../Button";
 import Buttons from "../Buttons";
 import { ReactComponent as DownloadIcon } from "./downloadIcon.svg";
@@ -95,7 +94,7 @@ export default class Workplace extends React.Component {
 
   downloadThemeFile = () => {
     const { theme } = prepareTheme(this.state.theme);
-    const content = Attheme.asText(theme);
+    const content = theme.toString();
     const name = `${this.state.theme.name}.attheme`;
 
     download({
