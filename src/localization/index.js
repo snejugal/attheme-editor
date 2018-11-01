@@ -35,7 +35,7 @@ const updateLanguage = async () => {
   if (language !== `en`) {
     try {
       ({ default: loaded } = await import(`./${language}`));
-    } catch (e) {
+    } catch {
       return;
     }
   }

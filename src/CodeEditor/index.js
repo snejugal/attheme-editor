@@ -28,7 +28,7 @@ export default class CodeMirrorEditor extends React.Component {
         await import(`codemirror/mode/javascript/javascript.js`);
         isJavaScriptModeLoaded = true;
       }
-    } catch (e) {
+    } catch {
       const textarea = document.createElement(`textarea`);
 
       textarea.autofocus = true;

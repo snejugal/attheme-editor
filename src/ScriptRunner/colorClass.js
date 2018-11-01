@@ -118,10 +118,10 @@ const normalizeRgbColor = (rgbColor, ...excessiveArguments) => {
     if (typeof fixedColor[channel] !== `number`) {
       try {
         fixedColor[channel] = Number(fixedColor[channel]);
-      } catch (error) {
+      } catch {
         try {
           fixedColor[channel] = parseInt(String(fixedColor[channel]));
-        } catch (secondError) {
+        } catch {
           throw new TypeError(`Could not convert ${fixedColor[channel]} to a number`);
         }
       }
@@ -178,10 +178,10 @@ const normalizeHslColor = (hslColor, ...excessiveArguments) => {
     if (typeof fixedColor[channel] !== `number`) {
       try {
         fixedColor[channel] = Number(fixedColor[channel]);
-      } catch (error) {
+      } catch {
         try {
           fixedColor[channel] = Number(String(fixedColor[channel]));
-        } catch (secondError) {
+        } catch {
           throw new TypeError(`Could not convert ${fixedColor[channel]} to a number`);
         }
       }
