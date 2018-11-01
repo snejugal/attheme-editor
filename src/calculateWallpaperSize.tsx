@@ -1,4 +1,4 @@
-const calculateWallpaperSize = (image) => new Promise((resolve, reject) => {
+export default (image: string) => new Promise((resolve, reject) => {
   const imageElement = new Image();
 
   imageElement.src = `data:image/jpg;base64,${image}`;
@@ -10,5 +10,3 @@ const calculateWallpaperSize = (image) => new Promise((resolve, reject) => {
 
   imageElement.addEventListener(`error`, reject);
 });
-
-export default calculateWallpaperSize;
