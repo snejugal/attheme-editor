@@ -7,13 +7,13 @@ export default class Fields extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,
-  }
+  };
 
   static defaultProps = {
     className: ``,
-  }
+  };
 
-  render () {
+  render() {
     return (
       <div className={`fields ${this.props.className}`}>
         {this.props.children}

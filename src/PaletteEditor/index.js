@@ -26,7 +26,7 @@ export default class PaletteEditor extends React.Component {
     isFromVariableEditor: false,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {

@@ -19,7 +19,7 @@ export default class Snackbar extends React.Component {
     isError: false,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.snackbarWrapper = document.createElement(`div`);
@@ -33,15 +33,15 @@ export default class Snackbar extends React.Component {
     }
   };
 
-  componentWillUnmount = () => {
+  componentWillUnmount() {
     root.removeChild(this.snackbarWrapper);
-  };
+  }
 
   hide = () => this.setState({
     isDisappearing: true,
   });
 
-  render () {
+  render() {
     let className = `snackbar`;
 
     if (this.props.isError) {

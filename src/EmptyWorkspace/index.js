@@ -13,9 +13,9 @@ import readFile from "../readFile";
 export default class EmptyWorkspace extends React.Component {
   static propTypes = {
     onTheme: PropTypes.func.isRequired,
-  }
+  };
 
-  filesInput = React.createRef()
+  filesInput = React.createRef();
 
   handleCreateButtonClick = () => {
     this.props.onTheme({
@@ -24,7 +24,7 @@ export default class EmptyWorkspace extends React.Component {
       wallpaper: ``,
       palette: [],
     });
-  }
+  };
 
   handleChange = () => {
     const files = [...this.filesInput.current.files];
@@ -46,11 +46,11 @@ export default class EmptyWorkspace extends React.Component {
         this.props.onTheme(theme);
       })();
     }
-  }
+  };
 
-  handleOpenButtonClick = () => this.filesInput.current.click()
+  handleOpenButtonClick = () => this.filesInput.current.click();
 
-  render () {
+  render() {
     return <>
       <Heading level={2}>{localization.emptyWorkspace_title()}</Heading>
       <Buttons>

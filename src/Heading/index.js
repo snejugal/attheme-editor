@@ -8,13 +8,13 @@ export default class Heading extends React.Component {
     children: PropTypes.any,
     level: PropTypes.number.isRequired,
     className: PropTypes.string,
-  }
+  };
 
   static defaultProps = {
     className: ``,
-  }
+  };
 
-  render () {
+  render() {
     const Level = `h${this.props.level}`;
 
     return (

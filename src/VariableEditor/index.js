@@ -192,7 +192,7 @@ export default class VariableEditor extends React.Component {
     }
   };
 
-  render () {
+  render() {
     const { color } = this.state;
 
     const tabs = [

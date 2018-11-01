@@ -14,7 +14,7 @@ export default class Header extends React.Component {
     onLogoClick: PropTypes.func.isRequired,
   }
 
-  render () {
+  render() {
     return (
       <header className="header">
         <Logo onClick={this.props.onLogoClick}/>

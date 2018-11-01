@@ -12,24 +12,22 @@ export default class Select extends React.Component {
 
   handleChange = (event) => this.props.onChange(event.target.value);
 
-  render () {
+  render() {
     return (
       <select
         className="select"
         onChange={this.handleChange}
         value={this.props.activeItem}
       >
-        {
-          this.props.items.map(({ id, title }) => (
-            <option
-              className="select_option"
-              value={id}
-              key={id}
-            >
-              {title}
-            </option>
-          ))
-        }
+        {this.props.items.map(({ id, title }) => (
+          <option
+            className="select_option"
+            value={id}
+            key={id}
+          >
+            {title}
+          </option>
+        ))}
       </select>
     );
   }

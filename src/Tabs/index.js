@@ -15,26 +15,24 @@ export default class Tabs extends React.Component {
     className: ``,
   };
 
-  render () {
+  render() {
     return (
       <div className={`tabs ${this.props.className}`}>
-        {
-          this.props.tabs.map(({ text, id }) => {
-            const handleClick = () => this.props.onChange(id);
+        {this.props.tabs.map(({ text, id }) => {
+          const handleClick = () => this.props.onChange(id);
 
-            let className = `tab`;
+          let className = `tab`;
 
-            if (id === this.props.activeTab) {
-              className += ` -active`;
-            }
+          if (id === this.props.activeTab) {
+            className += ` -active`;
+          }
 
-            return (
-              <button className={className} onClick={handleClick} key={id}>
-                {text}
-              </button>
-            );
-          })
-        }
+          return (
+            <button className={className} onClick={handleClick} key={id}>
+              {text}
+            </button>
+          );
+        })}
       </div>
     );
   }

@@ -23,7 +23,7 @@ export default class Field extends React.Component {
     step: PropTypes.number,
     autoFocus: PropTypes.bool,
     inputRef: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     type: `text`,
@@ -31,15 +31,15 @@ export default class Field extends React.Component {
     className: ``,
     autofocus: false,
     step: 1,
-  }
+  };
 
   handleKeyUp = (event) => {
     if (event.key === `Enter` && this.props.onEnter) {
       this.props.onEnter(event);
     }
-  }
+  };
 
-  render () {
+  render() {
     return (
       <div className={`fieldContainer ${this.props.className}`}>
         <label className="label" htmlFor={this.props.id}>

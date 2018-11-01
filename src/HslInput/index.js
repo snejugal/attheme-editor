@@ -14,7 +14,7 @@ export default class HslInput extends React.Component {
     onChange: PropTypes.func.isRequired,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     const { hue, saturation, lightness } = Color.rgbToHsl(props.color);
@@ -82,7 +82,7 @@ export default class HslInput extends React.Component {
       saturation: Math.round(saturation * PERCENTS * ROUND) / ROUND,
       lightness: Math.round(lightness * PERCENTS * ROUND) / ROUND,
     });
-  }
+  };
 
   handleHueChange = (event) => this.handleChange({
     hue: event.target.valueAsNumber,
@@ -112,7 +112,7 @@ export default class HslInput extends React.Component {
     focusedField: `lightness`,
   });
 
-  componentDidUpdate = (previousProps) => {
+  componentDidUpdate(previousProps) {
     if (previousProps === this.props) {
       return;
     }
@@ -136,7 +136,7 @@ export default class HslInput extends React.Component {
     this.setState(updatedState);
   }
 
-  render () {
+  render() {
     return (
       <Fields className="variableEditor_fields">
         <Field

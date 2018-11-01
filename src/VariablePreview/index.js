@@ -176,7 +176,7 @@ export default class VariablePreview extends React.Component {
     this.preview.current.appendChild(svg);
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate() {
     if (!this.state.updateeElements) {
       return;
     }
@@ -190,9 +190,9 @@ export default class VariablePreview extends React.Component {
 
       element.style.fill = cssRgb;
     }
-  };
+  }
 
-  render () {
+  render() {
     return (
       <div className="variablePreview" ref={this.preview}>
         {

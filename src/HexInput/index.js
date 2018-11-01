@@ -17,7 +17,7 @@ export default class HexInput extends React.Component {
     shouldShowAlpha: true,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -25,9 +25,9 @@ export default class HexInput extends React.Component {
     };
   }
 
-  mayChangeHexValue = false
+  mayChangeHexValue = false;
 
-  componentDidUpdate = (previousProps) => {
+  componentDidUpdate(previousProps) {
     if (this.mayChangeHexValue && previousProps !== this.props) {
       this.setState({
         hex: Color.createHex(this.props.color),
@@ -55,7 +55,7 @@ export default class HexInput extends React.Component {
       channel: `alpha`,
       value: correctValue,
     });
-  }
+  };
 
   handleHexChange = (event) => {
     let hex = event.target.value;
@@ -77,17 +77,17 @@ export default class HexInput extends React.Component {
 
       this.props.onHexChange(parsedHex);
     }
-  }
+  };
 
   handleHexBlur = () => {
     this.mayChangeHexValue = true;
-  }
+  };
 
   handleHexFocus = () => {
     this.mayChangeHexValue = false;
-  }
+  };
 
-  render () {
+  render() {
     return (
       <Fields className="variableEditor_fields">
         <Field

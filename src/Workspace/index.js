@@ -27,7 +27,7 @@ export default class Workplace extends React.Component {
     onNameChange: PropTypes.func.isRequired,
     onClosePrompt: PropTypes.func.isRequired,
     isSearchHotkeyEnabled: PropTypes.bool,
-  }
+  };
 
   state = {
     theme: null,
@@ -43,17 +43,19 @@ export default class Workplace extends React.Component {
     hasUploadError: false,
   };
 
-  componentDidMount = async () => this.setState({
-    theme: await database.getTheme(this.props.themeId),
-  });
+  async componentDidMount() {
+    this.setState({
+      theme: await database.getTheme(this.props.themeId),
+    });
+  }
 
-  componentDidUpdate = async (prevProps) => {
+  async componentDidUpdate(prevProps) {
     if (prevProps.themeId !== this.props.themeId) {
       this.setState({
         theme: await database.getTheme(this.props.themeId),
       });
     }
-  };
+  }
 
   handleNameFieldChange = (event) => {
     const name = event.target.value;
@@ -287,7 +289,7 @@ export default class Workplace extends React.Component {
     hasUploadError: false,
   });
 
-  render () {
+  render() {
     if (!this.state.theme) {
       return null;
     }

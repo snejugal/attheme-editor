@@ -13,7 +13,7 @@ export default class CodeMirrorEditor extends React.Component {
 
   container = React.createRef();
 
-  componentDidMount = async () => {
+  async componentDidMount() {
     try {
       if (!CodeMirror) {
         CodeMirror = (await import(`codemirror`)).default;
@@ -65,7 +65,7 @@ export default class CodeMirrorEditor extends React.Component {
     this.editor = editor;
   }
 
-  render () {
+  render() {
     return <div className={this.props.className} ref={this.container}/>;
   }
 }

@@ -9,9 +9,9 @@ export default class ErrorElement extends React.Component {
   static propTypes = {
     errorStack: PropTypes.string.isRequired,
     onDismissed: PropTypes.func.isRequired,
-  }
+  };
 
-  render () {
+  render() {
     return (
       <div className="error" onClick={this.props.onDismissed}>
         <Heading level={2} className="error_title">
