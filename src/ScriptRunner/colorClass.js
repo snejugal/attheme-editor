@@ -179,11 +179,7 @@ const normalizeHslColor = (hslColor, ...excessiveArguments) => {
       try {
         fixedColor[channel] = Number(fixedColor[channel]);
       } catch {
-        try {
-          fixedColor[channel] = Number(String(fixedColor[channel]));
-        } catch {
-          throw new TypeError(`Could not convert ${fixedColor[channel]} to a number`);
-        }
+        throw new TypeError(`Could not convert ${fixedColor[channel]} to a number`);
       }
     }
   }
@@ -208,18 +204,10 @@ const normalizeHslColor = (hslColor, ...excessiveArguments) => {
     fixedColor.hue = MIN_HUE_VALUE;
   }
 
-  if (fixedColor.hue >= MAX_HUE_VALUE_EXCLUDING) {
-    fixedColor.hue %= MAX_HUE_VALUE_EXCLUDING;
-  }
-
-  if (fixedColor.hue < MIN_HUE_VALUE) {
-    fixedColor.hue =
-      (
-        MAX_HUE_VALUE_EXCLUDING
-        + (fixedColor.hue % MAX_HUE_VALUE_EXCLUDING)
-      )
-      % MAX_HUE_VALUE_EXCLUDING;
-  }
+  fixedColor.hue = (
+    MAX_HUE_VALUE_EXCLUDING
+    + (fixedColor.hue % MAX_HUE_VALUE_EXCLUDING)
+  ) % MAX_HUE_VALUE_EXCLUDING;
 
   for (const channel of [`saturation`, `lightness`]) {
     if (Number.isNaN(fixedColor[channel])) {

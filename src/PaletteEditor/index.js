@@ -114,7 +114,7 @@ export default class PaletteEditor extends React.Component {
 
     if (this.state.editingColorIndex === null) {
       title = localization.paletteEditor_title();
-      colors = this.state.palette.map(({ name, color }, i) => {
+      colors = this.state.palette.map(({ name, color }, index) => {
         color.alpha = 255;
 
         const { hue, saturation, lightness } = Color.rgbToHsl(color);
@@ -129,14 +129,14 @@ export default class PaletteEditor extends React.Component {
         }
 
         const handleClick = () => this.setState({
-          editingColorIndex: i,
+          editingColorIndex: index,
           editingColorName: name,
           editingColor: color,
         });
 
         return (
           <button
-            key={i}
+            key={index}
             type="button"
             className={className}
             style={{

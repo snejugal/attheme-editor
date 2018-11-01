@@ -26,18 +26,16 @@ export default class VariablePreview extends React.Component {
 
   preview = React.createRef();
 
-  componentDidMount = async () => {
+  async componentDidMount() {
     const previewFileName = previewsMap[this.props.variable];
-
-    const idsMap = {};
 
     if (!previewFileName) {
       return;
     }
 
-    const previewUrl = await import(
-      `./previews/${previewFileName}.svg`,
-    );
+    const idsMap = {};
+
+    const previewUrl = await import(`./previews/${previewFileName}.svg`);
 
     const response = await fetch(previewUrl);
     const contents = await response.text();
@@ -45,7 +43,7 @@ export default class VariablePreview extends React.Component {
     const previewDocument = parser.parseFromString(contents, `text/xml`);
     const svg = previewDocument.documentElement;
 
-    const coloredElements = Array.from(svg.querySelectorAll(`[class]`));
+    const coloredElements = [...svg.querySelectorAll(`[class]`)];
 
     for (const element of coloredElements) {
       const currentFill = element.getAttribute(`fill`) || ``;
@@ -86,25 +84,16 @@ export default class VariablePreview extends React.Component {
       }
     }
 
-    const linkElements = Array.from(svg.querySelectorAll(`[href]`));
-
-    if (linkElements.length > 0) {
-      for (const element of linkElements) {
+    [...svg.querySelectorAll(`:not([href^="data:"]:not([href=""])`)]
+      .forEach(async (element) => {
         const url = element.getAttribute(`href`);
+        const resolvedUrl = await import(`./previews/${url}`);
 
-        if (!url.startsWith(`data:`) && url !== ``) {
-          const resolvedUrl = await import(`./previews/${url}`);
-
-          element.setAttribute(`href`, resolvedUrl);
-        }
-      }
-    }
+        element.setAttribute(`href`, resolvedUrl);
+      });
 
     if (this.props.currentWallpaper) {
-      const wallpaperElements = Array.from(
-        svg.querySelectorAll(`[data-wallpaper]`),
-      );
-
+      const wallpaperElements = [...svg.querySelectorAll(`[data-wallpaper]`)];
 
       if (wallpaperElements.length > 0) {
         const wallpaperSize = await calculateWallpaperSize(
@@ -176,16 +165,16 @@ export default class VariablePreview extends React.Component {
       }
     }
 
-    const updateeElements = Array.from(
-      svg.querySelectorAll(`[class="${this.props.variable}"]`),
-    );
+    const updateeElements = [
+      ...svg.querySelectorAll(`[class="${this.props.variable}"]`),
+    ];
 
     this.setState({
       updateeElements,
     });
 
     this.preview.current.appendChild(svg);
-  };
+  }
 
   componentDidUpdate = () => {
     if (!this.state.updateeElements) {

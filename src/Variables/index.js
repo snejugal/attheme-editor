@@ -119,7 +119,6 @@ export default class Variables extends React.Component {
 
         variablesOrder = variablesOrder.filter((variable) => {
           const color = this.props.theme[variable] || defaultValues[variable];
-
           const variableHex = Color.createHex(color);
 
           return variableHex.startsWith(searchHex);
@@ -133,37 +132,33 @@ export default class Variables extends React.Component {
       }
     }
 
-    const variables = [];
-
-    for (const variableName of variablesOrder) {
-      let variableElement;
-
+    const variables = variablesOrder.map((variableName) => {
       if (variableName === `chat_wallpaper` && this.props.wallpaper) {
-        variableElement = <Variable
+        return <Variable
           variableName="chat_wallpaper"
           key="chat_wallpaper"
           wallpaper={this.props.wallpaper}
           onClick={this.props.onClick}
         />;
-      } else if (themeVariables.includes(variableName)) {
-        variableElement = <Variable
+      }
+
+      if (themeVariables.includes(variableName)) {
+        return <Variable
           variableName={variableName}
           key={variableName}
           color={this.props.theme[variableName]}
           onClick={this.props.onClick}
         />;
-      } else {
-        variableElement = <Variable
-          variableName={variableName}
-          key={variableName}
-          color={defaultValues[variableName]}
-          onClick={this.props.onNewVariable}
-          isUnadded={true}
-        />;
       }
 
-      variables.push(variableElement);
-    }
+      return <Variable
+        variableName={variableName}
+        key={variableName}
+        color={defaultValues[variableName]}
+        onClick={this.props.onNewVariable}
+        isUnadded={true}
+      />;
+    });
 
     return <>
       <Field
@@ -175,29 +170,23 @@ export default class Variables extends React.Component {
       >
         {localization.workspace_search()}
       </Field>
-      {
-        variables.length > 0 && (
-          <div className="variables">{variables}</div>
-        )
-      }
-      {
-        variables.length === 0
+      {variables.length > 0 && (
+        <div className="variables">{variables}</div>
+      )}
+      {variables.length === 0
         && this.state.searchQuery.trim() === ``
         && (
           <Hint className="variables_placeholder">
             {localization.workspace_noVariablesPlaceholder()}
           </Hint>
-        )
-      }
-      {
-        variables.length === 0
+        )}
+      {variables.length === 0
         && this.state.searchQuery.trim() !== ``
         && (
           <Hint className="variables_placeholder">
             {localization.workspace_noResultsPlaceholder()}
           </Hint>
-        )
-      }
+        )}
     </>;
   }
 }
