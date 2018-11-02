@@ -9,6 +9,7 @@ interface PartialColor {
 }
 
 interface Theme {
+  name: string;
   variables: {
     [key: string]: Color;
   },
