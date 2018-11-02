@@ -54,7 +54,7 @@ export const updateActiveTab = (activeTab: number) => (
   setSetting(`activeTab`, activeTab)
 );
 
-export const getTheme = (id: number) => new Promise<number>(async (resolve) => {
+export const getTheme = (id: number) => new Promise<Theme>(async (resolve) => {
   const request = (await database)
     .transaction(`themes`)
     .objectStore(`themes`)
