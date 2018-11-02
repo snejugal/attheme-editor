@@ -1,4 +1,4 @@
-const SCHEME = {
+const SCHEME: { [key: string]: any } = {
   themes: {
     autoIncrement: true,
   },
@@ -7,7 +7,7 @@ const SCHEME = {
   },
 };
 
-export default (database) => new Promise((resolve) => {
+export default (database: IDBDatabase) => new Promise((resolve) => {
   const objectStoresAmount = Object.keys(SCHEME).length;
 
   let completedAmount = 0;
