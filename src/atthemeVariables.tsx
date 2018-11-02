@@ -25,7 +25,7 @@ const defaultValues = [...defaultTheme.entries()]
     object[variable] = value;
 
     return object;
-}, {});
+  }, {});
 
 const allVariables = Object.keys(defaultValues);
 const allVariablesAmount = allVariables.length;
