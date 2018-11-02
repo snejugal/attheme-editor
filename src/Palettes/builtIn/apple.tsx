@@ -1,4 +1,4 @@
-const palette = [
+export const palette = [
   {
     name: `Red`,
     color: {
@@ -64,7 +64,3 @@ const palette = [
     },
   },
 ];
-
-export {
-  palette,
-};
