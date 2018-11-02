@@ -3,25 +3,35 @@ import Fields from "../Fields";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
+import { Color } from "attheme-js/lib/types";
 
-export default class RgbInput extends React.Component {
+// eslint-disable-next-line quotes
+type Channel = "red" | "green" | "blue";
+type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
+interface Props {
+  color: Color;
+  onChange(change: { channel: Channel, value: number }): void;
+}
+
+export default class RgbInput extends React.Component<Props> {
   static propTypes = {
     color: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
   };
 
-  handleChange = (channel, event) => {
-    let correctValue = event.target.valueAsNumber;
-
-    if (event.target.valueAsNumber > event.target.max) {
-      correctValue = Number(event.target.max);
-    }
+  handleChange = (channel: Channel, event: ChangeEvent) => {
+    let correctValue = event.currentTarget.valueAsNumber;
 
     if (
-      event.target.valueAsNumber < event.target.min
-      || Number.isNaN(event.target.valueAsNumber)
+      Number.isNaN(event.currentTarget.valueAsNumber)
+      || event.currentTarget.valueAsNumber < +event.currentTarget.min
     ) {
-      correctValue = Number(event.target.min);
+      correctValue = Number(event.currentTarget.min);
+    }
+
+    if (event.currentTarget.valueAsNumber > +event.currentTarget.max) {
+      correctValue = Number(event.currentTarget.max);
     }
 
     correctValue = Math.round(correctValue);
@@ -32,11 +42,11 @@ export default class RgbInput extends React.Component {
     });
   };
 
-  handleRedChange = (event) => this.handleChange(`red`, event);
+  handleRedChange = (event: ChangeEvent) => this.handleChange(`red`, event);
 
-  handleGreenChange = (event) => this.handleChange(`green`, event);
+  handleGreenChange = (event: ChangeEvent) => this.handleChange(`green`, event);
 
-  handleBlueChange = (event) => this.handleChange(`blue`, event);
+  handleBlueChange = (event: ChangeEvent) => this.handleChange(`blue`, event);
 
   render() {
     return (

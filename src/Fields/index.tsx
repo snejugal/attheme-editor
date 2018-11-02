@@ -1,14 +1,13 @@
 import "./styles.scss";
 
-import PropTypes from "prop-types";
 import React from "react";
 
-export default class Fields extends React.Component {
-  static propTypes = {
-    children: PropTypes.any,
-    className: PropTypes.string,
-  };
+interface Props {
+  children: React.ReactNode;
+  className?: string;
+}
 
+export default class Fields extends React.Component<Props> {
   static defaultProps = {
     className: ``,
   };

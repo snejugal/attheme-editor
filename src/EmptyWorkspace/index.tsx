@@ -4,7 +4,6 @@ import Button from "../Button";
 import Buttons from "../Buttons";
 import Heading from "../Heading";
 import Hint from "../Hint";
-import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 import parseTheme from "../parseTheme";
@@ -12,12 +11,12 @@ import fromFile from "attheme-js/lib/tools/browser/fromFile";
 import parseWorkspace from "../parseWorkspace";
 import readFile from "../readFile";
 
-export default class EmptyWorkspace extends React.Component {
-  static propTypes = {
-    onTheme: PropTypes.func.isRequired,
-  };
+interface Props {
+  onTheme(theme: Theme): void;
+}
 
-  filesInput = React.createRef();
+export default class EmptyWorkspace extends React.Component<Props> {
+  filesInput = React.createRef<HTMLInputElement>();
 
   handleCreateButtonClick = () => {
     this.props.onTheme({
@@ -29,7 +28,7 @@ export default class EmptyWorkspace extends React.Component {
   };
 
   handleChange = () => {
-    [...this.filesInput.current.files].forEach(async (file) => {
+    [...this.filesInput.current!.files!].forEach(async (file) => {
       let theme;
 
       if (file.name.endsWith(`.attheme`)) {
@@ -44,7 +43,7 @@ export default class EmptyWorkspace extends React.Component {
     });
   };
 
-  handleOpenButtonClick = () => this.filesInput.current.click();
+  handleOpenButtonClick = () => this.filesInput.current!.click();
 
   render() {
     return <>

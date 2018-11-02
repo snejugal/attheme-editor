@@ -1,16 +1,18 @@
 import "./styles.scss";
 
-import PropTypes from "prop-types";
 import React from "react";
 
-export default class Tabs extends React.Component {
-  static propTypes = {
-    tabs: PropTypes.arrayOf(PropTypes.object).isRequired,
-    activeTab: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    className: PropTypes.string,
-  };
+interface Props {
+  tabs: {
+    text: string;
+    id: string;
+  }[];
+  activeTab: string;
+  onChange(id: string): void;
+  className?: string;
+}
 
+export default class Tabs extends React.Component<Props> {
   static defaultProps = {
     className: ``,
   };

@@ -1,17 +1,16 @@
 import "./styles.scss";
 
 import { ReactComponent as Icon } from "./icon.svg";
-import PropTypes from "prop-types";
 import React from "react";
 import isEqual from "lodash/isEqual";
 
-export default class NewTab extends React.Component {
-  static propTypes = {
-    onClick: PropTypes.func.isRequired,
-    isActive: PropTypes.bool.isRequired,
-  };
+interface Props {
+  onClick(): void;
+  isActive: boolean;
+}
 
-  shouldComponentUpdate(nextProps) {
+export default class NewTab extends React.Component<Props> {
+  shouldComponentUpdate(nextProps: Props) {
     return !isEqual(this.props, nextProps);
   }
 

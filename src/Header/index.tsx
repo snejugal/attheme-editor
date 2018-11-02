@@ -1,19 +1,19 @@
 import "./styles.scss";
 
+import HeaderTab from "../HeaderTab";
 import HeaderTabs from "../HeaderTabs";
 import Logo from "../Logo";
-import PropTypes from "prop-types";
 import React from "react";
 
-export default class Header extends React.Component {
-  static propTypes = {
-    workplaces: PropTypes.array.isRequired,
-    activeTab: PropTypes.number,
-    onActiveTabChange: PropTypes.func.isRequired,
-    activeTabRef: PropTypes.object.isRequired,
-    onLogoClick: PropTypes.func.isRequired,
-  }
+interface Props {
+  workplaces: number[];
+  activeTab: number;
+  onActiveTabChange(tab: number): void;
+  activeTabRef: React.Ref<HeaderTab>,
+  onLogoClick(): void;
+}
 
+export default class Header extends React.Component<Props> {
   render() {
     return (
       <header className="header">

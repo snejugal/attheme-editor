@@ -1,16 +1,15 @@
 import "./styles.scss";
 
 import { ReactComponent as LogoSVG } from "./logo.svg";
-import PropTypes from "prop-types";
 import React from "react";
 import isEqual from "lodash/isEqual";
 
-export default class Logo extends React.Component {
-  static propTypes = {
-    onClick: PropTypes.func.isRequired,
-  };
+interface Props {
+  onClick(): void;
+}
 
-  shouldComponentUpdate(nextProps) {
+export default class Logo extends React.Component<Props> {
+  shouldComponentUpdate(nextProps: Props) {
     return !isEqual(this.props, nextProps);
   }
 

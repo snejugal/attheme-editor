@@ -1,16 +1,20 @@
 import "./styles.scss";
 
-import PropTypes from "prop-types";
 import React from "react";
 
-export default class Select extends React.Component {
-  static propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onChange: PropTypes.func.isRequired,
-    activeItem: PropTypes.string.isRequired,
-  };
+interface Props {
+  items: {
+    id: string;
+    title: string;
+  }[];
+  onChange(id: string): void;
+  activeItem: string;
+}
 
-  handleChange = (event) => this.props.onChange(event.target.value);
+export default class Select extends React.Component<Props> {
+  handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => (
+    this.props.onChange(event.target.value)
+  );
 
   render() {
     return (

@@ -1,15 +1,14 @@
 import "./styles.scss";
 
-import PropTypes from "prop-types";
 import React from "react";
 
-export default class Heading extends React.Component {
-  static propTypes = {
-    children: PropTypes.any,
-    level: PropTypes.number.isRequired,
-    className: PropTypes.string,
-  };
+interface Props {
+  children: React.ReactNode;
+  level: number;
+  className?: string;
+}
 
+export default class Heading extends React.Component<Props> {
   static defaultProps = {
     className: ``,
   };
