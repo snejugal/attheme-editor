@@ -8,13 +8,15 @@ interface PartialColor {
   blue: number;
 }
 
+type Palette = (string | PartialColor)[];
+
 interface Theme {
   name: string;
   variables: {
     [key: string]: Color;
   },
   wallpaper?: string;
-  palette: (string | PartialColor)[];
+  palette: Palette;
 }
 
 // This is a workaround, because Babel (that CRA uses) doesn't support `import`
