@@ -1,4 +1,4 @@
-export default (file: File) => new Promise((resolve) => {
+export default (file: File) => new Promise<string>((resolve) => {
   const reader = new FileReader();
 
   reader.onload = () => {
