@@ -3,7 +3,13 @@ import "./styles.scss";
 import PropTypes from "prop-types";
 import React from "react";
 
-export default class Container extends React.Component {
+interface Props {
+  children: React.ReactNode;
+  containerRef: React.Ref<HTMLDivElement>;
+  onScroll(): void;
+}
+
+export default class Container extends React.Component<Props> {
   static propTypes = {
     children: PropTypes.any,
     containerRef: PropTypes.any.isRequired,

@@ -1,16 +1,15 @@
 import "./styles.scss";
 
 import Heading from "../Heading";
-import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 
-export default class ErrorElement extends React.Component {
-  static propTypes = {
-    errorStack: PropTypes.string.isRequired,
-    onDismissed: PropTypes.func.isRequired,
-  };
+interface Props {
+  errorStack: string;
+  onDismissed(): void;
+}
 
+export default class ErrorElement extends React.Component<Props> {
   render() {
     return (
       <div className="error" onClick={this.props.onDismissed}>

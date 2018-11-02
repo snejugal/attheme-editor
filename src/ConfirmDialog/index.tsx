@@ -1,17 +1,16 @@
 import Dialog from "../Dialog";
-import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 
-export class ConfirmDialog extends React.Component {
-  static propTypes = {
-    children: PropTypes.any,
-    onDismiss: PropTypes.func,
-    onConfirm: PropTypes.func.isRequired,
-    onClose: PropTypes.func.isRequired,
-    isDangerous: PropTypes.bool,
-  };
+interface Props {
+  children: React.ReactNode;
+  onDismiss?(): void;
+  onConfirm(): void;
+  onClose(): void;
+  isDangerous?: boolean;
+}
 
+export class ConfirmDialog extends React.Component<Props> {
   static defaultProps = {
     isDangerous: false,
   };

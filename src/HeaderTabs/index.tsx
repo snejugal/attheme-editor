@@ -2,28 +2,27 @@ import "./styles.scss";
 
 import HeaderTab from "../HeaderTab";
 import NewTab from "../NewTab";
-import PropTypes from "prop-types";
 import React from "react";
 
-export default class HeaderTabs extends React.Component {
-  static propTypes = {
-    workplaces: PropTypes.array.isRequired,
-    activeTab: PropTypes.number,
-    onActiveTabChange: PropTypes.func.isRequired,
-    activeTabRef: PropTypes.object.isRequired,
-  };
+interface Props {
+  workplaces: number[];
+  activeTab: number;
+  onActiveTabChange(tab: number): void;
+  activeTabRef: React.Ref<HeaderTab>,
+}
 
-  tabs = React.createRef();
+export default class HeaderTabs extends React.Component<Props> {
+  tabs = React.createRef<HTMLDivElement>();
 
   handleNewTabClick = () => this.props.onActiveTabChange(-1);
 
-  handleWheel = (event) => {
+  handleWheel = (event: React.WheelEvent) => {
     if (event.deltaX) {
       return;
     }
 
     event.preventDefault();
-    this.tabs.current.scrollBy({
+    this.tabs.current!.scrollBy({
       left: event.deltaY,
       behavior: `smooth`,
     });
@@ -37,18 +36,12 @@ export default class HeaderTabs extends React.Component {
         ref={this.tabs}
       >
         {this.props.workplaces.map((themeId) => {
-          const ref = {};
-
-          if (this.props.activeTab === themeId) {
-            ref.ref = this.props.activeTabRef;
-          }
-
           return <HeaderTab
             id={themeId}
             key={themeId}
             isActive={this.props.activeTab === themeId}
             onClick={() => this.props.onActiveTabChange(themeId)}
-            {...ref}
+            ref={this.props.activeTabRef}
           />;
         })}
         <NewTab

@@ -1,30 +1,26 @@
 import "./styles.scss";
 
-import PropTypes from "prop-types";
 import React from "react";
 
-export default class Field extends React.Component {
-  static propTypes = {
-    type: PropTypes.string,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
-    className: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    onBlur: PropTypes.func,
-    onFocus: PropTypes.func,
-    onEnter: PropTypes.func,
-    id: PropTypes.string.isRequired,
-    children: PropTypes.any.isRequired,
-    autoCapitalize: PropTypes.string,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    step: PropTypes.number,
-    autoFocus: PropTypes.bool,
-    inputRef: PropTypes.object,
-  };
+interface Props {
+  type?: string;
+  value: string | number;
+  className?: string;
+  onChange(event: React.ChangeEvent<HTMLInputElement>): void;
+  onBlur?(): void;
+  onFocus?(): void;
+  onEnter?(event: React.KeyboardEvent): void;
+  id: string;
+  children: React.ReactNode;
+  autoCapitalize?: string;
+  min?: number;
+  max?: number;
+  step?: number;
+  autoFocus?: boolean;
+  inputRef?: React.Ref<HTMLInputElement>;
+}
 
+export default class Field extends React.Component<Props> {
   static defaultProps = {
     type: `text`,
     placeholder: ``,
@@ -33,7 +29,7 @@ export default class Field extends React.Component {
     step: 1,
   };
 
-  handleKeyUp = (event) => {
+  handleKeyUp = (event: React.KeyboardEvent) => {
     if (event.key === `Enter` && this.props.onEnter) {
       this.props.onEnter(event);
     }

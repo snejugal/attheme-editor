@@ -1,20 +1,19 @@
 import "./styles.scss";
 
-import PropTypes from "prop-types";
 import React from "react";
 
-export default class Link extends React.Component {
-  static propTypes = {
-    href: PropTypes.string.isRequired,
-    children: PropTypes.any,
-    isWhite: PropTypes.bool,
-  };
+interface Props {
+  href: string;
+  children: React.ReactNode;
+  isWhite?: boolean;
+}
 
+export default class Link extends React.Component<Props> {
   static defaultProps = {
     isWhite: false,
   };
 
-  stopPropagation = (event) => event.stopPropagation();
+  stopPropagation = (event: React.SyntheticEvent) => event.stopPropagation();
 
   render() {
     let className = `link`;
