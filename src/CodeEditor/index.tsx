@@ -1,17 +1,22 @@
-import PropTypes from "prop-types";
 import React from "react";
 
-let CodeMirror;
+let CodeMirror: typeof CodeMirrorClass;
 let areStylesImported = false;
 let isJavaScriptModeLoaded = false;
 
-export default class CodeMirrorEditor extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    onFocus: PropTypes.func,
+interface Props {
+  className?: string;
+  onFocus(): void;
+}
+
+export default class CodeMirrorEditor extends React.Component<Props> {
+  editor = {
+    getValue() {
+      return ``;
+    },
   };
 
-  container = React.createRef();
+  container = React.createRef<HTMLDivElement>();
 
   async componentDidMount() {
     try {
@@ -43,12 +48,12 @@ export default class CodeMirrorEditor extends React.Component {
         },
       };
 
-      this.container.appendChild(textarea);
+      this.container.current!.appendChild(textarea);
 
       return;
     }
 
-    const editor = new CodeMirror(this.container.current, {
+    const editor = new CodeMirror(this.container.current!, {
       value: ``,
       lineNumbers: true,
       autofocus: true,
