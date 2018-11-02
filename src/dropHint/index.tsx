@@ -29,17 +29,17 @@ const hide = () => {
   root.classList.add(`-disappear`);
 };
 
-document.documentElement.addEventListener(`dragstart`, () => {
+document.documentElement!.addEventListener(`dragstart`, () => {
   shouldShowHint = false;
 });
 
-document.documentElement.addEventListener(`dragend`, () => {
+document.documentElement!.addEventListener(`dragend`, () => {
   shouldShowHint = true;
 });
 
-document.documentElement.addEventListener(`dragenter`, onDragEnter);
+document.documentElement!.addEventListener(`dragenter`, onDragEnter);
 
-document.documentElement.addEventListener(`dragleave`, ({ target }) => {
+document.documentElement!.addEventListener(`dragleave`, ({ target }) => {
   if (target === root) {
     hide();
   } else {
@@ -47,7 +47,7 @@ document.documentElement.addEventListener(`dragleave`, ({ target }) => {
   }
 });
 
-document.documentElement.addEventListener(`drop`, hide);
+document.documentElement!.addEventListener(`drop`, hide);
 
 root.addEventListener(`click`, () => {
   document.body.removeChild(root);
