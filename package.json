@@ -4,7 +4,7 @@
   "homepage": ".",
   "dependencies": {
     "@babel/standalone": "^7.1.0",
-    "@snejugal/color": "^2.0.0",
+    "@snejugal/color": "^2.0.3",
     "attheme-editor-api": "^2.0.0",
     "attheme-js": "^2.0.0",
     "codemirror": "^5.41.0",
