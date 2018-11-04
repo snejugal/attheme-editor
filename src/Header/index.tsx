@@ -7,7 +7,7 @@ import React from "react";
 
 interface Props {
   workplaces: number[];
-  activeTab: number;
+  activeTab: number | null;
   onActiveTabChange(tab: number): void;
   activeTabRef: React.Ref<HeaderTab>,
   onLogoClick(): void;
