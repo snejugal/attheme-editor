@@ -6,9 +6,15 @@ interface PartialColor {
   red: number;
   green: number;
   blue: number;
+  alpha?: number;
 }
 
-type Palette = (string | PartialColor)[];
+interface PaletteColor {
+  name: string;
+  color: PartialColor;
+}
+
+type Palette = (string | PaletteColor)[];
 
 interface Theme {
   name: string;
