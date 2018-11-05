@@ -3,28 +3,37 @@ import "./styles.scss";
 import * as builtInPalettes from "./builtIn";
 import Button from "../Button";
 import Buttons from "../Buttons";
-import Color from "@snejugal/color";
+import { parseHex, isLight, createCssRgb } from "@snejugal/color";
 import Hint from "../Hint";
-import PropTypes from "prop-types";
 import React from "react";
 import Select from "../Select";
 import localization from "../localization";
+import { Color } from "attheme-js/lib/types";
 
-export default class Palettes extends React.Component {
-  static propTypes = {
-    themeColors: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onChange: PropTypes.func.isRequired,
-    alpha: PropTypes.number.isRequired,
-    themeCustomPalette: PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.object,
-      ])
-    ).isRequired,
-    onCustomPaletteEditStart: PropTypes.func.isRequired,
-  };
+/* eslint-disable quotes */
+type PaletteName = (
+  "themeCustomPalette"
+  | "themeColors"
+  | "materialDesign"
+  | "css"
+  | "apple"
+  );
+/* eslint-enable quotes */
 
-  constructor(props) {
+interface Props {
+  themeColors: string[];
+  onChange(color: Color): void;
+  alpha: number;
+  themeCustomPalette: Palette;
+  onCustomPaletteEditStart(): void;
+}
+
+interface State {
+  activePalette: PaletteName;
+}
+
+export default class Palettes extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -34,7 +43,7 @@ export default class Palettes extends React.Component {
     };
   }
 
-  handlePaletteChange = (activePalette) => this.setState({
+  handlePaletteChange = (activePalette: PaletteName) => this.setState({
     activePalette,
   });
 
@@ -44,18 +53,18 @@ export default class Palettes extends React.Component {
     if (this.state.activePalette === `themeColors`) {
       palette = this.props.themeColors.map((hex) => ({
         name: hex,
-        color: Color.parseHex(hex),
+        color: parseHex(hex)!,
       }));
     } else if (this.state.activePalette === `themeCustomPalette`) {
       palette = this.props.themeCustomPalette.map((color) => {
-        if (typeof color === `object`) {
-          return color;
+        if (typeof color === `string`) {
+          return {
+            name: color,
+            color: parseHex(color)!,
+          };
         }
 
-        return {
-          name: color,
-          color: Color.parseHex(color),
-        };
+        return color;
       });
     } else {
       palette = builtInPalettes[this.state.activePalette];
@@ -71,15 +80,31 @@ export default class Palettes extends React.Component {
         title: localization.palettes_themeCustomPalette(),
       },
       ...(
-        Object.keys(builtInPalettes)
+        (Object.keys(builtInPalettes) as PaletteName[])
           .map((id) => ({
             id,
+
+            // @ts-ignore
+            // TODO: Through in reality title won't be undefined, this is a bad
+            // design decision to place names in such a way that we have to use
+            // indexing over all localization strings. This would be better:
+            //     localization.paletteNames[id],
             title: localization[`palettes_${id}`](),
           }))
       ),
     ];
 
-    const colors = palette.map(({ name, color }, index) => {
+    const colors = palette.map((paletteColor, index) => {
+      let name;
+      let color: PartialColor;
+
+      if (typeof paletteColor === `string`) {
+        name = paletteColor;
+        color = parseHex(paletteColor)!;
+      } else {
+        ({ name, color } = paletteColor);
+      }
+
       const handleClick = () => {
         this.props.onChange({
           ...color,
@@ -89,13 +114,13 @@ export default class Palettes extends React.Component {
 
       let className = `palettes_color`;
 
-      if (Color.isLight(color)) {
+      if (isLight(color)) {
         className += ` -darkText`;
       }
 
       return <Button
         className={className}
-        backgroundColor={Color.createCssRgb(color)}
+        backgroundColor={createCssRgb(color)}
         key={index}
         onClick={handleClick}
       >
@@ -109,40 +134,32 @@ export default class Palettes extends React.Component {
         activeItem={this.state.activePalette}
         onChange={this.handlePaletteChange}
       />
-      {
-        this.state.activePalette === `themeCustomPalette` && (
-          <Buttons className="variableEditor_buttons">
-            <Button onClick={this.props.onCustomPaletteEditStart}>
-              {localization.variableEditor_editPalette()}
-            </Button>
-          </Buttons>
-        )
-      }
-      {
-        colors.length > 0 && (
-          <div className="palettes">
-            {colors}
-          </div>
-        )
-      }
-      {
-        colors.length === 0
+      {this.state.activePalette === `themeCustomPalette` && (
+        <Buttons className="variableEditor_buttons">
+          <Button onClick={this.props.onCustomPaletteEditStart}>
+            {localization.variableEditor_editPalette()}
+          </Button>
+        </Buttons>
+      )}
+      {colors.length > 0 && (
+        <div className="palettes">
+          {colors}
+        </div>
+      )}
+      {colors.length === 0
         && this.state.activePalette === `themeColors`
         && (
           <Hint className="palettes_placeholder">
             {localization.variableEditor_themeColorsPlaceholder()}
           </Hint>
-        )
-      }
-      {
-        colors.length === 0
+        )}
+      {colors.length === 0
         && this.state.activePalette === `themeCustomPalette`
         && (
           <Hint className="palettes_placeholder">
             {localization.variableEditor_themeCustomPalettePlaceholder()}
           </Hint>
-        )
-      }
+        )}
     </>;
   }
 }

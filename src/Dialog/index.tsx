@@ -3,36 +3,43 @@ import "./styles.scss";
 import Button from "../Button";
 import Buttons from "../Buttons";
 import Heading from "../Heading";
-import PropTypes from "prop-types";
 import React from "react";
 import ReactDOM from "react-dom";
 
-const root = document.querySelector(`.dialogContainer`);
+const root = document.querySelector(`.dialogContainer`)!;
 
-export default class Dialog extends React.Component {
-  static propTypes = {
-    children: PropTypes.any,
-    title: PropTypes.any,
-    buttons: PropTypes.arrayOf(PropTypes.shape({
-      caption: PropTypes.any,
-      onClick: PropTypes.func,
-      shouldCloseAfterClick: PropTypes.bool,
-      isDangerous: PropTypes.bool,
-      isDisabled: PropTypes.bool,
-    })).isRequired,
-    onDismiss: PropTypes.func,
-    onClose: PropTypes.func.isRequired,
-  };
+interface ButtonDescription {
+  caption: React.ReactNode;
+  onClick?(): void;
+  shouldCloseAfterClick?: boolean;
+  isDangerous?: boolean;
+  isDisabled?: boolean;
+}
 
+interface Props {
+  children: React.ReactNode;
+  title?: React.ReactNode;
+  buttons: ButtonDescription[];
+  onDismiss?(): void;
+  onClose(): void;
+}
+
+interface State {
+  isClosing: boolean;
+}
+
+export default class Dialog extends React.Component<Props, State> {
   state = {
     isClosing: false,
   };
 
   wasMouseDown = false;
 
-  dialog = React.createRef();
+  restoreTabIndexOn: HTMLElement[] = [];
 
-  onRootClick = (event) => {
+  dialog = React.createRef<HTMLDialogElement>();
+
+  onRootClick = (event: Event) => {
     if (event.target === root && this.wasMouseDown) {
       this.close();
     }
@@ -40,13 +47,13 @@ export default class Dialog extends React.Component {
     this.wasMouseDown = false;
   };
 
-  onRootMouseDown = (event) => {
+  onRootMouseDown = (event: Event) => {
     if (event.target === root) {
       this.wasMouseDown = true;
     }
   };
 
-  onDocumentKeyDown = (event) => {
+  onDocumentKeyDown = (event: KeyboardEvent) => {
     if (event.key === `Escape`) {
       this.close();
     }
@@ -62,7 +69,7 @@ export default class Dialog extends React.Component {
     });
   };
 
-  handleRootTransitionEnd = ({ target }) => {
+  handleRootTransitionEnd = ({ target }: Event) => {
     if (target === this.dialog.current) {
       this.props.onClose();
 
@@ -70,7 +77,7 @@ export default class Dialog extends React.Component {
     }
   };
 
-  handleButtonClick = (button) => {
+  handleButtonClick = (button: ButtonDescription) => {
     if (button.onClick) {
       button.onClick();
     }
@@ -88,11 +95,11 @@ export default class Dialog extends React.Component {
     window.addEventListener(`popstate`, this.close);
     document.body.addEventListener(`keydown`, this.onDocumentKeyDown);
 
-    this.shouldRestoreTabIndex = Array.from(
+    this.restoreTabIndexOn = Array.from(
       document.querySelectorAll(`main *`),
     );
 
-    for (const element of this.shouldRestoreTabIndex) {
+    for (const element of this.restoreTabIndexOn) {
       element.tabIndex = -1;
     }
   }
@@ -103,12 +110,16 @@ export default class Dialog extends React.Component {
     window.removeEventListener(`popstate`, this.close);
     document.body.removeEventListener(`keydown`, this.onDocumentKeyDown);
 
-    for (const element of this.shouldRestoreTabIndex) {
+    for (const element of this.restoreTabIndexOn) {
       element.removeAttribute(`tabindex`);
     }
   }
 
-  componentDidUpdate(_, oldState) {
+  componentDidUpdate(
+    // @ts-ignore
+    _,
+    oldState: State,
+  ) {
     if (this.state.isClosing && !oldState.isClosing) {
       root.classList.add(`-disappear`);
       root.addEventListener(`transitionend`, this.handleRootTransitionEnd);
@@ -130,7 +141,7 @@ export default class Dialog extends React.Component {
           <Buttons className="dialog_buttons">
             {this.props.buttons.map((button) => (
               <Button
-                key={button.caption}
+                key={String(button.caption)}
                 onClick={() => this.handleButtonClick(button)}
                 isDangerous={button.isDangerous}
                 isDisabled={button.isDisabled}

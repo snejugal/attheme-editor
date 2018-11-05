@@ -3,20 +3,27 @@ import "./styles.scss";
 import ErrorElement from "../Error";
 import React from "react";
 
-export default class ErrorHandler extends React.Component {
-  state = {
+interface State {
+  errors: {
+    stack: string;
+    timeStamp: number;
+  }[],
+}
+
+export default class ErrorHandler extends React.Component<{}> {
+  state: State = {
     errors: [],
   };
 
-  handler = (event) => {
+  handler = (event: ErrorEvent | PromiseRejectionEvent) => {
     let stack;
 
-    const { error, reason, timeStamp } = event;
+    const { timeStamp } = event;
 
-    if (reason) {
-      ({ stack } = reason);
+    if (`error` in event) {
+      ({ stack } = event.error);
     } else {
-      ({ stack } = error);
+      ({ stack } = event.reason);
     }
 
     this.setState({
@@ -33,7 +40,7 @@ export default class ErrorHandler extends React.Component {
   };
 
   componentDidMount() {
-    window.onerror = null;
+    delete window.onerror;
     window.addEventListener(`error`, this.handler);
     window.addEventListener(`unhandledrejection`, this.handler);
   }

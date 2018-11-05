@@ -1,4 +1,4 @@
-import * as database from "../database/";
+import * as database from "../database";
 import localization, {
   addUpdatee as addLocalizationUpdatee,
 } from "../localization";
@@ -8,29 +8,40 @@ import EmptyWorkspace from "../EmptyWorkspace";
 import Header from "../Header";
 import React from "react";
 import Workspace from "../Workspace";
-import atthemeEditorApi from "attheme-editor-api/browser";
+import atthemeEditorApi from "attheme-editor-api/lib/browser";
 import parseTheme from "../parseTheme";
 import parseWorkspace from "../parseWorkspace";
 import fromFile from "attheme-js/lib/tools/browser/fromFile";
 import readFile from "../readFile";
+import themeToObject from "attheme-js/lib/tools/themeToObject";
+import HeaderTab from "../HeaderTab";
 
 const HANDLE_SCROLL_INTERVAL = 200;
 
+interface State {
+  workplaces: number[];
+  activeTab: number | null;
+  confirmClosing: false;
+}
+
 export default class App extends React.Component {
-  state = {
+  state: State = {
     workplaces: [],
     activeTab: null,
     confirmClosing: false,
   };
+
 
   // we don't need to update the whole dom just to scroll
   doHandleScroll = true;
 
   doScrollTo = 0;
 
-  activeTab = React.createRef();
+  activeTab = React.createRef<HeaderTab>();
 
-  container = React.createRef();
+  container = React.createRef<HTMLDivElement>();
+
+  timer: number | null = null;
 
   async componentDidMount() {
     const tabs = database.getTabs();
@@ -48,7 +59,7 @@ export default class App extends React.Component {
     document.body.addEventListener(`drop`, (event) => {
       event.preventDefault();
 
-      const { files } = event.dataTransfer;
+      const { files } = event.dataTransfer!;
 
       Array.from(files).forEach(async (file) => {
         let theme;
@@ -70,7 +81,7 @@ export default class App extends React.Component {
       && `themeName` in localStorage
       && `palette` in localStorage
     ) {
-      const theme = {
+      const theme: Theme = {
         variables: JSON.parse(localStorage.theme),
         name: localStorage.themeName,
         palette: JSON.parse(localStorage.palette),
@@ -99,21 +110,23 @@ export default class App extends React.Component {
 
       const { name, theme } = await atthemeEditorApi.downloadTheme(themeId);
 
-      const downloadedTheme = {
-        variables: theme,
+      const downloadedTheme: Theme = {
+        variables: themeToObject(theme),
         name,
         palette: [],
       };
 
-      if (theme[Symbol.for(`image`)]) {
-        downloadedTheme.wallpaper = btoa(theme[Symbol.for(`image`)]);
+      const wallpaper = theme.getWallpaper();
+
+      if (wallpaper) {
+        downloadedTheme.wallpaper = btoa(wallpaper);
       }
 
       this.handleTheme(downloadedTheme);
     }
   }
 
-  handleTheme = async (theme) => {
+  handleTheme = async (theme: Theme) => {
     const themeId = await database.createTheme(theme);
     const workplaces = [...this.state.workplaces, themeId];
 
@@ -126,7 +139,7 @@ export default class App extends React.Component {
     });
   };
 
-  handleActiveTabChange = (newActiveTab) => {
+  handleActiveTabChange = (newActiveTab: number) => {
     database.updateActiveTab(newActiveTab);
 
     this.setState({
@@ -134,15 +147,17 @@ export default class App extends React.Component {
     });
   };
 
-  handleNameChange = (name) => this.activeTab.current.updateTitle(name);
+  handleNameChange = (name: string) => {
+    this.activeTab.current!.updateTitle(name);
+  };
 
   handleLogoClick = () => {
     const { doScrollTo } = this;
 
-    this.doScrollTo = this.container.current.scrollTop;
+    this.doScrollTo = this.container.current!.scrollTop;
     this.doHandleScroll = false;
 
-    this.container.current.scrollTo({
+    this.container.current!.scrollTo({
       top: doScrollTo,
       behavior: `smooth`,
     });
@@ -152,6 +167,7 @@ export default class App extends React.Component {
     if (this.doHandleScroll) {
       this.doScrollTo = 0;
     } else {
+
       // Expecting smooth scroll so we'll catch scroll events by browser in a
       // while. We don't need them, so we ignore them. Anyway, even if it won't
       // scroll smoothly, we'll start thinking that the user is scrolling in
@@ -160,9 +176,9 @@ export default class App extends React.Component {
         clearTimeout(this.timer);
       }
 
-      this.timer = setTimeout(() => {
+      this.timer = window.setTimeout(() => {
         this.doHandleScroll = true;
-        clearTimeout(this.timer);
+        clearTimeout(this.timer!);
         this.timer = null;
       }, HANDLE_SCROLL_INTERVAL);
     }
@@ -174,14 +190,14 @@ export default class App extends React.Component {
 
   handleConfirm = () => {
     const workplaces = [...this.state.workplaces];
-    const currentIndex = workplaces.indexOf(this.state.activeTab);
+    const currentIndex = workplaces.indexOf(this.state.activeTab!);
 
     workplaces.splice(currentIndex, 1);
 
     const newActiveTabIndex = Math.min(currentIndex, workplaces.length - 1);
     const activeTab = workplaces[newActiveTabIndex] || -1;
 
-    database.deleteTheme(this.state.activeTab);
+    database.deleteTheme(this.state.activeTab!);
     database.updateWorkplaces(workplaces);
     database.updateActiveTab(activeTab);
 
