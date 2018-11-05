@@ -7,9 +7,9 @@ interface Props {
   value: string | number;
   className?: string;
   onChange(event: React.ChangeEvent<HTMLInputElement>): void;
-  onBlur?(): void;
-  onFocus?(): void;
-  onEnter?(event: React.KeyboardEvent): void;
+  onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+  onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+  onEnter?(event: React.KeyboardEvent<HTMLInputElement>): void;
   id: string;
   children: React.ReactNode;
   autoCapitalize?: string;
@@ -29,7 +29,7 @@ export default class Field extends React.Component<Props> {
     step: 1,
   };
 
-  handleKeyUp = (event: React.KeyboardEvent) => {
+  handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === `Enter` && this.props.onEnter) {
       this.props.onEnter(event);
     }
