@@ -1,6 +1,6 @@
 import React from "react";
 
-let CodeMirror: typeof CodeMirrorClass;
+let CodeMirror: CodeMirrorClass;
 let areStylesImported = false;
 let isJavaScriptModeLoaded = false;
 
@@ -9,7 +9,7 @@ interface Props {
   onFocus(): void;
 }
 
-export default class CodeMirrorEditor extends React.Component<Props> {
+export default class CodeEditor extends React.Component<Props> {
   editor = {
     getValue() {
       return ``;
@@ -53,7 +53,8 @@ export default class CodeMirrorEditor extends React.Component<Props> {
       return;
     }
 
-    const editor = new CodeMirror(this.container.current!, {
+    // eslint-disable-next-line new-cap
+    const editor = CodeMirror(this.container.current!, {
       value: ``,
       lineNumbers: true,
       autofocus: true,
