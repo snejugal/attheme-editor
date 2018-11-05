@@ -13,7 +13,7 @@ const UNUSED_VARIABLES = [
   `windowBackgroundWhiteBlueText2`,
 ];
 
-const defaultValues = [...defaultTheme.entries()]
+const defaultValues: { [key: string]: Color } = [...defaultTheme.entries()]
   .reduce((object: { [key: string]: Color }, [variable, value]) => {
     if (
       OBSOLETE_VARIABLES.includes(variable)
