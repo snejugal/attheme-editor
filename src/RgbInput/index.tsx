@@ -3,14 +3,13 @@ import Fields from "../Fields";
 import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
-import { Color } from "attheme-js/lib/types";
 
 // eslint-disable-next-line quotes
 type Channel = "red" | "green" | "blue";
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 interface Props {
-  color: Color;
+  color: PartialColor;
   onChange(change: { channel: Channel, value: number }): void;
 }
 
