@@ -1,18 +1,21 @@
 import "./styles.scss";
 
-import * as database from "../database/";
-import PropTypes from "prop-types";
+import * as database from "../database";
 import React from "react";
 import Spinner from "../Spinner";
 
-export default class Tab extends React.Component {
-  static propTypes = {
-    id: PropTypes.number.isRequired,
-    isActive: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
-  };
+interface Props {
+  id: number;
+  isActive: boolean;
+  onClick(): void;
+}
 
-  state = {
+interface State {
+  title: string | null;
+}
+
+export default class Tab extends React.Component<Props> {
+  state: State = {
     title: null,
   };
 
@@ -24,7 +27,7 @@ export default class Tab extends React.Component {
     });
   }
 
-  updateTitle = (title) => this.setState({
+  updateTitle = (title: string) => this.setState({
     title,
   });
 

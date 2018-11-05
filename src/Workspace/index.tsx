@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-import * as database from "../database/";
+import * as database from "../database";
 import { allVariablesAmount, defaultValues } from "../atthemeVariables";
 import Button from "../Button";
 import Buttons from "../Buttons";
@@ -13,15 +13,41 @@ import React from "react";
 import ScriptRunner from "../ScriptRunner";
 import Snackbar from "../Snackbar";
 import Spinner from "../Spinner";
-import VariableEditor from "../VariableEditor";
+import VariableEditor, {
+  State as VariableEditorState,
+} from "../VariableEditor";
 import Variables from "../Variables";
 import download from "../download";
 import localization from "../localization";
 import prepareTheme from "../prepareTheme";
 import uploadTheme from "../uploadTheme";
 import toBlob from "attheme-js/lib/tools/browser/toBlob";
+import { Color } from "attheme-js/lib/types";
 
-export default class Workplace extends React.Component {
+interface Props {
+  themeId: number;
+  onNameChange(newName: string): void;
+  onClosePrompt(): void;
+  isSearchHotkeyEnabled?: boolean;
+}
+
+interface State {
+  theme: Theme | null;
+  editingVariable: string | null;
+  color: Color | null;
+  showScriptRunner: boolean;
+  isSearchHotkeyEnabled: boolean;
+  isEditingPalette: boolean;
+  editorState: VariableEditorState | null;
+  loaders: {
+    atthemeEditorBot: boolean;
+    testAtthemeBot: boolean;
+    themePreviewBot: boolean;
+  };
+  hasUploadError: boolean;
+}
+
+export default class Workplace extends React.Component<Props, State> {
   static propTypes = {
     themeId: PropTypes.number.isRequired,
     onNameChange: PropTypes.func.isRequired,
@@ -29,7 +55,7 @@ export default class Workplace extends React.Component {
     isSearchHotkeyEnabled: PropTypes.bool,
   };
 
-  state = {
+  state: State = {
     theme: null,
     editingVariable: null,
     color: null,
@@ -37,9 +63,11 @@ export default class Workplace extends React.Component {
     isSearchHotkeyEnabled: true,
     isEditingPalette: false,
     editorState: null,
-    shouldShowCreatePreviewSpinner: false,
-    shouldShowTestThemeSpinner: false,
-    shouldShowDownloadSpinner: false,
+    loaders: {
+      atthemeEditorBot: false,
+      themePreviewBot: false,
+      testAtthemeBot: false,
+    },
     hasUploadError: false,
   };
 
@@ -49,7 +77,7 @@ export default class Workplace extends React.Component {
     });
   }
 
-  async componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps: Props) {
     if (prevProps.themeId !== this.props.themeId) {
       this.setState({
         theme: await database.getTheme(this.props.themeId),
@@ -57,10 +85,10 @@ export default class Workplace extends React.Component {
     }
   }
 
-  handleNameFieldChange = (event) => {
+  handleNameFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const name = event.target.value;
     const theme = {
-      ...this.state.theme,
+      ...this.state.theme!,
       name,
     };
 
@@ -71,7 +99,7 @@ export default class Workplace extends React.Component {
     this.props.onNameChange(name);
   };
 
-  handleNameFieldBlur = (event) => {
+  handleNameFieldBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     let name = event.target.value.trim();
 
     if (!name) {
@@ -79,7 +107,7 @@ export default class Workplace extends React.Component {
     }
 
     const theme = {
-      ...this.state.theme,
+      ...this.state.theme!,
       name,
     };
 
@@ -91,24 +119,29 @@ export default class Workplace extends React.Component {
     database.updateTheme(this.props.themeId, theme);
   };
 
-  handleNameFieldEnter = ({ target }) => target.blur();
+  handleNameFieldEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    event.currentTarget.blur();
+  };
 
   downloadThemeFile = () => {
-    const { theme } = prepareTheme(this.state.theme);
-    const name = `${this.state.theme.name}.attheme`;
+    const { theme } = prepareTheme(this.state.theme!);
+    const name = `${this.state.theme!.name}.attheme`;
     const blob = toBlob(theme, name);
 
     download(blob, name);
   };
 
-  openThemeInBot = async ({ botUsername, loaderProperty }) => {
+  openThemeInBot = async (bot: keyof State["loaders"]) => {
     this.setState({
-      [loaderProperty]: true,
+      loaders: {
+        ...this.state.loaders,
+        [bot]: true,
+      },
     });
 
     try {
-      const themeId = await uploadTheme(this.state.theme);
-      const tgLink = `tg://resolve?domain=${botUsername}&start=${themeId}`;
+      const themeId = await uploadTheme(this.state.theme!);
+      const tgLink = `tg://resolve?domain=${bot}&start=${themeId}`;
 
       window.location.href = tgLink;
     } catch {
@@ -118,33 +151,27 @@ export default class Workplace extends React.Component {
     }
 
     this.setState({
-      [loaderProperty]: false,
+      loaders: {
+        ...this.state.loaders,
+        [bot]: false,
+      }
     });
   };
 
-  downloadThemeViaTelegram = () => this.openThemeInBot({
-    botUsername: `atthemeeditorbot`,
-    loaderProperty: `shouldShowDownloadSpinner`,
-  });
+  downloadThemeViaTelegram = () => this.openThemeInBot(`atthemeEditorBot`);
 
-  createPreview = () => this.openThemeInBot({
-    botUsername: `themepreviewbot`,
-    loaderProperty: `shouldShowCreatePreviewSpinner`,
-  });
+  createPreview = () => this.openThemeInBot(`themePreviewBot`);
 
-  testTheme = () => this.openThemeInBot({
-    botUsername: `testatthemebot`,
-    loaderProperty: `shouldShowTestThemeSpinner`,
-  });
+  testTheme = () => this.openThemeInBot(`testAtthemeBot`);
 
   downloadWorkspace = () => {
-    const name = `${this.state.theme.name}.attheme-editor`;
+    const name = `${this.state.theme!.name}.attheme-editor`;
     const serialized = JSON.stringify(this.state.theme);
     const length = serialized.length;
     const buffer = new Uint8Array(length);
 
     for (let charIndex = 0; charIndex < length; charIndex++) {
-      buffer[charIndex] = serialized.codePointAt(charIndex);
+      buffer[charIndex] = serialized.codePointAt(charIndex)!;
     }
 
     const blob = URL.createObjectURL(new File([buffer], name));
@@ -152,10 +179,10 @@ export default class Workplace extends React.Component {
     download(blob, name);
   }
 
-  handleVariableEditStart = (variable) => {
+  handleVariableEditStart = (variable: string) => {
     this.setState({
       editingVariable: variable,
-      color: this.state.theme.variables[variable],
+      color: this.state.theme!.variables[variable],
     });
   };
 
@@ -165,19 +192,19 @@ export default class Workplace extends React.Component {
     color: null,
   });
 
-  handleVariableEditSave = (value) => {
-    const variable = this.state.editingVariable;
+  handleVariableEditSave = (value: Color | string) => {
+    const variable = this.state.editingVariable!;
 
     let theme;
 
     if (typeof value === `object`) {
       const variables = {
-        ...this.state.theme.variables,
+        ...this.state.theme!.variables,
         [variable]: value,
       };
 
       theme = {
-        ...this.state.theme,
+        ...this.state.theme!,
         variables,
       };
 
@@ -186,13 +213,13 @@ export default class Workplace extends React.Component {
       }
     } else {
       const variables = {
-        ...this.state.theme.variables,
+        ...this.state.theme!.variables,
       };
 
       delete variables.chat_wallpaper;
 
       theme = {
-        ...this.state.theme,
+        ...this.state.theme!,
         variables,
         wallpaper: value,
       };
@@ -206,20 +233,20 @@ export default class Workplace extends React.Component {
     database.updateTheme(this.props.themeId, theme);
   };
 
-  handleNewVariable = (variable) => this.setState({
+  handleNewVariable = (variable: string) => this.setState({
     editingVariable: variable,
     color: defaultValues[variable],
   });
 
   handleVariableDelete = () => {
     const variables = {
-      ...this.state.theme.variables,
+      ...this.state.theme!.variables,
     };
 
-    delete variables[this.state.editingVariable];
+    delete variables[this.state.editingVariable!];
 
     const theme = {
-      ...this.state.theme,
+      ...this.state.theme!,
       variables,
     };
 
@@ -243,7 +270,7 @@ export default class Workplace extends React.Component {
     showScriptRunner: false,
   });
 
-  handleThemeChange = (theme) => {
+  handleThemeChange = (theme: Theme) => {
     this.setState({
       theme,
     });
@@ -251,11 +278,11 @@ export default class Workplace extends React.Component {
     database.updateTheme(this.props.themeId, theme);
   };
 
-  handleCustomPaletteColorAdd = (color) => {
-    const palette = [...this.state.theme.palette, color];
+  handleCustomPaletteColorAdd = (color: PaletteColor) => {
+    const palette = [...this.state.theme!.palette, color];
 
     const theme = {
-      ...this.state.theme,
+      ...this.state.theme!,
       palette,
     };
 
@@ -274,9 +301,9 @@ export default class Workplace extends React.Component {
     isEditingPalette: false,
   });
 
-  handlePaletteChange = (palette) => {
+  handlePaletteChange = (palette: Palette) => {
     const theme = {
-      ...this.state.theme,
+      ...this.state.theme!,
       palette,
     };
 
@@ -287,7 +314,9 @@ export default class Workplace extends React.Component {
     database.updateTheme(this.props.themeId, theme);
   };
 
-  handleCustomPaletteEditStart = ({ backupState }) => this.setState({
+  handleCustomPaletteEditStart = ({
+    backupState
+  }: { backupState: VariableEditorState }) => this.setState({
     isEditingPalette: true,
     editorState: backupState,
   });
@@ -326,7 +355,7 @@ export default class Workplace extends React.Component {
     } else if (this.state.editingVariable) {
       dialog = <VariableEditor
         variable={this.state.editingVariable}
-        color={this.state.color}
+        color={this.state.color!}
         onClose={this.handleVariableEditClose}
         onSave={this.handleVariableEditSave}
         onDelete={this.handleVariableDelete}
@@ -360,9 +389,9 @@ export default class Workplace extends React.Component {
         onClick={this.downloadThemeViaTelegram}
         isFloating={true}
         className="workspace_downloadButton"
-        isDisabled={this.state.shouldShowDownloadSpinner}
+        isDisabled={this.state.loaders.atthemeEditorBot}
       >
-        {this.state.shouldShowDownloadSpinner ? <Spinner/> : <DownloadIcon/>}
+        {this.state.loaders.atthemeEditorBot ? <Spinner/> : <DownloadIcon/>}
       </Button>
 
       <Field
@@ -392,17 +421,17 @@ export default class Workplace extends React.Component {
         </Button>
         <Button
           onClick={this.createPreview}
-          isDisabled={this.state.shouldShowCreatePreviewSpinner}
+          isDisabled={this.state.loaders.themePreviewBot}
         >
           {localization.workspace_createPreview()}
-          {this.state.shouldShowCreatePreviewSpinner && <Spinner/>}
+          {this.state.loaders.themePreviewBot && <Spinner/>}
         </Button>
         <Button
           onClick={this.testTheme}
-          isDisabled={this.state.shouldShowTestThemeSpinner}
+          isDisabled={this.state.loaders.testAtthemeBot}
         >
           {localization.workspace_testTheme()}
-          {this.state.shouldShowTestThemeSpinner && <Spinner/>}
+          {this.state.loaders.testAtthemeBot && <Spinner/>}
         </Button>
         <Button onClick={this.handleEditPaletteButtonClick}>
           {localization.workspace_editPalette()}

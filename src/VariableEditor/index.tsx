@@ -3,7 +3,7 @@ import "./styles.scss";
 import Button from "../Button";
 import Buttons from "../Buttons";
 import { ReactComponent as Check } from "./check.svg";
-import Color from "@snejugal/color";
+import { isLight, createCssRgb, createHex } from "@snejugal/color";
 import Dialog from "../Dialog";
 import Heading from "../Heading";
 import HexInput from "../HexInput";
@@ -18,11 +18,42 @@ import VariablePreview from "../VariablePreview";
 import { defaultValues } from "../atthemeVariables";
 import localization from "../localization";
 import readFile from "../readFile";
+import { Color } from "attheme-js/lib/types";
 
-let Vibrant;
-let WebWorkerQuantizer;
+let Vibrant: VibrantClass;
+let WebWorkerQuantizer: Quantizer;
 
-export default class VariableEditor extends React.Component {
+/* eslint-disable quotes */
+type Channel = "red" | "green" | "blue";
+type TabName = "image" | "colorNumeric" | "palettes";
+/* eslint-enable quotes */
+
+interface Update {
+  channel: Channel;
+  value: number;
+}
+
+interface Props {
+  variable: string;
+  color?: Color;
+  onClose(): void;
+  onSave(newValue: string | Color): void;
+  onDelete(): void;
+  onCustomPaletteColorAdd(color: PaletteColor): void;
+  onCustomPaletteEditStart(message: { backupState: State }): void;
+  stateBackup: State | null;
+  theme: Theme;
+}
+
+export interface State {
+  color?: Color;
+  wallpaper?: string;
+  activeTab: TabName;
+  wallpaperColors: PaletteColor[] | null;
+  isEditingPalette: boolean;
+}
+
+export default class VariableEditor extends React.Component<Props, State> {
   static propTypes = {
     variable: PropTypes.string.isRequired,
     color: PropTypes.object,
@@ -40,7 +71,7 @@ export default class VariableEditor extends React.Component {
     isFromPaletteEditing: false,
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     if (this.props.stateBackup) {
@@ -51,7 +82,7 @@ export default class VariableEditor extends React.Component {
       return;
     }
 
-    let activeTab = `color-numeric`;
+    let activeTab: TabName = `colorNumeric`;
 
     if (
       this.props.theme.wallpaper
@@ -69,9 +100,9 @@ export default class VariableEditor extends React.Component {
     };
   }
 
-  filesInput = React.createRef();
+  filesInput = React.createRef<HTMLInputElement>();
 
-  dialog = React.createRef();
+  dialog = React.createRef<Dialog>();
 
   componentDidMount() {
     if (this.state.wallpaper) {
@@ -86,9 +117,8 @@ export default class VariableEditor extends React.Component {
       }
 
       if (!WebWorkerQuantizer) {
-        ({
-          default: WebWorkerQuantizer,
-        } = await import(`node-vibrant/lib/quantizer/worker`));
+        WebWorkerQuantizer = (await import(`node-vibrant/lib/quantizer/worker`))
+          .default;
       }
     } catch {
       return;
@@ -130,14 +160,16 @@ export default class VariableEditor extends React.Component {
     });
   };
 
-  handleRgbaChannelChange = ({ channel, value }) => this.setState({
-    color: {
-      ...this.state.color,
-      [channel]: value,
-    },
-  });
+  handleRgbaChannelChange = ({ channel, value }: Update) => {
+    this.setState({
+      color: {
+        ...this.state.color!,
+        [channel]: value,
+      },
+    });
+  }
 
-  handleColorChange = (color) => this.setState({
+  handleColorChange = (color: Color) => this.setState({
     color,
   });
 
@@ -145,20 +177,20 @@ export default class VariableEditor extends React.Component {
     if (this.state.activeTab === `image` && this.state.wallpaper) {
       this.props.onSave(this.state.wallpaper);
     } else {
-      this.props.onSave(this.state.color);
+      this.props.onSave(this.state.color!);
     }
   };
 
-  handleUploadWallpaperClick = () => this.filesInput.current.click();
+  handleUploadWallpaperClick = () => this.filesInput.current!.click();
 
   handleFileInputChange = async () => {
-    const filesInput = this.filesInput.current;
+    const filesInput = this.filesInput.current!;
 
-    if (filesInput.files.length === 0) {
+    if (filesInput.files!.length === 0) {
       return;
     }
 
-    const wallpaper = btoa(await readFile(filesInput.files[0]));
+    const wallpaper = btoa(await readFile(filesInput.files![0]));
 
     this.setState({
       wallpaper,
@@ -167,7 +199,7 @@ export default class VariableEditor extends React.Component {
     this.generateWallpaperColors();
   };
 
-  handleTabChange = (activeTab) => this.setState({
+  handleTabChange = (activeTab: TabName) => this.setState({
     activeTab,
   });
 
@@ -176,7 +208,7 @@ export default class VariableEditor extends React.Component {
       isEditingPalette: true,
     });
 
-    this.dialog.current.close();
+    this.dialog.current!.close();
   };
 
   handleClose = () => {
@@ -197,7 +229,7 @@ export default class VariableEditor extends React.Component {
 
     const tabs = [
       {
-        id: `color-numeric`,
+        id: `colorNumeric`,
         text: localization.variableEditor_colorModelsTab(),
       },
       {
@@ -223,11 +255,9 @@ export default class VariableEditor extends React.Component {
           this.props.onCustomPaletteColorAdd(colorData);
         };
 
-        const isLight = Color.isLight(colorData.color);
-
         let className = `palettes_color`;
 
-        if (isLight) {
+        if (isLight(colorData.color)) {
           className += ` -darkText`;
         }
 
@@ -243,7 +273,7 @@ export default class VariableEditor extends React.Component {
         return <Button
           className={className}
           key={colorData.name}
-          backgroundColor={Color.createCssRgb(colorData.color)}
+          backgroundColor={createCssRgb(colorData.color)}
           onClick={handleClick}
           isDisabled={isAlreadyInPalette}
         >
@@ -257,7 +287,7 @@ export default class VariableEditor extends React.Component {
 
     if (this.state.activeTab === `palettes`) {
       const allColors = Object.values(this.props.theme.variables);
-      const hexes = allColors.map(({ red, green, blue }) => Color.createHex({
+      const hexes = allColors.map(({ red, green, blue }) => createHex({
         red,
         green,
         blue,
@@ -309,19 +339,19 @@ export default class VariableEditor extends React.Component {
           onChange={this.handleTabChange}
           className="variableEditor_tabs"
         />
-        {this.state.activeTab === `color-numeric` && (
+        {this.state.activeTab === `colorNumeric` && (
           <form noValidate={true}>
             <HexInput
-              color={color}
+              color={color!}
               onAlphaChange={this.handleRgbaChannelChange}
               onHexChange={this.handleColorChange}
             />
             <RgbInput
-              color={color}
+              color={color!}
               onChange={this.handleRgbaChannelChange}
             />
             <HslInput
-              color={color}
+              color={color!}
               onChange={this.handleColorChange}
             />
           </form>
@@ -354,7 +384,7 @@ export default class VariableEditor extends React.Component {
           <Palettes
             onChange={this.handleColorChange}
             themeColors={themeColors}
-            alpha={this.state.color.alpha}
+            alpha={this.state.color!.alpha}
             themeCustomPalette={this.props.theme.palette}
             onCustomPaletteEditStart={this.hanldeCustomPaletteEditStart}
           />

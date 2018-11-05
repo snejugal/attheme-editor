@@ -1,30 +1,34 @@
 import "./styles.scss";
 
-import Color from "@snejugal/color";
-import PropTypes from "prop-types";
+import { createCssRgb } from "@snejugal/color";
 import React from "react";
 import calculateWallpaperSize from "../calculateWallpaperSize";
 import { defaultValues } from "../atthemeVariables";
 import previewsMap from "./previewsMap";
+import { Color } from "attheme-js/lib/types";
 
 const CHANNEL = 255;
 
 const parser = new DOMParser();
 
-export default class VariablePreview extends React.Component {
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-    variable: PropTypes.string.isRequired,
-    currentColor: PropTypes.object,
-    currentWallpaper: PropTypes.string,
-    shouldShowWallpaper: PropTypes.bool,
-  };
+interface Props {
+  theme: Theme;
+  variable: string;
+  currentColor?: Color;
+  currentWallpaper?: string;
+  shouldShowWallpaper?: boolean;
+}
 
-  state = {
+interface State {
+  updateeElements: SVGElement[] | null;
+}
+
+export default class VariablePreview extends React.Component<Props, State> {
+  state: State = {
     updateeElements: null,
   };
 
-  preview = React.createRef();
+  preview = React.createRef<HTMLDivElement>();
 
   async componentDidMount() {
     const previewFileName = previewsMap[this.props.variable];
@@ -33,7 +37,7 @@ export default class VariablePreview extends React.Component {
       return;
     }
 
-    const idsMap = {};
+    const idsMap = new Map<string, SVGElement>();
 
     const previewUrl = await import(`./previews/${previewFileName}.svg`);
 
@@ -41,9 +45,9 @@ export default class VariablePreview extends React.Component {
     const contents = await response.text();
 
     const previewDocument = parser.parseFromString(contents, `text/xml`);
-    const svg = previewDocument.documentElement;
+    const svg = previewDocument.documentElement!;
 
-    const coloredElements = [...svg.querySelectorAll(`[class]`)];
+    const coloredElements = [...svg.querySelectorAll<SVGElement>(`[class]`)];
 
     for (const element of coloredElements) {
       const currentFill = element.getAttribute(`fill`) || ``;
@@ -51,22 +55,22 @@ export default class VariablePreview extends React.Component {
       if (currentFill.startsWith(`url`) && this.props.currentWallpaper) {
         const id = currentFill.slice(`url(#`.length, -`)`.length);
 
-        idsMap[id] = element;
+        idsMap.set(id, element);
 
         continue;
       }
 
-      const variable = element.getAttribute(`class`);
+      const variable = element.getAttribute(`class`)!;
 
       let color = this.props.theme.variables[variable];
 
-      if (!color && `fallback` in element.dataset) {
+      if (!color && element.dataset.fallback) {
         color = (
           this.props.theme.variables[element.dataset.fallback]
           || defaultValues[element.dataset.fallback]
         );
 
-        if (`fallbackAlpha` in element.dataset) {
+        if (element.dataset.fallbackAlpha) {
           color.alpha = Number(element.dataset.fallbackAlpha) * CHANNEL;
         }
       }
@@ -75,7 +79,7 @@ export default class VariablePreview extends React.Component {
         color = defaultValues[variable];
       }
 
-      const cssRgb = Color.createCssRgb(color);
+      const cssRgb = createCssRgb(color);
 
       if (element.tagName === `stop`) {
         element.style.stopColor = cssRgb;
@@ -104,17 +108,17 @@ export default class VariablePreview extends React.Component {
         const image = `data:image;base64,${this.props.currentWallpaper}`;
 
         for (const imageElement of wallpaperElements) {
-          const patternElementId = imageElement.closest(`pattern`).id;
+          const patternElementId = imageElement.closest(`pattern`)!.id;
 
-          const element = idsMap[patternElementId];
+          const element = idsMap.get(patternElementId)!;
 
           // We have to figure out wallpaper element's size on our own
           // because the preview is not rendered yet
-          let elementWidth = element.getAttribute(`width`);
-          let elementHeight = element.getAttribute(`height`);
+          let elementWidth: string | number = element.getAttribute(`width`)!;
+          let elementHeight: string | number = element.getAttribute(`height`)!;
 
           const [svgXOffset, svgYOffset, svgWidth, svgHeight] = svg
-            .getAttribute(`viewBox`)
+            .getAttribute(`viewBox`)!
             .split(` `)
             .map(Number);
 
@@ -157,23 +161,23 @@ export default class VariablePreview extends React.Component {
           const yCenter = elementHeight / 2 + elementY - finalHeight / 2;
 
           imageElement.setAttribute(`href`, image);
-          imageElement.setAttribute(`width`, finalWidth);
-          imageElement.setAttribute(`height`, finalHeight);
-          imageElement.setAttribute(`x`, xCenter);
-          imageElement.setAttribute(`y`, yCenter);
+          imageElement.setAttribute(`width`, String(finalWidth));
+          imageElement.setAttribute(`height`, String(finalHeight));
+          imageElement.setAttribute(`x`, String(xCenter));
+          imageElement.setAttribute(`y`, String(yCenter));
         }
       }
     }
 
     const updateeElements = [
-      ...svg.querySelectorAll(`[class="${this.props.variable}"]`),
+      ...svg.querySelectorAll<SVGElement>(`[class="${this.props.variable}"]`),
     ];
 
     this.setState({
       updateeElements,
     });
 
-    this.preview.current.appendChild(svg);
+    this.preview.current!.appendChild(svg);
   }
 
   componentDidUpdate() {
@@ -181,7 +185,7 @@ export default class VariablePreview extends React.Component {
       return;
     }
 
-    const cssRgb = Color.createCssRgb(this.props.currentColor);
+    const cssRgb = createCssRgb(this.props.currentColor!);
 
     for (const element of this.state.updateeElements) {
       if (element.tagName === `stop`) {
@@ -195,8 +199,7 @@ export default class VariablePreview extends React.Component {
   render() {
     return (
       <div className="variablePreview" ref={this.preview}>
-        {
-          !this.state.updateeElements
+        {!this.state.updateeElements
           && this.props.shouldShowWallpaper
           && (
             <img
@@ -204,20 +207,17 @@ export default class VariablePreview extends React.Component {
               src={`data:image/jpg;base64,${this.props.currentWallpaper}`}
               alt=""
             />
-          )
-        }
-        {
-          !this.state.updateeElements
+          )}
+        {!this.state.updateeElements
           && !this.props.shouldShowWallpaper
           && (
             <div
               className="variablePreview_color"
               style={{
-                backgroundColor: Color.createCssRgb(this.props.currentColor),
+                backgroundColor: createCssRgb(this.props.currentColor!),
               }}
             />
-          )
-        }
+          )}
       </div>
     );
   }

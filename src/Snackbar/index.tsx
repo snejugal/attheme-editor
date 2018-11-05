@@ -1,25 +1,26 @@
 import "./styles.scss";
 
-import PropTypes from "prop-types";
 import React from "react";
 import ReactDOM from "react-dom";
 
-const root = document.querySelector(`.snackbars`);
+const root = document.querySelector(`.snackbars`)!;
 
-export default class Snackbar extends React.Component {
-  static propTypes = {
-    children: PropTypes.any,
-    timeout: PropTypes.number,
-    onDismiss: PropTypes.func.isRequired,
-    isError: PropTypes.bool,
-  };
+interface Props {
+  children: React.ReactNode;
+  timeout?: number;
+  onDismiss(): void;
+  isError?: boolean;
+}
 
+export default class Snackbar extends React.Component<Props> {
   state = {
     isDisappearing: false,
     isError: false,
   };
 
-  constructor(props) {
+  snackbarWrapper: HTMLDivElement | null = null;
+
+  constructor(props: Props) {
     super(props);
 
     this.snackbarWrapper = document.createElement(`div`);
@@ -28,13 +29,15 @@ export default class Snackbar extends React.Component {
   }
 
   handleAnimationEnd = () => {
-    if (this.props.timeout > 0 && this.props.timeout < Infinity) {
+    const { timeout } = this.props;
+
+    if (timeout && 0 < timeout && timeout < Infinity) {
       setTimeout(this.hide, this.props.timeout);
     }
   };
 
   componentWillUnmount() {
-    root.removeChild(this.snackbarWrapper);
+    root.removeChild(this.snackbarWrapper!);
   }
 
   hide = () => this.setState({
@@ -61,7 +64,7 @@ export default class Snackbar extends React.Component {
       >
         {this.props.children}
       </div>,
-      this.snackbarWrapper,
+      this.snackbarWrapper!,
     );
   }
 }

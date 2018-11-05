@@ -2,15 +2,13 @@ import "./styles.scss";
 
 import { allVariables, defaultValues } from "../atthemeVariables";
 import CodeEditor from "../CodeEditor";
-import Color from "@snejugal/color";
 import Dialog from "../Dialog";
 import Heading from "../Heading";
 import Hint from "../Hint";
-import PropTypes from "prop-types";
 import React from "react";
 import Spinner from "../Spinner";
 import colorClass from "./colorClass";
-import createTheme from "./theme";
+import createTheme from "./createTheme";
 import localization from "../localization";
 import deepClone from "lodash/cloneDeep";
 
@@ -23,19 +21,28 @@ const BABEL_OPTIONS = {
   ],
 };
 
-let Babel;
-let Interpreter;
+let Babel: Babel;
+let Interpreter: EsInterpreter;
 
-window.Color = Color;
+interface Props {
+  onClose(): void;
+  theme: Theme;
+  onThemeChange(theme: Theme): void;
+}
 
-export default class ScriptRunner extends React.Component {
-  static propTypes = {
-    onClose: PropTypes.func.isRequired,
-    theme: PropTypes.object.isRequired,
-    onThemeChange: PropTypes.func.isRequired,
-  };
+interface State {
+  parseError: Error | null;
+  runtimeError: Error | null;
+  isEvaluated: boolean;
+  isEvaluating: boolean;
+  isBabelLoaded: boolean;
+  isBabelLoading: boolean;
+  isInterpreterLoaded: boolean;
+  isInterpreterLoading: boolean;
+}
 
-  state = {
+export default class ScriptRunner extends React.Component<Props> {
+  state: State = {
     parseError: null,
     runtimeError: null,
     isEvaluated: false,
@@ -94,7 +101,7 @@ export default class ScriptRunner extends React.Component {
     }
   }
 
-  editor = React.createRef();
+  editor = React.createRef<CodeEditor>();
 
   handleRun = () => {
     this.setState({
@@ -105,7 +112,7 @@ export default class ScriptRunner extends React.Component {
     });
 
     let hasErrors = false;
-    let code = this.editor.current.editor.getValue();
+    let code = this.editor.current!.editor.getValue();
 
     try {
       ({ code } = Babel.transform(code, BABEL_OPTIONS));
@@ -121,16 +128,17 @@ export default class ScriptRunner extends React.Component {
     const themeCopy = deepClone(this.props.theme);
     const activeTheme = createTheme(themeCopy);
 
-    const prepare = (interpreter, scope) => {
-      const log = (...messageParts) => {
+    const prepare = (
+      interpreter: EsInterpreterInstance,
+      scope: EsInterpreterScope,
+      ) => {
+      const log = (...messageParts: unknown[]) => {
         // eslint-disable-next-line no-console
         console.log(
           localization.scriptRunner_logMessage(),
-          ...messageParts.map((part) => interpreter.pseudoToNative(part))
+          ...messageParts.map((part) => interpreter.pseudoToNative(part)),
         );
       };
-
-      window.script = interpreter;
 
       interpreter.setProperty(
         scope,
@@ -166,7 +174,7 @@ export default class ScriptRunner extends React.Component {
       );
     };
 
-    let script;
+    let script: EsInterpreterInstance;
 
     try {
       script = new Interpreter(code, prepare);

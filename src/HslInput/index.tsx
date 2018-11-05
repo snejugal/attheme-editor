@@ -1,23 +1,39 @@
-import Color from "@snejugal/color";
+import { rgbToHsl, hslToRgb } from "@snejugal/color";
 import Field from "../Field";
 import Fields from "../Fields";
-import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
+
+// eslint-disable-next-line quotes
+type Channel = "hue" | "saturation" | "lightness";
+type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
+interface HslColor {
+  hue: number;
+  saturation: number;
+  lightness: number;
+}
+
+interface Props {
+  color: PartialColor;
+  onChange(color: PartialColor): void;
+}
+
+interface State {
+  hue: number;
+  saturation: number;
+  lightness: number;
+  focusedField: Channel | null;
+}
 
 const ROUND = 100;
 const PERCENTS = 100;
 
-export default class HslInput extends React.Component {
-  static propTypes = {
-    color: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-  };
-
-  constructor(props) {
+export default class HslInput extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
-    const { hue, saturation, lightness } = Color.rgbToHsl(props.color);
+    const { hue, saturation, lightness } = rgbToHsl(props.color);
 
     const roundedHue = Math.round(hue * ROUND) / ROUND;
     const roundedSaturation = Math.round(saturation * ROUND * PERCENTS) / ROUND;
@@ -31,15 +47,15 @@ export default class HslInput extends React.Component {
     };
   }
 
-  handleChange = (updatedValue) => {
+  handleChange = (updatedValue: Partial<HslColor>) => {
     let hue = (`hue` in updatedValue)
       ? updatedValue.hue || 0
       : this.state.hue || 0;
     let saturation = (`saturation` in updatedValue)
-      ? updatedValue.saturation / PERCENTS || 0
+      ? updatedValue.saturation! / PERCENTS || 0
       : this.state.saturation / PERCENTS || 0;
     let lightness = (`lightness` in updatedValue)
-      ? updatedValue.lightness / PERCENTS || 0
+      ? updatedValue.lightness! / PERCENTS || 0
       : this.state.lightness / PERCENTS || 0;
 
     /* eslint-disable no-magic-numbers */
@@ -68,7 +84,7 @@ export default class HslInput extends React.Component {
     }
     /* eslint-enable no-magic-numbers */
 
-    const rgbColor = Color.hslToRgb({
+    const rgbColor = hslToRgb({
       hue,
       saturation,
       lightness,
@@ -84,15 +100,15 @@ export default class HslInput extends React.Component {
     });
   };
 
-  handleHueChange = (event) => this.handleChange({
+  handleHueChange = (event: ChangeEvent) => this.handleChange({
     hue: event.target.valueAsNumber,
   });
 
-  handleSaturationChange = (event) => this.handleChange({
+  handleSaturationChange = (event: ChangeEvent) => this.handleChange({
     saturation: event.target.valueAsNumber,
   });
 
-  handleLightnessChange = (event) => this.handleChange({
+  handleLightnessChange = (event: ChangeEvent) => this.handleChange({
     lightness: event.target.valueAsNumber,
   });
 
@@ -112,12 +128,12 @@ export default class HslInput extends React.Component {
     focusedField: `lightness`,
   });
 
-  componentDidUpdate(previousProps) {
+  componentDidUpdate(previousProps: Props) {
     if (previousProps === this.props) {
       return;
     }
 
-    const { hue, saturation, lightness } = Color.rgbToHsl(this.props.color);
+    const { hue, saturation, lightness } = rgbToHsl(this.props.color);
 
     const roundedHue = Math.round(hue * ROUND) / ROUND;
     const roundedSaturation = Math.round(saturation * ROUND * PERCENTS) / ROUND;

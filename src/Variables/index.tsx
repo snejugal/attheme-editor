@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 import { allVariables, defaultValues } from "../atthemeVariables";
-import Color from "@snejugal/color";
+import { parseHex, createHex } from "@snejugal/color";
 import Field from "../Field";
 import FuzzySearch from "fuzzy-search";
 import Hint from "../Hint";
@@ -10,10 +10,24 @@ import React from "react";
 import Variable from "../Variable";
 import localization from "../localization";
 import isEqual from "lodash/isEqual";
+import { Color } from "attheme-js/lib/types";
 
 const isMac = navigator.platform.toLowerCase().startsWith(`mac`);
 
-export default class Variables extends React.Component {
+interface Props {
+  themeId: number;
+  theme: { [key: string]: Color };
+  wallpaper?: string;
+  onClick(variable: string): void;
+  onNewVariable(variable: string): void;
+  isSearchHotkeyEnabled?: boolean;
+}
+
+interface State {
+  searchQuery: string;
+}
+
+export default class Variables extends React.Component<Props, State> {
   static propTypes = {
     themeId: PropTypes.number.isRequired,
     theme: PropTypes.object.isRequired,
@@ -27,15 +41,15 @@ export default class Variables extends React.Component {
     isSearchHotkeyEnabled: true,
   };
 
-  searchInput = React.createRef();
+  searchInput = React.createRef<HTMLInputElement>();
 
-  state = {
+  state: State = {
     searchQuery: ``,
   };
 
   isCtrlPressed = false;
 
-  handleKeyDown = (event) => {
+  handleKeyDown = (event: KeyboardEvent) => {
     if (!this.props.isSearchHotkeyEnabled) {
       return;
     }
@@ -46,11 +60,11 @@ export default class Variables extends React.Component {
 
     if (this.isCtrlPressed && event.code === `KeyF`) {
       event.preventDefault();
-      this.searchInput.current.focus();
+      this.searchInput.current!.focus();
     }
   };
 
-  handleKeyUp = (event) => {
+  handleKeyUp = (event: KeyboardEvent) => {
     if (!this.props.isSearchHotkeyEnabled) {
       return;
     }
@@ -73,19 +87,21 @@ export default class Variables extends React.Component {
     document.body.removeEventListener(`keyup`, this.handleKeyUp);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
     return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
   }
 
-  handleSearchChange = (event) => this.setState({
-    searchQuery: event.target.value,
-  });
+  handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      searchQuery: event.target.value,
+    });
+  };
 
   render() {
     const themeVariables = Object.keys(this.props.theme);
     const query = this.state.searchQuery.trim();
 
-    let variablesOrder = [];
+    let variablesOrder: string[] = [];
 
     if (query !== ``) {
       for (const variableName of allVariables) {
@@ -107,15 +123,15 @@ export default class Variables extends React.Component {
 
     if (query) {
       if (query.startsWith(`#`)) {
-        const parsedSearchHex = Color.parseHex(query);
+        const parsedSearchHex = parseHex(query);
 
         const searchHex = parsedSearchHex
-          ? Color.createHex(parsedSearchHex)
+          ? createHex(parsedSearchHex)
           : query;
 
         variablesOrder = variablesOrder.filter((variable) => {
           const color = this.props.theme[variable] || defaultValues[variable];
-          const variableHex = Color.createHex(color);
+          const variableHex = createHex(color);
 
           return variableHex.startsWith(searchHex);
         });
