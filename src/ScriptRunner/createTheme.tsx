@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
 import { checkRgbColorValidity } from "./colorClass";
+import { Color } from "attheme-js/lib/types";
 
-const createTheme = (originalTheme) => {
+export default (originalTheme: Theme) => {
   return {
-    getVariable (variableName, ...excessiveArguments) {
-      if (excessiveArguments.length > 0) {
-        throw new TypeError(`theme.getVariable expected 1 argument, received ${excessiveArguments.length + 1}`);
+    getVariable(variableName: string, ...excess: unknown[]) {
+      if (excess.length > 0) {
+        throw new TypeError(`theme.getVariable expected 1 argument, received ${excess.length + 1}`);
       }
 
       if (typeof variableName !== `string`) {
@@ -22,9 +23,9 @@ const createTheme = (originalTheme) => {
 
       return null;
     },
-    setVariable (variableName, color, ...excessiveArguments) {
-      if (excessiveArguments.length > 0) {
-        throw new TypeError(`theme.setVariable expected 2 arguments, received ${excessiveArguments.length + 2}`);
+    setVariable(variableName: string, color: Color, ...excess: unknown[]) {
+      if (excess.length > 0) {
+        throw new TypeError(`theme.setVariable expected 2 arguments, received ${excess.length + 2}`);
       }
 
       if (typeof variableName !== `string`) {
@@ -35,14 +36,12 @@ const createTheme = (originalTheme) => {
 
       originalTheme.variables[variableName] = color;
     },
-    getVariables (...excessiveArguments) {
-      if (excessiveArguments.length > 0) {
-        throw new TypeError(`theme.getVariables expected no arguments, received ${excessiveArguments.length}`);
+    getVariables(...excess: unknown[]) {
+      if (excess.length > 0) {
+        throw new TypeError(`theme.getVariables expected no arguments, received ${excess.length}`);
       }
 
       return Object.keys(originalTheme.variables);
     },
   };
 };
-
-export default createTheme;
