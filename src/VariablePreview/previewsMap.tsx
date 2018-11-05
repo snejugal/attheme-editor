@@ -1,5 +1,5 @@
-const previewsMap = {
-  /* eslint-disable camelcase */
+/* eslint-disable camelcase */
+const previewsMap: { [key: string]: string } = {
   actionBarDefault: `actionBarDefault`,
   actionBarDefaultIcon: `actionBarDefault`,
   actionBarDefaultTitle: `actionBarDefault`,
@@ -48,7 +48,6 @@ const previewsMap = {
   windowBackgroundWhiteBlueText5: `windowBackgroundWhiteBlueText5`,
   windowBackgroundWhiteBlueText6: `windowBackgroundWhiteBlueText6`,
   windowBackgroundWhiteGrayText2: `windowBackgroundWhiteBlueText5`,
-  /* eslint-enable camelcase */
 };
 
 export default previewsMap;
