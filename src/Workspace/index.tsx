@@ -103,7 +103,7 @@ export default class Workplace extends React.Component<Props, State> {
     let name = event.target.value.trim();
 
     if (!name) {
-      name = localization.theme_defaultName();
+      name = localization.theme.defaultName;
     }
 
     const theme = {
@@ -330,7 +330,7 @@ export default class Workplace extends React.Component<Props, State> {
       return null;
     }
 
-    let variablesAmount;
+    let variablesAmount: number;
 
     if (this.state.theme) {
       variablesAmount = Object.keys(this.state.theme.variables).length;
@@ -382,7 +382,7 @@ export default class Workplace extends React.Component<Props, State> {
           onDismiss={this.handleSnackbarDismiss}
           isError={true}
         >
-          {localization.workspace_uploadError()}
+          {localization.workspace.uploadError}
         </Snackbar>
       )}
       <Button
@@ -403,38 +403,38 @@ export default class Workplace extends React.Component<Props, State> {
         value={this.state.theme.name}
         autoCapitalize="words"
       >
-        {localization.workspace_themeNameLabel()}
+        {localization.workspace.themeNameLabel}
       </Field>
 
       <Buttons>
         <Button onClick={this.props.onClosePrompt} isDangerous={true}>
-          {localization.workspace_closeTheme()}
+          {localization.workspace.closeTheme}
         </Button>
         <Button onClick={this.downloadThemeFile}>
-          {localization.workspace_downloadThemeFile()}
+          {localization.workspace.downloadThemeFile}
         </Button>
         <Button onClick={this.downloadWorkspace}>
-          {localization.workspace_downloadWorkspace()}
+          {localization.workspace.downloadWorkspace}
         </Button>
         <Button onClick={this.handleRunScriptButtonClick}>
-          {localization.workspace_runScript()}
+          {localization.workspace.runScript}
         </Button>
         <Button
           onClick={this.createPreview}
           isDisabled={this.state.loaders.themePreviewBot}
         >
-          {localization.workspace_createPreview()}
+          {localization.workspace.createPreview}
           {this.state.loaders.themePreviewBot && <Spinner/>}
         </Button>
         <Button
           onClick={this.testTheme}
           isDisabled={this.state.loaders.testAtthemeBot}
         >
-          {localization.workspace_testTheme()}
+          {localization.workspace.testTheme}
           {this.state.loaders.testAtthemeBot && <Spinner/>}
         </Button>
         <Button onClick={this.handleEditPaletteButtonClick}>
-          {localization.workspace_editPalette()}
+          {localization.workspace.editPalette}
         </Button>
       </Buttons>
 
@@ -448,9 +448,9 @@ export default class Workplace extends React.Component<Props, State> {
       />
 
       <Hint>
-        {localization.workspace_variablesAmount({
+        {localization.workspace.variablesAmount({
           total: allVariablesAmount,
-          theme: variablesAmount,
+          theme: variablesAmount!,
         })}
       </Hint>
     </>;

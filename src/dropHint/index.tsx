@@ -9,7 +9,7 @@ const root = document.createElement(`div`);
 let shouldShowHint = true;
 
 root.className = `dropHint`;
-root.textContent = localization.dropHint();
+root.textContent = localization.dragAndDrop.hint;
 
 const onDragEnter = () => {
   root.classList.remove(`-disappear`);
@@ -54,5 +54,5 @@ root.addEventListener(`click`, () => {
 });
 
 addLocalizationUpdatee(() => {
-  root.textContent = localization.dropHint();
+  root.textContent = localization.dragAndDrop.hint;
 });

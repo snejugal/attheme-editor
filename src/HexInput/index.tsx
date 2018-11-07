@@ -106,7 +106,7 @@ export default class HexInput extends React.Component<Props, State> {
           onBlur={this.handleHexBlur}
           autoFocus={true}
         >
-          {localization.variableEditor_hex()}
+          {localization.variableEditor.hex}
         </Field>
         {this.props.shouldShowAlpha && (
           <Field
@@ -117,7 +117,7 @@ export default class HexInput extends React.Component<Props, State> {
             onChange={this.handleAlphaChange}
             value={this.props.color.alpha!}
           >
-            {localization.variableEditor_alpha()}
+            {localization.variableEditor.alpha}
           </Field>
         )}
       </Fields>
