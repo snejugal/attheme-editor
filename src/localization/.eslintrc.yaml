@@ -1,5 +1,4 @@
 extends: ../../.eslintrc.yaml
 rules:
-  camelcase: off
   max-len: off
-  react/display-name: off
+  no-shadow: off # It is actually false positive in our case.

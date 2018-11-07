@@ -58,7 +58,7 @@ export default class RgbInput extends React.Component<Props> {
           onChange={this.handleRedChange}
           value={this.props.color.red}
         >
-          {localization.variableEditor_red()}
+          {localization.variableEditor.red}
         </Field>
         <Field
           type="number"
@@ -68,7 +68,7 @@ export default class RgbInput extends React.Component<Props> {
           onChange={this.handleGreenChange}
           value={this.props.color.green}
         >
-          {localization.variableEditor_green()}
+          {localization.variableEditor.green}
         </Field>
         <Field
           type="number"
@@ -78,7 +78,7 @@ export default class RgbInput extends React.Component<Props> {
           onChange={this.handleBlueChange}
           value={this.props.color.blue}
         >
-          {localization.variableEditor_blue()}
+          {localization.variableEditor.blue}
         </Field>
       </Fields>
     );

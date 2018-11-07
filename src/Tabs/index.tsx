@@ -4,7 +4,7 @@ import React from "react";
 
 interface Props {
   tabs: {
-    text: string;
+    text: React.ReactNode;
     id: string;
   }[];
   activeTab: string;

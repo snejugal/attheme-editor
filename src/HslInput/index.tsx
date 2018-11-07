@@ -165,7 +165,7 @@ export default class HslInput extends React.Component<Props, State> {
           onFocus={this.handleHueFocus}
           onBlur={this.handleBlur}
         >
-          {localization.variableEditor_hue()}
+          {localization.variableEditor.hue}
         </Field>
         <Field
           type="number"
@@ -177,7 +177,7 @@ export default class HslInput extends React.Component<Props, State> {
           onFocus={this.handleSaturationFocus}
           onBlur={this.handleBlur}
         >
-          {localization.variableEditor_saturation()}
+          {localization.variableEditor.saturation}
         </Field>
         <Field
           type="number"
@@ -189,7 +189,7 @@ export default class HslInput extends React.Component<Props, State> {
           onFocus={this.handleLightnessFocus}
           onBlur={this.handleBlur}
         >
-          {localization.variableEditor_lightness()}
+          {localization.variableEditor.lightness}
         </Field>
       </Fields>
     );

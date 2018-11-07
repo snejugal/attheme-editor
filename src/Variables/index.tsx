@@ -180,7 +180,7 @@ export default class Variables extends React.Component<Props, State> {
         onChange={this.handleSearchChange}
         inputRef={this.searchInput}
       >
-        {localization.workspace_search()}
+        {localization.workspace.search}
       </Field>
       {variables.length > 0 && (
         <div className="variables">{variables}</div>
@@ -189,14 +189,14 @@ export default class Variables extends React.Component<Props, State> {
         && this.state.searchQuery.trim() === ``
         && (
           <Hint className="variables_placeholder">
-            {localization.workspace_noVariablesPlaceholder()}
+            {localization.workspace.noVariablesPlaceholder}
           </Hint>
         )}
       {variables.length === 0
         && this.state.searchQuery.trim() !== ``
         && (
           <Hint className="variables_placeholder">
-            {localization.workspace_noResultsPlaceholder()}
+            {localization.workspace.noResultsPlaceholder}
           </Hint>
         )}
     </>;

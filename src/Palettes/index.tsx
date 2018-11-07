@@ -73,23 +73,17 @@ export default class Palettes extends React.Component<Props, State> {
     const palettes = [
       {
         id: `themeColors`,
-        title: localization.palettes_themeColors(),
+        title: localization.palettes.themeColors,
       },
       {
         id: `themeCustomPalette`,
-        title: localization.palettes_themeCustomPalette(),
+        title: localization.palettes.themeCustomPalette,
       },
       ...(
         (Object.keys(builtInPalettes) as PaletteName[])
           .map((id) => ({
             id,
-
-            // @ts-ignore
-            // TODO: Through in reality title won't be undefined, this is a bad
-            // design decision to place names in such a way that we have to use
-            // indexing over all localization strings. This would be better:
-            //     localization.paletteNames[id],
-            title: localization[`palettes_${id}`](),
+            title: localization.palettes[id],
           }))
       ),
     ];
@@ -137,7 +131,7 @@ export default class Palettes extends React.Component<Props, State> {
       {this.state.activePalette === `themeCustomPalette` && (
         <Buttons className="variableEditor_buttons">
           <Button onClick={this.props.onCustomPaletteEditStart}>
-            {localization.variableEditor_editPalette()}
+            {localization.variableEditor.editPalette}
           </Button>
         </Buttons>
       )}
@@ -150,14 +144,14 @@ export default class Palettes extends React.Component<Props, State> {
         && this.state.activePalette === `themeColors`
         && (
           <Hint className="palettes_placeholder">
-            {localization.variableEditor_themeColorsPlaceholder()}
+            {localization.variableEditor.themeColorsPlaceholder}
           </Hint>
         )}
       {colors.length === 0
         && this.state.activePalette === `themeCustomPalette`
         && (
           <Hint className="palettes_placeholder">
-            {localization.variableEditor_themeCustomPalettePlaceholder()}
+            {localization.variableEditor.themeCustomPalettePlaceholder}
           </Hint>
         )}
     </>;

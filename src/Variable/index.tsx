@@ -104,24 +104,24 @@ export default class Variable extends React.Component<Props> {
         <div className="variable_badges">
           {this.props.isUnadded && (
             <span className="variable_badge">
-              {localization.workspace_unaddedVariable()}
+              {localization.workspace.unaddedVariable}
             </span>
           )}
           {OBSOLETE_VARIABLES.includes(this.props.variableName) && (
             <span className="variable_badge">
-              {localization.workspace_obsoleteVariable()}
+              {localization.workspace.obsoleteVariable}
             </span>
           )}
           {UNUSED_VARIABLES.includes(this.props.variableName) && (
             <span className="variable_badge">
-              {localization.workspace_unusedVariable()}
+              {localization.workspace.unusedVariable}
             </span>
           )}
           {!allVariables.includes(this.props.variableName)
             && !UNUSED_VARIABLES.includes(this.props.variableName)
             && (
               <span className="variable_badge">
-                {localization.workspace_nonStandardVariable()}
+                {localization.workspace.nonStandardVariable}
               </span>
             )}
         </div>

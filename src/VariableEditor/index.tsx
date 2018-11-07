@@ -230,11 +230,11 @@ export default class VariableEditor extends React.Component<Props, State> {
     const tabs = [
       {
         id: `colorNumeric`,
-        text: localization.variableEditor_colorModelsTab(),
+        text: localization.variableEditor.colorModelsTab,
       },
       {
         id: `palettes`,
-        text: localization.variableEditor_palettesTab(),
+        text: localization.variableEditor.palettesTab,
       },
     ];
 
@@ -242,7 +242,7 @@ export default class VariableEditor extends React.Component<Props, State> {
       tabs.unshift(
         {
           id: `image`,
-          text: localization.variableEditor_imageTab(),
+          text: localization.variableEditor.imageTab,
         },
       );
     }
@@ -304,16 +304,16 @@ export default class VariableEditor extends React.Component<Props, State> {
         onClose={this.handleClose}
         buttons={[
           {
-            caption: localization.variableEditor_save(),
+            caption: localization.variableEditor.save,
             onClick: this.handleSave,
             shouldCloseAfterClick: true,
           },
           {
-            caption: localization.variableEditor_cancel(),
+            caption: localization.variableEditor.cancel,
             shouldCloseAfterClick: true,
           },
           {
-            caption: localization.variableEditor_delete(),
+            caption: localization.variableEditor.delete,
             onClick: this.props.onDelete,
             shouldCloseAfterClick: true,
             isDangerous: true,
@@ -361,12 +361,12 @@ export default class VariableEditor extends React.Component<Props, State> {
             <Button
               onClick={this.handleUploadWallpaperClick}
             >
-              {localization.variableEditor_uploadImage()}
+              {localization.variableEditor.uploadImage}
             </Button>
           </Buttons>
           {this.state.wallpaperColors && <>
             <Hint>
-              {localization.variableEditor_wallpaperColorsHint()}
+              {localization.variableEditor.wallpaperColorsHint}
             </Hint>
             <div className="palettes">
               {wallpaperColors}

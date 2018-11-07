@@ -20,7 +20,7 @@ export default class EmptyWorkspace extends React.Component<Props> {
 
   handleCreateButtonClick = () => {
     this.props.onTheme({
-      name: localization.theme_defaultName(),
+      name: localization.theme.defaultName,
       variables: {},
       wallpaper: ``,
       palette: [],
@@ -47,13 +47,13 @@ export default class EmptyWorkspace extends React.Component<Props> {
 
   render() {
     return <>
-      <Heading level={2}>{localization.emptyWorkspace_title()}</Heading>
+      <Heading level={2}>{localization.emptyWorkspace.title}</Heading>
       <Buttons>
         <Button onClick={this.handleCreateButtonClick}>
-          {localization.emptyWorkspace_createTheme()}
+          {localization.emptyWorkspace.createTheme}
         </Button>
         <Button onClick={this.handleOpenButtonClick}>
-          {localization.emptyWorkspace_openTheme()}
+          {localization.emptyWorkspace.openTheme}
         </Button>
       </Buttons>
       <input
@@ -65,10 +65,10 @@ export default class EmptyWorkspace extends React.Component<Props> {
         multiple={true}
       />
       <Hint className="emptyWorkspace_uploadWaysHint">
-        {localization.emptyWorkspace_uploadWaysHint()}
+        {localization.emptyWorkspace.uploadWaysHint}
       </Hint>
       <Hint className="emptyWorkspace_credits">
-        {localization.emptyWorkspace_credits()}
+        {localization.emptyWorkspace.credits}
       </Hint>
     </>;
   }

@@ -135,7 +135,7 @@ export default class ScriptRunner extends React.Component<Props> {
       const log = (...messageParts: unknown[]) => {
         // eslint-disable-next-line no-console
         console.log(
-          localization.scriptRunner_logMessage(),
+          localization.scriptRunner.logMessage,
           ...messageParts.map((part) => interpreter.pseudoToNative(part)),
         );
       };
@@ -241,27 +241,27 @@ export default class ScriptRunner extends React.Component<Props> {
     let outputClassName = `scriptRunner_output`;
 
     if (this.state.isEvaluated) {
-      outputTitle = localization.scriptRunner_isEvaluated();
+      outputTitle = localization.scriptRunner.isEvaluated;
       outputClassName += ` -success`;
     } else if (this.state.runtimeError) {
-      outputTitle = localization.scriptRunner_runtimeError();
+      outputTitle = localization.scriptRunner.runtimeError;
       output = this.state.runtimeError.message;
       outputClassName += ` -error`;
     } else if (this.state.parseError) {
-      outputTitle = localization.scriptRunner_syntaxError();
+      outputTitle = localization.scriptRunner.syntaxError;
       output = this.state.parseError.message;
       outputClassName += ` -error`;
     } else if (
       !this.state.isBabelLoaded
       && !this.state.isBabelLoading
     ) {
-      outputTitle = localization.scriptRunner_babelLoadingFailed();
+      outputTitle = localization.scriptRunner.babelLoadingFailed;
       outputClassName += ` -error`;
     } else if (
       !this.state.isInterpreterLoaded
       && !this.state.isInterpreterLoading
     ) {
-      outputTitle = localization.scriptRunner_interpreterLoadingFailed();
+      outputTitle = localization.scriptRunner.interpreterLoadingFailed;
       outputClassName += ` -error`;
     }
 
@@ -273,24 +273,24 @@ export default class ScriptRunner extends React.Component<Props> {
 
     return (
       <Dialog
-        title={localization.scriptRunner_title()}
+        title={localization.scriptRunner.title}
         onClose={this.props.onClose}
         buttons={[
           {
             caption: <>
-              {localization.scriptRunner_run()}
+              {localization.scriptRunner.run}
               {isRunButtonDisabled && <Spinner/>}
             </>,
             onClick: this.handleRun,
             isDisabled: isRunButtonDisabled,
           },
           {
-            caption: localization.scriptRunner_close(),
+            caption: localization.scriptRunner.close,
             shouldCloseAfterClick: true,
           },
         ]}
       >
-        <Hint>{localization.scriptRunner_description()}</Hint>
+        <Hint>{localization.scriptRunner.description}</Hint>
         <CodeEditor
           className="scriptRunner_editor"
           ref={this.editor}

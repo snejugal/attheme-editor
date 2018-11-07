@@ -123,7 +123,7 @@ export default class PaletteEditor extends React.Component<Props, State> {
   handleNewColor = () => this.setState({
     editingColor: {
       index: this.state.palette.length,
-      name: localization.paletteEditor_defaultColorName(),
+      name: localization.paletteEditor.defaultColorName,
       value: {
         red: 0,
         green: 0,
@@ -141,21 +141,21 @@ export default class PaletteEditor extends React.Component<Props, State> {
     if (this.state.editingColor) {
       buttons = [
         {
-          caption: localization.paletteEditor_save(),
+          caption: localization.paletteEditor.save,
           onClick: this.handleSave,
         },
         {
-          caption: localization.paletteEditor_cancel(),
+          caption: localization.paletteEditor.cancel,
           onClick: this.handleCancel,
         },
         {
-          caption: localization.paletteEditor_delete(),
+          caption: localization.paletteEditor.delete,
           onClick: this.handleCancel,
           isDangerous: true,
         },
       ];
     } else {
-      title = localization.paletteEditor_title();
+      ({ title } = localization.paletteEditor);
       colors = this.state.palette.map((paletteColor, index) => {
         let name: string;
         let color: PartialColor;
@@ -218,12 +218,12 @@ export default class PaletteEditor extends React.Component<Props, State> {
       buttons = [
         {
           caption: this.props.isFromVariableEditor
-            ? localization.paletteEditor_back()
-            : localization.paletteEditor_close(),
+            ? localization.paletteEditor.back
+            : localization.paletteEditor.close,
           shouldCloseAfterClick: true,
         },
         {
-          caption: localization.paletteEditor_newColor(),
+          caption: localization.paletteEditor.newColor,
           onClick: this.handleNewColor,
         },
       ];
@@ -242,7 +242,7 @@ export default class PaletteEditor extends React.Component<Props, State> {
         )}
         {!this.state.editingColor && colors!.length === 0 && (
           <Hint className="paletteEditor_colorsPlaceholder">
-            {localization.paletteEditor_placeholder()}
+            {localization.paletteEditor.placeholder}
           </Hint>
         )}
         {this.state.editingColor !== null && <>

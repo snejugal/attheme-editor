@@ -22,13 +22,13 @@ export class ConfirmDialog extends React.Component<Props> {
         onClose={this.props.onClose}
         buttons={[
           {
-            caption: localization.confirmDialog_yes(),
+            caption: localization.confirmDialog.yes,
             onClick: this.props.onConfirm,
             shouldCloseAfterClick: true,
             isDangerous: this.props.isDangerous,
           },
           {
-            caption: localization.confirmDialog_no(),
+            caption: localization.confirmDialog.no,
             onClick: this.props.onDismiss,
             shouldCloseAfterClick: true,
           },

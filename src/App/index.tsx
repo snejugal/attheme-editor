@@ -247,7 +247,7 @@ export default class App extends React.Component {
           onClose={this.handleConfirmClose}
           isDangerous={true}
         >
-          {localization.workspace_closeThemePrompt()}
+          {localization.workspace.closeThemePrompt}
         </ConfirmDialog>
       )}
     </>;
