@@ -104,6 +104,7 @@ const localization: PartialLocalization = {
     hex: `HEX`,
     alpha: `Альфа`,
     uploadImage: `Загрузить картинку`,
+    downloadImage: `Скачать картинку`,
     imageTab: `Картинка`,
     colorModelsTab: `Цветовые модели`,
     palettesTab: `Палитры`,
