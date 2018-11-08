@@ -10,7 +10,7 @@ interface State {
   }[],
 }
 
-export default class ErrorHandler extends React.Component<{}> {
+export default class ErrorHandler extends React.Component<{}, State> {
   state: State = {
     errors: [],
   };
