@@ -19,14 +19,14 @@ import HeaderTab from "../HeaderTab";
 const HANDLE_SCROLL_INTERVAL = 200;
 
 interface State {
-  workplaces: number[];
+  workspaces: number[];
   activeTab: number | null;
-  confirmClosing: false;
+  confirmClosing: boolean;
 }
 
-export default class App extends React.Component {
+export default class App extends React.Component<{}, State> {
   state: State = {
-    workplaces: [],
+    workspaces: [],
     activeTab: null,
     confirmClosing: false,
   };
@@ -48,7 +48,7 @@ export default class App extends React.Component {
     const activeTab = database.getActiveTab();
 
     this.setState({
-      workplaces: await tabs,
+      workspaces: await tabs,
       activeTab: await activeTab,
     });
 
@@ -128,13 +128,13 @@ export default class App extends React.Component {
 
   handleTheme = async (theme: Theme) => {
     const themeId = await database.createTheme(theme);
-    const workplaces = [...this.state.workplaces, themeId];
+    const workspaces = [...this.state.workspaces, themeId];
 
-    database.updateWorkplaces(workplaces);
+    database.updateWorkspaces(workspaces);
     database.updateActiveTab(themeId);
 
     this.setState({
-      workplaces,
+      workspaces,
       activeTab: themeId,
     });
   };
@@ -189,20 +189,20 @@ export default class App extends React.Component {
   });
 
   handleConfirm = () => {
-    const workplaces = [...this.state.workplaces];
-    const currentIndex = workplaces.indexOf(this.state.activeTab!);
+    const workspaces = [...this.state.workspaces];
+    const currentIndex = workspaces.indexOf(this.state.activeTab!);
 
-    workplaces.splice(currentIndex, 1);
+    workspaces.splice(currentIndex, 1);
 
-    const newActiveTabIndex = Math.min(currentIndex, workplaces.length - 1);
-    const activeTab = workplaces[newActiveTabIndex] || -1;
+    const newActiveTabIndex = Math.min(currentIndex, workspaces.length - 1);
+    const activeTab = workspaces[newActiveTabIndex] || -1;
 
     database.deleteTheme(this.state.activeTab!);
-    database.updateWorkplaces(workplaces);
+    database.updateWorkspaces(workspaces);
     database.updateActiveTab(activeTab);
 
     this.setState({
-      workplaces,
+      workspaces,
       activeTab,
     });
   };
@@ -229,7 +229,7 @@ export default class App extends React.Component {
 
     return <>
       <Header
-        workplaces={this.state.workplaces}
+        workspaces={this.state.workspaces}
         activeTab={this.state.activeTab}
         onActiveTabChange={this.handleActiveTabChange}
         activeTabRef={this.activeTab}

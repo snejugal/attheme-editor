@@ -5,7 +5,7 @@ import NewTab from "../NewTab";
 import React from "react";
 
 interface Props {
-  workplaces: number[];
+  workspaces: number[];
   activeTab: number | null;
   onActiveTabChange(tab: number): void;
   activeTabRef: React.Ref<HeaderTab>,
@@ -35,7 +35,7 @@ export default class HeaderTabs extends React.Component<Props> {
         onWheel={this.handleWheel}
         ref={this.tabs}
       >
-        {this.props.workplaces.map((themeId) => {
+        {this.props.workspaces.map((themeId) => {
           return <HeaderTab
             id={themeId}
             key={themeId}

@@ -26,6 +26,8 @@ const setSetting = (option: string, value: any) => (
 );
 
 export const getTabs = async () => (
+  // It should've been `workspaces`, but now it's hard to change it smoothly for
+  // users.
   await getSetting<number[]>(`workplaces`)
   || []
 );
@@ -46,7 +48,9 @@ export const createTheme = (theme: Theme) => (
   })
 );
 
-export const updateWorkplaces = (workspaces: number[]) => (
+export const updateWorkspaces = (workspaces: number[]) => (
+  // It should've been `workspaces`, but now it's hard to change it smoothly for
+  // users.
   setSetting(`workplaces`, workspaces)
 );
 

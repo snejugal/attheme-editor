@@ -47,7 +47,7 @@ interface State {
   hasUploadError: boolean;
 }
 
-export default class Workplace extends React.Component<Props, State> {
+export default class Workspace extends React.Component<Props, State> {
   static propTypes = {
     themeId: PropTypes.number.isRequired,
     onNameChange: PropTypes.func.isRequired,
