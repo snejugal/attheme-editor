@@ -63,6 +63,7 @@ export interface Localization {
     hex: ReactNode;
     alpha: ReactNode;
     uploadImage: ReactNode;
+    downloadImage: ReactNode;
     imageTab: ReactNode;
     colorModelsTab: ReactNode;
     palettesTab: ReactNode;
