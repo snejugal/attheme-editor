@@ -23,6 +23,7 @@ import prepareTheme from "../prepareTheme";
 import uploadTheme from "../uploadTheme";
 import toBlob from "attheme-js/lib/tools/browser/toBlob";
 import { Color } from "attheme-js/lib/types";
+import prepareFile from "../prepareFile";
 
 interface Props {
   themeId: number;
@@ -167,14 +168,8 @@ export default class Workspace extends React.Component<Props, State> {
   downloadWorkspace = () => {
     const name = `${this.state.theme!.name}.attheme-editor`;
     const serialized = JSON.stringify(this.state.theme);
-    const length = serialized.length;
-    const buffer = new Uint8Array(length);
 
-    for (let charIndex = 0; charIndex < length; charIndex++) {
-      buffer[charIndex] = serialized.codePointAt(charIndex)!;
-    }
-
-    const blob = URL.createObjectURL(new File([buffer], name));
+    const blob = prepareFile(name, serialized);
 
     download(blob, name);
   }
