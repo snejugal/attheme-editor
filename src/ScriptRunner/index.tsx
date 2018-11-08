@@ -14,6 +14,10 @@ import deepClone from "lodash/cloneDeep";
 
 const STEPS_PER_ONCE = 50000;
 const BABEL_OPTIONS = {
+  plugins: [
+    `proposal-object-rest-spread`,
+    `proposal-optional-catch-binding`,
+  ],
   presets: [
     `es2015`,
     `es2016`,
