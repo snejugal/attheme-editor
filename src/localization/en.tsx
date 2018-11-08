@@ -103,6 +103,7 @@ const localization: Localization = {
     hex: `HEX`,
     alpha: `Alpha`,
     uploadImage: `Upload an image`,
+    downloadImage: `Download the image`,
     imageTab: `Image`,
     colorModelsTab: `Color models`,
     palettesTab: `Palettes`,

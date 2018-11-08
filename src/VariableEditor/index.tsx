@@ -19,6 +19,8 @@ import { defaultValues } from "../atthemeVariables";
 import localization from "../localization";
 import readFile from "../readFile";
 import { Color } from "attheme-js/lib/types";
+import prepareFile from "../prepareFile";
+import download from "../download";
 
 let Vibrant: VibrantClass;
 let WebWorkerQuantizer: Quantizer;
@@ -224,6 +226,13 @@ export default class VariableEditor extends React.Component<Props, State> {
     }
   };
 
+  handleDownloadClick = () => {
+    const name = `${this.props.theme.name}.jpg`;
+    const blob = prepareFile(name, atob(this.state.wallpaper!));
+
+    download(blob, name);
+  };
+
   render() {
     const { color } = this.state;
 
@@ -358,11 +367,14 @@ export default class VariableEditor extends React.Component<Props, State> {
         )}
         {this.state.activeTab === `image` && <>
           <Buttons className="variableEditor_buttons">
-            <Button
-              onClick={this.handleUploadWallpaperClick}
-            >
+            <Button onClick={this.handleUploadWallpaperClick}>
               {localization.variableEditor.uploadImage}
             </Button>
+            {this.state.wallpaper && (
+              <Button onClick={this.handleDownloadClick}>
+                {localization.variableEditor.downloadImage}
+              </Button>
+            )}
           </Buttons>
           {this.state.wallpaperColors && <>
             <Hint>
