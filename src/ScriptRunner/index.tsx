@@ -41,7 +41,7 @@ interface State {
   isInterpreterLoading: boolean;
 }
 
-export default class ScriptRunner extends React.Component<Props> {
+export default class ScriptRunner extends React.Component<Props, State> {
   state: State = {
     parseError: null,
     runtimeError: null,

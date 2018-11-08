@@ -14,7 +14,7 @@ interface State {
   title: string | null;
 }
 
-export default class Tab extends React.Component<Props> {
+export default class Tab extends React.Component<Props, State> {
   state: State = {
     title: null,
   };
