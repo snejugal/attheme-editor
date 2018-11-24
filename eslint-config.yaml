@@ -97,14 +97,6 @@ rules:
   linebreak-style:
     - warn
     - windows
-  lines-around-comment:
-    - warn
-    - beforeBlockComment: true
-      beforeLineComment: true
-      allowBlockStart: true
-      allowObjectStart: true
-      allowArrayStart: true
-      allowClassStart: true
   lines-between-class-members: warn
   max-len:
     - warn
