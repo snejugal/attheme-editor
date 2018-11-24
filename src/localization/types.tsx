@@ -38,6 +38,7 @@ export interface Localization {
     unusedVariable: ReactNode;
     obsoleteVariable: ReactNode;
     nonStandardVariable: ReactNode;
+    removedVariable(version: string): ReactNode;
     search: ReactNode;
     variablesAmount(params: VariablesAmountProp): ReactNode;
     noVariablesPlaceholder: ReactNode;

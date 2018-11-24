@@ -67,6 +67,9 @@ const localization: Localization = {
     unusedVariable: `Unused by Telegram`,
     obsoleteVariable: `Obsolete`,
     nonStandardVariable: `Non-standard`,
+    removedVariable(version) {
+      return `Removed since ${version}`;
+    },
     search: `Search`,
     variablesAmount({ total, theme }: VariablesAmountProp) {
       const forms = {
