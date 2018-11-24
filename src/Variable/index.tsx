@@ -32,6 +32,7 @@ interface Props {
   wallpaper?: string;
   onClick(variableName: string): void;
   isUnadded?: boolean;
+  removalVersion?: string;
 }
 
 export default class Variable extends React.Component<Props> {
@@ -117,7 +118,15 @@ export default class Variable extends React.Component<Props> {
               {localization.workspace.unusedVariable}
             </span>
           )}
-          {!allVariables.includes(this.props.variableName)
+          {this.props.removalVersion && (
+            <span className="variable_badge">
+              {localization.workspace.removedVariable(
+                this.props.removalVersion,
+              )}
+            </span>
+          )}
+          {!this.props.removalVersion
+            && !allVariables.includes(this.props.variableName)
             && !UNUSED_VARIABLES.includes(this.props.variableName)
             && (
               <span className="variable_badge">

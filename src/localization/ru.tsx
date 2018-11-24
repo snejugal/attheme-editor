@@ -69,6 +69,9 @@ const localization: PartialLocalization = {
     unusedVariable: `Не используется Телеграмом`,
     obsoleteVariable: `Устаревшая`,
     nonStandardVariable: `Нестандартная`,
+    removedVariable(version: string) {
+      return `Удалена с версии ${version}`;
+    },
     search: `Поиск`,
     variablesAmount({ total, theme }: VariablesAmountProp) {
       const forms = {

@@ -1,6 +1,10 @@
 import "./styles.scss";
 
-import { allVariables, defaultValues } from "../atthemeVariables";
+import {
+  allVariables,
+  defaultValues,
+  getRemovedVariables,
+} from "../atthemeVariables";
 import { parseHex, createHex } from "@snejugal/color";
 import Field from "../Field";
 import FuzzySearch from "fuzzy-search";
@@ -144,6 +148,8 @@ export default class Variables extends React.Component<Props, State> {
       }
     }
 
+    const removedVariables = getRemovedVariables(themeVariables);
+
     const variables = variablesOrder.map((variableName) => {
       if (variableName === `chat_wallpaper` && this.props.wallpaper) {
         return <Variable
@@ -160,6 +166,7 @@ export default class Variables extends React.Component<Props, State> {
           key={variableName}
           color={this.props.theme[variableName]}
           onClick={this.props.onClick}
+          removalVersion={removedVariables[variableName]}
         />;
       }
 

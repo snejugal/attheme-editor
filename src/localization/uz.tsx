@@ -71,6 +71,9 @@ const localization: PartialLocalization = {
     unusedVariable: `Telegram orqali foydalanilmaydi`,
     obsoleteVariable: `Eskirgan`,
     nonStandardVariable: `Nostandart`,
+    removedVariable(version: string) {
+      return `Versiyadan o'chirildi ${version}`;
+    },
     search: `Qidirish`,
     variablesAmount({ total, theme }: VariablesAmountProp) {
       const forms = {
