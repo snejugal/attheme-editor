@@ -101,6 +101,7 @@ const localization: PartialLocalization = {
     hex: `HEX`,
     alpha: `Alfa`,
     uploadImage: `Rasm yuklash`,
+    downloadImage: `Rasmni yuklab olish`,
     imageTab: `Rasm`,
     colorModelsTab: `Rangli modellar`,
     palettesTab: `Ranglar`,

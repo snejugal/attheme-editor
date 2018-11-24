@@ -101,6 +101,7 @@ const localization: PartialLocalization = {
     lightness: `Luminosità, %`,
     saturation: `Saturazione, %`,
     uploadImage: `Carica un'immagine`,
+    downloadImage: `Scarica l'immagine`,
     imageTab: `Immagine`,
     colorModelsTab: `Codici colori`,
     palettesTab: `Palette dei colori`,
