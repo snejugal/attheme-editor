@@ -96,7 +96,7 @@ rules:
   keyword-spacing: warn
   linebreak-style:
     - warn
-    - windows
+    - unix
   lines-between-class-members: warn
   max-len:
     - warn
