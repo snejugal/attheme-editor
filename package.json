@@ -20,8 +20,8 @@
   },
   "scripts": {
     "analyze": "npx source-map-explorer build/static/js/main.*",
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "start": "react-scripts --max-old-space-size=2048 start",
+    "build": "react-scripts --max-old-space-size=2048 build"
   },
   "browserslist": {
     "development": [
