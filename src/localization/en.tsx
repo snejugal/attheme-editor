@@ -88,6 +88,7 @@ const localization: Localization = {
     noVariablesPlaceholder: `You don't have any variables in the theme yet :( Go and add some via the search field above!`,
     noResultsPlaceholder: `Whops, the search didn't give any results. Maybe you have a typo in your query?`,
     uploadError: `Whops, the editor couldn't upload the theme to the bot. Сheck your internet connection and try again.`,
+    downloadError: `Whops, you seem to open a theme that has expired. You should send the theme to the bot once again to be able to open it in the editor.`,
   },
   confirmDialog: {
     yes: `Yes`,

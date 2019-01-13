@@ -44,6 +44,7 @@ export interface Localization {
     noVariablesPlaceholder: ReactNode;
     noResultsPlaceholder: ReactNode;
     uploadError: ReactNode;
+    downloadError: ReactNode;
   };
   confirmDialog: {
     yes: ReactNode;

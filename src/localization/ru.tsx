@@ -85,6 +85,7 @@ const localization: PartialLocalization = {
     noVariablesPlaceholder: <>В&nbsp;теме ещё нет&nbsp;переменных :( Добавьте их&nbsp;через&nbsp;поле поиска выше!</>,
     noResultsPlaceholder: <>Упс, поиск не&nbsp;дал никаких результатов. Может, в&nbsp;запросе есть опечатка?</>,
     uploadError: <>Упс, редактор не&nbsp;смог загрузить тему боту. Проверьте соединение и&nbsp;попробуйте снова.</>,
+    downloadError: <>Упс, кажется, что вы&nbsp;открываете тему, которая больше недействительна. Отправьте боту тему ещё раз, чтобы открыть её&nbsp;в&nbsp;редакторе.</>,
   },
   confirmDialog: {
     yes: `Да`,
