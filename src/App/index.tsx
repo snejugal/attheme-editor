@@ -15,6 +15,7 @@ import fromFile from "attheme-js/lib/tools/browser/fromFile";
 import readFile from "../readFile";
 import themeToObject from "attheme-js/lib/tools/themeToObject";
 import HeaderTab from "../HeaderTab";
+import Snackbar from "../Snackbar";
 
 const HANDLE_SCROLL_INTERVAL = 200;
 
@@ -22,6 +23,7 @@ interface State {
   workspaces: number[];
   activeTab: number | null;
   confirmClosing: boolean;
+  downloadThemeError: boolean;
 }
 
 export default class App extends React.Component<{}, State> {
@@ -29,6 +31,7 @@ export default class App extends React.Component<{}, State> {
     workspaces: [],
     activeTab: null,
     confirmClosing: false,
+    downloadThemeError: false,
   };
 
 
@@ -108,21 +111,27 @@ export default class App extends React.Component<{}, State> {
         window.location.origin + window.location.pathname,
       );
 
-      const { name, theme } = await atthemeEditorApi.downloadTheme(themeId);
+      try {
+        const { name, theme } = await atthemeEditorApi.downloadTheme(themeId);
 
-      const downloadedTheme: Theme = {
-        variables: themeToObject(theme),
-        name,
-        palette: [],
-      };
+        const downloadedTheme: Theme = {
+          variables: themeToObject(theme),
+          name,
+          palette: [],
+        };
 
-      const wallpaper = theme.getWallpaper();
+        const wallpaper = theme.getWallpaper();
 
-      if (wallpaper) {
-        downloadedTheme.wallpaper = btoa(wallpaper);
+        if (wallpaper) {
+          downloadedTheme.wallpaper = btoa(wallpaper);
+        }
+
+        this.handleTheme(downloadedTheme);
+      } catch {
+        this.setState({
+          downloadThemeError: true,
+        });
       }
-
-      this.handleTheme(downloadedTheme);
     }
   }
 
@@ -211,6 +220,10 @@ export default class App extends React.Component<{}, State> {
     confirmClosing: false,
   });
 
+  handleDownloadErrorDismiss = () => this.setState({
+    downloadThemeError: false,
+  });
+
   render() {
     let workspace = null;
 
@@ -249,6 +262,11 @@ export default class App extends React.Component<{}, State> {
         >
           {localization.workspace.closeThemePrompt}
         </ConfirmDialog>
+      )}
+      {this.state.downloadThemeError && (
+        <Snackbar onDismiss={this.handleDownloadErrorDismiss} isError={true}>
+          {localization.workspace.downloadError}
+        </Snackbar>
       )}
     </>;
   }
