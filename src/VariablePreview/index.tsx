@@ -39,7 +39,9 @@ export default class VariablePreview extends React.Component<Props, State> {
 
     const idsMap = new Map<string, SVGElement>();
 
-    const previewUrl = await import(`./previews/${previewFileName}.svg`);
+    const {
+      default: previewUrl,
+    } = await import(`./previews/${previewFileName}.svg`);
 
     const response = await fetch(previewUrl);
     const contents = await response.text();
@@ -88,10 +90,10 @@ export default class VariablePreview extends React.Component<Props, State> {
       }
     }
 
-    [...svg.querySelectorAll(`:not([href^="data:"]:not([href=""])`)]
+    [...svg.querySelectorAll(`[href]:not([href^="data:"]):not([href=""])`)]
       .forEach(async (element) => {
         const url = element.getAttribute(`href`);
-        const resolvedUrl = await import(`./previews/${url}`);
+        const { default: resolvedUrl } = await import(`./previews/${url}`);
 
         element.setAttribute(`href`, resolvedUrl);
       });
