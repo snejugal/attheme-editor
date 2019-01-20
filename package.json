@@ -7,7 +7,7 @@
     "@snejugal/color": "^2.0.3",
     "@types/codemirror": "0.0.65",
     "attheme-editor-api": "^2.0.1",
-    "attheme-js": "^2.1.5",
+    "attheme-js": "^2.2.0",
     "codemirror": "^5.42.2",
     "es-interpreter": "^0.2.0",
     "fuzzy-search": "^2.2.1",
