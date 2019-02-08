@@ -105,7 +105,7 @@ export default class VariableEditor extends React.Component<Props, State> {
   dialog = React.createRef<Dialog>();
 
   componentDidMount() {
-    if (this.state.wallpaper) {
+    if (this.state.wallpaper && this.props.variable === `chat_wallpaper`) {
       this.generateWallpaperColors();
     }
   }
