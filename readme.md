@@ -25,6 +25,7 @@ The editor can be run on both phones and desktops in the browser, and even offli
 Developed by [@snejugal] and [@AlexStrNik]. Also thanks to these amazing people who translate the editor:
 
 - Italian: [@SventraPopizz] and [@supervalery];
+- Spanish: [@DiegoCanevaro];
 - Russian: [@snejugal];
 - Ukrainian: [@tfroke];
 - Uzbek: [@DeduwkA_gg] and [@akaRamzEE].
@@ -33,6 +34,7 @@ Also, [@ItaPathfinderDM] and [@danicotra] made some previews for the editor. Tha
 
 [@snejugal]: https://t.me/snejugal
 [@AlexStrNik]: https://t.me/AlexStrNik
+[@DiegoCanevaro]: https://t.me/DiegoCanevaro
 [@SventraPopizz]: https://t.me/SventraPopizz
 [@supervalery]: https://t.me/supervalery
 [@tfroke]: https://t.me/tfroke
