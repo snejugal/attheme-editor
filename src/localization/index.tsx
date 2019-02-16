@@ -3,7 +3,7 @@ import { Localization } from "./types";
 import defaultsDeep from "lodash/defaultsDeep";
 
 const LANGUAGE_NAME_LENGTH = 2;
-const languages = [`en`, `ru`, `uk`, `it`, `uz`];
+const languages = [`en`, `ru`, `uk`, `it`, `uz`, `es`];
 
 const localization: Localization = {
   ...english,
