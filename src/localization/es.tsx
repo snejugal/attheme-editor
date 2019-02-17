@@ -87,6 +87,10 @@ const localization: PartialLocalization = {
     noVariablesPlaceholder: `Aún no tienes variables en el tema :( ¡Añade algunas en el recuadro de búsqueda justo debajo!`,
     noResultsPlaceholder: `Ooops, la búsqueda no dio resultados. Tal vez tienes un error de escritura en tu consulta.`,
     uploadError: `Ooops, el editor no puede cargar el tema al bot. Revisa tu conexión a internet y vuelve a intentarlo.`,
+    removedVariable(version: string) {
+      return `Removido desde la versión ${version}`;
+    },
+    downloadError: `Ooops, parece que trataste de abrir un tema que expiró. Deberías enviar el tema al bot una vez que esté disponible de nuevo para abrirlo en el editor.`,
   },
   confirmDialog: {
     yes: `Si`,
