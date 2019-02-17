@@ -119,9 +119,9 @@ const localization: PartialLocalization = {
   },
   scriptRunner: {
     title: `Correr un script`,
-    description: <React.Fragment>
+    description: <>
       .attheme editor lets you easily run scripts wrriten in EcmaScript 2017 to fasten theme developing. You can read more about the API the editor provides on <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">its GitHub repository&apos;s wiki</Link>.
-    </React.Fragment>,
+    </>,
     close: `Cerrar`,
     run: `Ejecutar`,
     isEvaluated: `¡El script se ejecutó exitosamente!`,
