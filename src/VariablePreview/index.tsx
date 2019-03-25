@@ -4,12 +4,10 @@ import { createCssRgb } from "@snejugal/color";
 import React from "react";
 import calculateWallpaperSize from "../calculateWallpaperSize";
 import { defaultValues } from "../atthemeVariables";
-import previewsMap from "./previewsMap";
+import loadPreview from "./loadPreview";
 import { Color } from "attheme-js/lib/types";
 
 const CHANNEL = 255;
-
-const parser = new DOMParser();
 
 interface Props {
   theme: Theme;
@@ -31,24 +29,13 @@ export default class VariablePreview extends React.Component<Props, State> {
   preview = React.createRef<HTMLDivElement>();
 
   async componentDidMount() {
-    const previewFileName = previewsMap[this.props.variable];
+    const svg = await loadPreview(this.props.variable);
 
-    if (!previewFileName) {
+    if (!svg) {
       return;
     }
 
     const idsMap = new Map<string, SVGElement>();
-
-    const {
-      default: previewUrl,
-    } = await import(`./previews/${previewFileName}.svg`);
-
-    const response = await fetch(previewUrl);
-    const contents = await response.text();
-
-    const previewDocument = parser.parseFromString(contents, `text/xml`);
-    const svg = previewDocument.documentElement!;
-
     const coloredElements = [...svg.querySelectorAll<SVGElement>(`[class]`)];
 
     for (const element of coloredElements) {
