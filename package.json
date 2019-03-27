@@ -39,13 +39,12 @@
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.3",
     "@types/smoothscroll-polyfill": "^0.3.1",
+    "@typescript-eslint/parser": "^1.5.0",
     "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-typescript": "^0.13.0",
     "node-sass": "^4.11.0",
     "react-scripts": "^2.1.8",
     "source-map-explorer": "^1.8.0",
     "typescript": "^3.3.4000",
-    "typescript-eslint-parser": "^20.1.1",
     "worker-loader": "^2.0.0"
   }
 }
