@@ -3,20 +3,19 @@
   "version": "2.0.0",
   "homepage": ".",
   "dependencies": {
-    "@babel/standalone": "^7.2.5",
-    "@snejugal/color": "^2.0.3",
-    "@types/codemirror": "0.0.65",
+    "@babel/standalone": "^7.4.2",
+    "@snejugal/color": "^2.1.1",
     "attheme-editor-api": "^2.0.1",
     "attheme-js": "^2.2.0",
-    "codemirror": "^5.42.2",
+    "codemirror": "^5.45.0",
     "es-interpreter": "^0.2.0",
-    "fuzzy-search": "^2.2.1",
-    "intl-pluralrules": "^0.2.1",
+    "fuzzy-search": "^3.0.1",
+    "intl-pluralrules": "^1.0.0",
     "lodash": "^4.17.11",
     "node-vibrant": "3.0.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "smoothscroll-polyfill": "^0.4.3"
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "smoothscroll-polyfill": "^0.4.4"
   },
   "scripts": {
     "analyze": "npx source-map-explorer build/static/js/main.*",
@@ -35,16 +34,17 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^10.12.18",
-    "@types/react": "^16.7.18",
-    "@types/react-dom": "^16.0.11",
-    "@types/smoothscroll-polyfill": "^0.3.0",
-    "eslint-plugin-react": "^7.12.3",
+    "@types/codemirror": "0.0.72",
+    "@types/node": "^11.12.0",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.3",
+    "@types/smoothscroll-polyfill": "^0.3.1",
+    "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-typescript": "^0.13.0",
     "node-sass": "^4.11.0",
     "react-scripts": "^2.1.8",
-    "source-map-explorer": "^1.6.0",
-    "typescript": "^3.2.2",
+    "source-map-explorer": "^1.8.0",
+    "typescript": "^3.3.4000",
     "typescript-eslint-parser": "^20.1.1",
     "worker-loader": "^2.0.0"
   }
