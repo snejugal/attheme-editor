@@ -2,12 +2,10 @@ import "./styles.scss";
 
 import { createCssRgb } from "@snejugal/color";
 import React from "react";
-import calculateWallpaperSize from "../calculateWallpaperSize";
 import { defaultValues } from "../atthemeVariables";
 import loadPreview from "./loadPreview";
 import { Color } from "attheme-js/lib/types";
-
-const CHANNEL = 255;
+import { PreviewProps, GetColorParams } from "./previews/common";
 
 interface Props {
   theme: Theme;
@@ -18,177 +16,66 @@ interface Props {
 }
 
 interface State {
-  updateeElements: SVGElement[] | null;
+  Preview: null | ((props: PreviewProps) => JSX.Element);
 }
 
 export default class VariablePreview extends React.Component<Props, State> {
   state: State = {
-    updateeElements: null,
+    Preview: null,
   };
 
-  preview = React.createRef<HTMLDivElement>();
-
   async componentDidMount() {
-    const svg = await loadPreview(this.props.variable);
+    const Preview = await loadPreview(this.props.variable);
 
-    if (!svg) {
+    if (!Preview) {
       return;
     }
-
-    const idsMap = new Map<string, SVGElement>();
-    const coloredElements = [...svg.querySelectorAll<SVGElement>(`[class]`)];
-
-    for (const element of coloredElements) {
-      const currentFill = element.getAttribute(`fill`) || ``;
-
-      if (currentFill.startsWith(`url`) && this.props.currentWallpaper) {
-        const id = currentFill.slice(`url(#`.length, -`)`.length);
-
-        idsMap.set(id, element);
-
-        continue;
-      }
-
-      const variable = element.getAttribute(`class`)!;
-
-      let color = this.props.theme.variables[variable];
-
-      if (!color && element.dataset.fallback) {
-        color = (
-          this.props.theme.variables[element.dataset.fallback]
-          || defaultValues[element.dataset.fallback]
-        );
-
-        if (element.dataset.fallbackAlpha) {
-          color.alpha = Number(element.dataset.fallbackAlpha) * CHANNEL;
-        }
-      }
-
-      if (!color) {
-        color = defaultValues[variable];
-      }
-
-      const cssRgb = createCssRgb(color);
-
-      if (element.tagName === `stop`) {
-        element.style.stopColor = cssRgb;
-      } else {
-        element.style.fill = cssRgb;
-      }
-    }
-
-    [...svg.querySelectorAll(`[href]:not([href^="data:"]):not([href=""])`)]
-      .forEach(async (element) => {
-        const url = element.getAttribute(`href`);
-        const { default: resolvedUrl } = await import(`./previews/${url}`);
-
-        element.setAttribute(`href`, resolvedUrl);
-      });
-
-    if (this.props.currentWallpaper) {
-      const wallpaperElements = [...svg.querySelectorAll(`[data-wallpaper]`)];
-
-      if (wallpaperElements.length > 0) {
-        const wallpaperSize = await calculateWallpaperSize(
-          this.props.currentWallpaper,
-        );
-        const wallpaperRatio = wallpaperSize.width / wallpaperSize.height;
-
-        const image = `data:image;base64,${this.props.currentWallpaper}`;
-
-        for (const imageElement of wallpaperElements) {
-          const patternElementId = imageElement.closest(`pattern`)!.id;
-
-          const element = idsMap.get(patternElementId)!;
-
-          // We have to figure out wallpaper element's size on our own
-          // because the preview is not rendered yet
-          let elementWidth: string | number = element.getAttribute(`width`)!;
-          let elementHeight: string | number = element.getAttribute(`height`)!;
-
-          const [svgXOffset, svgYOffset, svgWidth, svgHeight] = svg
-            .getAttribute(`viewBox`)!
-            .split(` `)
-            .map(Number);
-
-          if (elementWidth.endsWith(`%`)) {
-            elementWidth = svgWidth;
-          } else {
-            elementWidth = Number(elementWidth);
-          }
-
-          if (elementHeight.endsWith(`%`)) {
-            elementHeight = svgHeight;
-          } else {
-            elementHeight = Number(elementHeight);
-          }
-
-          const elementSizeRatio = elementWidth / elementHeight;
-          const elementX = Number(element.getAttribute(`x`)) || svgXOffset;
-          const elementY = Number(element.getAttribute(`y`)) || svgYOffset;
-
-          let finalWidth;
-          let finalHeight;
-          let similarity;
-
-          if (wallpaperRatio > elementSizeRatio) {
-            finalHeight = 1;
-            finalWidth = wallpaperRatio;
-            similarity = elementHeight;
-          } else {
-            finalWidth = 1;
-            finalHeight = 1 / wallpaperRatio;
-            similarity = elementWidth;
-          }
-
-          finalWidth *= similarity;
-          finalHeight *= similarity;
-
-          // They don't point to the center, these are coords that will place
-          // the image in the center
-          const xCenter = elementWidth / 2 + elementX - finalWidth / 2;
-          const yCenter = elementHeight / 2 + elementY - finalHeight / 2;
-
-          imageElement.setAttribute(`href`, image);
-          imageElement.setAttribute(`width`, String(finalWidth));
-          imageElement.setAttribute(`height`, String(finalHeight));
-          imageElement.setAttribute(`x`, String(xCenter));
-          imageElement.setAttribute(`y`, String(yCenter));
-        }
-      }
-    }
-
-    const updateeElements = [
-      ...svg.querySelectorAll<SVGElement>(`[class="${this.props.variable}"]`),
-    ];
 
     this.setState({
-      updateeElements,
+      Preview,
     });
-
-    this.preview.current!.appendChild(svg);
   }
 
-  componentDidUpdate() {
-    if (!this.state.updateeElements) {
-      return;
+  getColor = ({
+    variable,
+    fallback,
+  }: GetColorParams) => {
+    if (variable === this.props.variable) {
+      return this.props.currentColor;
     }
 
-    const cssRgb = createCssRgb(this.props.currentColor!);
+    if (variable in this.props.theme.variables) {
+      return this.props.theme.variables[variable];
+    }
 
-    for (const element of this.state.updateeElements) {
-      if (element.tagName === `stop`) {
-        element.style.stopColor = cssRgb;
+    if (fallback) {
+      const color = (
+        this.props.theme.variables[fallback.variable]
+        || defaultValues[fallback.variable]
+      );
+
+      if (fallback.alpha) {
+        color.alpha = fallback.alpha;
       }
 
-      element.style.fill = cssRgb;
+      return color;
     }
-  }
+
+    return defaultValues[variable];
+  };
 
   render() {
+    const { Preview } = this.state;
+
     return (
-      <div className="variablePreview" ref={this.preview}>
-        {!this.state.updateeElements
+      <div className="variablePreview">
+        {Preview && (
+          <Preview
+            getColor={this.getColor}
+            wallpaper={this.props.currentWallpaper}
+          />
+        )}
+        {!Preview
           && this.props.shouldShowWallpaper
           && (
             <img
@@ -197,7 +84,7 @@ export default class VariablePreview extends React.Component<Props, State> {
               alt=""
             />
           )}
-        {!this.state.updateeElements
+        {!Preview
           && !this.props.shouldShowWallpaper
           && (
             <div

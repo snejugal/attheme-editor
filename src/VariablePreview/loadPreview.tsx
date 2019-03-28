@@ -1,5 +1,7 @@
+import { PreviewProps } from "./previews/common";
+
 const previewsMap = new Map([
-  [`actionBarDefault`, [
+  [`ActionBar`, [
     `actionBarDefault`,
     `actionBarDefaultIcon`,
     `actionBarDefaultTitle`,
@@ -11,53 +13,47 @@ const previewsMap = new Map([
     `chats_sentCheck`,
     `windowBackgroundWhite`,
   ]],
-  [`actionBarWhiteSelector`, [
+  [`ChatsMenu`, [
+    `chats_menuName`,
+    `chats_menuPhone`,
+    `chats_menuTopShadow`,
+  ]],
+  [`Checkout`, [
+    `divider`,
+    `windowBackgroundWhiteBlackText`,
+    `windowBackgroundWhiteBlueText6`,
+  ]],
+  [`CreateChannelScreenBottom`, [
+    `windowBackgroundWhiteBlueText5`,
+    `windowBackgroundWhiteGrayText2`,
+  ]],
+  [`CreateChannelScreenTop`, [
     `actionBarWhiteSelector`,
   ]],
-  [`chats_unreadCounter`, [
-    `avatar_backgroundOrange`,
-    `chats_unreadCounter`,
-    `chats_unreadCounterText`,
-  ]],
-  [`chats_secretName`, [
-    `avatar_backgroundGreen`,
-    `chats_secretIcon`,
-    `chats_secretName`,
-  ]],
-  [`chats_actionMessage`, [
-    `avatar_backgroundViolet`,
-    `chats_actionMessage`,
-    `chats_muteIcon`,
-    `chats_unreadCounterMuted`,
-  ]],
-  [`listSelectorSDK21`, [
+  [`ListSelector`, [
     `chats_menuBackground`,
     `chats_menuItemIcon`,
     `chats_menuItemText`,
     `listSelectorSDK21`,
   ]],
-  [`chats_menuName`, [
-    `chats_menuName`,
-    `chats_menuPhone`,
-    `chats_menuTopShadow`,
+  [`MutedChat`, [
+    `avatar_backgroundViolet`,
+    `chats_actionMessage`,
+    `chats_muteIcon`,
+    `chats_unreadCounterMuted`,
   ]],
-  [`chats_pinnedIcon`, [
+  [`PinnedChat`, [
     `chats_pinnedIcon`,
     `chats_pinnedOverlay`,
   ]],
-  [`windowBackgroundWhiteBlueText6`, [
-    `divider`,
-    `windowBackgroundWhiteBlackText`,
-    `windowBackgroundWhiteBlueText6`,
-  ]],
-  [`player_actionBar`, [
+  [`PlayerActionBar`, [
     `player_actionBar`,
     `player_actionBarItems`,
     `player_actionBarTitle`,
     `player_actionBarSubtitle`,
     `player_actionBarTop`,
   ]],
-  [`player_background`, [
+  [`PlayerBackground`, [
     `player_button`,
     `player_buttonActive`,
     `player_placeholder`,
@@ -67,9 +63,15 @@ const previewsMap = new Map([
     `player_background`,
     `player_placeholderBackground`,
   ]],
-  [`windowBackgroundWhiteBlueText5`, [
-    `windowBackgroundWhiteBlueText5`,
-    `windowBackgroundWhiteGrayText2`,
+  [`SecretChat`, [
+    `avatar_backgroundGreen`,
+    `chats_secretIcon`,
+    `chats_secretName`,
+  ]],
+  [`UnreadChat`, [
+    `avatar_backgroundOrange`,
+    `chats_unreadCounter`,
+    `chats_unreadCounterText`,
   ]],
 ]);
 
@@ -83,8 +85,6 @@ const getPreviewName = (variable: string) => {
   return null;
 };
 
-const parser = new DOMParser();
-
 const loadPreview = async (variable: string) => {
   const previewFileName = getPreviewName(variable);
 
@@ -92,17 +92,15 @@ const loadPreview = async (variable: string) => {
     return null;
   }
 
+  interface Import {
+    default(props: PreviewProps): JSX.Element;
+  }
+
   const {
-    default: previewUrl,
-  } = await import(`./previews/${previewFileName}.svg`);
+    default: Preview,
+  }: Import = await import(`./previews/${previewFileName}Preview`);
 
-  const response = await fetch(previewUrl);
-  const contents = await response.text();
-
-  const previewDocument = parser.parseFromString(contents, `text/xml`);
-  const svg = previewDocument.documentElement;
-
-  return svg;
+  return Preview;
 };
 
 export default loadPreview;
