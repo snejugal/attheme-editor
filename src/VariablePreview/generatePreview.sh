@@ -13,6 +13,13 @@
 # or you may rewrite it using `sed` :)
 
 echo 'import { PreviewProps, stringify } from "./common";' > $2
-echo '// const getColor = stringify(props.getColor);' >> $2
+echo 'const getColor = stringify(props.getColor);' >> $2
 
-svgr --no-svgo < $1 | sd 'className="([\w_]+)"' 'fill={getColor({ variable: `$1` })}' >> $2
+previewName=`basename "$2" ".tsx"`
+
+svgr --no-svgo < $1 \
+  | sd ' \{\.\.\.props\}' '' \
+  | sd SvgComponent $previewName \
+  | sd xlinkHref href \
+  | sd 'className="([\w_]+)"' 'fill={getColor({ variable: `$1` })}' \
+  >> $2
