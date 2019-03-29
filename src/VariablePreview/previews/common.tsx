@@ -5,6 +5,7 @@ import calculateWallpaperSize, { Size } from "../../calculateWallpaperSize";
 export interface PreviewProps {
   getColor: GetColor;
   wallpaper?: string;
+  variable: string;
 }
 
 type GetColor = (params: GetColorParams) => RgbColor;

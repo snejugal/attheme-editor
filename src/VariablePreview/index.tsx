@@ -73,6 +73,7 @@ export default class VariablePreview extends React.Component<Props, State> {
           <Preview
             getColor={this.getColor}
             wallpaper={this.props.currentWallpaper}
+            variable={this.props.variable}
           />
         )}
         {!Preview
