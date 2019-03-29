@@ -2,3 +2,4 @@ extends: ../../../.eslintrc.yaml
 rules:
   max-len: off
   id-length: off
+  no-magic-numbers: off
