@@ -90,6 +90,14 @@ export default new Map([
     `chats_nameIcon`,
     `chats_verifiedCheck`,
   ]],
+  [`GroupHeader`, [
+    `avatar_backgroundActionBarBlue`,
+    `avatar_actionBarIconBlue`,
+    `avatar_backgroundInProfileBlue`,
+    `profile_title`,
+    `avatar_subtitleInProfileBlue`,
+    `switchTrackChecked`,
+  ]],
   [`GroupMembersList`, [
     `windowBackgroundWhiteBlueText`,
     `windowBackgroundWhiteGrayText`,
