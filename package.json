@@ -6,7 +6,7 @@
     "@babel/standalone": "^7.4.2",
     "@snejugal/color": "^2.1.1",
     "attheme-editor-api": "^2.0.1",
-    "attheme-js": "^2.2.1",
+    "attheme-js": "^2.2.2",
     "codemirror": "^5.45.0",
     "es-interpreter": "^0.2.0",
     "fuzzy-search": "^3.0.1",
