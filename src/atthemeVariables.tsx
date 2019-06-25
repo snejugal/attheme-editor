@@ -192,6 +192,30 @@ export const REMOVED_VARIABLES = [
     variable: `profile_adminIcon`,
     version: `5.2.x`,
   },
+  {
+    variable: `chat_editDoneIcon`,
+    version: `5.5.x`,
+  },
+  {
+    variable: `chat_emojiPanelIconSelector`,
+    version: `5.5.x`,
+  },
+  {
+    variable: `groupcreate_checkbox`,
+    version: `5.7.0`,
+  },
+  {
+    variable: `groupcreate_checkboxCheck`,
+    version: `5.7.0`,
+  },
+  {
+    variable: `key_changephoneinfo_changeText`,
+    version: `5.8.0`,
+  },
+  {
+    variable: `location_markerX`,
+    version: `5.8.0`,
+  },
 ];
 
 export const getRemovedVariables = (variables: string[]): RemovedVariables => {
