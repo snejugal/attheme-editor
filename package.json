@@ -2,6 +2,7 @@
   "name": "attheme-editor",
   "version": "2.0.0",
   "homepage": ".",
+  "license": "GPLv3",
   "dependencies": {
     "@babel/standalone": "^7.6.4",
     "@snejugal/color": "^2.1.1",
