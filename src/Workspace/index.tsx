@@ -1,7 +1,8 @@
 import "./styles.scss";
 
 import * as database from "../database";
-import { allVariablesAmount, defaultValues } from "../atthemeVariables";
+import VARIABLES from "attheme-js/lib/variables";
+import { defaultValues } from "../atthemeVariables";
 import Button from "../Button";
 import Buttons from "../Buttons";
 import { ReactComponent as DownloadIcon } from "./downloadIcon.svg";
@@ -155,7 +156,7 @@ export default class Workspace extends React.Component<Props, State> {
       loaders: {
         ...this.state.loaders,
         [bot]: false,
-      }
+      },
     });
   };
 
@@ -172,7 +173,7 @@ export default class Workspace extends React.Component<Props, State> {
     const blob = prepareFile(name, serialized);
 
     download(blob, name);
-  }
+  };
 
   handleVariableEditStart = (variable: string) => {
     this.setState({
@@ -181,11 +182,12 @@ export default class Workspace extends React.Component<Props, State> {
     });
   };
 
-  handleVariableEditClose = () => this.setState({
-    editingVariable: null,
-    editorState: null,
-    color: null,
-  });
+  handleVariableEditClose = () =>
+    this.setState({
+      editingVariable: null,
+      editorState: null,
+      color: null,
+    });
 
   handleVariableEditSave = (value: Color | string) => {
     const variable = this.state.editingVariable!;
@@ -228,10 +230,11 @@ export default class Workspace extends React.Component<Props, State> {
     database.updateTheme(this.props.themeId, theme);
   };
 
-  handleNewVariable = (variable: string) => this.setState({
-    editingVariable: variable,
-    color: defaultValues[variable],
-  });
+  handleNewVariable = (variable: string) =>
+    this.setState({
+      editingVariable: variable,
+      color: defaultValues[variable],
+    });
 
   handleVariableDelete = () => {
     const variables = {
@@ -257,13 +260,15 @@ export default class Workspace extends React.Component<Props, State> {
     database.updateTheme(this.props.themeId, theme);
   };
 
-  handleRunScriptButtonClick = () => this.setState({
-    showScriptRunner: true,
-  });
+  handleRunScriptButtonClick = () =>
+    this.setState({
+      showScriptRunner: true,
+    });
 
-  handleScriptRunnerClose = () => this.setState({
-    showScriptRunner: false,
-  });
+  handleScriptRunnerClose = () =>
+    this.setState({
+      showScriptRunner: false,
+    });
 
   handleThemeChange = (theme: Theme) => {
     this.setState({
@@ -288,13 +293,15 @@ export default class Workspace extends React.Component<Props, State> {
     database.updateTheme(this.props.themeId, theme);
   };
 
-  handleEditPaletteButtonClick = () => this.setState({
-    isEditingPalette: true,
-  });
+  handleEditPaletteButtonClick = () =>
+    this.setState({
+      isEditingPalette: true,
+    });
 
-  handleEditPaletteClose = () => this.setState({
-    isEditingPalette: false,
-  });
+  handleEditPaletteClose = () =>
+    this.setState({
+      isEditingPalette: false,
+    });
 
   handlePaletteChange = (palette: Palette) => {
     const theme = {
@@ -310,15 +317,19 @@ export default class Workspace extends React.Component<Props, State> {
   };
 
   handleCustomPaletteEditStart = ({
-    backupState
-  }: { backupState: VariableEditorState }) => this.setState({
-    isEditingPalette: true,
-    editorState: backupState,
-  });
+    backupState,
+  }: {
+    backupState: VariableEditorState;
+  }) =>
+    this.setState({
+      isEditingPalette: true,
+      editorState: backupState,
+    });
 
-  handleSnackbarDismiss = () => this.setState({
-    hasUploadError: false,
-  });
+  handleSnackbarDismiss = () =>
+    this.setState({
+      hasUploadError: false,
+    });
 
   render() {
     if (!this.state.theme) {
@@ -331,8 +342,8 @@ export default class Workspace extends React.Component<Props, State> {
       variablesAmount = Object.keys(this.state.theme.variables).length;
 
       if (
-        this.state.theme.wallpaper
-        && !(this.state.theme.variables.chat_wallpaper)
+        this.state.theme.wallpaper &&
+        !this.state.theme.variables.chat_wallpaper
       ) {
         variablesAmount++;
       }
@@ -341,113 +352,121 @@ export default class Workspace extends React.Component<Props, State> {
     let dialog = null;
 
     if (this.state.isEditingPalette) {
-      dialog = <PaletteEditor
-        palette={this.state.theme.palette}
-        onChange={this.handlePaletteChange}
-        onClose={this.handleEditPaletteClose}
-        isFromVariableEditor={Boolean(this.state.editingVariable)}
-      />;
+      dialog = (
+        <PaletteEditor
+          palette={this.state.theme.palette}
+          onChange={this.handlePaletteChange}
+          onClose={this.handleEditPaletteClose}
+          isFromVariableEditor={Boolean(this.state.editingVariable)}
+        />
+      );
     } else if (this.state.editingVariable) {
-      dialog = <VariableEditor
-        variable={this.state.editingVariable}
-        color={this.state.color!}
-        onClose={this.handleVariableEditClose}
-        onSave={this.handleVariableEditSave}
-        onDelete={this.handleVariableDelete}
-        theme={this.state.theme}
-        onCustomPaletteColorAdd={this.handleCustomPaletteColorAdd}
-        onCustomPaletteEditStart={this.handleCustomPaletteEditStart}
-        stateBackup={this.state.editorState}
-      />;
+      dialog = (
+        <VariableEditor
+          variable={this.state.editingVariable}
+          color={this.state.color!}
+          onClose={this.handleVariableEditClose}
+          onSave={this.handleVariableEditSave}
+          onDelete={this.handleVariableDelete}
+          theme={this.state.theme}
+          onCustomPaletteColorAdd={this.handleCustomPaletteColorAdd}
+          onCustomPaletteEditStart={this.handleCustomPaletteEditStart}
+          stateBackup={this.state.editorState}
+        />
+      );
     } else if (this.state.showScriptRunner) {
-      dialog = <ScriptRunner
-        onClose={this.handleScriptRunnerClose}
-        theme={this.state.theme}
-        onThemeChange={this.handleThemeChange}
-      />;
+      dialog = (
+        <ScriptRunner
+          onClose={this.handleScriptRunnerClose}
+          theme={this.state.theme}
+          onThemeChange={this.handleThemeChange}
+        />
+      );
     }
 
     const isSearchHotkeyEnabled = !dialog && this.props.isSearchHotkeyEnabled;
 
-    return <>
-      {dialog}
-      {this.state.hasUploadError && (
-        <Snackbar
-          timeout={5000}
-          onDismiss={this.handleSnackbarDismiss}
-          isError={true}
-        >
-          {localization.workspace.uploadError}
-        </Snackbar>
-      )}
-      <Button
-        onClick={this.downloadThemeViaTelegram}
-        isFloating={true}
-        className="workspace_downloadButton"
-        isDisabled={this.state.loaders.atthemeEditorBot}
-      >
-        {this.state.loaders.atthemeEditorBot ? <Spinner/> : <DownloadIcon/>}
-      </Button>
-
-      <Field
-        className="workspace_themeName"
-        id="workspace_themeName"
-        onChange={this.handleNameFieldChange}
-        onBlur={this.handleNameFieldBlur}
-        onEnter={this.handleNameFieldEnter}
-        value={this.state.theme.name}
-        autoCapitalize="words"
-      >
-        {localization.workspace.themeNameLabel}
-      </Field>
-
-      <Buttons>
-        <Button onClick={this.props.onClosePrompt} isDangerous={true}>
-          {localization.workspace.closeTheme}
-        </Button>
-        <Button onClick={this.downloadThemeFile}>
-          {localization.workspace.downloadThemeFile}
-        </Button>
-        <Button onClick={this.downloadWorkspace}>
-          {localization.workspace.downloadWorkspace}
-        </Button>
-        <Button onClick={this.handleRunScriptButtonClick}>
-          {localization.workspace.runScript}
-        </Button>
+    return (
+      <>
+        {dialog}
+        {this.state.hasUploadError && (
+          <Snackbar
+            timeout={5000}
+            onDismiss={this.handleSnackbarDismiss}
+            isError={true}
+          >
+            {localization.workspace.uploadError}
+          </Snackbar>
+        )}
         <Button
-          onClick={this.createPreview}
-          isDisabled={this.state.loaders.themePreviewBot}
+          onClick={this.downloadThemeViaTelegram}
+          isFloating={true}
+          className="workspace_downloadButton"
+          isDisabled={this.state.loaders.atthemeEditorBot}
         >
-          {localization.workspace.createPreview}
-          {this.state.loaders.themePreviewBot && <Spinner/>}
+          {this.state.loaders.atthemeEditorBot ? <Spinner /> : <DownloadIcon />}
         </Button>
-        <Button
-          onClick={this.testTheme}
-          isDisabled={this.state.loaders.testAtthemeBot}
+
+        <Field
+          className="workspace_themeName"
+          id="workspace_themeName"
+          onChange={this.handleNameFieldChange}
+          onBlur={this.handleNameFieldBlur}
+          onEnter={this.handleNameFieldEnter}
+          value={this.state.theme.name}
+          autoCapitalize="words"
         >
-          {localization.workspace.testTheme}
-          {this.state.loaders.testAtthemeBot && <Spinner/>}
-        </Button>
-        <Button onClick={this.handleEditPaletteButtonClick}>
-          {localization.workspace.editPalette}
-        </Button>
-      </Buttons>
+          {localization.workspace.themeNameLabel}
+        </Field>
 
-      <Variables
-        themeId={this.props.themeId}
-        theme={this.state.theme.variables}
-        wallpaper={this.state.theme.wallpaper}
-        onClick={this.handleVariableEditStart}
-        onNewVariable={this.handleNewVariable}
-        isSearchHotkeyEnabled={isSearchHotkeyEnabled}
-      />
+        <Buttons>
+          <Button onClick={this.props.onClosePrompt} isDangerous={true}>
+            {localization.workspace.closeTheme}
+          </Button>
+          <Button onClick={this.downloadThemeFile}>
+            {localization.workspace.downloadThemeFile}
+          </Button>
+          <Button onClick={this.downloadWorkspace}>
+            {localization.workspace.downloadWorkspace}
+          </Button>
+          <Button onClick={this.handleRunScriptButtonClick}>
+            {localization.workspace.runScript}
+          </Button>
+          <Button
+            onClick={this.createPreview}
+            isDisabled={this.state.loaders.themePreviewBot}
+          >
+            {localization.workspace.createPreview}
+            {this.state.loaders.themePreviewBot && <Spinner />}
+          </Button>
+          <Button
+            onClick={this.testTheme}
+            isDisabled={this.state.loaders.testAtthemeBot}
+          >
+            {localization.workspace.testTheme}
+            {this.state.loaders.testAtthemeBot && <Spinner />}
+          </Button>
+          <Button onClick={this.handleEditPaletteButtonClick}>
+            {localization.workspace.editPalette}
+          </Button>
+        </Buttons>
 
-      <Hint>
-        {localization.workspace.variablesAmount({
-          total: allVariablesAmount,
-          theme: variablesAmount!,
-        })}
-      </Hint>
-    </>;
+        <Variables
+          themeId={this.props.themeId}
+          theme={this.state.theme.variables}
+          wallpaper={this.state.theme.wallpaper}
+          onClick={this.handleVariableEditStart}
+          onNewVariable={this.handleNewVariable}
+          isSearchHotkeyEnabled={isSearchHotkeyEnabled}
+        />
+
+        <Hint>
+          {localization.workspace.variablesAmount({
+            total: VARIABLES.length,
+            theme: variablesAmount!,
+          })}
+        </Hint>
+      </>
+    );
   }
 }
