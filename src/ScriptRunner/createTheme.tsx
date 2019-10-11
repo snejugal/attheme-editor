@@ -6,11 +6,16 @@ export default (originalTheme: Theme) => {
   return {
     getVariable(variableName: string, ...excess: unknown[]) {
       if (excess.length > 0) {
-        throw new TypeError(`theme.getVariable expected 1 argument, received ${excess.length + 1}`);
+        throw new TypeError(
+          `theme.getVariable expected 1 argument, received ${excess.length +
+            1}`,
+        );
       }
 
       if (typeof variableName !== `string`) {
-        throw new TypeError(`The variableName is not a string (received ${typeof variableName})`);
+        throw new TypeError(
+          `The variableName is not a string (received ${typeof variableName})`,
+        );
       }
 
       const color = originalTheme.variables[variableName];
@@ -25,11 +30,16 @@ export default (originalTheme: Theme) => {
     },
     setVariable(variableName: string, color: Color, ...excess: unknown[]) {
       if (excess.length > 0) {
-        throw new TypeError(`theme.setVariable expected 2 arguments, received ${excess.length + 2}`);
+        throw new TypeError(
+          `theme.setVariable expected 2 arguments, received ${excess.length +
+            2}`,
+        );
       }
 
       if (typeof variableName !== `string`) {
-        throw new TypeError(`The variableName is not a string (received ${typeof variableName})`);
+        throw new TypeError(
+          `The variableName is not a string (received ${typeof variableName})`,
+        );
       }
 
       checkRgbColorValidity(color);
@@ -38,7 +48,9 @@ export default (originalTheme: Theme) => {
     },
     getVariables(...excess: unknown[]) {
       if (excess.length > 0) {
-        throw new TypeError(`theme.getVariables expected no arguments, received ${excess.length}`);
+        throw new TypeError(
+          `theme.getVariables expected no arguments, received ${excess.length}`,
+        );
       }
 
       return Object.keys(originalTheme.variables);

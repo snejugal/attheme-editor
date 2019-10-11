@@ -4,7 +4,7 @@ const errorHandler = (request: IDBRequest) => {
   throw request.error;
 };
 
-export default new Promise<IDBDatabase>((resolve) => {
+export default new Promise<IDBDatabase>(resolve => {
   const request = indexedDB.open(`attheme-editor`, 1);
 
   request.onsuccess = () => {

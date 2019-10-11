@@ -14,7 +14,7 @@ const updatees: (() => void)[] = [];
 const updateLanguage = async () => {
   let language = `en`;
 
-  if (`languages` in navigator as any) {
+  if ((`languages` in navigator) as any) {
     for (const fullLanguage of navigator.languages) {
       const shortLanguage = fullLanguage.slice(0, LANGUAGE_NAME_LENGTH);
 
@@ -32,15 +32,14 @@ const updateLanguage = async () => {
     }
   }
 
-
   try {
     const { default: loaded } = await import(`./${language}`);
 
     Object.assign(localization, defaultsDeep({ ...loaded }, english));
-    updatees.forEach((updatee) => updatee());
+    updatees.forEach(updatee => updatee());
     document.documentElement!.lang = language;
-  // eslint-disable-next-line
-  } catch { };
+    // eslint-disable-next-line
+  } catch {}
 };
 
 updateLanguage();

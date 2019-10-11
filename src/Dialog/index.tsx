@@ -95,9 +95,7 @@ export default class Dialog extends React.Component<Props, State> {
     window.addEventListener(`popstate`, this.close);
     document.body.addEventListener(`keydown`, this.onDocumentKeyDown);
 
-    this.restoreTabIndexOn = Array.from(
-      document.querySelectorAll(`main *`),
-    );
+    this.restoreTabIndexOn = Array.from(document.querySelectorAll(`main *`));
 
     for (const element of this.restoreTabIndexOn) {
       element.tabIndex = -1;
@@ -139,7 +137,7 @@ export default class Dialog extends React.Component<Props, State> {
         </div>
         {`buttons` in this.props && (
           <Buttons className="dialog_buttons">
-            {this.props.buttons.map((button) => (
+            {this.props.buttons.map(button => (
               <Button
                 key={String(button.caption)}
                 onClick={() => this.handleButtonClick(button)}

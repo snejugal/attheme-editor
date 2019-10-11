@@ -19,6 +19,7 @@
     "smoothscroll-polyfill": "^0.4.4"
   },
   "scripts": {
+    "format": "npx prettier --write \"{public,src}/**/*.{html,json,ts,tsx,yaml}\"",
     "analyze": "npx source-map-explorer build/static/js/main.*",
     "start": "react-scripts --max-old-space-size=2048 start",
     "build": "react-scripts --max-old-space-size=2048 build"
@@ -43,6 +44,7 @@
     "@typescript-eslint/parser": "^2.3.3",
     "eslint-plugin-react": "^7.16.0",
     "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
     "react-scripts": "^3.2.0",
     "source-map-explorer": "^2.1.0",
     "typescript": "^3.6.4",

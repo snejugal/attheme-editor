@@ -12,9 +12,8 @@ interface Props {
 }
 
 export default class Select extends React.Component<Props> {
-  handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => (
-    this.props.onChange(event.target.value)
-  );
+  handleChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
+    this.props.onChange(event.target.value);
 
   render() {
     return (
@@ -24,11 +23,7 @@ export default class Select extends React.Component<Props> {
         value={this.props.activeItem}
       >
         {this.props.items.map(({ id, title }) => (
-          <option
-            className="select_option"
-            value={id}
-            key={id}
-          >
+          <option className="select_option" value={id} key={id}>
             {title}
           </option>
         ))}

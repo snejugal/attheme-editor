@@ -7,7 +7,7 @@ interface State {
   errors: {
     stack: string;
     timeStamp: number;
-  }[],
+  }[];
 }
 
 export default class ErrorHandler extends React.Component<{}, State> {
@@ -61,11 +61,13 @@ export default class ErrorHandler extends React.Component<{}, State> {
         });
       };
 
-      return <ErrorElement
-        errorStack={stack}
-        key={timeStamp}
-        onDismissed={handleDismissed}
-      />;
+      return (
+        <ErrorElement
+          errorStack={stack}
+          key={timeStamp}
+          onDismissed={handleDismissed}
+        />
+      );
     });
 
     return errorMessages;

@@ -14,6 +14,6 @@ export default class Logo extends React.Component<Props> {
   }
 
   render() {
-    return <LogoSVG className="logo" onClick={this.props.onClick}/>;
+    return <LogoSVG className="logo" onClick={this.props.onClick} />;
   }
 }

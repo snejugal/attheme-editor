@@ -3,11 +3,11 @@
 const NOT_FOUND = 404;
 
 const isLocalhost = Boolean(
-  window.location.hostname === `localhost`
-  || window.location.hostname === `[::1]`
-  || window.location.hostname.match(
-    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-  )
+  window.location.hostname === `localhost` ||
+    window.location.hostname === `[::1]` ||
+    window.location.hostname.match(
+      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/,
+    ),
 );
 
 const registerValidSW = async (swUrl: string) => {
@@ -18,8 +18,8 @@ const checkValidServiceWorker = async (swUrl: string) => {
   const response = await fetch(swUrl);
 
   if (
-    response.status === NOT_FOUND
-    || response.headers.get(`content-type`)!.includes(`javascript`)
+    response.status === NOT_FOUND ||
+    response.headers.get(`content-type`)!.includes(`javascript`)
   ) {
     const registration = await navigator.serviceWorker.ready;
 

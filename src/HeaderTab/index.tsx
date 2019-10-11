@@ -27,9 +27,10 @@ export default class Tab extends React.Component<Props, State> {
     });
   }
 
-  updateTitle = (title: string) => this.setState({
-    title,
-  });
+  updateTitle = (title: string) =>
+    this.setState({
+      title,
+    });
 
   render() {
     let className = `tab headerTab`;
@@ -41,9 +42,11 @@ export default class Tab extends React.Component<Props, State> {
     return (
       <button className={className} onClick={this.props.onClick}>
         <h3 className="headerTab_title">
-          {typeof this.state.title === `string`
-            ? this.state.title
-            : <Spinner/>}
+          {typeof this.state.title === `string` ? (
+            this.state.title
+          ) : (
+            <Spinner />
+          )}
         </h3>
       </button>
     );

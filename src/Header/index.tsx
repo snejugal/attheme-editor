@@ -9,7 +9,7 @@ interface Props {
   workspaces: number[];
   activeTab: number | null;
   onActiveTabChange(tab: number): void;
-  activeTabRef: React.Ref<HeaderTab>,
+  activeTabRef: React.Ref<HeaderTab>;
   onLogoClick(): void;
 }
 
@@ -17,7 +17,7 @@ export default class Header extends React.Component<Props> {
   render() {
     return (
       <header className="header">
-        <Logo onClick={this.props.onLogoClick}/>
+        <Logo onClick={this.props.onLogoClick} />
         <HeaderTabs
           workspaces={this.props.workspaces}
           activeTab={this.props.activeTab}

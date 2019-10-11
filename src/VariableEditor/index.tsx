@@ -57,8 +57,6 @@ export default class VariableEditor extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    console.log(props);
-
     if (this.props.stateBackup) {
       this.state = {
         ...this.props.stateBackup,

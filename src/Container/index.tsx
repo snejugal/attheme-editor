@@ -23,9 +23,7 @@ export default class Container extends React.Component<Props> {
         ref={this.props.containerRef}
         onScroll={this.props.onScroll}
       >
-        <div className="container -inner">
-          {this.props.children}
-        </div>
+        <div className="container -inner">{this.props.children}</div>
       </div>
     );
   }

@@ -17,52 +17,61 @@ const localization: PartialLocalization = {
   },
   error: {
     title: `Упс, виникла помилка`,
-    description: <>
-      Будь&nbsp;ласка, відправте скриншот помилки {}
-      <Link href="//t.me/snejugal" isWhite={true}>
-        розробнику по&nbsp;Телеграму
-      </Link>
-      {} и&nbsp;опишіть, що&nbsp;ви&nbsp;зробили, після чого виникла ця помилка.  Мабуть треба буде відправити &nbsp;оригінальний файл&nbsp;теми, який ви&nbsp;використовували.
-    </>,
-    dismiss: <>Щоб закрити повідомлення про&nbsp;помилку, просто натисніть на&nbsp;неї.</>,
+    description: (
+      <>
+        Будь&nbsp;ласка, відправте скриншот помилки {}
+        <Link href="//t.me/snejugal" isWhite={true}>
+          розробнику по&nbsp;Телеграму
+        </Link>
+        {} и&nbsp;опишіть, що&nbsp;ви&nbsp;зробили, після чого виникла ця
+        помилка. Мабуть треба буде відправити &nbsp;оригінальний файл&nbsp;теми,
+        який ви&nbsp;використовували.
+      </>
+    ),
+    dismiss: (
+      <>
+        Щоб закрити повідомлення про&nbsp;помилку, просто натисніть на&nbsp;неї.
+      </>
+    ),
   },
   emptyWorkspace: {
     title: `Почніть працювати над власною темою`,
     createTheme: <>Створити нову&nbsp;тему</>,
     openTheme: <>Відкрити існуючі&nbsp;теми</>,
-    credits: <>
-      Редактор створено {}
-      <Link href="//t.me/snejugal">@snejugal</Link>
-      {} та {}
-      <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
-      {} та перевів на&nbsp;українську {}
-      <Link href="//t.me/tfroke">@tfroke</Link>
-      {} з {}
-      <LoveEmoji className="emoji" />.
-      {} Подивіться {}
-      <Link href="//github.com/snejugal/attheme-editor">
-        вихідний код редактора
-      </Link>
-      {} та підпишіться&nbsp;на {}
-      <Link href="//t.me/atthemeeditor">
-        наш канал у Телеграмі
-      </Link>!
-    </>,
-    uploadWaysHint: <>
-      Також можна перекинути сюди файл або використовувати {}
-      <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>,
-      {} щоби відкривати теми через Телеграм.
-    </>,
+    credits: (
+      <>
+        Редактор створено {}
+        <Link href="//t.me/snejugal">@snejugal</Link>
+        {} та {}
+        <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
+        {} та перевів на&nbsp;українську {}
+        <Link href="//t.me/tfroke">@tfroke</Link>
+        {} з {}
+        <LoveEmoji className="emoji" />.{} Подивіться {}
+        <Link href="//github.com/snejugal/attheme-editor">
+          вихідний код редактора
+        </Link>
+        {} та підпишіться&nbsp;на {}
+        <Link href="//t.me/atthemeeditor">наш канал у Телеграмі</Link>!
+      </>
+    ),
+    uploadWaysHint: (
+      <>
+        Також можна перекинути сюди файл або використовувати {}
+        <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>,{} щоби
+        відкривати теми через Телеграм.
+      </>
+    ),
   },
   theme: {
     defaultName: `Чудова${NBSP}тема`,
   },
   workspace: {
-    themeNameLabel: <>Ім'я&nbsp;теми</>,
+    themeNameLabel: <>Ім&apos;я&nbsp;теми</>,
     closeTheme: <>Закрити&nbsp;тему</>,
     closeThemePrompt: `Ви впевнені, що бажаєте закрити тему?`,
     downloadThemeFile: `Завантажити файл .attheme`,
-    createPreview: <>Створити&nbsp;прев'ю</>,
+    createPreview: <>Створити&nbsp;прев&apos;ю</>,
     testTheme: <>Протестувати&nbsp;тему</>,
     downloadWorkspace: <>Завантажити робоче &nbsp;точення</>,
     runScript: <>Запустити&nbsp;скрипт</>,
@@ -81,8 +90,12 @@ const localization: PartialLocalization = {
 
       return forms[select(theme)];
     },
-    noVariablesPlaceholder: <>У&nbsp;темі досі нема змінних :( Додайте їх через поле пошуку вище!</>,
-    noResultsPlaceholder: <>Упс, пошук не&nbsp;дав ніяких результатів. Можливо, у запиті помилка.</>,
+    noVariablesPlaceholder: (
+      <>У&nbsp;темі досі нема змінних :( Додайте їх через поле пошуку вище!</>
+    ),
+    noResultsPlaceholder: (
+      <>Упс, пошук не&nbsp;дав ніяких результатів. Можливо, у запиті помилка.</>
+    ),
     uploadError: `Упс, редактор не зміг завантажити тему боту. Перевірте з'єднання та спробуйте знову.`,
   },
   confirmDialog: {
@@ -106,16 +119,34 @@ const localization: PartialLocalization = {
     imageTab: `Зображення`,
     colorModelsTab: `Кольорові моделі`,
     palettesTab: `Палітри`,
-    wallpaperColorsHint: <>Ось декілька кольорів зі&nbsp;шпалер. Натисніть на колір, щоби додати його у палітру теми:</>,
+    wallpaperColorsHint: (
+      <>
+        Ось декілька кольорів зі&nbsp;шпалер. Натисніть на колір, щоби додати
+        його у палітру теми:
+      </>
+    ),
     editPalette: `Редагувати палітру`,
     themeColorsPlaceholder: `Упс, у темі досі нема ніяких кольорів.`,
-    themeCustomPalettePlaceholder: <>Упс, у кастомній палитрі нема кольорів… Поки&nbsp;що. Натисніть на кнопку «Редагувати палітру» вище!</>,
+    themeCustomPalettePlaceholder: (
+      <>
+        Упс, у кастомній палитрі нема кольорів… Поки&nbsp;що. Натисніть на
+        кнопку «Редагувати палітру» вище!
+      </>
+    ),
   },
   scriptRunner: {
     title: `Запуск скриптів`,
-    description: <>
-      .аttheme editor дозволяє легко запускати скрипти, написанні на EcmaScript 2017, що прискорює розробку тем. Про API редактора можна дізнатися в <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">вікі GitHub репозиторію редактора</Link>.
-    </>,
+    description: (
+      <>
+        .аttheme editor дозволяє легко запускати скрипти, написанні на
+        EcmaScript 2017, що прискорює розробку тем. Про API редактора можна
+        дізнатися в{" "}
+        <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">
+          вікі GitHub репозиторію редактора
+        </Link>
+        .
+      </>
+    ),
     close: `Закрити`,
     run: `Запустити`,
     isEvaluated: `Скрипт успішно виконано!`,
@@ -141,7 +172,13 @@ const localization: PartialLocalization = {
     newColor: `Додати новий колір`,
     title: `Кастомна палітра теми`,
     defaultColorName: `Красивий колір`,
-    placeholder: <>Упс, палітра порожня… Поки що. Натисніть на кнопку «Додати новий колір» або, якщо&nbsp;на chat_wallpaper стоїть картинка, відкрийте редактор цієї змінної та додайте кольори, які він пропонує!</>,
+    placeholder: (
+      <>
+        Упс, палітра порожня… Поки що. Натисніть на кнопку «Додати новий колір»
+        або, якщо&nbsp;на chat_wallpaper стоїть картинка, відкрийте редактор
+        цієї змінної та додайте кольори, які він пропонує!
+      </>
+    ),
   },
 };
 

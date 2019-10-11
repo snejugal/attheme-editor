@@ -15,44 +15,49 @@ const localization: PartialLocalization = {
   },
   error: {
     title: `Uzur, xatolik ro'y berdi`,
-    description: <>
-      Iltimos, xato skrinshotini Telegram {}
-      <Link href="//t.me/snejugal" isWhite={true}>
-        orqali ishlab chiqaruvchiga yuboring
-      </Link>
-      {} i Xato paydo bo&apos;lishidan oldin, nima qilganinggiz, qaysi harakatlarni bajarganinggizni ta&apos;riflab bering. Ehtimol, siz ishlatgan original tema faylini yuborishishga t&apos;g&apos;ri keladi.
-    </>,
+    description: (
+      <>
+        Iltimos, xato skrinshotini Telegram {}
+        <Link href="//t.me/snejugal" isWhite={true}>
+          orqali ishlab chiqaruvchiga yuboring
+        </Link>
+        {} i Xato paydo bo&apos;lishidan oldin, nima qilganinggiz, qaysi
+        harakatlarni bajarganinggizni ta&apos;riflab bering. Ehtimol, siz
+        ishlatgan original tema faylini yuborishishga t&apos;g&apos;ri keladi.
+      </>
+    ),
     dismiss: `Xatolik haqidagi habarni o'chirish uchun, shunchaki buning ustiga bosing.`,
   },
   emptyWorkspace: {
     title: `O'z temangiz ustida ishlashni boshlang`,
     createTheme: `Yangi tema yaratish`,
     openTheme: `Mavjud temalarni oching`,
-    credits: <>
-      Tahrirlovchisi yaratildi {}
-      <Link href="//t.me/snejugal">@snejugal</Link>
-      {} va {}
-      <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
-      {} va o&apos;zbek tiliga tarjima qilingan {}
-      <Link href="//t.me/DeduwkA_gg">@DeduwkA_gg</Link>
-      {} i {}
-      <Link href="//t.me/akaRamzEE">@akaRamzEE</Link>
-      {} s {}
-      <LoveEmoji className="emoji" />.
-      {} Qarang {}
-      <Link href="//github.com/snejugal/attheme-editor">
-        GitHub-da manba kodi tahrirlovchisi
-      </Link>
-      {} va obuna bo&apos;ling {}
-      <Link href="//t.me/atthemeeditor">
-        Telegramdagi bizning kanalimiz
-      </Link>!
-    </>,
-    uploadWaysHint: <>
-      Bundan tashqari, faylni bu yerga tashlang yoki foydalaning {}
-      <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>,
-      {} Telegram orqali temalarni ochish.
-    </>,
+    credits: (
+      <>
+        Tahrirlovchisi yaratildi {}
+        <Link href="//t.me/snejugal">@snejugal</Link>
+        {} va {}
+        <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
+        {} va o&apos;zbek tiliga tarjima qilingan {}
+        <Link href="//t.me/DeduwkA_gg">@DeduwkA_gg</Link>
+        {} i {}
+        <Link href="//t.me/akaRamzEE">@akaRamzEE</Link>
+        {} s {}
+        <LoveEmoji className="emoji" />.{} Qarang {}
+        <Link href="//github.com/snejugal/attheme-editor">
+          GitHub-da manba kodi tahrirlovchisi
+        </Link>
+        {} va obuna bo&apos;ling {}
+        <Link href="//t.me/atthemeeditor">Telegramdagi bizning kanalimiz</Link>!
+      </>
+    ),
+    uploadWaysHint: (
+      <>
+        Bundan tashqari, faylni bu yerga tashlang yoki foydalaning {}
+        <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>,{}{" "}
+        Telegram orqali temalarni ochish.
+      </>
+    ),
   },
   theme: {
     defaultName: `Ajoyib tema`,
@@ -115,9 +120,17 @@ const localization: PartialLocalization = {
   },
   scriptRunner: {
     title: `Skriptni ishga tushirish`,
-    description: <>
-      .attheme editor EcmaScript 2017 yordamida yozilgan skriptni oson ishga tushirish imkonini yaratib beradi va tema yaratish vaqtini qisqaytiradi. API redaktori haqida bu yerdan ma&apos;lumot olishingiz mumkin <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">wiki GitHub redaktor ma&apos;lumotlar omborxonasi</Link>.
-    </>,
+    description: (
+      <>
+        .attheme editor EcmaScript 2017 yordamida yozilgan skriptni oson ishga
+        tushirish imkonini yaratib beradi va tema yaratish vaqtini qisqaytiradi.
+        API redaktori haqida bu yerdan ma&apos;lumot olishingiz mumkin{" "}
+        <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">
+          wiki GitHub redaktor ma&apos;lumotlar omborxonasi
+        </Link>
+        .
+      </>
+    ),
     close: `Yopish`,
     run: `Boshlash`,
     isEvaluated: `Skript muvaffaqiyatli yuklandi!`,
