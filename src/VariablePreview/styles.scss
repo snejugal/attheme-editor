@@ -13,6 +13,10 @@
     height: $colorPreview_height;
   }
 
+  &_gradient {
+    height: $colorPreview_height * 2;
+  }
+
   &_image {
     max-height: 50vh;
     display: block;

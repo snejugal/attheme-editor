@@ -15,40 +15,44 @@ const localization: Localization = {
   },
   error: {
     title: `Whoops, some error happened.`,
-    description: <>
-      Please send a screenshot of the following error to {}
-      <Link href="//t.me/snejugal" isWhite={true}>
-        the developer on Telegram
-      </Link>
-      {} and describe what you did so the error happened. You may also need to send the original theme file you used.
-    </>,
+    description: (
+      <>
+        Please send a screenshot of the following error to {}
+        <Link href="//t.me/snejugal" isWhite={true}>
+          the developer on Telegram
+        </Link>
+        {} and describe what you did so the error happened. You may also need to
+        send the original theme file you used.
+      </>
+    ),
     dismiss: `To dismiss the error, just tap it.`,
   },
   emptyWorkspace: {
     title: `Start working on your theme`,
     createTheme: `Create a new theme`,
     openTheme: `Open existing themes`,
-    credits: <>
-      Created by {}
-      <Link href="//t.me/snejugal">@snejugal</Link>
-      {} and {}
-      <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
-      {} with {}
-      <LoveEmoji className="emoji" />.
-      {} Check out {}
-      <Link href="//github.com/snejugal/attheme-editor">
-        the editor&apos;s source code on GitHub
-      </Link>
-      {} and subscribe to {}
-      <Link href="//t.me/atthemeeditor">
-        our channel on Telegram
-      </Link>!
-    </>,
-    uploadWaysHint: <>
-      You can also use drag&apos;n&apos;drop to open themes or use {}
-      <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
-      {} to open themes via Telegram.
-    </>,
+    credits: (
+      <>
+        Created by {}
+        <Link href="//t.me/snejugal">@snejugal</Link>
+        {} and {}
+        <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
+        {} with {}
+        <LoveEmoji className="emoji" />.{} Check out {}
+        <Link href="//github.com/snejugal/attheme-editor">
+          the editor&apos;s source code on GitHub
+        </Link>
+        {} and subscribe to {}
+        <Link href="//t.me/atthemeeditor">our channel on Telegram</Link>!
+      </>
+    ),
+    uploadWaysHint: (
+      <>
+        You can also use drag&apos;n&apos;drop to open themes or use {}
+        <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
+        {} to open themes via Telegram.
+      </>
+    ),
   },
   theme: {
     defaultName: `Awesome Theme`,
@@ -109,18 +113,29 @@ const localization: Localization = {
     uploadImage: `Upload an image`,
     downloadImage: `Download the image`,
     imageTab: `Image`,
+    gradientTab: `Gradient`,
     colorModelsTab: `Color models`,
     palettesTab: `Palettes`,
     wallpaperColorsHint: `Here are some colors from the wallpaper. Click one to add it to your theme's palette:`,
     editPalette: `Edit the palette`,
     themeColorsPlaceholder: `Whops, no colors in the theme yet.`,
     themeCustomPalettePlaceholder: `Whops, no colors in the custom palette… yet. Click the “Edit the palette” button above!`,
+    fromPoint: `From`,
+    toPoint: `To`,
   },
   scriptRunner: {
     title: `Run a script`,
-    description: <>
-      .attheme editor lets you easily run scripts wrriten in EcmaScript 2017 to fasten theme developing. You can read more about the API the editor provides on <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">its GitHub repository&apos;s wiki</Link>.
-    </>,
+    description: (
+      <>
+        .attheme editor lets you easily run scripts wrriten in EcmaScript 2017
+        to fasten theme developing. You can read more about the API the editor
+        provides on{" "}
+        <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">
+          its GitHub repository&apos;s wiki
+        </Link>
+        .
+      </>
+    ),
     close: `Close`,
     run: `Run`,
     isEvaluated: `The script has run successfully!`,

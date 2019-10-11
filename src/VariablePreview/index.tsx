@@ -14,9 +14,7 @@ const parser = new DOMParser();
 interface Props {
   theme: Theme;
   variable: string;
-  currentColor?: Color;
-  currentWallpaper?: string;
-  shouldShowWallpaper?: boolean;
+  value: string | Color | Gradient;
 }
 
 interface State {
@@ -39,9 +37,9 @@ export default class VariablePreview extends React.Component<Props, State> {
 
     const idsMap = new Map<string, SVGElement>();
 
-    const {
-      default: previewUrl,
-    } = await import(`./previews/${previewFileName}.svg`);
+    const { default: previewUrl } = await import(
+      `./previews/${previewFileName}.svg`
+    );
 
     const response = await fetch(previewUrl);
     const contents = await response.text();
@@ -54,7 +52,10 @@ export default class VariablePreview extends React.Component<Props, State> {
     for (const element of coloredElements) {
       const currentFill = element.getAttribute(`fill`) || ``;
 
-      if (currentFill.startsWith(`url`) && this.props.currentWallpaper) {
+      if (
+        currentFill.startsWith(`url`) &&
+        typeof this.props.value === `string`
+      ) {
         const id = currentFill.slice(`url(#`.length, -`)`.length);
 
         idsMap.set(id, element);
@@ -67,10 +68,9 @@ export default class VariablePreview extends React.Component<Props, State> {
       let color = this.props.theme.variables[variable];
 
       if (!color && element.dataset.fallback) {
-        color = (
-          this.props.theme.variables[element.dataset.fallback]
-          || defaultValues[element.dataset.fallback]
-        );
+        color =
+          this.props.theme.variables[element.dataset.fallback] ||
+          defaultValues[element.dataset.fallback];
 
         if (element.dataset.fallbackAlpha) {
           color.alpha = Number(element.dataset.fallbackAlpha) * CHANNEL;
@@ -90,24 +90,23 @@ export default class VariablePreview extends React.Component<Props, State> {
       }
     }
 
-    [...svg.querySelectorAll(`[href]:not([href^="data:"]):not([href=""])`)]
-      .forEach(async (element) => {
-        const url = element.getAttribute(`href`);
-        const { default: resolvedUrl } = await import(`./previews/${url}`);
+    [
+      ...svg.querySelectorAll(`[href]:not([href^="data:"]):not([href=""])`),
+    ].forEach(async element => {
+      const url = element.getAttribute(`href`);
+      const { default: resolvedUrl } = await import(`./previews/${url}`);
 
-        element.setAttribute(`href`, resolvedUrl);
-      });
+      element.setAttribute(`href`, resolvedUrl);
+    });
 
-    if (this.props.currentWallpaper) {
+    if (typeof this.props.value === `string`) {
       const wallpaperElements = [...svg.querySelectorAll(`[data-wallpaper]`)];
 
       if (wallpaperElements.length > 0) {
-        const wallpaperSize = await calculateWallpaperSize(
-          this.props.currentWallpaper,
-        );
+        const wallpaperSize = await calculateWallpaperSize(this.props.value);
         const wallpaperRatio = wallpaperSize.width / wallpaperSize.height;
 
-        const image = `data:image;base64,${this.props.currentWallpaper}`;
+        const image = `data:image;base64,${this.props.value}`;
 
         for (const imageElement of wallpaperElements) {
           const patternElementId = imageElement.closest(`pattern`)!.id;
@@ -187,7 +186,7 @@ export default class VariablePreview extends React.Component<Props, State> {
       return;
     }
 
-    const cssRgb = createCssRgb(this.props.currentColor!);
+    const cssRgb = createCssRgb(this.props.value as Color);
 
     for (const element of this.state.updateeElements) {
       if (element.tagName === `stop`) {
@@ -201,22 +200,32 @@ export default class VariablePreview extends React.Component<Props, State> {
   render() {
     return (
       <div className="variablePreview" ref={this.preview}>
-        {!this.state.updateeElements
-          && this.props.shouldShowWallpaper
-          && (
-            <img
-              className="variablePreview_image"
-              src={`data:image/jpg;base64,${this.props.currentWallpaper}`}
-              alt=""
-            />
-          )}
-        {!this.state.updateeElements
-          && !this.props.shouldShowWallpaper
-          && (
+        {typeof this.props.value === `string` && (
+          <img
+            className="variablePreview_image"
+            src={`data:image/jpg;base64,${this.props.value}`}
+            alt=""
+          />
+        )}
+        {typeof this.props.value === `object` && `from` in this.props.value && (
+          <div
+            className="variablePreview_gradient"
+            style={{
+              backgroundImage: `linear-gradient(
+                to top right,
+                ${createCssRgb(this.props.value.from)},
+                ${createCssRgb(this.props.value.to)}
+              )`,
+            }}
+          />
+        )}
+        {!this.state.updateeElements &&
+          typeof this.props.value === `object` &&
+          `red` in this.props.value && (
             <div
               className="variablePreview_color"
               style={{
-                backgroundColor: createCssRgb(this.props.currentColor!),
+                backgroundColor: createCssRgb(this.props.value),
               }}
             />
           )}

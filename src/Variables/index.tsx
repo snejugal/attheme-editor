@@ -6,7 +6,6 @@ import { parseHex, createHex } from "@snejugal/color";
 import Field from "../Field";
 import FuzzySearch from "fuzzy-search";
 import Hint from "../Hint";
-import PropTypes from "prop-types";
 import React from "react";
 import Variable from "../Variable";
 import localization from "../localization";
@@ -29,15 +28,6 @@ interface State {
 }
 
 export default class Variables extends React.Component<Props, State> {
-  static propTypes = {
-    themeId: PropTypes.number.isRequired,
-    theme: PropTypes.object.isRequired,
-    wallpaper: PropTypes.string,
-    onClick: PropTypes.func.isRequired,
-    onNewVariable: PropTypes.func.isRequired,
-    isSearchHotkeyEnabled: PropTypes.bool,
-  };
-
   static defaultProps = {
     isSearchHotkeyEnabled: true,
   };

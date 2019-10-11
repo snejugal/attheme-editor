@@ -15,42 +15,46 @@ const localization: PartialLocalization = {
   },
   error: {
     title: `Ooops, ocurrió un error`,
-    description: <>
-      Por favor, envia una captura de pantalla del error a {}
-      <Link href="//t.me/snejugal" isWhite={true}>
-        the developer on Telegram
-      </Link>
-      {} y describe qué hiciste para que el error ocurriera. También necesitas enviar el archivo original del tema que usaste.
-    </>,
+    description: (
+      <>
+        Por favor, envia una captura de pantalla del error a {}
+        <Link href="//t.me/snejugal" isWhite={true}>
+          the developer on Telegram
+        </Link>
+        {} y describe qué hiciste para que el error ocurriera. También necesitas
+        enviar el archivo original del tema que usaste.
+      </>
+    ),
     dismiss: `Para descartar el error, solo toca aquí.`,
   },
   emptyWorkspace: {
     title: `Empieza a trabajar en tu tema`,
     createTheme: `Crea un nuevo tema`,
     openTheme: `Abrir temas ya existentes`,
-    credits: <>
-      Creado por {}
-      <Link href="//t.me/snejugal">@snejugal</Link>
-      {} y {}
-      <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
-      {} y traducido al español por {}
-      <Link href="//t.me/DiegoCanevaro">@DiegoCanevaro</Link>
-      {} con {}
-      <LoveEmoji className="emoji" />.
-      {} Revisa el código de {}
-      <Link href="//github.com/snejugal/attheme-editor">
-        the editor&apos;s en GitHub
-      </Link>
-      {} y suscríbete a {}
-      <Link href="//t.me/atthemeeditor">
-        nuestro canal en Telegram
-      </Link>!
-    </>,
-    uploadWaysHint: <>
-      También puedes usar el drag&apos;n&apos;drop para abrir temas o usar {}
-      <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
-      {} para abrir temas vía Telegram.
-    </>,
+    credits: (
+      <>
+        Creado por {}
+        <Link href="//t.me/snejugal">@snejugal</Link>
+        {} y {}
+        <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
+        {} y traducido al español por {}
+        <Link href="//t.me/DiegoCanevaro">@DiegoCanevaro</Link>
+        {} con {}
+        <LoveEmoji className="emoji" />.{} Revisa el código de {}
+        <Link href="//github.com/snejugal/attheme-editor">
+          the editor&apos;s en GitHub
+        </Link>
+        {} y suscríbete a {}
+        <Link href="//t.me/atthemeeditor">nuestro canal en Telegram</Link>!
+      </>
+    ),
+    uploadWaysHint: (
+      <>
+        También puedes usar el drag&apos;n&apos;drop para abrir temas o usar {}
+        <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
+        {} para abrir temas vía Telegram.
+      </>
+    ),
   },
   theme: {
     defaultName: `Tema Increíble`,
@@ -111,18 +115,29 @@ const localization: PartialLocalization = {
     uploadImage: `Sube una imagen`,
     downloadImage: `Descarga la imagen`,
     imageTab: `Imagen`,
+    gradientTab: `Gradiente`,
     colorModelsTab: `Modelos de Color`,
     palettesTab: `Paletas`,
     wallpaperColorsHint: `Aquí hay algunos colores para el fondo de pantalla. Haz click en uno para añadirlo a la paleta de colores:`,
     editPalette: `Editar la paleta`,
     themeColorsPlaceholder: `Ooops, aún no hay colores en el tema.`,
     themeCustomPalettePlaceholder: `Ooops, aún no hay colores en la paleta personalizada. Haz click en el botón “Editar la paleta” que está justo encima`,
+    fromPoint: `Desde`,
+    toPoint: `Hasta`,
   },
   scriptRunner: {
     title: `Correr un script`,
-    description: <>
-      .attheme editor lets you easily run scripts wrriten in EcmaScript 2017 to fasten theme developing. You can read more about the API the editor provides on <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">its GitHub repository&apos;s wiki</Link>.
-    </>,
+    description: (
+      <>
+        .attheme editor lets you easily run scripts wrriten in EcmaScript 2017
+        to fasten theme developing. You can read more about the API the editor
+        provides on{" "}
+        <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">
+          its GitHub repository&apos;s wiki
+        </Link>
+        .
+      </>
+    ),
     close: `Cerrar`,
     run: `Ejecutar`,
     isEvaluated: `¡El script se ejecutó exitosamente!`,

@@ -23,11 +23,6 @@ const EDTIOR_BACKGROUND = {
 };
 const PERCENTS = 100;
 
-interface Gradient {
-  from: Color;
-  to: Color;
-}
-
 interface Props {
   variableName: string;
   value: string | Color | Gradient;
@@ -93,9 +88,11 @@ export default class Variable extends React.Component<Props> {
       style.backgroundImage = `url(data:image/jpg;base64,${this.props.value})`;
     } else {
       className += ` -nonPlain`;
-      style.backgroundImage = `linear-gradient(to top right, ${createCssRgb(
-        this.props.value.from,
-      )}, ${createCssRgb(this.props.value.to)})`;
+      style.backgroundImage = `linear-gradient(
+        to top right,
+        ${createCssRgb(this.props.value.from)},
+        ${createCssRgb(this.props.value.to)}
+      )`;
     }
 
     if (this.props.isUnadded) {
