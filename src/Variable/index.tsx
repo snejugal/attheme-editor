@@ -1,10 +1,7 @@
 import "./styles.scss";
 
-import {
-  OBSOLETE_VARIABLES,
-  UNUSED_VARIABLES,
-  allVariables,
-} from "../atthemeVariables";
+import VARIABLES from "attheme-js/lib/variables";
+import { OBSOLETE_VARIABLES, UNUSED_VARIABLES } from "../atthemeVariables";
 import {
   isLight,
   overlay,
@@ -50,8 +47,8 @@ export default class Variable extends React.Component<Props> {
     let className = `variable`;
 
     const style: {
-      backgroundColor?: string,
-      backgroundImage?: string,
+      backgroundColor?: string;
+      backgroundImage?: string;
     } = {};
 
     let content;
@@ -70,25 +67,23 @@ export default class Variable extends React.Component<Props> {
       const { hue, saturation, lightness } = rgbToHsl(this.props.color);
 
       const roundedHue = Math.round(hue);
-      const roundedSaturation =
-        Math.round(saturation * PERCENTS);
+      const roundedSaturation = Math.round(saturation * PERCENTS);
       const roundedLightness = Math.round(lightness * PERCENTS);
 
-      content = <>
-        <p className="variable_color -hex">
-          {createHex(this.props.color)}
-        </p>
-        <p className="variable_color -rgb">
-          {red}, {green}, {blue}, {alpha}
-        </p>
-        <p className="variable_color -hsl">
-          {roundedHue}°, {roundedSaturation}%, {roundedLightness}%, {alpha}
-        </p>
-      </>;
+      content = (
+        <>
+          <p className="variable_color -hex">{createHex(this.props.color)}</p>
+          <p className="variable_color -rgb">
+            {red}, {green}, {blue}, {alpha}
+          </p>
+          <p className="variable_color -hsl">
+            {roundedHue}°, {roundedSaturation}%, {roundedLightness}%, {alpha}
+          </p>
+        </>
+      );
     } else {
       className += ` -wallpaper`;
-      style.backgroundImage =
-        `url(data:image/jpg;base64,${this.props.wallpaper})`;
+      style.backgroundImage = `url(data:image/jpg;base64,${this.props.wallpaper})`;
     }
 
     if (this.props.isUnadded) {
@@ -125,10 +120,9 @@ export default class Variable extends React.Component<Props> {
               )}
             </span>
           )}
-          {!this.props.removalVersion
-            && !allVariables.includes(this.props.variableName)
-            && !UNUSED_VARIABLES.includes(this.props.variableName)
-            && (
+          {!this.props.removalVersion &&
+            !VARIABLES.includes(this.props.variableName) &&
+            !UNUSED_VARIABLES.includes(this.props.variableName) && (
               <span className="variable_badge">
                 {localization.workspace.nonStandardVariable}
               </span>

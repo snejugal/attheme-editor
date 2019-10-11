@@ -1,6 +1,7 @@
 import "./styles.scss";
 
-import { allVariables, defaultValues } from "../atthemeVariables";
+import VARIABLES from "attheme-js/lib/variables";
+import { defaultValues } from "../atthemeVariables";
 import CodeEditor from "../CodeEditor";
 import Dialog from "../Dialog";
 import Heading from "../Heading";
@@ -14,15 +15,8 @@ import deepClone from "lodash/cloneDeep";
 
 const STEPS_PER_ONCE = 50000;
 const BABEL_OPTIONS = {
-  plugins: [
-    `proposal-object-rest-spread`,
-    `proposal-optional-catch-binding`,
-  ],
-  presets: [
-    `es2015`,
-    `es2016`,
-    `es2017`,
-  ],
+  plugins: [`proposal-object-rest-spread`, `proposal-optional-catch-binding`],
+  presets: [`es2015`, `es2016`, `es2017`],
 };
 
 let Babel: Babel;
@@ -135,12 +129,12 @@ export default class ScriptRunner extends React.Component<Props, State> {
     const prepare = (
       interpreter: EsInterpreterInstance,
       scope: EsInterpreterScope,
-      ) => {
+    ) => {
       const log = (...messageParts: unknown[]) => {
         // eslint-disable-next-line no-console
         console.log(
           localization.scriptRunner.logMessage,
-          ...messageParts.map((part) => interpreter.pseudoToNative(part)),
+          ...messageParts.map(part => interpreter.pseudoToNative(part)),
         );
       };
 
@@ -169,7 +163,7 @@ export default class ScriptRunner extends React.Component<Props, State> {
       interpreter.setProperty(
         scope,
         `allVariablesList`,
-        interpreter.nativeToPseudo(allVariables),
+        interpreter.nativeToPseudo(VARIABLES),
       );
       interpreter.setProperty(
         scope,
@@ -255,25 +249,21 @@ export default class ScriptRunner extends React.Component<Props, State> {
       outputTitle = localization.scriptRunner.syntaxError;
       output = this.state.parseError.message;
       outputClassName += ` -error`;
-    } else if (
-      !this.state.isBabelLoaded
-      && !this.state.isBabelLoading
-    ) {
+    } else if (!this.state.isBabelLoaded && !this.state.isBabelLoading) {
       outputTitle = localization.scriptRunner.babelLoadingFailed;
       outputClassName += ` -error`;
     } else if (
-      !this.state.isInterpreterLoaded
-      && !this.state.isInterpreterLoading
+      !this.state.isInterpreterLoaded &&
+      !this.state.isInterpreterLoading
     ) {
       outputTitle = localization.scriptRunner.interpreterLoadingFailed;
       outputClassName += ` -error`;
     }
 
-    const isRunButtonDisabled = (
-      !this.state.isBabelLoaded
-      || !this.state.isInterpreterLoaded
-      || this.state.isEvaluating
-    );
+    const isRunButtonDisabled =
+      !this.state.isBabelLoaded ||
+      !this.state.isInterpreterLoaded ||
+      this.state.isEvaluating;
 
     return (
       <Dialog
@@ -281,10 +271,12 @@ export default class ScriptRunner extends React.Component<Props, State> {
         onClose={this.props.onClose}
         buttons={[
           {
-            caption: <>
-              {localization.scriptRunner.run}
-              {isRunButtonDisabled && <Spinner/>}
-            </>,
+            caption: (
+              <>
+                {localization.scriptRunner.run}
+                {isRunButtonDisabled && <Spinner />}
+              </>
+            ),
             onClick: this.handleRun,
             isDisabled: isRunButtonDisabled,
           },

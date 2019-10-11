@@ -5,8 +5,8 @@
   "dependencies": {
     "@babel/standalone": "^7.6.4",
     "@snejugal/color": "^2.1.1",
-    "attheme-editor-api": "^2.0.1",
-    "attheme-js": "^2.2.4",
+    "attheme-editor-api": "^2.0.2",
+    "attheme-js": "^3.0.0",
     "codemirror": "^5.49.0",
     "es-interpreter": "^0.2.0",
     "fuzzy-search": "^3.0.1",
