@@ -1,0 +1,14 @@
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: npm ci
+    - name: Build the project
+      run: npm run build
+    - name: Check styling
+      run: npx prettier --check "{public,src}/**/*.{html,json,ts,tsx,yaml}"
+    - name: Run ESLint
+      run: npx eslint "src/**/*.tsx"
