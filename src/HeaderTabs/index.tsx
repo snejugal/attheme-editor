@@ -8,41 +8,55 @@ interface Props {
   workspaces: number[];
   activeTab: number | null;
   onActiveTabChange(tab: number): void;
-  activeTabRef: React.Ref<HeaderTab>,
+  activeTabRef: React.Ref<HeaderTab>;
 }
 
 export default class HeaderTabs extends React.Component<Props> {
-  tabs = React.createRef<HTMLDivElement>();
-
   handleNewTabClick = () => this.props.onActiveTabChange(-1);
+
+  scrolledHorizontallyAt = 0;
 
   handleWheel = (event: React.WheelEvent) => {
     if (event.deltaX) {
+      this.scrolledHorizontallyAt = event.timeStamp;
       return;
     }
 
     event.preventDefault();
-    this.tabs.current!.scrollBy({
-      left: event.deltaY,
-      behavior: `smooth`,
+
+    if (Math.abs(this.scrolledHorizontallyAt - event.timeStamp) <= 1) {
+      return;
+    }
+
+    let multiplier;
+
+    if (event.deltaMode === 0) {
+      multiplier = 3;
+    } else if (event.deltaMode === 1) {
+      multiplier = 50;
+    } else {
+      multiplier = 150 / window.innerHeight;
+    }
+
+    event.currentTarget.scrollBy({
+      left: event.deltaY * multiplier,
+      behavior: `smooth`
     });
   };
 
   render() {
     return (
-      <div
-        className="tabs headerTabs"
-        onWheel={this.handleWheel}
-        ref={this.tabs}
-      >
-        {this.props.workspaces.map((themeId) => {
-          return <HeaderTab
-            id={themeId}
-            key={themeId}
-            isActive={this.props.activeTab === themeId}
-            onClick={() => this.props.onActiveTabChange(themeId)}
-            ref={this.props.activeTabRef}
-          />;
+      <div className="tabs headerTabs" onWheel={this.handleWheel}>
+        {this.props.workspaces.map(themeId => {
+          return (
+            <HeaderTab
+              id={themeId}
+              key={themeId}
+              isActive={this.props.activeTab === themeId}
+              onClick={() => this.props.onActiveTabChange(themeId)}
+              ref={this.props.activeTabRef}
+            />
+          );
         })}
         <NewTab
           isActive={this.props.activeTab === -1}
