@@ -4,7 +4,7 @@ import React from "react";
 import isEqual from "lodash/isEqual";
 
 interface Props {
-  type?: string;
+  type?: `button` | `reset` | `submit`;
   className?: string;
   children: React.ReactNode;
   onClick(): void;
@@ -20,7 +20,7 @@ export default class Button extends React.Component<Props> {
     isDangerous: false,
     isFloating: false,
     className: ``,
-    isDisabled: false,
+    isDisabled: false
   };
 
   shouldComponentUpdate(nextProps: Props) {
@@ -49,7 +49,7 @@ export default class Button extends React.Component<Props> {
         onClick={this.props.onClick}
         disabled={this.props.isDisabled}
         style={{
-          backgroundColor: this.props.backgroundColor,
+          backgroundColor: this.props.backgroundColor
         }}
       >
         {this.props.children}
