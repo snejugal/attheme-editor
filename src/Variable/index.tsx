@@ -23,14 +23,21 @@ const EDTIOR_BACKGROUND = {
 };
 const PERCENTS = 100;
 
+interface Gradient {
+  from: Color;
+  to: Color;
+}
+
 interface Props {
   variableName: string;
-  color?: Color;
-  wallpaper?: string;
+  value: string | Color | Gradient;
   onClick(variableName: string): void;
   isUnadded?: boolean;
   removalVersion?: string;
 }
+
+const isColor = (color: string | Color | Gradient): color is Color =>
+  typeof color === `object` && `red` in color;
 
 export default class Variable extends React.Component<Props> {
   static defaultProps = {
@@ -54,17 +61,17 @@ export default class Variable extends React.Component<Props> {
     let content;
 
     // Telegram respects chat_wallpaper color over image. Doing the same thing.
-    if (this.props.color) {
-      const { red, green, blue, alpha } = this.props.color;
-      const finalColor = overlay(EDTIOR_BACKGROUND, this.props.color);
+    if (isColor(this.props.value)) {
+      const { red, green, blue, alpha } = this.props.value;
+      const finalColor = overlay(EDTIOR_BACKGROUND, this.props.value);
 
-      style.backgroundColor = createCssRgb(this.props.color);
+      style.backgroundColor = createCssRgb(this.props.value);
 
       if (isLight(finalColor)) {
         className += ` -darkText`;
       }
 
-      const { hue, saturation, lightness } = rgbToHsl(this.props.color);
+      const { hue, saturation, lightness } = rgbToHsl(this.props.value);
 
       const roundedHue = Math.round(hue);
       const roundedSaturation = Math.round(saturation * PERCENTS);
@@ -72,7 +79,7 @@ export default class Variable extends React.Component<Props> {
 
       content = (
         <>
-          <p className="variable_color -hex">{createHex(this.props.color)}</p>
+          <p className="variable_color -hex">{createHex(this.props.value)}</p>
           <p className="variable_color -rgb">
             {red}, {green}, {blue}, {alpha}
           </p>
@@ -81,9 +88,14 @@ export default class Variable extends React.Component<Props> {
           </p>
         </>
       );
+    } else if (typeof this.props.value === `string`) {
+      className += ` -nonPlain`;
+      style.backgroundImage = `url(data:image/jpg;base64,${this.props.value})`;
     } else {
-      className += ` -wallpaper`;
-      style.backgroundImage = `url(data:image/jpg;base64,${this.props.wallpaper})`;
+      className += ` -nonPlain`;
+      style.backgroundImage = `linear-gradient(to top right, ${createCssRgb(
+        this.props.value.from,
+      )}, ${createCssRgb(this.props.value.to)})`;
     }
 
     if (this.props.isUnadded) {

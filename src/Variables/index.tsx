@@ -116,7 +116,7 @@ export default class Variables extends React.Component<Props, State> {
       }
     }
 
-    if (this.props.wallpaper && !themeVariables.includes(`chat_wallpaper`)) {
+    if (themeVariables.includes(`chat_wallpaper`) || this.props.wallpaper) {
       variablesOrder.push(`chat_wallpaper`);
     }
 
@@ -143,18 +143,49 @@ export default class Variables extends React.Component<Props, State> {
       }
     }
 
+    if (variablesOrder.includes(`chat_wallpaper_gradient_to`)) {
+      const index = variablesOrder.indexOf(`chat_wallpaper_gradient_to`);
+
+      variablesOrder.splice(index, 1);
+
+      if (!variablesOrder.includes(`chat_wallpaper`)) {
+        variablesOrder.unshift(`chat_wallpaper`);
+      }
+    }
+
+    variablesOrder = [...new Set(variablesOrder)];
+
     const removedVariables = getRemovedVariables(themeVariables);
 
     const variables = variablesOrder.map(variableName => {
-      if (variableName === `chat_wallpaper` && this.props.wallpaper) {
-        return (
-          <Variable
-            variableName="chat_wallpaper"
-            key="chat_wallpaper"
-            wallpaper={this.props.wallpaper}
-            onClick={this.props.onClick}
-          />
-        );
+      if (variableName === `chat_wallpaper`) {
+        if (this.props.wallpaper) {
+          return (
+            <Variable
+              variableName="chat_wallpaper"
+              key="chat_wallpaper"
+              value={this.props.wallpaper}
+              onClick={this.props.onClick}
+            />
+          );
+        }
+
+        if (
+          themeVariables.includes(`chat_wallpaper`) &&
+          themeVariables.includes(`chat_wallpaper_gradient_to`)
+        ) {
+          return (
+            <Variable
+              variableName="chat_wallpaper"
+              key="chat_wallpaper"
+              value={{
+                from: this.props.theme.chat_wallpaper,
+                to: this.props.theme.chat_wallpaper_gradient_to,
+              }}
+              onClick={this.props.onClick}
+            />
+          );
+        }
       }
 
       if (themeVariables.includes(variableName)) {
@@ -162,7 +193,7 @@ export default class Variables extends React.Component<Props, State> {
           <Variable
             variableName={variableName}
             key={variableName}
-            color={this.props.theme[variableName]}
+            value={this.props.theme[variableName]}
             onClick={this.props.onClick}
             removalVersion={removedVariables[variableName]}
           />
@@ -173,7 +204,7 @@ export default class Variables extends React.Component<Props, State> {
         <Variable
           variableName={variableName}
           key={variableName}
-          color={defaultValues[variableName]}
+          value={defaultValues[variableName]}
           onClick={this.props.onNewVariable}
           isUnadded={true}
         />
