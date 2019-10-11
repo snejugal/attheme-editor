@@ -34,7 +34,6 @@ export default class App extends React.Component<{}, State> {
     downloadThemeError: false,
   };
 
-
   // we don't need to update the whole dom just to scroll
   doHandleScroll = true;
 
@@ -58,13 +57,13 @@ export default class App extends React.Component<{}, State> {
     addLocalizationUpdatee(() => this.forceUpdate());
 
     // eslint-disable-next-line id-length
-    document.body.addEventListener(`dragover`, (e) => e.preventDefault());
-    document.body.addEventListener(`drop`, (event) => {
+    document.body.addEventListener(`dragover`, e => e.preventDefault());
+    document.body.addEventListener(`drop`, event => {
       event.preventDefault();
 
       const { files } = event.dataTransfer!;
 
-      Array.from(files).forEach(async (file) => {
+      Array.from(files).forEach(async file => {
         let theme;
 
         if (file.name.endsWith(`.attheme`)) {
@@ -80,9 +79,9 @@ export default class App extends React.Component<{}, State> {
     });
 
     if (
-      `theme` in localStorage
-      && `themeName` in localStorage
-      && `palette` in localStorage
+      `theme` in localStorage &&
+      `themeName` in localStorage &&
+      `palette` in localStorage
     ) {
       const theme: Theme = {
         variables: JSON.parse(localStorage.theme),
@@ -176,7 +175,6 @@ export default class App extends React.Component<{}, State> {
     if (this.doHandleScroll) {
       this.doScrollTo = 0;
     } else {
-
       // Expecting smooth scroll so we'll catch scroll events by browser in a
       // while. We don't need them, so we ignore them. Anyway, even if it won't
       // scroll smoothly, we'll start thinking that the user is scrolling in
@@ -193,9 +191,10 @@ export default class App extends React.Component<{}, State> {
     }
   };
 
-  handleClosePrompt = () => this.setState({
-    confirmClosing: true,
-  });
+  handleClosePrompt = () =>
+    this.setState({
+      confirmClosing: true,
+    });
 
   handleConfirm = () => {
     const workspaces = [...this.state.workspaces];
@@ -216,19 +215,21 @@ export default class App extends React.Component<{}, State> {
     });
   };
 
-  handleConfirmClose = () => this.setState({
-    confirmClosing: false,
-  });
+  handleConfirmClose = () =>
+    this.setState({
+      confirmClosing: false,
+    });
 
-  handleDownloadErrorDismiss = () => this.setState({
-    downloadThemeError: false,
-  });
+  handleDownloadErrorDismiss = () =>
+    this.setState({
+      downloadThemeError: false,
+    });
 
   render() {
     let workspace = null;
 
     if (this.state.activeTab === -1) {
-      workspace = <EmptyWorkspace onTheme={this.handleTheme}/>;
+      workspace = <EmptyWorkspace onTheme={this.handleTheme} />;
     } else if (this.state.activeTab !== null) {
       workspace = (
         <Workspace
@@ -240,34 +241,36 @@ export default class App extends React.Component<{}, State> {
       );
     }
 
-    return <>
-      <Header
-        workspaces={this.state.workspaces}
-        activeTab={this.state.activeTab}
-        onActiveTabChange={this.handleActiveTabChange}
-        activeTabRef={this.activeTab}
-        onLogoClick={this.handleLogoClick}
-      />
-      <Container
-        containerRef={this.container}
-        onScroll={this.handleContainerScroll}
-      >
-        {workspace}
-      </Container>
-      {this.state.confirmClosing && (
-        <ConfirmDialog
-          onConfirm={this.handleConfirm}
-          onClose={this.handleConfirmClose}
-          isDangerous={true}
+    return (
+      <>
+        <Header
+          workspaces={this.state.workspaces}
+          activeTab={this.state.activeTab}
+          onActiveTabChange={this.handleActiveTabChange}
+          activeTabRef={this.activeTab}
+          onLogoClick={this.handleLogoClick}
+        />
+        <Container
+          containerRef={this.container}
+          onScroll={this.handleContainerScroll}
         >
-          {localization.workspace.closeThemePrompt}
-        </ConfirmDialog>
-      )}
-      {this.state.downloadThemeError && (
-        <Snackbar onDismiss={this.handleDownloadErrorDismiss} isError={true}>
-          {localization.workspace.downloadError}
-        </Snackbar>
-      )}
-    </>;
+          {workspace}
+        </Container>
+        {this.state.confirmClosing && (
+          <ConfirmDialog
+            onConfirm={this.handleConfirm}
+            onClose={this.handleConfirmClose}
+            isDangerous={true}
+          >
+            {localization.workspace.closeThemePrompt}
+          </ConfirmDialog>
+        )}
+        {this.state.downloadThemeError && (
+          <Snackbar onDismiss={this.handleDownloadErrorDismiss} isError={true}>
+            {localization.workspace.downloadError}
+          </Snackbar>
+        )}
+      </>
+    );
   }
 }

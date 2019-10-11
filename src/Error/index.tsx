@@ -20,9 +20,7 @@ export default class ErrorElement extends React.Component<Props> {
           {localization.error.description}
         </p>
         <pre className="error_stack">{this.props.errorStack}</pre>
-        <p className="paragraph error_dismiss">
-          {localization.error.dismiss}
-        </p>
+        <p className="paragraph error_dismiss">{localization.error.dismiss}</p>
       </div>
     );
   }

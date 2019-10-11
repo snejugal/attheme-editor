@@ -43,7 +43,7 @@ export default class CodeEditor extends React.Component<Props> {
       }
 
       this.editor = {
-        getValue () {
+        getValue() {
           return textarea.value;
         },
       };
@@ -72,6 +72,6 @@ export default class CodeEditor extends React.Component<Props> {
   }
 
   render() {
-    return <div className={this.props.className} ref={this.container}/>;
+    return <div className={this.props.className} ref={this.container} />;
   }
 }

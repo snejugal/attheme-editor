@@ -28,7 +28,7 @@ export default class EmptyWorkspace extends React.Component<Props> {
   };
 
   handleChange = () => {
-    [...this.filesInput.current!.files!].forEach(async (file) => {
+    [...this.filesInput.current!.files!].forEach(async file => {
       let theme;
 
       if (file.name.endsWith(`.attheme`)) {
@@ -46,30 +46,32 @@ export default class EmptyWorkspace extends React.Component<Props> {
   handleOpenButtonClick = () => this.filesInput.current!.click();
 
   render() {
-    return <>
-      <Heading level={2}>{localization.emptyWorkspace.title}</Heading>
-      <Buttons>
-        <Button onClick={this.handleCreateButtonClick}>
-          {localization.emptyWorkspace.createTheme}
-        </Button>
-        <Button onClick={this.handleOpenButtonClick}>
-          {localization.emptyWorkspace.openTheme}
-        </Button>
-      </Buttons>
-      <input
-        hidden={true}
-        type="file"
-        ref={this.filesInput}
-        onChange={this.handleChange}
-        accept=".attheme,.attheme-editor"
-        multiple={true}
-      />
-      <Hint className="emptyWorkspace_uploadWaysHint">
-        {localization.emptyWorkspace.uploadWaysHint}
-      </Hint>
-      <Hint className="emptyWorkspace_credits">
-        {localization.emptyWorkspace.credits}
-      </Hint>
-    </>;
+    return (
+      <>
+        <Heading level={2}>{localization.emptyWorkspace.title}</Heading>
+        <Buttons>
+          <Button onClick={this.handleCreateButtonClick}>
+            {localization.emptyWorkspace.createTheme}
+          </Button>
+          <Button onClick={this.handleOpenButtonClick}>
+            {localization.emptyWorkspace.openTheme}
+          </Button>
+        </Buttons>
+        <input
+          hidden={true}
+          type="file"
+          ref={this.filesInput}
+          onChange={this.handleChange}
+          accept=".attheme,.attheme-editor"
+          multiple={true}
+        />
+        <Hint className="emptyWorkspace_uploadWaysHint">
+          {localization.emptyWorkspace.uploadWaysHint}
+        </Hint>
+        <Hint className="emptyWorkspace_credits">
+          {localization.emptyWorkspace.credits}
+        </Hint>
+      </>
+    );
   }
 }

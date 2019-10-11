@@ -9,7 +9,7 @@ type Channel = "red" | "green" | "blue" | "alpha";
 
 interface Props {
   color: PartialColor;
-  onAlphaChange?(data: { channel: Channel, value: number }): void;
+  onAlphaChange?(data: { channel: Channel; value: number }): void;
   onHexChange(color: PartialColor): void;
   shouldShowAlpha?: boolean;
 }
@@ -45,8 +45,8 @@ export default class HexInput extends React.Component<Props, State> {
     let correctValue = event.target.valueAsNumber;
 
     if (
-      Number.isNaN(event.target.valueAsNumber)
-      || event.target.valueAsNumber < +event.target.min
+      Number.isNaN(event.target.valueAsNumber) ||
+      event.target.valueAsNumber < +event.target.min
     ) {
       correctValue = Number(event.target.min);
     }
@@ -54,7 +54,6 @@ export default class HexInput extends React.Component<Props, State> {
     if (event.target.valueAsNumber > +event.target.max) {
       correctValue = Number(event.target.max);
     }
-
 
     correctValue = Math.round(correctValue);
 

@@ -40,9 +40,10 @@ export default class Snackbar extends React.Component<Props> {
     root.removeChild(this.snackbarWrapper!);
   }
 
-  hide = () => this.setState({
-    isDisappearing: true,
-  });
+  hide = () =>
+    this.setState({
+      isDisappearing: true,
+    });
 
   render() {
     let className = `snackbar`;

@@ -48,15 +48,16 @@ export default class HslInput extends React.Component<Props, State> {
   }
 
   handleChange = (updatedValue: Partial<HslColor>) => {
-    let hue = (`hue` in updatedValue)
-      ? updatedValue.hue || 0
-      : this.state.hue || 0;
-    let saturation = (`saturation` in updatedValue)
-      ? updatedValue.saturation! / PERCENTS || 0
-      : this.state.saturation / PERCENTS || 0;
-    let lightness = (`lightness` in updatedValue)
-      ? updatedValue.lightness! / PERCENTS || 0
-      : this.state.lightness / PERCENTS || 0;
+    let hue =
+      `hue` in updatedValue ? updatedValue.hue || 0 : this.state.hue || 0;
+    let saturation =
+      `saturation` in updatedValue
+        ? updatedValue.saturation! / PERCENTS || 0
+        : this.state.saturation / PERCENTS || 0;
+    let lightness =
+      `lightness` in updatedValue
+        ? updatedValue.lightness! / PERCENTS || 0
+        : this.state.lightness / PERCENTS || 0;
 
     /* eslint-disable no-magic-numbers */
     if (hue < 0) {
@@ -100,33 +101,40 @@ export default class HslInput extends React.Component<Props, State> {
     });
   };
 
-  handleHueChange = (event: ChangeEvent) => this.handleChange({
-    hue: event.target.valueAsNumber,
-  });
+  handleHueChange = (event: ChangeEvent) =>
+    this.handleChange({
+      hue: event.target.valueAsNumber,
+    });
 
-  handleSaturationChange = (event: ChangeEvent) => this.handleChange({
-    saturation: event.target.valueAsNumber,
-  });
+  handleSaturationChange = (event: ChangeEvent) =>
+    this.handleChange({
+      saturation: event.target.valueAsNumber,
+    });
 
-  handleLightnessChange = (event: ChangeEvent) => this.handleChange({
-    lightness: event.target.valueAsNumber,
-  });
+  handleLightnessChange = (event: ChangeEvent) =>
+    this.handleChange({
+      lightness: event.target.valueAsNumber,
+    });
 
-  handleBlur = () => this.setState({
-    focusedField: null,
-  });
+  handleBlur = () =>
+    this.setState({
+      focusedField: null,
+    });
 
-  handleHueFocus = () => this.setState({
-    focusedField: `hue`,
-  });
+  handleHueFocus = () =>
+    this.setState({
+      focusedField: `hue`,
+    });
 
-  handleSaturationFocus = () => this.setState({
-    focusedField: `saturation`,
-  });
+  handleSaturationFocus = () =>
+    this.setState({
+      focusedField: `saturation`,
+    });
 
-  handleLightnessFocus = () => this.setState({
-    focusedField: `lightness`,
-  });
+  handleLightnessFocus = () =>
+    this.setState({
+      focusedField: `lightness`,
+    });
 
   componentDidUpdate(previousProps: Props) {
     if (previousProps === this.props) {

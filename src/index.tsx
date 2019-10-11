@@ -2,7 +2,7 @@ import "./general.scss";
 
 import "intl-pluralrules";
 import "./dropHint";
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import ErrorHandler from "./ErrorHandler";
 import React from "react";
@@ -12,8 +12,8 @@ import smoothscroll from "smoothscroll-polyfill";
 const appRoot = document.querySelector(`main`);
 const errorsRoot = document.querySelector(`.errors`);
 
-ReactDOM.render(<App/>, appRoot);
-ReactDOM.render(<ErrorHandler/>, errorsRoot);
+ReactDOM.render(<App />, appRoot);
+ReactDOM.render(<ErrorHandler />, errorsRoot);
 
 smoothscroll.polyfill();
 serviceWorker.register();

@@ -40,7 +40,7 @@ export default class HeaderTabs extends React.Component<Props> {
 
     event.currentTarget.scrollBy({
       left: event.deltaY * multiplier,
-      behavior: `smooth`
+      behavior: `smooth`,
     });
   };
 

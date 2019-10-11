@@ -3,15 +3,18 @@ interface Size {
   height: number;
 }
 
-export default (image: string) => new Promise<Size>((resolve, reject) => {
-  const imageElement = new Image();
+export default (image: string) =>
+  new Promise<Size>((resolve, reject) => {
+    const imageElement = new Image();
 
-  imageElement.src = `data:image/jpg;base64,${image}`;
+    imageElement.src = `data:image/jpg;base64,${image}`;
 
-  imageElement.addEventListener(`load`, () => resolve({
-    width: imageElement.width,
-    height: imageElement.height,
-  }));
+    imageElement.addEventListener(`load`, () =>
+      resolve({
+        width: imageElement.width,
+        height: imageElement.height,
+      }),
+    );
 
-  imageElement.addEventListener(`error`, reject);
-});
+    imageElement.addEventListener(`error`, reject);
+  });

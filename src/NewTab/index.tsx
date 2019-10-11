@@ -23,7 +23,7 @@ export default class NewTab extends React.Component<Props> {
 
     return (
       <button className={className} onClick={this.props.onClick}>
-        <Icon/>
+        <Icon />
       </button>
     );
   }

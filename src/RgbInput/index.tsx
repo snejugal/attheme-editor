@@ -10,7 +10,7 @@ type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 interface Props {
   color: PartialColor;
-  onChange(change: { channel: Channel, value: number }): void;
+  onChange(change: { channel: Channel; value: number }): void;
 }
 
 export default class RgbInput extends React.Component<Props> {
@@ -23,8 +23,8 @@ export default class RgbInput extends React.Component<Props> {
     let correctValue = event.currentTarget.valueAsNumber;
 
     if (
-      Number.isNaN(event.currentTarget.valueAsNumber)
-      || event.currentTarget.valueAsNumber < +event.currentTarget.min
+      Number.isNaN(event.currentTarget.valueAsNumber) ||
+      event.currentTarget.valueAsNumber < +event.currentTarget.min
     ) {
       correctValue = Number(event.currentTarget.min);
     }
