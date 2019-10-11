@@ -36,7 +36,7 @@ interface Props {
 interface State {
   theme: Theme | null;
   editingVariable: string | null;
-  color: Color | null;
+  color: Color | Gradient | null;
   showScriptRunner: boolean;
   isSearchHotkeyEnabled: boolean;
   isEditingPalette: boolean;
@@ -176,9 +176,21 @@ export default class Workspace extends React.Component<Props, State> {
   };
 
   handleVariableEditStart = (variable: string) => {
+    let color: Color | Gradient = this.state.theme!.variables[variable];
+
+    if (
+      variable === `chat_wallpaper` &&
+      `chat_wallpaper_gradient_to` in this.state.theme!.variables
+    ) {
+      color = {
+        from: color,
+        to: this.state.theme!.variables.chat_wallpaper_gradient_to,
+      };
+    }
+
     this.setState({
       editingVariable: variable,
-      color: this.state.theme!.variables[variable],
+      color,
     });
   };
 
@@ -189,23 +201,40 @@ export default class Workspace extends React.Component<Props, State> {
       color: null,
     });
 
-  handleVariableEditSave = (value: Color | string) => {
+  handleVariableEditSave = (value: Color | Gradient | string) => {
     const variable = this.state.editingVariable!;
 
     let theme;
 
     if (typeof value === `object`) {
-      const variables = {
-        ...this.state.theme!.variables,
-        [variable]: value,
-      };
+      if (`red` in value) {
+        const variables = {
+          ...this.state.theme!.variables,
+          [variable]: value,
+        };
 
-      theme = {
-        ...this.state.theme!,
-        variables,
-      };
+        theme = {
+          ...this.state.theme!,
+          variables,
+        };
 
-      if (variable === `chat_wallpaper`) {
+        if (variable === `chat_wallpaper`) {
+          delete theme.wallpaper;
+          delete theme.variables.chat_wallpaper_gradient_to;
+        }
+      } else {
+        const { from, to } = value;
+        const variables = {
+          ...this.state.theme!.variables,
+          chat_wallpaper: from,
+          chat_wallpaper_gradient_to: to,
+        };
+
+        theme = {
+          ...this.state.theme!,
+          variables,
+        };
+
         delete theme.wallpaper;
       }
     } else {
@@ -214,6 +243,7 @@ export default class Workspace extends React.Component<Props, State> {
       };
 
       delete variables.chat_wallpaper;
+      delete variables.chat_wallpaper_gradient_to;
 
       theme = {
         ...this.state.theme!,
@@ -250,6 +280,7 @@ export default class Workspace extends React.Component<Props, State> {
 
     if (this.state.editingVariable === `chat_wallpaper`) {
       delete theme.wallpaper;
+      delete theme.variables.chat_wallpaper_gradient_to;
     }
 
     this.setState({
@@ -364,7 +395,7 @@ export default class Workspace extends React.Component<Props, State> {
       dialog = (
         <VariableEditor
           variable={this.state.editingVariable}
-          color={this.state.color!}
+          value={this.state.color!}
           onClose={this.handleVariableEditClose}
           onSave={this.handleVariableEditSave}
           onDelete={this.handleVariableDelete}
@@ -372,6 +403,7 @@ export default class Workspace extends React.Component<Props, State> {
           onCustomPaletteColorAdd={this.handleCustomPaletteColorAdd}
           onCustomPaletteEditStart={this.handleCustomPaletteEditStart}
           stateBackup={this.state.editorState}
+          mayBeGradient={this.state.editingVariable === `chat_wallpaper`}
         />
       );
     } else if (this.state.showScriptRunner) {

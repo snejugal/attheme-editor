@@ -35,7 +35,7 @@
     z-index: -1;
   }
 
-  &.-wallpaper::before {
+  &.-nonPlain::before {
     z-index: 0;
     background-size: 100% 100%;
     background-image: linear-gradient(
@@ -46,7 +46,7 @@
   }
 
   &.-darkText {
-    color: rgba(#000000, .87);
+    color: rgba(#000000, 0.87);
   }
 
   &_title {

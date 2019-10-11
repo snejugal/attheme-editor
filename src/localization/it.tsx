@@ -15,44 +15,51 @@ const localization: PartialLocalization = {
   },
   error: {
     title: `Oops, c'è stato un errore.`,
-    description: <>
-      Per favore, manda uno screenshot dell&apos;errore al seguente indirizzo {}
-      <Link href="//t.me/snejugal" isWhite={true}>
-        lo sviluppatore su Telegram
-      </Link>
-      {} e descrivi cosa hai fatto che ha causato l&apos;errore. Potrebbe essere necessario mandare anche il file originale del tema che hai usato.
-    </>,
+    description: (
+      <>
+        Per favore, manda uno screenshot dell&apos;errore al seguente indirizzo{" "}
+        {}
+        <Link href="//t.me/snejugal" isWhite={true}>
+          lo sviluppatore su Telegram
+        </Link>
+        {} e descrivi cosa hai fatto che ha causato l&apos;errore. Potrebbe
+        essere necessario mandare anche il file originale del tema che hai
+        usato.
+      </>
+    ),
     dismiss: `Per chiudere la finestra di errore fai tap qui.`,
   },
   emptyWorkspace: {
     title: `Comincia a lavorare al tuo tema`,
     createTheme: `Crea un nuovo tema`,
     openTheme: `Apri dei temi già esistenti`,
-    credits: <>
-      Creato da {}
-      <Link href="//t.me/snejugal">@snejugal</Link>
-      {} e {}
-      <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
-      {} e tradotto in Italiano da {}
-      <Link href="//t.me/SventraPopizz">@SventraPopizz</Link>
-      {} e {}
-      <Link href="//t.me/supervalery">@supervalery</Link>
-      {} con {}
-      <LoveEmoji className="emoji" />.
-      {} Guarda {}
-      <Link href="//github.com/snejugal/attheme-editor">
-        il codice sorgente dell&apos;editor su GitHub
-      </Link>
-      {} e iscriviti al {}
-      <Link href="//t.me/atthemeeditor">
-        nostro canale Telegram
-      </Link>!
-    </>,
-    uploadWaysHint: <>
-      Per aprire i temi puoi anche usare il drag&apos;n&apos;drop oppure usa {}
-      <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
-      {} per aprire i temi direttamente da Telegram.
-    </>,
+    credits: (
+      <>
+        Creato da {}
+        <Link href="//t.me/snejugal">@snejugal</Link>
+        {} e {}
+        <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
+        {} e tradotto in Italiano da {}
+        <Link href="//t.me/SventraPopizz">@SventraPopizz</Link>
+        {} e {}
+        <Link href="//t.me/supervalery">@supervalery</Link>
+        {} con {}
+        <LoveEmoji className="emoji" />.{} Guarda {}
+        <Link href="//github.com/snejugal/attheme-editor">
+          il codice sorgente dell&apos;editor su GitHub
+        </Link>
+        {} e iscriviti al {}
+        <Link href="//t.me/atthemeeditor">nostro canale Telegram</Link>!
+      </>
+    ),
+    uploadWaysHint: (
+      <>
+        Per aprire i temi puoi anche usare il drag&apos;n&apos;drop oppure usa{" "}
+        {}
+        <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>
+        {} per aprire i temi direttamente da Telegram.
+      </>
+    ),
   },
   theme: {
     defaultName: `Bel tema`,
@@ -103,18 +110,30 @@ const localization: PartialLocalization = {
     uploadImage: `Carica un'immagine`,
     downloadImage: `Scarica l'immagine`,
     imageTab: `Immagine`,
+    gradientTab: `Gradient`,
     colorModelsTab: `Codici colori`,
     palettesTab: `Palette dei colori`,
     wallpaperColorsHint: `Ecco alcuni colori estratti dallo sfondo. Clicca su un colore per aggiungerlo alla palette del tuo tema:`,
     editPalette: `Modifica la palette dei colori`,
     themeColorsPlaceholder: `Oops, non ci sono ancora colori nel tuo tema.`,
     themeCustomPalettePlaceholder: `Oops, non c'è ancora alcun colore nella palette colori personalizzata. Premi il tasto "Modifica la palette colori" qui sopra!`,
+    fromPoint: `Inizio`,
+    toPoint: `Fine`,
   },
   scriptRunner: {
     title: `Esegui uno script`,
-    description: <>
-      L&apos;editor .attheme ti permette di eseguire facilmente degli script in linguaggio EcmaScript 2017 per velocizzare lo sviluppo dei temi. Puoi trovare informazioni sulle API che l&apos;editor mette a disposizione alla <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">wiki del suo repository su GitHub</Link>.
-    </>,
+    description: (
+      <>
+        L&apos;editor .attheme ti permette di eseguire facilmente degli script
+        in linguaggio EcmaScript 2017 per velocizzare lo sviluppo dei temi. Puoi
+        trovare informazioni sulle API che l&apos;editor mette a disposizione
+        alla{" "}
+        <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">
+          wiki del suo repository su GitHub
+        </Link>
+        .
+      </>
+    ),
     close: `Chiudi`,
     run: `Esegui`,
     isEvaluated: `Lo script è stato eseguito correttamente!`,

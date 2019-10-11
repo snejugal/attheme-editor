@@ -17,40 +17,47 @@ const localization: PartialLocalization = {
   },
   error: {
     title: `Упс, произошла ошибка`,
-    description: <>
-      Пожалуйста, отправьте скриншот ошибки {}
-      <Link href="//t.me/snejugal" isWhite={true}>
-        разработчику по&nbsp;Телеграму
-      </Link>
-      {} и&nbsp;опишите, что&nbsp;вы&nbsp;сделали, после чего возникла ошибка. Возможно, понадобится отправить и&nbsp;оригинальный файл темы, который вы&nbsp;использовали.
-    </>,
-    dismiss: <>Чтобы закрыть сообщение об&nbsp;ошибке, просто нажмите на&nbsp;него.</>,
+    description: (
+      <>
+        Пожалуйста, отправьте скриншот ошибки {}
+        <Link href="//t.me/snejugal" isWhite={true}>
+          разработчику по&nbsp;Телеграму
+        </Link>
+        {} и&nbsp;опишите, что&nbsp;вы&nbsp;сделали, после чего возникла ошибка.
+        Возможно, понадобится отправить и&nbsp;оригинальный файл темы, который
+        вы&nbsp;использовали.
+      </>
+    ),
+    dismiss: (
+      <>Чтобы закрыть сообщение об&nbsp;ошибке, просто нажмите на&nbsp;него.</>
+    ),
   },
   emptyWorkspace: {
     title: <>Начните работать над&nbsp;своей темой</>,
     createTheme: `Создать новую тему`,
     openTheme: `Открыть существующие темы`,
-    credits: <>
-      Редактор создан {}
-      <Link href="//t.me/snejugal">@snejugal</Link>
-      {} и&nbsp;
-      <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
-      {} с&nbsp;
-      <LoveEmoji className="emoji" />.
-      {} Посмотрите {}
-      <Link href="//github.com/snejugal/attheme-editor">
-        исходный код редактора на&nbsp;GitHub
-      </Link>
-      {} и&nbsp;подпишитесь на&nbsp;
-      <Link href="//t.me/atthemeeditor">
-        наш канал в&nbsp;Телеграме
-      </Link>!
-    </>,
-    uploadWaysHint: <>
-      Также можно перекинуть сюда файл или&nbsp;использовать {}
-      <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>,
-      {} чтобы открывать темы через&nbsp;Телеграм.
-    </>,
+    credits: (
+      <>
+        Редактор создан {}
+        <Link href="//t.me/snejugal">@snejugal</Link>
+        {} и&nbsp;
+        <Link href="//t.me/AlexStrNik">@AlexStrNik</Link>
+        {} с&nbsp;
+        <LoveEmoji className="emoji" />.{} Посмотрите {}
+        <Link href="//github.com/snejugal/attheme-editor">
+          исходный код редактора на&nbsp;GitHub
+        </Link>
+        {} и&nbsp;подпишитесь на&nbsp;
+        <Link href="//t.me/atthemeeditor">наш канал в&nbsp;Телеграме</Link>!
+      </>
+    ),
+    uploadWaysHint: (
+      <>
+        Также можно перекинуть сюда файл или&nbsp;использовать {}
+        <Link href="//t.me/atthemeeditorbot">@atthemeeditorbot</Link>,{} чтобы
+        открывать темы через&nbsp;Телеграм.
+      </>
+    ),
   },
   theme: {
     defaultName: `Классная тема`,
@@ -75,17 +82,50 @@ const localization: PartialLocalization = {
     search: `Поиск`,
     variablesAmount({ total, theme }: VariablesAmountProp) {
       const forms = {
-        one: <>{theme} переменная из&nbsp;{total} добавлена в&nbsp;тему</>,
-        few: <>{theme} переменные из&nbsp;{total} добавлены в&nbsp;тему</>,
-        many: <>{theme} переменных из&nbsp;{total} добавлены в&nbsp;тему</>,
+        one: (
+          <>
+            {theme} переменная из&nbsp;{total} добавлена в&nbsp;тему
+          </>
+        ),
+        few: (
+          <>
+            {theme} переменные из&nbsp;{total} добавлены в&nbsp;тему
+          </>
+        ),
+        many: (
+          <>
+            {theme} переменных из&nbsp;{total} добавлены в&nbsp;тему
+          </>
+        ),
       };
 
       return forms[select(theme)];
     },
-    noVariablesPlaceholder: <>В&nbsp;теме ещё нет&nbsp;переменных :( Добавьте их&nbsp;через&nbsp;поле поиска выше!</>,
-    noResultsPlaceholder: <>Упс, поиск не&nbsp;дал никаких результатов. Может, в&nbsp;запросе есть опечатка?</>,
-    uploadError: <>Упс, редактор не&nbsp;смог загрузить тему боту. Проверьте соединение и&nbsp;попробуйте снова.</>,
-    downloadError: <>Упс, кажется, что вы&nbsp;открываете тему, которая больше недействительна. Отправьте боту тему ещё раз, чтобы открыть её&nbsp;в&nbsp;редакторе.</>,
+    noVariablesPlaceholder: (
+      <>
+        В&nbsp;теме ещё нет&nbsp;переменных :( Добавьте их&nbsp;через&nbsp;поле
+        поиска выше!
+      </>
+    ),
+    noResultsPlaceholder: (
+      <>
+        Упс, поиск не&nbsp;дал никаких результатов. Может, в&nbsp;запросе есть
+        опечатка?
+      </>
+    ),
+    uploadError: (
+      <>
+        Упс, редактор не&nbsp;смог загрузить тему боту. Проверьте соединение
+        и&nbsp;попробуйте снова.
+      </>
+    ),
+    downloadError: (
+      <>
+        Упс, кажется, что вы&nbsp;открываете тему, которая больше
+        недействительна. Отправьте боту тему ещё раз, чтобы открыть
+        её&nbsp;в&nbsp;редакторе.
+      </>
+    ),
   },
   confirmDialog: {
     yes: `Да`,
@@ -106,26 +146,57 @@ const localization: PartialLocalization = {
     uploadImage: `Загрузить картинку`,
     downloadImage: `Скачать картинку`,
     imageTab: `Картинка`,
+    gradientTab: `Градиент`,
     colorModelsTab: `Цветовые модели`,
     palettesTab: `Палитры`,
-    wallpaperColorsHint: <>Вот несколько цветов из&nbsp;обоев. Нажмите на&nbsp;цвет, чтобы добавить его в&nbsp;палитру темы:</>,
+    fromPoint: `Начало`,
+    toPoint: `Конец`,
+    wallpaperColorsHint: (
+      <>
+        Вот несколько цветов из&nbsp;обоев. Нажмите на&nbsp;цвет, чтобы добавить
+        его в&nbsp;палитру темы:
+      </>
+    ),
     editPalette: `Редактировать палитру`,
     themeColorsPlaceholder: <>Упс, в&nbsp;теме ещё нет никаких цветов.</>,
-    themeCustomPalettePlaceholder: <>Упс, в&nbsp;кастомной палитре нет цветов… пока&nbsp;что. Нажмите на кнопку «Редактировать палитру» выше!</>,
+    themeCustomPalettePlaceholder: (
+      <>
+        Упс, в&nbsp;кастомной палитре нет цветов… пока&nbsp;что. Нажмите на
+        кнопку «Редактировать палитру» выше!
+      </>
+    ),
   },
   scriptRunner: {
     title: `Запуск скриптов`,
-    description: <>
-      .attheme editor позволяет легко запускать скрипты, написанные на&nbsp;EcmaScript 2017, что ускоряет разработку тем. Про API редактора можно узнать в&nbsp;<Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">вики GitHub репозитория редактора</Link>.
-    </>,
+    description: (
+      <>
+        .attheme editor позволяет легко запускать скрипты, написанные
+        на&nbsp;EcmaScript 2017, что ускоряет разработку тем. Про API редактора
+        можно узнать в&nbsp;
+        <Link href="//github.com/SnejUgal/attheme-editor/wiki/.attheme-editor-scripts-documentation">
+          вики GitHub репозитория редактора
+        </Link>
+        .
+      </>
+    ),
     close: `Закрыть`,
     run: `Запустить`,
     isEvaluated: `Скрипт успешно выполнился!`,
     runtimeError: <>Упс, в&nbsp;скрипте произошла ошибка:</>,
     syntaxError: <>Упс, в&nbsp;скрипте неверный синтаксис:</>,
     logMessage: <>Ваш скрипт передал в&nbsp;консоль:</>,
-    babelLoadingFailed: <>Не удалось загрузить Babel. Проверьте соединение и&nbsp;перезагрузите страницу.</>,
-    interpreterLoadingFailed: <>Не удалось загрузить интерпретатор. Проверьте соединение и&nbsp;перезагрузите страницу.</>,
+    babelLoadingFailed: (
+      <>
+        Не удалось загрузить Babel. Проверьте соединение и&nbsp;перезагрузите
+        страницу.
+      </>
+    ),
+    interpreterLoadingFailed: (
+      <>
+        Не удалось загрузить интерпретатор. Проверьте соединение
+        и&nbsp;перезагрузите страницу.
+      </>
+    ),
   },
   palettes: {
     apple: `Apple`,
@@ -143,7 +214,13 @@ const localization: PartialLocalization = {
     newColor: `Добавить новый цвет`,
     title: `Кастомная палитра темы`,
     defaultColorName: `Красивый цвет`,
-    placeholder: <>Упс, палитра пустая… пока&nbsp;что. Нажмите на кнопку «Добавить новый цвет» или, если на&nbsp;chat_wallpaper стоит картинка, откройте редактор этой переменной и&nbsp;добавьте цвета, которые он&nbsp;предлагает!</>,
+    placeholder: (
+      <>
+        Упс, палитра пустая… пока&nbsp;что. Нажмите на кнопку «Добавить новый
+        цвет» или, если на&nbsp;chat_wallpaper стоит картинка, откройте редактор
+        этой переменной и&nbsp;добавьте цвета, которые он&nbsp;предлагает!
+      </>
+    ),
   },
 };
 

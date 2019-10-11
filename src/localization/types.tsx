@@ -65,12 +65,15 @@ export interface Localization {
     uploadImage: ReactNode;
     downloadImage: ReactNode;
     imageTab: ReactNode;
+    gradientTab: ReactNode;
     colorModelsTab: ReactNode;
     palettesTab: ReactNode;
     wallpaperColorsHint: ReactNode;
     editPalette: ReactNode;
     themeColorsPlaceholder: ReactNode;
     themeCustomPalettePlaceholder: ReactNode;
+    fromPoint: ReactNode;
+    toPoint: ReactNode;
   };
   scriptRunner: {
     title: ReactNode;
