@@ -46,12 +46,12 @@ export default class HexInput extends React.Component<Props, State> {
 
     if (
       Number.isNaN(event.target.valueAsNumber) ||
-      event.target.valueAsNumber < +event.target.min
+      event.target.valueAsNumber < Number(event.target.min)
     ) {
       correctValue = Number(event.target.min);
     }
 
-    if (event.target.valueAsNumber > +event.target.max) {
+    if (event.target.valueAsNumber > Number(event.target.max)) {
       correctValue = Number(event.target.max);
     }
 

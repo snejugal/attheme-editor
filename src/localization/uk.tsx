@@ -67,11 +67,11 @@ const localization: PartialLocalization = {
     defaultName: `Чудова${NBSP}тема`,
   },
   workspace: {
-    themeNameLabel: <>Ім'я&nbsp;теми</>,
+    themeNameLabel: <>Ім&apos;я&nbsp;теми</>,
     closeTheme: <>Закрити&nbsp;тему</>,
     closeThemePrompt: `Ви впевнені, що бажаєте закрити тему?`,
     downloadThemeFile: `Завантажити файл .attheme`,
-    createPreview: <>Створити&nbsp;прев'ю</>,
+    createPreview: <>Створити&nbsp;прев&apos;ю</>,
     testTheme: <>Протестувати&nbsp;тему</>,
     downloadWorkspace: <>Завантажити робоче &nbsp;точення</>,
     runScript: <>Запустити&nbsp;скрипт</>,

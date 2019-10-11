@@ -24,12 +24,12 @@ export default class RgbInput extends React.Component<Props> {
 
     if (
       Number.isNaN(event.currentTarget.valueAsNumber) ||
-      event.currentTarget.valueAsNumber < +event.currentTarget.min
+      event.currentTarget.valueAsNumber < Number(event.currentTarget.min)
     ) {
       correctValue = Number(event.currentTarget.min);
     }
 
-    if (event.currentTarget.valueAsNumber > +event.currentTarget.max) {
+    if (event.currentTarget.valueAsNumber > Number(event.currentTarget.max)) {
       correctValue = Number(event.currentTarget.max);
     }
 
