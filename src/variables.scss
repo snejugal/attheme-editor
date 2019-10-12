@@ -4,7 +4,6 @@ $theme_secondaryColor: rgba($theme_textColor, 0.54);
 $theme_accentColor: #607d8b;
 $theme_errorColor: #f44336;
 
-
 $container_maxWidth: 960px;
 $container_padding: 24px 16px;
 $container_padding-negated: -24px -16px;
@@ -14,7 +13,4 @@ $container_horizontalMargin: 16px;
 
 $transitionDuration: 300ms;
 
-$fontFamily:
-  Roboto Mono,
-  Lucida Consolas,
-  monospace;
+$fontFamily: Roboto Mono, Lucida Consolas, monospace;

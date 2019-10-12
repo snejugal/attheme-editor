@@ -21,7 +21,9 @@
     "smoothscroll-polyfill": "^0.4.4"
   },
   "scripts": {
-    "format": "npx prettier --write \"{public,src}/**/*.{html,json,ts,tsx,yaml}\"",
+    "format:base": "npx prettier \"{public,src}/**/*.{html,json,ts,tsx,yaml,scss}\"",
+    "format:check": "npm run format:base -- --check",
+    "format": "npm run format:base -- --write",
     "analyze": "npx source-map-explorer build/static/js/main.*",
     "start": "react-scripts --max-old-space-size=2048 start",
     "build": "react-scripts --max-old-space-size=2048 build"

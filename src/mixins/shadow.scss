@@ -1,7 +1,6 @@
-$shadowColor: rgba(#000000, .2);
+$shadowColor: rgba(#000000, 0.2);
 
 @mixin shadow($level) {
-  box-shadow:
-    0 0 $level * 1px $shadowColor,
+  box-shadow: 0 0 $level * 1px $shadowColor,
     0 $level * 1px $level * 1px $shadowColor;
 }
