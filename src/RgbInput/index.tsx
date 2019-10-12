@@ -1,10 +1,8 @@
 import Field from "../Field";
 import Fields from "../Fields";
-import PropTypes from "prop-types";
 import React from "react";
 import localization from "../localization";
 
-// eslint-disable-next-line quotes
 type Channel = "red" | "green" | "blue";
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
@@ -14,11 +12,6 @@ interface Props {
 }
 
 export default class RgbInput extends React.Component<Props> {
-  static propTypes = {
-    color: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-  };
-
   handleChange = (channel: Channel, event: ChangeEvent) => {
     let correctValue = event.currentTarget.valueAsNumber;
 

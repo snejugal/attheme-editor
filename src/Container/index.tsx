@@ -1,6 +1,5 @@
 import "./styles.scss";
 
-import PropTypes from "prop-types";
 import React from "react";
 
 interface Props {
@@ -10,12 +9,6 @@ interface Props {
 }
 
 export default class Container extends React.Component<Props> {
-  static propTypes = {
-    children: PropTypes.any,
-    containerRef: PropTypes.any.isRequired,
-    onScroll: PropTypes.func.isRequired,
-  };
-
   render() {
     return (
       <div
