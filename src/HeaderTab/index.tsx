@@ -43,7 +43,7 @@ export default class Tab extends React.Component<Props, State> {
       <button className={className} onClick={this.props.onClick}>
         <h3 className="headerTab_title">
           {typeof this.state.title === `string` ? (
-            this.state.title
+            <pre>{this.state.title}</pre>
           ) : (
             <Spinner />
           )}
