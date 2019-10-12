@@ -48,13 +48,15 @@ export default class HeaderTabs extends React.Component<Props> {
     return (
       <div className="tabs headerTabs" onWheel={this.handleWheel}>
         {this.props.workspaces.map(themeId => {
+          const isActive = this.props.activeTab === themeId;
+
           return (
             <HeaderTab
               id={themeId}
               key={themeId}
-              isActive={this.props.activeTab === themeId}
+              isActive={isActive}
               onClick={() => this.props.onActiveTabChange(themeId)}
-              ref={this.props.activeTabRef}
+              ref={isActive ? this.props.activeTabRef : null}
             />
           );
         })}
