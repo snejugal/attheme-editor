@@ -1,19 +1,16 @@
 import "./styles.scss";
 
-import { ReactComponent as LogoSVG } from "./logo.svg";
-import React from "react";
-import isEqual from "lodash/isEqual";
+import React, { memo } from "react";
+import { ReactComponent as LogoSvg } from "./logo.svg";
 
 interface Props {
   onClick(): void;
 }
 
-export default class Logo extends React.Component<Props> {
-  shouldComponentUpdate(nextProps: Props) {
-    return !isEqual(this.props, nextProps);
-  }
+const Logo = ({ onClick }: Props) => {
+  return <div className="logo" onClick={onClick}>
+    <LogoSvg />
+  </div>
+};
 
-  render() {
-    return <LogoSVG className="logo" onClick={this.props.onClick} />;
-  }
-}
+export default memo(Logo);
