@@ -8,9 +8,11 @@ interface Props {
 }
 
 const Logo = ({ onClick }: Props) => {
-  return <div className="logo" onClick={onClick}>
-    <LogoSvg />
-  </div>
+  return (
+    <div className="logo" onClick={onClick}>
+      <LogoSvg />
+    </div>
+  );
 };
 
 export default memo(Logo);
