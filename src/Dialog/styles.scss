@@ -12,7 +12,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba($shadowColor, .5);
+  background-color: rgba($shadowColor, 0.5);
   animation-name: dialogBackdrop_appear;
   animation-duration: $transitionDuration;
   transition-property: opacity;
@@ -68,7 +68,8 @@
     overflow-y: auto;
   }
 
-  &_title.heading { // so it's higher than just .heading
+  &_title.heading {
+    // so it's higher than just .heading
     @extend %heading-5;
   }
 
