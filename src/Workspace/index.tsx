@@ -9,7 +9,6 @@ import { ReactComponent as DownloadIcon } from "./downloadIcon.svg";
 import Field from "../Field";
 import Hint from "../Hint";
 import PaletteEditor from "../PaletteEditor";
-import PropTypes from "prop-types";
 import React from "react";
 import ScriptRunner from "../ScriptRunner";
 import Snackbar from "../Snackbar";
@@ -50,13 +49,6 @@ interface State {
 }
 
 export default class Workspace extends React.Component<Props, State> {
-  static propTypes = {
-    themeId: PropTypes.number.isRequired,
-    onNameChange: PropTypes.func.isRequired,
-    onClosePrompt: PropTypes.func.isRequired,
-    isSearchHotkeyEnabled: PropTypes.bool,
-  };
-
   state: State = {
     theme: null,
     editingVariable: null,
