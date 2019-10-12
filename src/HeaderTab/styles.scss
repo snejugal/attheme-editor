@@ -2,14 +2,27 @@
 @import "../Tabs/variables";
 @import "../HeaderTabs/variables";
 @import "../mixins/hoverShade";
+@import "../mixins/shadow";
 @import "../typography";
 
 .headerTab {
   &.tab {
     flex-grow: 0;
+    background-color: $header_background;
+    overflow: hidden;
+    cursor: default;
+  }
+
+  &.-dragging {
+    @include shadow(3);
+    border-radius: $container_borderRadius;
   }
 
   &_title {
     @extend %subtitle-1;
+
+    pre {
+      margin: 0;
+    }
   }
 }

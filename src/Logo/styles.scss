@@ -1,9 +1,19 @@
 @import "./variables";
 @import "../mixins/square";
+@import "../mixins/hoverShade";
 
 .logo {
-  @include square($logo_size);
-  fill: $logo_color;
-  margin-right: $header_horizontalGap;
+  @include square($header_height);
+  @include hoverShade($tabs_color);
+
   flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    @include square($logo_size);
+    fill: $logo_color;
+  }
 }

@@ -8,6 +8,7 @@
     "@snejugal/color": "^2.1.1",
     "attheme-editor-api": "^2.0.2",
     "attheme-js": "^3.0.0",
+    "classnames": "^2.2.6",
     "codemirror": "^5.49.0",
     "es-interpreter": "^0.2.0",
     "fuzzy-search": "^3.0.1",
@@ -15,6 +16,7 @@
     "lodash": "^4.17.15",
     "node-vibrant": "3.0.0",
     "react": "^16.10.2",
+    "react-beautiful-dnd": "^11.0.5",
     "react-dom": "^16.10.2",
     "smoothscroll-polyfill": "^0.4.4"
   },
@@ -36,9 +38,11 @@
     ]
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.9",
     "@types/codemirror": "0.0.78",
     "@types/node": "^12.7.12",
     "@types/react": "^16.9.5",
+    "@types/react-beautiful-dnd": "^11.0.3",
     "@types/react-dom": "^16.9.1",
     "@types/smoothscroll-polyfill": "^0.3.1",
     "@typescript-eslint/parser": "^2.3.3",

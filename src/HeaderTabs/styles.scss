@@ -4,4 +4,9 @@
   height: 100%;
   width: 100%;
   margin-bottom: 0;
+
+  > button[data-react-beautiful-dnd-placeholder] {
+    background: none;
+    border: none;
+  }
 }

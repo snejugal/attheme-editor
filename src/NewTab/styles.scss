@@ -4,8 +4,7 @@
 @import "../mixins/square";
 
 .headerTab.-new {
-  @include square($tabs_height);
-
+  width: $tabs_height;
   padding: 0;
 
   svg {

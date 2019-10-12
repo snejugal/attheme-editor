@@ -3,9 +3,12 @@ import "./styles.scss";
 import * as database from "../database";
 import React from "react";
 import Spinner from "../Spinner";
+import { Draggable } from "react-beautiful-dnd";
+import classNames from "classnames";
 
 interface Props {
   id: number;
+  index: number;
   isActive: boolean;
   onClick(): void;
 }
@@ -33,22 +36,33 @@ export default class Tab extends React.Component<Props, State> {
     });
 
   render() {
-    let className = `tab headerTab`;
-
-    if (this.props.isActive) {
-      className += ` -active`;
-    }
-
     return (
-      <button className={className} onClick={this.props.onClick}>
-        <h3 className="headerTab_title">
-          {typeof this.state.title === `string` ? (
-            this.state.title
-          ) : (
-            <Spinner />
-          )}
-        </h3>
-      </button>
+      <Draggable
+        draggableId={String(this.props.id)}
+        index={this.props.index}
+        disableInteractiveElementBlocking={true}
+      >
+        {(provided, { isDragging }) => (
+          <button
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            className={classNames(`tab`, `headerTab`, {
+              "-active": this.props.isActive,
+              "-dragging": isDragging,
+            })}
+            onClick={this.props.onClick}
+          >
+            <h3 className="headerTab_title">
+              {typeof this.state.title === `string` ? (
+                <pre>{this.state.title}</pre>
+              ) : (
+                <Spinner />
+              )}
+            </h3>
+          </button>
+        )}
+      </Draggable>
     );
   }
 }
