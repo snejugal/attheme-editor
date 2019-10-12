@@ -27,9 +27,12 @@
   white-space: nowrap;
   flex-grow: 1;
   flex-shrink: 0;
-  opacity: .5;
-  transition-property: opacity;
-  transition-duration: $transitionDuration;
+
+  > * {
+    opacity: 0.5;
+    transition-property: opacity;
+    transition-duration: $transitionDuration;
+  }
 
   &::before {
     content: "";
@@ -48,7 +51,9 @@
   }
 
   &.-active {
-    opacity: 1;
+    > * {
+      opacity: 1;
+    }
 
     &::before {
       transform: scaleY(1);

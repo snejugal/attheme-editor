@@ -215,6 +215,13 @@ export default class App extends React.Component<{}, State> {
     });
   };
 
+  handleWorkspacesChange = (workspaces: number[]) => {
+    database.updateWorkspaces(workspaces);
+    this.setState({
+      workspaces,
+    });
+  };
+
   handleConfirmClose = () =>
     this.setState({
       confirmClosing: false,
@@ -247,6 +254,7 @@ export default class App extends React.Component<{}, State> {
           workspaces={this.state.workspaces}
           activeTab={this.state.activeTab}
           onActiveTabChange={this.handleActiveTabChange}
+          onWorkspacesChange={this.handleWorkspacesChange}
           activeTabRef={this.activeTab}
           onLogoClick={this.handleLogoClick}
         />
