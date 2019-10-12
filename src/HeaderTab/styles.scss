@@ -11,5 +11,9 @@
 
   &_title {
     @extend %subtitle-1;
+
+    pre {
+      margin: 0;
+    }
   }
 }
