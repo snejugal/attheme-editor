@@ -6,7 +6,7 @@
   "dependencies": {
     "@babel/standalone": "^7.6.4",
     "@snejugal/color": "^2.1.1",
-    "attheme-editor-api": "^2.0.2",
+    "attheme-editor-api": "^2.0.3",
     "attheme-js": "^3.0.0",
     "classnames": "^2.2.6",
     "codemirror": "^5.49.0",
