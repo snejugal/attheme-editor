@@ -138,7 +138,9 @@ export default class Workspace extends React.Component<Props, State> {
       const tgLink = `tg://resolve?domain=${bot}&start=${themeId}`;
 
       window.location.href = tgLink;
-    } catch {
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
       this.setState({
         hasUploadError: true,
       });
